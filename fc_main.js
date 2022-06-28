@@ -1083,7 +1083,8 @@ function autoFTHOFComboAction() {
 
                     // Calculated with https://lookas123.github.io/CCGrimoireCalculator/
                     case 1:
-                        if (M.magicM >= 81) {
+                        if (M.magic >= 81) {
+                            autoFTHOFComboAction.count = Game.Objects['Wizard tower'].amount - 21;
                             M.castSpell(FTHOF);
                             logEvent('autoFTHOFCombo', 'Cast first Force the Hand of Fate');
                             autoFTHOFComboAction.state = 2;
@@ -1091,7 +1092,8 @@ function autoFTHOFComboAction() {
                         return;
 
                     case 2:
-                        if (M.magicM >= 81) {
+                        if (M.magic >= 81) {
+                            autoFTHOFComboAction.count = Game.Objects['Wizard tower'].amount - 14;
                             M.castSpell(FTHOF);
                             logEvent('autoFTHOFCombo', 'Cast first Force the Hand of Fate');
                             autoFTHOFComboAction.state = 2;
@@ -1099,7 +1101,8 @@ function autoFTHOFComboAction() {
                         return;
 
                     case 3:
-                        if (M.magicM >= 81) {
+                        if (M.magic >= 81) {
+                            autoFTHOFComboAction.count = Game.Objects['Wizard tower'].amount - 8;
                             M.castSpell(FTHOF);
                             logEvent('autoFTHOFCombo', 'Cast first Force the Hand of Fate');
                             autoFTHOFComboAction.state = 2;
@@ -1107,7 +1110,8 @@ function autoFTHOFComboAction() {
                         return;
 
                     case 4:
-                        if (M.magicM >= 81) {
+                        if (M.magic >= 81) {
+                            autoFTHOFComboAction.count = Game.Objects['Wizard tower'].amount - 3;
                             M.castSpell(FTHOF);
                             logEvent('autoFTHOFCombo', 'Cast first Force the Hand of Fate');
                             autoFTHOFComboAction.state = 2;
@@ -1115,7 +1119,8 @@ function autoFTHOFComboAction() {
                         return;
 
                     case 5:
-                        if (M.magicM >= 83) {
+                        if (M.magic >= 83) {
+                            autoFTHOFComboAction.count = Game.Objects['Wizard tower'].amount - 1;
                             M.castSpell(FTHOF);
                             logEvent('autoFTHOFCombo', 'Cast first Force the Hand of Fate');
                             autoFTHOFComboAction.state = 2;
@@ -1123,7 +1128,8 @@ function autoFTHOFComboAction() {
                         return;
 
                     case 6:
-                        if (M.magicM >= 88) {
+                        if (M.magic >= 88) {
+                            autoFTHOFComboAction.count = Game.Objects['Wizard tower'].amount - 1;
                             M.castSpell(FTHOF);
                             logEvent('autoFTHOFCombo', 'Cast first Force the Hand of Fate');
                             autoFTHOFComboAction.state = 2;
@@ -1131,7 +1137,8 @@ function autoFTHOFComboAction() {
                         return;
 
                     case 7:
-                        if (M.magicM >= 91) {
+                        if (M.magic >= 91) {
+                            autoFTHOFComboAction.count = Game.Objects['Wizard tower'].amount - 1;
                             M.castSpell(FTHOF);
                             logEvent('autoFTHOFCombo', 'Cast first Force the Hand of Fate');
                             autoFTHOFComboAction.state = 2;
@@ -1139,7 +1146,8 @@ function autoFTHOFComboAction() {
                         return;
 
                     case 8:
-                        if (M.magicM >= 93) {
+                        if (M.magic >= 93) {
+                            autoFTHOFComboAction.count = Game.Objects['Wizard tower'].amount - 1;
                             M.castSpell(FTHOF);
                             logEvent('autoFTHOFCombo', 'Cast first Force the Hand of Fate');
                             autoFTHOFComboAction.state = 2;
@@ -1147,7 +1155,8 @@ function autoFTHOFComboAction() {
                         return;
 
                     case 9:
-                        if (M.magicM >= 96) {
+                        if (M.magic >= 96) {
+                            autoFTHOFComboAction.count = Game.Objects['Wizard tower'].amount - 1;
                             M.castSpell(FTHOF);
                             logEvent('autoFTHOFCombo', 'Cast first Force the Hand of Fate');
                             autoFTHOFComboAction.state = 2;
@@ -1155,7 +1164,8 @@ function autoFTHOFComboAction() {
                         return;
 
                     case 10:
-                        if (M.magicM >= 98) {
+                        if (M.magic >= 98) {
+                            autoFTHOFComboAction.count = Game.Objects['Wizard tower'].amount - 1;
                             M.castSpell(FTHOF);
                             logEvent('autoFTHOFCombo', 'Cast first Force the Hand of Fate');
                             autoFTHOFComboAction.state = 2;
@@ -1176,7 +1186,6 @@ function autoFTHOFComboAction() {
             if (Game.buyMode == -1) {
                 Game.buyMode = 1;
             }
-            autoFTHOFComboAction.count = Game.Objects['Wizard tower'].amount - 1;
             Game.Objects['Wizard tower'].sell(autoFTHOFComboAction.count);
             M.computeMagicM(); //Recalc max after selling
             M.castSpell(FTHOF);
