@@ -1569,65 +1569,63 @@ function auto100ConsistencyComboAction() {
 
 function autoSweetAction() {
     if (FrozenCookies.autoSweet == 0) return;
-    if (Game.ObjectsById[7].minigameLoaded) {
-        if (typeof Game.ready !== "undefined" && Game.ready) {
-            
-            if (typeof autoSweetAction.state == 'undefined') {
-                autoSweetAction.state = 0;
-            }
-            
-            if (autoSweetAction.state == 0) {
-                if ( // Check first 10 spells
-                    (nextSpellName(0) == "Sugar Lump") ||
-                    (nextSpellName(1) == "Sugar Lump") ||
-                    (nextSpellName(2) == "Sugar Lump") ||
-                    (nextSpellName(3) == "Sugar Lump") ||
-                    (nextSpellName(4) == "Sugar Lump") ||
-                    (nextSpellName(5) == "Sugar Lump") ||
-                    (nextSpellName(6) == "Sugar Lump") ||
-                    (nextSpellName(7) == "Sugar Lump") ||
-                    (nextSpellName(8) == "Sugar Lump") ||
-                    (nextSpellName(9) == "Sugar Lump")
-                ) {
-                    autoSweetAction.state = 1;
-                    var manaprev = FrozenCookies.manaMax;
-                    FrozenCookies.manaMax = 37;
-                }
-            }
-            
-            switch (autoSweetAction.state) {
-                case 0:
-                    if (!Game.OnAscend && !Game.AscendTimer) {
-                        logEvent('autoSweet', 'No \"Sweet\" detected, ascending');
-                        Game.ClosePrompt();
-                        Game.Ascend(1);
-                        setTimeout(function() {
-                            Game.ClosePrompt();
-                            Game.Reincarnate(1);
-                        }, 10000);
-                    }
-                    return;
-                
-                case 1:
-                    if (M.magic == M.magicM) {
-                        if (nextSpellName(0) != "Sugar Lump") {
-                            var hagC = M.spellsById[4];
-                            M.castSpell(hagC);
-                            logEvent('autoSweet', 'Cast Haggler\'s Charm instead of Force the Hand of Fate');
-                        }
-                        if (nextSpellName(0) == "Sugar Lump") {
-                            var FTHOF = M.spellsById[1];
-                            M.castSpell(FTHOF);
-                            logEvent('autoSweet', 'Cast Force the Hand of Fate');
-                            FrozenCookies.autoSweet = 0;
-                        }
-                    }
-                    return;
-            }
+    
+    if (typeof Game.ready !== "undefined" && Game.ready) {
+        if (typeof autoSweetAction.state == 'undefined') {
             autoSweetAction.state = 0;
-            if (manaprev != -1) FrozenCookies.manaMax = manaprev;
-            return;
         }
+        
+        if (autoSweetAction.state == 0) {
+            if ( // Check first 10 spells
+                (nextSpellName(0) == "Sugar Lump") ||
+                (nextSpellName(1) == "Sugar Lump") ||
+                (nextSpellName(2) == "Sugar Lump") ||
+                (nextSpellName(3) == "Sugar Lump") ||
+                (nextSpellName(4) == "Sugar Lump") ||
+                (nextSpellName(5) == "Sugar Lump") ||
+                (nextSpellName(6) == "Sugar Lump") ||
+                (nextSpellName(7) == "Sugar Lump") ||
+                (nextSpellName(8) == "Sugar Lump") ||
+                (nextSpellName(9) == "Sugar Lump")
+            ) {
+                autoSweetAction.state = 1;
+                var manaprev = FrozenCookies.manaMax;
+                FrozenCookies.manaMax = 37;
+            }
+        }
+        
+        switch (autoSweetAction.state) {
+            case 0:
+                if (!Game.OnAscend && !Game.AscendTimer) {
+                    logEvent('autoSweet', 'No \"Sweet\" detected, ascending');
+                    Game.ClosePrompt();
+                    Game.Ascend(1);
+                    setTimeout(function() {
+                        Game.ClosePrompt();
+                        Game.Reincarnate(1);
+                    }, 10000);
+                }
+                return;
+            
+            case 1:
+                if (M.magic == M.magicM) {
+                    if (nextSpellName(0) != "Sugar Lump") {
+                        var hagC = M.spellsById[4];
+                        M.castSpell(hagC);
+                        logEvent('autoSweet', 'Cast Haggler\'s Charm instead of Force the Hand of Fate');
+                    }
+                    if (nextSpellName(0) == "Sugar Lump") {
+                        var FTHOF = M.spellsById[1];
+                        M.castSpell(FTHOF);
+                        autoSweetAction.state = 0;
+                        logEvent('autoSweet', 'Cast Force the Hand of Fate');
+                        FrozenCookies.autoSweet = 0;
+                        if (manaprev != -1) FrozenCookies.manaMax = manaprev;
+                    }
+                }
+                return;
+        }
+        return;
     }
 }
 
