@@ -1568,6 +1568,7 @@ function auto100ConsistencyComboAction() {
 }
 
 function autoSweetAction() {
+    if (FrozenCookies.autoSweet == 0) return;
     if (Game.ObjectsById[7].minigameLoaded) {
         if (typeof Game.ready !== "undefined" && Game.ready) {
             
@@ -1589,6 +1590,8 @@ function autoSweetAction() {
                     (nextSpellName(9) == "Sugar Lump")
                 ) {
                     autoSweetAction.state = 1;
+                    var manaprev = FrozenCookies.manaMax;
+                    FrozenCookies.manaMax = 37;
                 }
             }
             
@@ -1605,23 +1608,24 @@ function autoSweetAction() {
                     }
                     return;
                 
-                case 1:        
-                    if (nextSpellName(0) != "Sugar Lump") {
-                    var hagC = M.spellsById[4];
-                        M.castSpell(hagC);
-                        logEvent('autoSweet', 'Cast Haggler\'s Charm instead of Force the Hand of Fate');
-                    }
-                    var FTHOF = M.spellsById[1];
+                case 1:
                     if (M.magic == M.magicM) {
+                        if (nextSpellName(0) != "Sugar Lump") {
+                            var hagC = M.spellsById[4];
+                            M.castSpell(hagC);
+                            logEvent('autoSweet', 'Cast Haggler\'s Charm instead of Force the Hand of Fate');
+                        }
                         if (nextSpellName(0) == "Sugar Lump") {
+                            var FTHOF = M.spellsById[1];
                             M.castSpell(FTHOF);
                             logEvent('autoSweet', 'Cast Force the Hand of Fate');
-                            autoSweetAction.state = 0;
                             FrozenCookies.autoSweet = 0;
                         }
                     }
                     return;
             }
+            autoSweetAction.state = 0;
+            if (manaprev != -1) FrozenCookies.manaMax = manaprev;
             return;
         }
     }
