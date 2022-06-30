@@ -1,4 +1,4 @@
-![frozen](https://user-images.githubusercontent.com/6014923/165900996-4726d38f-3c7c-4932-8d2e-f98bed93a836.png)
+*![frozen](https://user-images.githubusercontent.com/6014923/165900996-4726d38f-3c7c-4932-8d2e-f98bed93a836.png)
 
 # FrozenCookies
 
@@ -11,19 +11,26 @@ NOT currently compatible with __CCSE__. CCSE changes base game functions that br
 ## Changes in this fork
 
 Current differences from the oficial release:
-* Fix to auto-Godzamok behaviour so that cookie count will not decrease drastically if enabled
-* With auto-Godz active, cap rebuy at 500 buildings to balance gain and loss
-* Smarter Force the Hand of Fate auto-spellcasting by not blindly selecting clots and other negative effects
-* Smarter season behaviour by swapping to Easter on Cookie Storms when not all eggs are unlocked 
-* Implemented two advanced Auto Cast behaviours, see documentation below
-* Automatically buys brokers and upgrades the market office
-* Attempts to shortens time a debuff remains active
-* Automatically upgrades and pets the dragon
-* Automatically sets dragon auras
 * Updated for 2.048 (Cortex bakers etc.)
-* Automatically take loans during big click frenzy combos
-* Automatically start a Sugar Frenzy during big combos
-* Automatically sets the Pantheon
+* Autocast changes:
+** Attempt to shorten time a debuff remains active
+** Smarter Force the Hand of Fate auto-spellcasting by not blindly selecting clots and other negative effects
+** Implement two advanced Auto Cast combos (see documentation below)
+** Automatically start a Sugar Frenzy during big combos
+** Add 'autoSweet' function to continually ascend until a Sweet spell is found
+* auto-Godzamok changes:
+** Buy Mines and Factories
+** Cap rebuy to 500 buildings to balance gain and loss
+* Season changes:
+** Swap to Easter on Cookie Storms when not all eggs are unlocked
+** Swap to Halloween if wrinklers are active and you still need spooky cookies
+* Bank changes:
+** Automatically buy brokers and upgrade the market office
+** Automatically take loans during big click frenzy combos
+* Dragon changes:
+** Automatically upgrade and pet the dragon
+** Automatically set dragon auras
+* Automatically set the Pantheon
 
 ## How to use
 
@@ -76,6 +83,7 @@ If you want to manually install it:
 
 2022 Jun 30
 - Add option to toggle display of missed golden cookie clicks (and turn off by default)
+- Add autoSweet option to continually ascend until a grimoire seed with Sweet (free Sugar Lump) is found
 
 2022 Jun 21
 
