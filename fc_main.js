@@ -858,7 +858,8 @@ function autoCast() {
     if (M.magic == M.magicM) {
         if (
             FrozenCookies.autoFTHOFCombo == 1 ||
-            FrozenCookies.auto100ConsistencyCombo == 1
+            FrozenCookies.auto100ConsistencyCombo == 1 ||
+            FrozenCookies.autoSweet == 1
         ) return; // combo option will override any auto cast function
 
         if (
@@ -1010,6 +1011,7 @@ function autoFTHOFComboAction() {
     if (
         M.magicM < 81 || // Below minimum mana
         FrozenCookies.auto100ConsistencyCombo == 1 || // 100% combo should override
+        FrozenCookies.autoSweet == 1 || // Autosweet overrides
         Game.hasBuff("Dragonflight") || // DF will remove click frenzy, potentially wasting it
         auto100ConsistencyComboAction.state < 2 && goldenCookieLife() // Unclicked cookie on screen increases fail chance, so wait
     ) return;
@@ -1217,6 +1219,8 @@ function auto100ConsistencyComboAction() {
 
     // Not currently possible to do the combo
     if (
+        M.magicM < 98 || // Below minimum mana
+        FrozenCookies.autoSweet == 1 || // Autosweet overrides
         Game.hasBuff("Dragonflight") || // DF will remove click frenzy, potentially wasting it
         auto100ConsistencyComboAction.state < 2 && goldenCookieLife() || // // Unclicked cookie on screen increases fail chance, so wait
         Game.lumps < 101 || // Needs at least 101 lumps with guard
@@ -1563,6 +1567,72 @@ function auto100ConsistencyComboAction() {
     return;
 }
 
+function autoSweetAction() {
+    if (FrozenCookies.autoSweet == 0) return;
+    
+    if (typeof Game.ready !== "undefined" && Game.ready) {
+        if (typeof autoSweetAction.state == 'undefined') {
+            autoSweetAction.state = 0;
+        }
+        
+        if (autoSweetAction.state == 0) {
+            if ( // Check first 10 spells
+                (nextSpellName(0) == "Sugar Lump") ||
+                (nextSpellName(1) == "Sugar Lump") ||
+                (nextSpellName(2) == "Sugar Lump") ||
+                (nextSpellName(3) == "Sugar Lump") ||
+                (nextSpellName(4) == "Sugar Lump") ||
+                (nextSpellName(5) == "Sugar Lump") ||
+                (nextSpellName(6) == "Sugar Lump") ||
+                (nextSpellName(7) == "Sugar Lump") ||
+                (nextSpellName(8) == "Sugar Lump") ||
+                (nextSpellName(9) == "Sugar Lump")
+            ) {
+                autoSweetAction.state = 1;
+                if (FrozenCookies.manaMax != 0) {
+                    autoSweetAction.manaPrev = FrozenCookies.manaMax;
+                    FrozenCookies.manaMax = 37;
+                }
+            }
+        }
+        
+        switch (autoSweetAction.state) {
+            case 0:
+                if (!Game.OnAscend && !Game.AscendTimer) {
+                    logEvent('autoSweet', 'No \"Sweet\" detected, ascending');
+                    Game.ClosePrompt();
+                    Game.Ascend(1);
+                    setTimeout(function() {
+                        Game.ClosePrompt();
+                        Game.Reincarnate(1);
+                    }, 10000);
+                }
+                return;
+            
+            case 1:
+                if (M.magic == M.magicM) {
+                    if (nextSpellName(0) != "Sugar Lump") {
+                        var hagC = M.spellsById[4];
+                        M.castSpell(hagC);
+                        logEvent('autoSweet', 'Cast Haggler\'s Charm instead of Force the Hand of Fate');
+                    }
+                    if (nextSpellName(0) == "Sugar Lump") {
+                        var FTHOF = M.spellsById[1];
+                        M.castSpell(FTHOF);
+                        autoSweetAction.state = 0;
+                        logEvent('autoSweet', 'Cast Force the Hand of Fate');
+                        FrozenCookies.autoSweet = 0;
+                        if (autoSweetAction.manaPrev != -1) {
+                            FrozenCookies.manaMax = autoSweetAction.manaPrev;
+                        }
+                    }
+                }
+                return;
+        }
+        return;
+    }
+}
+
 function autoEasterAction() {
     if (FrozenCookies.autoEaster == 0) return;
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
@@ -1603,7 +1673,7 @@ function autoBlacklistOff() {
 
 function autoBrokerAction() {
     if (!B) return; // Just leave if you don't have the bank
-    if (hasClickBuff()) return; // Don't pet during click buff
+    if (hasClickBuff()) return; // Don't buy during click buff
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
     //Hire brokers
@@ -1678,7 +1748,7 @@ function petDragonAction() {
 }
 
 function autoLoanBuy() {
-    if (!B) return;
+    if (!B) return; // Just leave if you don't have the bank
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
     if (hasClickBuff() && (cpsBonus() >= FrozenCookies.minLoanMult)) {
@@ -1731,7 +1801,6 @@ function autoDragonAura1Action() {
 }
 
 function autoDragonAura2Action() {
-
     if (
         !Game.HasUnlocked("A crumbly egg") ||
         Game.dragonLevel < 26 ||
@@ -4153,6 +4222,13 @@ function FCStart() {
     if (FrozenCookies.auto100ConsistencyCombo) {
         FrozenCookies.auto100ConsistencyComboBot = setInterval(
             auto100ConsistencyComboAction,
+            FrozenCookies.frequency * 2
+        );
+    }
+
+    if (FrozenCookies.autoSweet) {
+        FrozenCookies.autoSweetBot = setInterval(
+            autoSweetAction,
             FrozenCookies.frequency * 2
         );
     }

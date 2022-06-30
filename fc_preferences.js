@@ -237,6 +237,11 @@ FrozenCookies.preferenceValues = {
         'display': ["Auto Sugar Frenzy OFF", "ASF for 100% Consistency Combo", "ASF also for Auto FTHOF Combo", ],
         'default': 0
     },
+    autoSweet: {
+        'hint': 'EXPERIMENTAL: Automatically ascend until \"Sweet\" (free sugar lump) is in the next ten spells. This option will turn itself off once a \"Sweet\" is detected, no manual shutdown!',
+        'display': ["Auto Sweet OFF", "Auto Sweet ON", ],
+        'default': 0
+    },
     
     //Dragon options
     dragonOptions: {

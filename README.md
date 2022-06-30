@@ -8,23 +8,6 @@ An automated Cookie Clicker tool.
 
 NOT currently compatible with __CCSE__. CCSE changes base game functions that break the switches like the season switch and the elder pledge. This problem exists in version **2.033** of CCSE and older, when used with Cookie Clicker version 2.048.
 
-## Changes in this fork
-
-Current differences from the oficial release:
-* Fix to auto-Godzamok behaviour so that cookie count will not decrease drastically if enabled
-* With auto-Godz active, cap rebuy at 500 buildings to balance gain and loss
-* Smarter Force the Hand of Fate auto-spellcasting by not blindly selecting clots and other negative effects
-* Smarter season behaviour by swapping to Easter on Cookie Storms when not all eggs are unlocked 
-* Implemented two advanced Auto Cast behaviours, see documentation below
-* Automatically buys brokers and upgrades the market office
-* Attempts to shortens time a debuff remains active
-* Automatically upgrades and pets the dragon
-* Automatically sets dragon auras
-* Updated for 2.048 (Cortex bakers etc.)
-* Automatically take loans during big click frenzy combos
-* Automatically start a Sugar Frenzy during big combos
-* Automatically sets the Pantheon
-
 ## How to use
 
 ## Steam Install
@@ -76,6 +59,7 @@ If you want to manually install it:
 
 2022 Jun 30
 - Add option to toggle display of missed golden cookie clicks (and turn off by default)
+- Add **experimental** autoSweet option to continually ascend until a grimoire seed with Sweet (free Sugar Lump) is found - once activated, it can only disabled in the console with *FrozenCookies.autosweet = 0*
 
 2022 Jun 21
 
