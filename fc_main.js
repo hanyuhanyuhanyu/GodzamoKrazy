@@ -1589,10 +1589,6 @@ function autoSweetAction() {
                 (nextSpellName(9) == "Sugar Lump")
             ) {
                 autoSweetAction.state = 1;
-                if (FrozenCookies.manaMax != 0) {
-                    autoSweetAction.manaPrev = FrozenCookies.manaMax;
-                    FrozenCookies.manaMax = 37;
-                }
             }
         }
         
@@ -1610,6 +1606,10 @@ function autoSweetAction() {
                 return;
             
             case 1:
+                if (FrozenCookies.manaMax != 0) {
+                    autoSweetAction.manaPrev = FrozenCookies.manaMax;
+                    FrozenCookies.manaMax = 37;
+                }
                 if (M.magic == M.magicM) {
                     if (nextSpellName(0) != "Sugar Lump") {
                         var hagC = M.spellsById[4];
