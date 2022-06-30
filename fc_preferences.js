@@ -416,7 +416,7 @@ FrozenCookies.preferenceValues = {
         hint: "Display the number of missed Golden Cookie clicks under Golden Cookie Information",
         display: [ "Show Missed GCs OFF", "Show Missed GCs ON" ],
         default: 0,
-    }
+    },
     fpsModifier: {
         hint: "Run the game at the selected frame rate (browser default is 30). 60 is twice as fast, 15 is half as fast, etc. If you're not sure, keep this at 30",
         display: [
