@@ -401,17 +401,22 @@ FrozenCookies.preferenceValues = {
     },
     /*
       'timeTravelMethod':{
-          'hint':'Time travel is unstable. This determines how time travel works. If you\'re unsure, don\'t touch this.',
-          'display':['Time Travel DISABLED'], //, 'Purchases by Estimated Effective CPS', 'Purchases by Simulated Real Time', 'Heavenly Chips by Estimated Effective CPS', 'Heavenly Chips by Simulated Real Time'],
-          'default':0,
-          'extras':'<a class="option" id="timeTravelPurchases" onclick="updateTimeTravelAmount();">Set Time Travel Amount</a>'
+          hint:"Time travel is unstable. This determines how time travel works. If you\'re unsure, don\'t touch this.",
+          display:["Time Travel DISABLED"], //, "Purchases by Estimated Effective CPS", "Purchases by Simulated Real Time", "Heavenly Chips by Estimated Effective CPS", "Heavenly Chips by Simulated Real Time"],
+          default:0,
+          extras:"<a class="option" id="timeTravelPurchases" onclick="updateTimeTravelAmount();">Set Time Travel Amount</a>"
       },
       */
     simulatedGCPercent: {
-        hint: 'Assume a percentage of Golden Cookies as "clicked" for GC efficiency calculations (100% recommended)',
-        display: ["0%", "100%"],
+        hint: "Assume a percentage of Golden Cookies as \"clicked\" for GC efficiency calculations (100% recommended)",
+        display: ["GC clicked 0%", "GC clicked 100%"],
         default: 1,
     },
+    showMissedCookies: {
+        hint: "Display the number of missed Golden Cookie clicks under Golden Cookie Information",
+        display: [ "Show Missed GCs OFF", "Show Missed GCs ON" ],
+        default: 0,
+    }
     fpsModifier: {
         hint: "Run the game at the selected frame rate (browser default is 30). 60 is twice as fast, 15 is half as fast, etc. If you're not sure, keep this at 30",
         display: [

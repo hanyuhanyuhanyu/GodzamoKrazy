@@ -528,12 +528,14 @@ function FCMenu() {
         subsection.append(
             buildListing("Golden Cookie Clicks", Beautify(Game.goldenClicks))
         );
-        subsection.append(
-            buildListing(
-                "Missed Golden Cookie Clicks",
-                Beautify(Game.missedGoldenClicks)
-            )
-        );
+            if (FrozenCookies.showMissedCookies == 1) {
+            subsection.append(
+                buildListing(
+                    "Missed Golden Cookie Clicks",
+                    Beautify(Game.missedGoldenClicks)
+                )
+            );
+        }
         subsection.append(
             buildListing("Last Golden Cookie Effect", Game.shimmerTypes.golden.last)
         );
