@@ -1,4 +1,4 @@
-![frozen](https://user-images.githubusercontent.com/6014923/165900996-4726d38f-3c7c-4932-8d2e-f98bed93a836.png)
+*![frozen](https://user-images.githubusercontent.com/6014923/165900996-4726d38f-3c7c-4932-8d2e-f98bed93a836.png)
 
 # FrozenCookies
 
@@ -88,6 +88,7 @@ If you want to manually install it:
 
 2022 Jun 30
 - Add option to toggle display of missed golden cookie clicks (and turn off by default)
+- Add autoSweet option to continually ascend until a grimoire seed with Sweet (free Sugar Lump) is found
 
 2022 Jun 21
 
