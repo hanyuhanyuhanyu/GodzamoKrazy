@@ -1589,8 +1589,10 @@ function autoSweetAction() {
                 (nextSpellName(9) == "Sugar Lump")
             ) {
                 autoSweetAction.state = 1;
-                var manaprev = FrozenCookies.manaMax;
-                FrozenCookies.manaMax = 37;
+                if (FrozenCookies.manaMax != 0) {
+                    autoSweetAction.manaPrev = FrozenCookies.manaMax;
+                    FrozenCookies.manaMax = 37;
+                }
             }
         }
         
@@ -1620,7 +1622,9 @@ function autoSweetAction() {
                         autoSweetAction.state = 0;
                         logEvent('autoSweet', 'Cast Force the Hand of Fate');
                         FrozenCookies.autoSweet = 0;
-                        if (manaprev != -1) FrozenCookies.manaMax = manaprev;
+                        if (autoSweetAction.manaPrev != -1) {
+                            FrozenCookies.manaMax = autoSweetAction.manaPrev;
+                        }
                     }
                 }
                 return;
