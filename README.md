@@ -8,35 +8,6 @@ An automated Cookie Clicker tool.
 
 NOT currently compatible with __CCSE__. CCSE changes base game functions that break the switches like the season switch and the elder pledge. This problem exists in version **2.033** of CCSE and older, when used with Cookie Clicker version 2.048.
 
-## Changes in this fork
-
-Updated for 2.048 (Cortex bakers etc.)
-
-Autocast changes: 
- * Attempt to shorten time a debuff remains active
- * Smarter Force the Hand of Fate auto-spellcasting by not blindly selecting clots and other negative effects
- * Implement two advanced Auto Cast combos (see documentation below)
- * Automatically start a Sugar Frenzy during big combos
- * Add 'autoSweet' function to continually ascend until a Sweet spell is found
- 
-auto-Godzamok changes:
- * Buy Mines and Factories
- * Cap rebuy to 500 buildings to balance gain and loss
- 
-Season changes:
- * Swap to Easter on Cookie Storms when not all eggs are unlocked
- * Swap to Halloween if wrinklers are active and you still need spooky cookies
- 
-Bank changes:
- * Automatically buy brokers and upgrade the market office
- * Automatically take loans during big click frenzy combos
- 
-Dragon changes:
- * Automatically upgrade and pet the dragon
- * Automatically set dragon auras
- 
-Automatically set the Pantheon
-
 ## How to use
 
 ## Steam Install
