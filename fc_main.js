@@ -1603,7 +1603,7 @@ function autoBlacklistOff() {
 
 function autoBrokerAction() {
     if (!B) return; // Just leave if you don't have the bank
-    if (hasClickBuff()) return; // Don't pet during click buff
+    if (hasClickBuff()) return; // Don't buy during click buff
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
     //Hire brokers
@@ -1678,7 +1678,7 @@ function petDragonAction() {
 }
 
 function autoLoanBuy() {
-    if (!B) return;
+    if (!B) return; // Just leave if you don't have the bank
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
     if (hasClickBuff() && (cpsBonus() >= FrozenCookies.minLoanMult)) {
@@ -1731,7 +1731,6 @@ function autoDragonAura1Action() {
 }
 
 function autoDragonAura2Action() {
-
     if (
         !Game.HasUnlocked("A crumbly egg") ||
         Game.dragonLevel < 26 ||
@@ -1805,6 +1804,60 @@ function autoWorship2Action() {
         swapIn(FrozenCookies.autoWorship2, 2)
         return;
     }
+}
+
+function autoSweetAction() {
+    if (typeof autoSweetAction.state == 'undefined') {
+        autoSweetAction.state = 0;
+    }
+    
+    if (autoSweetAction.state == 0) {
+        if ( // Check first 10 spells
+            (nextSpellName(0) == "Sugar Lump") ||
+            (nextSpellName(1) == "Sugar Lump") ||
+            (nextSpellName(2) == "Sugar Lump") ||
+            (nextSpellName(3) == "Sugar Lump") ||
+            (nextSpellName(4) == "Sugar Lump") ||
+            (nextSpellName(5) == "Sugar Lump") ||
+            (nextSpellName(6) == "Sugar Lump") ||
+            (nextSpellName(7) == "Sugar Lump") ||
+            (nextSpellName(8) == "Sugar Lump") ||
+            (nextSpellName(9) == "Sugar Lump")
+        ) {
+            autoSweetAction.state = 1;
+        }
+    }
+    
+    switch (autoSweetAction.state) {
+        case 0:
+            if (!Game.OnAscend && !Game.AscendTimer) {
+                Game.ClosePrompt();
+                Game.Ascend(1);
+                setTimeout(function() {
+                    Game.ClosePrompt();
+                    Game.Reincarnate(1);
+                }, 10000);
+            }
+            return;
+        
+        case 1:        
+            if (nextSpellName(0) != "Sugar Lump") {
+            var hagC = M.spellsById[4];
+                M.castSpell(hagC);
+                logEvent('autoSweet', 'Cast Haggler\'s Charm instead of Force the Hand of Fate');
+            }
+            var FTHOF = M.spellsById[1];
+            if (M.magic == M.magicM) {
+                if (nextSpellName(0) == "Sugar Lump") {
+                    M.castSpell(FTHOF);
+                    logEvent('autoSweet', 'Cast Force the Hand of Fate');
+                }
+            }
+            autoSweetAction.state = 0;
+            FrozenCookies.autoSweet = 0;
+            return;
+    }
+    return;
 }
 
 function generateProbabilities(upgradeMult, minBase, maxMult) {
@@ -4238,6 +4291,13 @@ function FCStart() {
         FrozenCookies.autoWorship2Bot = setInterval(
             autoWorship2Action,
             FrozenCookies.frequency
+        );
+    }
+
+    if (FrozenCookies.autoSweet) {
+        FrozenCookies.autoSweet = setInterval(
+            autoSweetAction,
+            FrozenCookies.frequency * 2
         );
     }
 
