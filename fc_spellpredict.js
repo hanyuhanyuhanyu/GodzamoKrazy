@@ -26,6 +26,24 @@
                         "<b>Fourth Spell:</b> " +
                         nextSpell(3) +
                         "</div>",
+                        "<b>Fifth Spell:</b> " +
+                        nextSpell(4) +
+                        "</div>",
+                        "<b>Sixth Spell:</b> " +
+                        nextSpell(5) +
+                        "</div>",
+                        "<b>Seventh Spell:</b> " +
+                        nextSpell(6) +
+                        "</div>",
+                        "<b>Eighth Spell:</b> " +
+                        nextSpell(7) +
+                        "</div>",
+                        "<b>Ninth Spell:</b> " +
+                        nextSpell(8) +
+                        "</div>",
+                        "<b>Tenth Spell:</b> " +
+                        nextSpell(9) +
+                        "</div>",
                         "this"
                     );
                     Game.tooltip.wobble();
