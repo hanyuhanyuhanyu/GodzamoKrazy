@@ -1807,6 +1807,8 @@ function autoWorship2Action() {
 }
 
 function autoSweetAction() {
+    if (!Game.ObjectsById[7].minigameLoaded) return;
+    
     if (typeof autoSweetAction.state == 'undefined') {
         autoSweetAction.state = 0;
     }
