@@ -4221,7 +4221,7 @@ function FCStart() {
     }
 
     if (FrozenCookies.autoSweet) {
-        FrozenCookies.autoSweet = setInterval(
+        FrozenCookies.autoSweetBot = setInterval(
             autoSweetAction,
             FrozenCookies.frequency * 2
         );
