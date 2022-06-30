@@ -59,7 +59,7 @@ If you want to manually install it:
 
 2022 Jun 30
 - Add option to toggle display of missed golden cookie clicks (and turn off by default)
-- Add autoSweet option to continually ascend until a grimoire seed with Sweet (free Sugar Lump) is found - once activated, it can only disabled in the console with *FrozenCookies.autosweet = 0*
+- Add **experimental** autoSweet option to continually ascend until a grimoire seed with Sweet (free Sugar Lump) is found - once activated, it can only disabled in the console with *FrozenCookies.autosweet = 0*
 
 2022 Jun 21
 
