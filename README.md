@@ -74,6 +74,9 @@ If you want to manually install it:
 
 ## What's new?
 
+2022 Jun 30
+- Add option to toggle display of missed golden cookie clicks (and turn off by default)
+
 2022 Jun 21
 
 - Add automatic Sugar Frenzy
