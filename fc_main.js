@@ -1851,10 +1851,10 @@ function autoSweetAction() {
                 if (nextSpellName(0) == "Sugar Lump") {
                     M.castSpell(FTHOF);
                     logEvent('autoSweet', 'Cast Force the Hand of Fate');
+                    autoSweetAction.state = 0;
+                    FrozenCookies.autoSweet = 0;
                 }
             }
-            autoSweetAction.state = 0;
-            FrozenCookies.autoSweet = 0;
             return;
     }
     return;
