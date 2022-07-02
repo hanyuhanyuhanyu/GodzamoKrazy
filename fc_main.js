@@ -2884,6 +2884,10 @@ function isUnavailable(upgrade, upgradeBlacklist) {
         return true;
     }
 
+    if (upgrade.id == 74 && FrozenCookies.shinyPop == 1) { // Don't pledge if we want to protect Shiny Wrinklers
+        return true;
+    }
+
     if (App && upgrade.id == 816) { // Web cookies are only on Browser
         return true;
     }
@@ -3850,8 +3854,10 @@ function autoCookie() {
             _.filter(Game.wrinklers, function(w) {
                 return _.contains(popList, w.id);
             }).forEach(function(w) {
-                w.hp = 0;
-                popCount += 1;
+                if (FrozenCookies.shinyPop == 1 && w.type !== 1) { // do not pop Shiny Wrinkler
+                    w.hp = 0;
+                    popCount += 1;
+                }
             });
             if (popCount > 0) {
                 logEvent("Wrinkler", "Popped " + popCount + " wrinklers.");
@@ -3862,8 +3868,10 @@ function autoCookie() {
             var popList = Game.wrinklers;
             popList.forEach(function(w) {
                 if (w.close == true) {
-                    w.hp = 0;
-                    popCount += 1;
+                    if (FrozenCookies.shinyPop == 1 && w.type !== 1) { // do not pop Shiny Wrinkler
+                        w.hp = 0;
+                        popCount += 1;
+                    }
                 }
             });
             if (popCount > 0) {

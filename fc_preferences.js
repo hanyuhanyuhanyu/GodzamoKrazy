@@ -98,13 +98,11 @@ FrozenCookies.preferenceValues = {
         ],
         default: 0,
     },
-    /* Not working yet
     shinyPop:{
-        hint: "Protect the endangered Shiny Wrinkler from being auomatically popped",
+        hint: "Protect the endangered Shiny Wrinkler from being auomatically popped. Note: this disables buying the Elder Pledge.",
         display: ["Save Shiny Wrinklers ON", "Save Shiny Wrinklers OFF"],
         default: 0
     },
-    */
     autoSL: {
         hint: "Automatically harvest sugar lumps when ripe, with option to automatically swap in Rigidel",
         display: [
