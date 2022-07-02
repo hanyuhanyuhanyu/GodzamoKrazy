@@ -1639,24 +1639,24 @@ function autoSweetAction() {
 
 function autoEasterAction() {
     if (FrozenCookies.autoEaster == 0) return;
+    if (Game.season == 'easter') return;
+    if (haveAll('easter')) return;
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
-    if (Game.hasBuff('Cookie storm') && !haveAll('easter') && Game.season != 'easter') {
-        Game.UpgradesById[209].buy()
-        logEvent("autoEaster", "Swapping to Easter for Cookie Storm");
+    if (Game.hasBuff('Cookie storm') && Game.season != 'easter' && !haveAll('easter')) {
+        Game.UpgradesById[209].buy();
     }
 }
 
 function autoHalloweenAction() {
     if (FrozenCookies.autoHalloween == 0) return;
+    if (Game.season == 'halloween') return;
+    if (haveAll('halloween')) return;
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
-    var living = liveWrinklers();
-    if (living.length > 0) {
-        if (Game.season != 'easter' && Game.season != 'halloween' && !haveAll('halloween')) {
-            Game.UpgradesById[183].buy()
-            logEvent("autoHalloween", "Swapping to Halloween season to use wrinklers");
-        }
+    if (Game.elderWrath > 0 && Game.season != 'halloween' && !haveAll('halloween')) {
+        Game.UpgradesById[183].buy();
+        logEvent("autoHalloween", "Swapping to Halloween season to use wrinklers");
     }
 }
 
@@ -1703,6 +1703,7 @@ function autoBrokerAction() {
 
 function autoDragonAction() {
     if (!Game.HasUnlocked("A crumbly egg")) return;
+    if (Game.dragonLevel == 26) return;
     if (hasClickBuff()) return; // Don't pet during click buff
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
@@ -1712,17 +1713,17 @@ function autoDragonAction() {
     }
 
     if (Game.dragonLevel < Game.dragonLevels.length - 1 && Game.dragonLevels[Game.dragonLevel].cost()) {
+        Game.specialTab = "dragon";
+        Game.ToggleSpecialMenu(1);
         PlaySound('snd/shimmerClick.mp3');
         Game.dragonLevels[Game.dragonLevel].buy();
         Game.dragonLevel = (Game.dragonLevel + 1) % Game.dragonLevels.length;
+        Game.ToggleSpecialMenu(0);
+        logEvent("autoDragon", "Upgraded the dragon");
 
         if (Game.dragonLevel >= Game.dragonLevels.length - 1) Game.Win('Here be dragon');
         Game.recalculateGains = 1;
         Game.upgradesToRebuild = 1;
-        logEvent("autoDragon", "Upgraded the dragon");
-    }
-    if (Game.dragonLevel + 1 >= Game.dragonLevel.length) {
-        Game.ToggleSpecialMenu();
     }
 }
 
@@ -1880,6 +1881,55 @@ function autoWorship2Action() {
     if (T.swaps > 0) {
         swapIn(FrozenCookies.autoWorship2, 2)
         return;
+    }
+}
+
+function buyOtherUpgrades() { // I'm sure there's a better way to do this
+    //Buy eggs
+    if (Game.UpgradesById['223'].unlocked == 1 && Game.UpgradesById['223'].bought == 0) {
+         Game.UpgradesById['223'].buy(); // Faberge egg
+    }
+    if (Game.season == 'halloween' && Game.UpgradesById['224'].unlocked == 1 && Game.UpgradesById['224'].bought == 0) {
+         Game.UpgradesById['224'].buy(); // Wrinklerspawn
+    }
+    if (Game.season == 'easter' && Game.UpgradesById['226'].unlocked == 1 && Game.UpgradesById['226'].bought == 0) {
+         Game.UpgradesById['226'].buy(); // Omelette
+    }
+    if (Game.UpgradesById['229'].unlocked == 1 && Game.UpgradesById['229'].bought == 0) {
+         Game.UpgradesById['229'].buy(); // "egg"
+    }
+    
+    //Buy Santa stuff
+    if (Game.season == 'christmas' && Game.UpgradesById['158'].unlocked == 1 && Game.UpgradesById['158'].bought == 0) {
+         Game.UpgradesById['158'].buy(); // Weighted sleighs
+    }
+    if (Game.season == 'christmas' && Game.UpgradesById['163'].unlocked == 1 && Game.UpgradesById['163'].bought == 0) {
+         Game.UpgradesById['163'].buy(); // Santa's bottomless bag
+    }
+    
+    //Buy dragon drops
+    if (Game.UpgradesById['650'].unlocked == 1 && Game.UpgradesById['650'].bought == 0) {
+         Game.UpgradesById['650'].buy(); // Dragon fang
+    }
+    if (Game.UpgradesById['651'].unlocked == 1 && Game.UpgradesById['651'].bought == 0) {
+         Game.UpgradesById['651'].buy(); // Dragon teddy bear
+    }
+    
+    //Buy other essential upgrades
+    if (Game.Upgrades["Elder Pact"].bought == 1 && Game.UpgradesById['87'].unlocked == 1 && Game.UpgradesById['87'].bought == 0) {
+         Game.UpgradesById['87'].buy(); // Sacrificial rolling pins
+    }
+    if (Game.UpgradesById['473'].unlocked == 1 && Game.UpgradesById['473'].bought == 0) {
+         Game.UpgradesById['473'].buy(); // Green yeast digestives
+    }
+    if (Game.UpgradesById['474'].unlocked == 1 && Game.UpgradesById['474'].bought == 0) {
+         Game.UpgradesById['474'].buy(); // Fern tea
+    }
+    if (Game.UpgradesById['475'].unlocked == 1 && Game.UpgradesById['475'].bought == 0) {
+         Game.UpgradesById['475'].buy(); // Ichor syrup
+    }
+    if (Game.UpgradesById['640'].unlocked == 1 && Game.UpgradesById['640'].bought == 0) {
+         Game.UpgradesById['640'].buy(); // Fortune #102
     }
 }
 
@@ -2927,7 +2977,6 @@ function isUnavailable(upgrade, upgradeBlacklist) {
             (!haveAll(Game.season) ||
                 (upgrade.season != seasons[FrozenCookies.defaultSeason] &&
                     haveAll(upgrade.season))));
-
     return result;
 }
 
@@ -3933,16 +3982,18 @@ function autoCookie() {
             } else if (FrozenCookies.trackStats == 6) {
                 FrozenCookies.delayPurchaseCount += 1;
             }
-            logEvent(
-                "Store",
-                "Autobought " +
-                recommendation.purchase.name +
-                " for " +
-                Beautify(recommendation.cost) +
-                ", resulting in " +
-                Beautify(recommendation.delta_cps) +
-                " CPS."
-            );
+            if (FrozenCookies.purchaseLog == 1) {
+                logEvent(
+                    "Store",
+                    "Autobought " +
+                    recommendation.purchase.name +
+                    " for " +
+                    Beautify(recommendation.cost) +
+                    ", resulting in " +
+                    Beautify(recommendation.delta_cps) +
+                    " CPS."
+                );
+            }
             disabledPopups = true;
             if (FrozenCookies.autobuyCount >= 10) {
                 Game.Draw();
@@ -4181,6 +4232,11 @@ function FCStart() {
         clearInterval(FrozenCookies.autoWorship2Bot);
         FrozenCookies.autoWorship2Bot = 0;
     }
+    
+    if (FrozenCookies.otherUpgradesBot) {
+        clearInterval(FrozenCookies.otherUpgradesBot);
+        FrozenCookies.otherUpgradesBot = 0;
+    }
 
     // Remove until timing issues are fixed
     //  if (FrozenCookies.goldenCookieBot) {
@@ -4348,6 +4404,13 @@ function FCStart() {
         FrozenCookies.autoWorship2Bot = setInterval(
             autoWorship2Action,
             FrozenCookies.frequency
+        );
+    }
+
+    if (FrozenCookies.otherUpgrades) {
+        FrozenCookies.otherUpgradesBot = setInterval(
+            buyOtherUpgrades,
+            FrozenCookies.frequency * 2
         );
     }
 
