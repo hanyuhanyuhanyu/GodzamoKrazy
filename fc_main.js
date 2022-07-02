@@ -1721,6 +1721,9 @@ function autoDragonAction() {
         Game.upgradesToRebuild = 1;
         logEvent("autoDragon", "Upgraded the dragon");
     }
+    if (Game.dragonLevel + 1 >= Game.dragonLevel.length) {
+        Game.ToggleSpecialMenu();
+    }
 }
 
 function petDragonAction() {
