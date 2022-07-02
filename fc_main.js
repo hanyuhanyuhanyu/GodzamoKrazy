@@ -1721,7 +1721,7 @@ function autoDragonAction() {
 
 function petDragonAction() {
     if (
-        !Game.HasUnlocked("A crumbly egg") ||
+        !Game.Has("A crumbly egg") ||
         Game.dragonLevel < 4 ||
         !(Game.Has("Pet the dragon"))
     ) { //Need to actually be able to pet
@@ -1785,7 +1785,7 @@ function autoSugarFrenzyAction() {
 
 function autoDragonAura1Action() {
     if (
-        !Game.HasUnlocked("A crumbly egg") ||
+        !Game.Has("A crumbly egg") ||
         Game.dragonLevel < 5 ||
         FrozenCookies.autoDragonAura1 == 0
     ) return;
@@ -1802,7 +1802,7 @@ function autoDragonAura1Action() {
 
 function autoDragonAura2Action() {
     if (
-        !Game.HasUnlocked("A crumbly egg") ||
+        !Game.Has("A crumbly egg") ||
         Game.dragonLevel < 26 ||
         FrozenCookies.autoDragonAura2 == 0
     ) return;
