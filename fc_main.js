@@ -3848,7 +3848,7 @@ function autoCookie() {
         if (FrozenCookies.autoWrinkler == 1) {
             var popCount = 0;
             var popList = shouldPopWrinklers();
-            if (FrozenCookies.shinyPop == 1 {
+            if (FrozenCookies.shinyPop == 1) {
                 _.filter(Game.wrinklers, function(w) {
                     return _.contains(popList, w.id);
                 }).forEach(function(w) {
@@ -3875,7 +3875,7 @@ function autoCookie() {
         if (FrozenCookies.autoWrinkler == 2) {
             var popCount = 0;
             var popList = Game.wrinklers;
-            if (FrozenCookies.shinyPop == 1 {
+            if (FrozenCookies.shinyPop == 1) {
                 popList.forEach(function(w) {
                     if (w.close == true && w.type !== 1) {
                         w.hp = 0;
