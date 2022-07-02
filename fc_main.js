@@ -915,7 +915,10 @@ function autoCast() {
                                 logEvent('AutoSpell', 'Cast Force the Hand of Fate');
                             }
                         } else if (Game.Upgrades["Elder Pact"].bought == 0) {
-                            if (Game.hasBuff('Frenzy') && Game.hasBuff('Click frenzy') && Game.hasBuff('Click frenzy').time / 30 >= Math.ceil(6 * BuffTimeFactor()) - 1) {
+                            if ((Game.hasBuff('Frenzy') || Game.hasBuff('Dragon Harvest')) &&
+                                Game.hasBuff('Click frenzy') && 
+                                Game.hasBuff('Click frenzy').time / 30 >= Math.ceil(6 * BuffTimeFactor()) - 1
+                            ){
                                 M.castSpell(FTHOF);
                                 logEvent('AutoSpell', 'Cast Force the Hand of Fate');
                             }
@@ -930,18 +933,19 @@ function autoCast() {
                     }
 
                     if (nextSpellName(0) == "Click Frenzy") {
-                        if (Game.hasBuff('Frenzy') && BuildingSpecialBuff() == 1 && Game.hasBuff('Frenzy').time / 30 >= Math.ceil(13 * BuffTimeFactor()) - 1 && BuildingBuffTime() >= Math.ceil(13 * BuffTimeFactor())) {
+                        if ((Game.hasBuff('Frenzy') || Game.hasBuff('Dragon Harvest')) &&
+                            BuildingSpecialBuff() == 1 &&
+                            (Game.hasBuff('Frenzy').time / 30 >= Math.ceil(13 * BuffTimeFactor()) - 1 ||
+                            Game.hasBuff('Dragon Harvest').time / 30 >= Math.ceil(13 * BuffTimeFactor()) - 1) &&
+                            BuildingBuffTime() >= Math.ceil(13 * BuffTimeFactor())
+                        ){
                             M.castSpell(FTHOF);
                             logEvent('AutoSpell', 'Cast Force the Hand of Fate');
                         }
                     }
 
                     if (nextSpellName(0) == "Cookie Storm") {
-                        if (Game.hasBuff('Frenzy') && BuildingSpecialBuff() == 1 && Game.hasBuff('Frenzy').time / 30 >= Math.ceil(7 * BuffTimeFactor()) - 1 && BuildingBuffTime() >= Math.ceil(7 * BuffTimeFactor())) {
-                            M.castSpell(FTHOF);
-                            logEvent('AutoSpell', 'Cast Force the Hand of Fate');
-                        }
-                        if (FrozenCookies.autoEaster && !haveAll('easter')) {
+                        if ((FrozenCookies.autoEaster && !haveAll('easter')) || cpsBonus() >= 7){
                             M.castSpell(FTHOF);
                             logEvent('AutoSpell', 'Cast Force the Hand of Fate');
                         }
