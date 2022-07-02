@@ -57,6 +57,9 @@ If you want to manually install it:
 
 ## What's new?
 
+2022 Jul 02
+- Completed the Shiny Wrinkler protection code so you can now keep your shinies.
+
 2022 Jun 30
 - Add option to toggle display of missed golden cookie clicks (and turn off by default)
 - Add **experimental** autoSweet option to continually ascend until a grimoire seed with Sweet (free Sugar Lump) is found - once activated, it can only disabled in the console with *FrozenCookies.autosweet = 0*

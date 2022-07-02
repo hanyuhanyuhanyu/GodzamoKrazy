@@ -2884,6 +2884,10 @@ function isUnavailable(upgrade, upgradeBlacklist) {
         return true;
     }
 
+    if (upgrade.id == 74 && FrozenCookies.shinyPop == 1) { // Don't pledge if we want to protect Shiny Wrinklers
+        return true;
+    }
+
     if (App && upgrade.id == 816) { // Web cookies are only on Browser
         return true;
     }
@@ -3633,10 +3637,7 @@ function shouldPopWrinklers() {
             });
         } else {
             var delay = delayAmount();
-            var wrinklerList =
-                FrozenCookies.shinyPop == 0 ?
-                Game.wrinklers.filter(v >= v.type == 0) :
-                Game.wrinklers;
+            var wrinklerList = Game.wrinklers;
             var nextRecNeeded = nextPurchase().cost + delay - Game.cookies;
             var nextRecCps = nextPurchase().delta_cps;
             var wrinklersNeeded = wrinklerList
@@ -3847,27 +3848,53 @@ function autoCookie() {
         if (FrozenCookies.autoWrinkler == 1) {
             var popCount = 0;
             var popList = shouldPopWrinklers();
-            _.filter(Game.wrinklers, function(w) {
-                return _.contains(popList, w.id);
-            }).forEach(function(w) {
-                w.hp = 0;
-                popCount += 1;
-            });
-            if (popCount > 0) {
-                logEvent("Wrinkler", "Popped " + popCount + " wrinklers.");
+            if (FrozenCookies.shinyPop == 1) {
+                _.filter(Game.wrinklers, function(w) {
+                    return _.contains(popList, w.id);
+                }).forEach(function(w) {
+                    if (w.type !== 1) { // do not pop Shiny Wrinkler
+                        w.hp = 0;
+                        popCount += 1;
+                    }
+                });
+                if (popCount > 0) {
+                    logEvent("Wrinkler", "Popped " + popCount + " wrinklers.");
+                }
+            } else {
+                _.filter(Game.wrinklers, function(w) {
+                    return _.contains(popList, w.id);
+                }).forEach(function(w) {
+                    w.hp = 0;
+                    popCount += 1;
+                });
+                if (popCount > 0) {
+                    logEvent("Wrinkler", "Popped " + popCount + " wrinklers.");
+                }
             }
         }
         if (FrozenCookies.autoWrinkler == 2) {
             var popCount = 0;
             var popList = Game.wrinklers;
-            popList.forEach(function(w) {
-                if (w.close == true) {
-                    w.hp = 0;
-                    popCount += 1;
+            if (FrozenCookies.shinyPop == 1) {
+                popList.forEach(function(w) {
+                    if (w.close == true && w.type !== 1) {
+                        w.hp = 0;
+                        popCount += 1;
+                    }
+                });
+                if (popCount > 0) {
+                    logEvent("Wrinkler", "Popped " + popCount + " wrinklers.");
                 }
-            });
-            if (popCount > 0) {
-                logEvent("Wrinkler", "Popped " + popCount + " wrinklers.");
+            } else {
+                popList.forEach(function(w) {
+                    if (w.close == true) {
+                        w.hp = 0;
+                        popCount += 1;
+                    }
+                });
+                if (popCount > 0) {
+                    logEvent("Wrinkler", "Popped " + popCount + " wrinklers.");
+                }
             }
         }
 
