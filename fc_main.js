@@ -405,7 +405,7 @@ function timeDisplay(seconds) {
         return "Never!";
     }
     seconds = Math.floor(seconds);
-    var years, weeks, days, hours, minutes;
+    var years, days, hours, minutes;
     years = Math.floor(seconds / (365.25 * 24 * 60 * 60));
     years = years > 0 ? Beautify(years) + "y " : "";
     seconds %= 365.25 * 24 * 60 * 60;
