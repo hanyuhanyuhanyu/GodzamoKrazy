@@ -231,9 +231,11 @@ BuildingSpecialBuff = function () {
         //	Game.hasBuff('Microcosm') ||
         Game.hasBuff("Refactoring") ||
         //	Game.hasBuff('Antipattern') ||
-        Game.hasBuff("Cosmic nursery")
+        Game.hasBuff("Cosmic nursery") ||
+        //	Game.hasBuff('Big crunch')) ||
+        Game.hasBuff("Brainstorm") // ||
+        //	Game.hasBuff("Brain freeze") ||
     ) {
-        //	Game.hasBuff('Big crunch'))
         return 1;
     } else {
         return 0;
