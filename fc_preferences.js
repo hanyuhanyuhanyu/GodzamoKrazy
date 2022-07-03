@@ -396,8 +396,8 @@ FrozenCookies.preferenceValues = {
         display: ["Shortcuts OFF", "Shortcuts ON"],
         default: 1,
     },
-    otherOptions: {
-        hint: "Setting a bank delays autobuy until the bank is complete",
+    otherNotes: {
+        hint: "(Setting a bank delays autobuy until the bank is complete)",
     },
     holdSEBank: {
         hint: "Maintain a bank for Spontaneous Edifice (already enabled if Auto Casting SE)",
