@@ -405,9 +405,12 @@ function timeDisplay(seconds) {
         return "Never!";
     }
     seconds = Math.floor(seconds);
-    var days, hours, minutes;
+    var years, weeks, days, hours, minutes;
+    years = Math.floor(seconds / (365.25 * 24 * 60 * 60));
+    years = years > 0 ? Beautify(years) + "y " : "";
+    seconds %= 365.25 * 24 * 60 * 60;
     days = Math.floor(seconds / (24 * 60 * 60));
-    days = days > 0 ? Beautify(days) + "d " : "";
+    days = days > 0 ? days + "d " : "";
     seconds %= 24 * 60 * 60;
     hours = Math.floor(seconds / (60 * 60));
     hours = hours > 0 ? hours + "h " : "";
@@ -416,7 +419,7 @@ function timeDisplay(seconds) {
     minutes = minutes > 0 ? minutes + "m " : "";
     seconds %= 60;
     seconds = seconds > 0 ? seconds + "s" : "";
-    return (days + hours + minutes + seconds).trim();
+    return (years + days + hours + minutes + seconds).trim();
 }
 
 function fcDraw(from, text, origin) {
