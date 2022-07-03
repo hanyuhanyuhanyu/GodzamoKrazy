@@ -419,9 +419,9 @@ FrozenCookies.preferenceValues = {
         default: 0,
     },
     setHarvestBankType: {
-        hint: "Calculate the needed harvesting bank based on whether a CPS multiplier is in effect when you intend to harvest (no effect if no plant was selected above)",
+        hint: "Increase the harvesting bank for the above plant, based on whether a CpS multiplier is in effect during harvest",
         display: [
-            "Harvesting during NO CPS MULTIPLER",
+            "Harvesting during NO CpS MULTIPLIER",
             "Harvesting during FRENZY",
             "Harvesting during BUILDING SPECIAL",
             "Harvesting during FRENZY + BUILDING SPECIAL",
@@ -434,9 +434,9 @@ FrozenCookies.preferenceValues = {
         hint: "Time travel is unstable. This determines how time travel works. If you're unsure, don't touch this",
         display: [
             Time Travel DISABLED"],
-            "Purchases by Estimated Effective CPS",
+            "Purchases by Estimated Effective CpS",
             "Purchases by Simulated Real Time",
-            "Heavenly Chips by Estimated Effective CPS",
+            "Heavenly Chips by Estimated Effective CpS",
             "Heavenly Chips by Simulated Real Time"
         ],
         default: 0,
