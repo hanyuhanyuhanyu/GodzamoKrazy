@@ -1393,13 +1393,9 @@ function auto100ConsistencyComboAction() {
         return;
     }
 
-    if (typeof auto100ConsistencyComboAction.countWizard == "undefined") {
-        auto100ConsistencyComboAction.countWizard =
-            Game.Objects["Wizard"].amount - 1;
-    }
     if (typeof auto100ConsistencyComboAction.countFarm == "undefined") {
         auto100ConsistencyComboAction.countFarm =
-            Game.Objects["Farm"].amount - 1;
+            Game.Objects["Farm"].amount;
     }
     if (typeof auto100ConsistencyComboAction.countMine == "undefined") {
         auto100ConsistencyComboAction.countMine = Game.Objects["Mine"].amount;
@@ -1410,11 +1406,15 @@ function auto100ConsistencyComboAction() {
     }
     if (typeof auto100ConsistencyComboAction.countBank == "undefined") {
         auto100ConsistencyComboAction.countBank =
-            Game.Objects["Bank"].amount - 1;
+            Game.Objects["Bank"].amount;
     }
     if (typeof auto100ConsistencyComboAction.countTemple == "undefined") {
         auto100ConsistencyComboAction.countTemple =
-            Game.Objects["Temple"].amount - 1;
+            Game.Objects["Temple"].amount;
+    }
+    if (typeof auto100ConsistencyComboAction.countWizard == "undefined") {
+        auto100ConsistencyComboAction.countWizard =
+            Game.Objects["Wizard tower"].amount;
     }
     if (typeof auto100ConsistencyComboAction.countShipment == "undefined") {
         auto100ConsistencyComboAction.countShipment =
@@ -1562,7 +1562,7 @@ function auto100ConsistencyComboAction() {
                 "Cast first Force the Hand of Fate"
             );
             auto100ConsistencyComboAction.countWizard =
-                Game.Objects["Wizard"].amount - 1;
+                Game.Objects["Wizard tower"].amount - 1;
             Game.Objects["Wizard tower"].sell(
                 auto100ConsistencyComboAction.countWizard
             );
@@ -1607,9 +1607,9 @@ function auto100ConsistencyComboAction() {
             return;
         case 10: // Take Stock Market loans
             if (B) {
-                Game.Objects["Bank"].minigame.takeLoan(1);
-                Game.Objects["Bank"].minigame.takeLoan(2);
-                Game.Objects["Bank"].minigame.takeLoan(3);
+                B.takeLoan(1);
+                B.takeLoan(2);
+                B.takeLoan(3);
             }
             auto100ConsistencyComboAction.state = 11;
             return;
@@ -2072,9 +2072,9 @@ function autoLoanBuy() {
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
     if (hasClickBuff() && cpsBonus() >= FrozenCookies.minLoanMult) {
-        Game.Objects["Bank"].minigame.takeLoan(1);
-        Game.Objects["Bank"].minigame.takeLoan(2);
-        // Game.Objects['Bank'].minigame.takeLoan(3);
+        B.takeLoan(1);
+        B.takeLoan(2);
+        // B.takeLoan(3);
     }
 }
 
