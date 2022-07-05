@@ -1923,10 +1923,14 @@ function autoSweetAction() {
 }
 
 function autoEasterAction() {
-    if (FrozenCookies.autoEaster == 0) return;
-    if (Game.season == "easter") return;
-    if (haveAll("easter")) return;
-    if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
+    if (
+        FrozenCookies.autoEaster == 0 ||
+        Game.season == "easter" ||
+        haveAll("easter") ||
+        FrozenCookies.autoBuy == 0 // Treat like global on/off switch
+    ) {
+        return;
+    }
 
     if (
         Game.hasBuff("Cookie storm") &&
@@ -1938,13 +1942,19 @@ function autoEasterAction() {
 }
 
 function autoHalloweenAction() {
-    if (FrozenCookies.autoHalloween == 0) return;
-    if (Game.season == "halloween") return;
-    if (haveAll("halloween")) return;
-    if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
+    if (
+        FrozenCookies.autoHalloween == 0 ||
+        Game.season == "easter" ||
+        Game.season == "halloween" ||
+        haveAll("halloween") ||
+        FrozenCookies.autoBuy == 0 // Treat like global on/off switch
+    ) {
+        return;
+    }
 
     if (
         Game.elderWrath > 0 &&
+        Game.season != "easter" &&
         Game.season != "halloween" &&
         !haveAll("halloween")
     ) {
