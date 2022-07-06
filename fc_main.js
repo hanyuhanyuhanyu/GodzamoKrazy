@@ -2222,14 +2222,12 @@ function buyOtherUpgrades() {
         Game.UpgradesById["223"].buy(); // Faberge egg
     }
     if (
-        Game.season == "halloween" &&
         Game.UpgradesById["224"].unlocked == 1 &&
         Game.UpgradesById["224"].bought == 0
     ) {
         Game.UpgradesById["224"].buy(); // Wrinklerspawn
     }
     if (
-        Game.season == "easter" &&
         Game.UpgradesById["226"].unlocked == 1 &&
         Game.UpgradesById["226"].bought == 0
     ) {
@@ -2244,14 +2242,12 @@ function buyOtherUpgrades() {
 
     //Buy Santa stuff
     if (
-        Game.season == "christmas" &&
         Game.UpgradesById["158"].unlocked == 1 &&
         Game.UpgradesById["158"].bought == 0
     ) {
         Game.UpgradesById["158"].buy(); // Weighted sleighs
     }
     if (
-        Game.season == "christmas" &&
         Game.UpgradesById["163"].unlocked == 1 &&
         Game.UpgradesById["163"].bought == 0
     ) {
