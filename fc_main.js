@@ -2064,6 +2064,8 @@ function autoBrokerAction() {
             "AutoBroker",
             "Bought a broker for " + Beautify(B.getBrokerPrice()) + " cookies"
         );
+        Game.recalculateGains = 1;
+        Game.upgradesToRebuild = 1;
     }
     //Upgrade bank level
     let currentOffice = B.offices[B.officeLevel];
@@ -2074,16 +2076,31 @@ function autoBrokerAction() {
     ) {
         var countBankCursor = currentOffice.cost[0];
         l("bankOfficeUpgrade").click();
-        logEvent("AutoBroker", "Upgrade bank level");
         safeBuy(Game.Objects["Cursor"], countBankCursor);
-        logEvent("AutoBroker", "Bought " + countBankCursor + " cursors");
+        logEvent(
+            "AutoBroker",
+            "Upgrade bank level for " + countBankCursor + " cursors"
+        );
+        Game.recalculateGains = 1;
+        Game.upgradesToRebuild = 1;
+    }
+}
+
+function autoLoanBuy() {
+    if (!B) return; // Just leave if you don't have the bank
+    if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
+
+    if (hasClickBuff() && cpsBonus() >= FrozenCookies.minLoanMult) {
+        B.takeLoan(1);
+        B.takeLoan(2);
+        // B.takeLoan(3);
     }
 }
 
 function autoDragonAction() {
     if (!Game.HasUnlocked("A crumbly egg")) return;
-    if (Game.dragonLevel == 26) return;
-    if (hasClickBuff()) return; // Don't pet during click buff
+    if (Game.dragonLevel == Game.dragonLevels.length) return;
+    if (hasClickBuff()) return; // Don't upgrade during click buff
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
     if (Game.HasUnlocked("A crumbly egg") && !Game.Has("A crumbly egg")) {
@@ -2096,17 +2113,11 @@ function autoDragonAction() {
         Game.dragonLevels[Game.dragonLevel].cost()
     ) {
         Game.specialTab = "dragon";
-        Game.ToggleSpecialMenu(1);
-        PlaySound("snd/shimmerClick.mp3");
-        Game.dragonLevels[Game.dragonLevel].buy();
-        Game.dragonLevel = (Game.dragonLevel + 1) % Game.dragonLevels.length;
-        Game.ToggleSpecialMenu(0);
+        Game.UpgradeDragon();
+        if (Game.dragonLevel + 1 >= Game.dragonLevels.length) {
+            Game.ToggleSpecialMenu();
+        }
         logEvent("autoDragon", "Upgraded the dragon");
-
-        if (Game.dragonLevel >= Game.dragonLevels.length - 1)
-            Game.Win("Here be dragon");
-        Game.recalculateGains = 1;
-        Game.upgradesToRebuild = 1;
     }
 }
 
@@ -2141,46 +2152,6 @@ function petDragonAction() {
         Game.ClickSpecialPic();
         Game.ToggleSpecialMenu(0);
         //logEvent("petDragon", "Who's a good dragon? You are!");
-    }
-}
-
-function autoLoanBuy() {
-    if (!B) return; // Just leave if you don't have the bank
-    if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
-
-    if (hasClickBuff() && cpsBonus() >= FrozenCookies.minLoanMult) {
-        B.takeLoan(1);
-        B.takeLoan(2);
-        // B.takeLoan(3);
-    }
-}
-
-function autoSugarFrenzyAction() {
-    if (
-        FrozenCookies.autoSugarFrenzy == 1 &&
-        ((FrozenCookies.sugarBakingGuard == 0 && Game.lumps > 0) ||
-            Game.lumps > 100) &&
-        Game.UpgradesById["450"].unlocked == 1 && // Check to see if Sugar craving prestige upgrade has been purchased
-        Game.UpgradesById["452"].bought == 0 && // Check to see if sugar frenzy has already been bought this ascension
-        auto100ConsistencyComboAction.state == 16
-    ) {
-        Game.UpgradesById["452"].buy();
-        Game.ConfirmPrompt();
-        logEvent("autoSugarFrenzy", "Started a Sugar Frenzy this ascension");
-    }
-
-    if (
-        FrozenCookies.autoSugarFrenzy == 2 &&
-        ((FrozenCookies.sugarBakingGuard == 0 && Game.lumps > 0) ||
-            Game.lumps > 100) &&
-        Game.UpgradesById["450"].unlocked == 1 && // Check to see if Sugar craving prestige upgrade has been purchased
-        Game.UpgradesById["452"].bought == 0 && // Check to see if sugar frenzy has already been bought this ascension
-        (autoFTHOFComboAction.state == 2 ||
-            auto100ConsistencyComboAction.state == 16)
-    ) {
-        Game.UpgradesById["452"].buy();
-        Game.ConfirmPrompt();
-        logEvent("autoSugarFrenzy", "Started a Sugar Frenzy this ascension");
     }
 }
 
@@ -2219,10 +2190,39 @@ function autoDragonAura2Action() {
         return;
     }
 
-    if (Game.dragonLevel >= 26) {
+    if (Game.dragonLevel == Game.dragonLevels.length - 1) {
         Game.SetDragonAura(FrozenCookies.autoDragonAura2, 1);
         Game.ConfirmPrompt();
         return;
+    }
+}
+
+function autoSugarFrenzyAction() {
+    if (
+        FrozenCookies.autoSugarFrenzy == 1 &&
+        ((FrozenCookies.sugarBakingGuard == 0 && Game.lumps > 0) ||
+            Game.lumps > 100) &&
+        Game.UpgradesById["450"].unlocked == 1 && // Check to see if Sugar craving prestige upgrade has been purchased
+        Game.UpgradesById["452"].bought == 0 && // Check to see if sugar frenzy has already been bought this ascension
+        auto100ConsistencyComboAction.state == 16
+    ) {
+        Game.UpgradesById["452"].buy();
+        Game.ConfirmPrompt();
+        logEvent("autoSugarFrenzy", "Started a Sugar Frenzy this ascension");
+    }
+
+    if (
+        FrozenCookies.autoSugarFrenzy == 2 &&
+        ((FrozenCookies.sugarBakingGuard == 0 && Game.lumps > 0) ||
+            Game.lumps > 100) &&
+        Game.UpgradesById["450"].unlocked == 1 && // Check to see if Sugar craving prestige upgrade has been purchased
+        Game.UpgradesById["452"].bought == 0 && // Check to see if sugar frenzy has already been bought this ascension
+        (autoFTHOFComboAction.state == 2 ||
+            auto100ConsistencyComboAction.state == 16)
+    ) {
+        Game.UpgradesById["452"].buy();
+        Game.ConfirmPrompt();
+        logEvent("autoSugarFrenzy", "Started a Sugar Frenzy this ascension");
     }
 }
 
@@ -4742,6 +4742,11 @@ function FCStart() {
         FrozenCookies.autoBrokerBot = 0;
     }
 
+    if (FrozenCookies.autoLoanBot) {
+        clearInterval(FrozenCookies.autoLoanBot);
+        FrozenCookies.autoLoanBot = 0;
+    }
+
     if (FrozenCookies.autoDragonBot) {
         clearInterval(FrozenCookies.autoDragonBot);
         FrozenCookies.autoDragonBot = 0;
@@ -4752,16 +4757,6 @@ function FCStart() {
         FrozenCookies.petDragonBot = 0;
     }
 
-    if (FrozenCookies.autoLoanBot) {
-        clearInterval(FrozenCookies.autoLoanBot);
-        FrozenCookies.autoLoanBot = 0;
-    }
-
-    if (FrozenCookies.autoSugarFrenzyBot) {
-        clearInterval(FrozenCookies.autoSugarFrenzyBot);
-        FrozenCookies.autoSugarFrenzyBot = 0;
-    }
-
     if (FrozenCookies.autoDragonAura1Bot) {
         clearInterval(FrozenCookies.autoDragonAura1Bot);
         FrozenCookies.autoDragonAura1Bot = 0;
@@ -4770,6 +4765,11 @@ function FCStart() {
     if (FrozenCookies.autoDragonAura2Bot) {
         clearInterval(FrozenCookies.autoDragonAura2Bot);
         FrozenCookies.autoDragonAura2Bot = 0;
+    }
+
+    if (FrozenCookies.autoSugarFrenzyBot) {
+        clearInterval(FrozenCookies.autoSugarFrenzyBot);
+        FrozenCookies.autoSugarFrenzyBot = 0;
     }
 
     if (FrozenCookies.autoWorship0Bot) {
@@ -4898,6 +4898,13 @@ function FCStart() {
         );
     }
 
+    if (FrozenCookies.autoLoan) {
+        FrozenCookies.autoLoanBot = setInterval(
+            autoLoanBuy,
+            FrozenCookies.frequency
+        );
+    }
+
     if (FrozenCookies.autoDragon) {
         FrozenCookies.autoDragonBot = setInterval(
             autoDragonAction,
@@ -4908,20 +4915,6 @@ function FCStart() {
     if (FrozenCookies.petDragon) {
         FrozenCookies.petDragonBot = setInterval(
             petDragonAction,
-            FrozenCookies.frequency * 2
-        );
-    }
-
-    if (FrozenCookies.autoLoan) {
-        FrozenCookies.autoLoanBot = setInterval(
-            autoLoanBuy,
-            FrozenCookies.frequency
-        );
-    }
-
-    if (FrozenCookies.autoSugarFrenzy) {
-        FrozenCookies.autoSugarFrenzyBot = setInterval(
-            autoSugarFrenzyAction,
             FrozenCookies.frequency * 2
         );
     }
@@ -4937,6 +4930,13 @@ function FCStart() {
         FrozenCookies.autoDragonAura2Bot = setInterval(
             autoDragonAura2Action,
             FrozenCookies.frequency
+        );
+    }
+
+    if (FrozenCookies.autoSugarFrenzy) {
+        FrozenCookies.autoSugarFrenzyBot = setInterval(
+            autoSugarFrenzyAction,
+            FrozenCookies.frequency * 2
         );
     }
 
