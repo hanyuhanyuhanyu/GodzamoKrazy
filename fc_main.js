@@ -651,7 +651,7 @@ function updateSpeed(base) {
 function updateCpSMultMin(base) {
     userInputPrompt(
         "Autocasting!",
-        'What CpS multiplier should trigger Auto Casting (e.g. "7" will trigger during a Frenzy, "1" prevents triggering during a clot, etc.)?',
+        'What CpS multiplier should trigger Auto Casting? (e.g. "7" will trigger during a Frenzy, "1" prevents triggering during a clot, etc.)',
         FrozenCookies[base],
         storeNumberCallback(base, 0)
     );
@@ -927,15 +927,19 @@ function autoCast() {
                     );
                 }
 
-                var CBG = M.spellsById[0];
                 if (
-                    M.magicM <
-                    Math.floor(CBG.costMin + CBG.costPercent * M.magicM)
-                )
+                    cpsBonus() >= FrozenCookies.minCpSMult
+                ) {
+                    var CBG = M.spellsById[0];
+                    if (
+                        M.magicM <
+                        Math.floor(CBG.costMin + CBG.costPercent * M.magicM)
+                    )
+                        return;
+                    M.castSpell(CBG);
+                    logEvent("AutoSpell", "Cast Conjure Baked Goods");
                     return;
-                M.castSpell(CBG);
-                logEvent("AutoSpell", "Cast Conjure Baked Goods");
-                return;
+                }
             case 2:
                 if (Game.hasBuff("Dragonflight") || goldenCookieLife()) return;
 
