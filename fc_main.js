@@ -34,17 +34,14 @@ function registerMod(mod_id = "frozen_cookies") {
                 if (
                     FrozenCookies.autoBuy != 0 &&
                     Game.cookiesEarned >= 1000 &&
-                    Math.random() < 0.05
+                    Math.random() < 0.1
                 ) {
-                    return (
-                        'News : "' +
-                        [
-                            "debate about whether using Frozen Cookies constitutes cheating continues to rage. Violence escalating.",
-                            "Supreme Court rules Frozen Cookies not unauthorized cheating after all.",
-                            "frozen cookies considered 'cool' by local youths.",
-                            "move studio suit against popular mod over use of 'frozen' dismissed with prjeduce.",
-                        ]
-                    );
+                    return [
+                        "News : debate about whether using Frozen Cookies constitutes cheating continues to rage. Violence escalating.",
+                        "News : Supreme Court rules Frozen Cookies not unauthorized cheating after all.",
+                        "News : frozen cookies considered 'cool'. Pun-haters heard groaning.",
+                        "News : movie studio suit against popular mod over use of 'frozen' dismissed with prejudice.",
+                    ];
                 }
             });
             Game.registerHook("reset", function (hard) {
@@ -921,6 +918,15 @@ function autoCast() {
                     }
                 }
 
+                if (nextSpellName(0) == "Sugar Lump") {
+                    var FTHOF = M.spellsById[1];
+                    M.castSpell(FTHOF);
+                    logEvent(
+                        "AutoSpell",
+                        "Cast Force the Hand of Fate instead of Conjure Baked Goods"
+                    );
+                }
+
                 var CBG = M.spellsById[0];
                 if (
                     M.magicM <
@@ -1100,6 +1106,15 @@ function autoCast() {
                     }
                 }
 
+                if (nextSpellName(0) == "Sugar Lump") {
+                    var FTHOF = M.spellsById[1];
+                    M.castSpell(FTHOF);
+                    logEvent(
+                        "AutoSpell",
+                        "Cast Force the Hand of Fate instead of Spontaneous Edifice"
+                    );
+                }
+
                 var SE = M.spellsById[3];
                 // This code apparently works under the following assumptions:
                 //      - you want to spend your mana to get the highest value building (currently Cortex baker)
@@ -1147,6 +1162,15 @@ function autoCast() {
                     logEvent(
                         "AutoSpell",
                         "Cast Stretch Time instead of Haggler's Charm"
+                    );
+                }
+
+                if (nextSpellName(0) == "Sugar Lump") {
+                    var FTHOF = M.spellsById[1];
+                    M.castSpell(FTHOF);
+                    logEvent(
+                        "AutoSpell",
+                        "Cast Force the Hand of Fate instead of Haggler's Charm"
                     );
                 }
 
