@@ -205,7 +205,7 @@ function updateTimers() {
         t_draw.push({
             f_percent: chainCompletion,
             c1: "rgba(51, 51, 51, 1)",
-            name: "Chain to (" + decodeHtml(chainPurchase.name) + ")",
+            name: "Chain to: " + decodeHtml(chainPurchase.name),
             display: timeDisplay(
                 divCps(
                     Math.max(
@@ -221,7 +221,7 @@ function updateTimers() {
         t_draw.push({
             f_percent: purchaseCompletion,
             c1: "rgba(17, 17, 17, 1)",
-            name: "Buy Next (" + decodeHtml(nextPurchase().purchase.name) + ")",
+            name: "Next: " + decodeHtml(nextPurchase().purchase.name),
             display: timeDisplay(
                 divCps(
                     Math.max(purchaseTotal + bankTotal - Game.cookies, 0),
@@ -269,7 +269,7 @@ function updateTimers() {
         t_draw.push({
             f_percent: interest1_delay,
             c1: "rgba(255, 54, 5, 1)",
-            name: "Interest 1 Time",
+            name: "Interest 1 (x0.25) Time",
             display: timeDisplay(buffDuration("Loan 1 (interest)") / Game.fps),
         });
     }
@@ -277,7 +277,7 @@ function updateTimers() {
         t_draw.push({
             f_percent: interest2_delay,
             c1: "rgba(255, 54, 5, 1)",
-            name: "Interest 2 Time",
+            name: "Interest 2 (x0.1) Time",
             display: timeDisplay(buffDuration("Loan 2 (interest)") / Game.fps),
         });
     }
@@ -285,7 +285,7 @@ function updateTimers() {
         t_draw.push({
             f_percent: interest3_delay,
             c1: "rgba(255, 54, 5, 1)",
-            name: "Interest 3 Time",
+            name: "Interest 3 (x0.8) Time",
             display: timeDisplay(buffDuration("Loan 3 (interest)") / Game.fps),
         });
     }
@@ -301,7 +301,7 @@ function updateTimers() {
         t_draw.push({
             f_percent: loan1_delay,
             c1: "rgba(255, 222, 95, 1)",
-            name: "Loan 1 Time",
+            name: "Loan 1 (x1.5) Time",
             display: timeDisplay(buffDuration("Loan 1") / Game.fps),
         });
     }
@@ -309,7 +309,7 @@ function updateTimers() {
         t_draw.push({
             f_percent: loan2_delay,
             c1: "rgba(255, 222, 95, 1)",
-            name: "Loan 2 Time",
+            name: "Loan 2 (x2) Time",
             display: timeDisplay(buffDuration("Loan 2") / Game.fps),
         });
     }
@@ -317,7 +317,7 @@ function updateTimers() {
         t_draw.push({
             f_percent: loan3_delay,
             c1: "rgba(255, 222, 95, 1)",
-            name: "Loan 3 Time",
+            name: "Loan 3 (x1.2) Time",
             display: timeDisplay(buffDuration("Loan 3") / Game.fps),
         });
     }
