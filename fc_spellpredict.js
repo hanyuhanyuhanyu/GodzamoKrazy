@@ -64,11 +64,11 @@ nextSpell = function (i) {
                 '<b style="color:#FFDE5F">Lucky'
             );
             if (!Game.hasBuff("Dragonflight"))
-                choices.push('<b style="color:#FFD700">Click Frenzy');
+                choices.push('<b style="color:#00C4FF">Click Frenzy');
             if (Math.random() < 0.1)
                 choices.push(
                     '<b style="color:#FFDE5F">Cookie Chain',
-                    '<b style="color:#FFDE5F">Cookie Storm',
+                    '<b style="color:#00C4FF">Cookie Storm',
                     "Blab"
                 );
             if (Game.BuildingsOwned >= 10 && Math.random() < 0.25)
@@ -88,8 +88,8 @@ nextSpell = function (i) {
             );
             if (Math.random() < 0.1)
                 choices.push(
-                    '<b style="color:#DAA520">Cursed Finger',
-                    '<b style="color:#DAA520">Elder Frenzy'
+                    '<b style="color:#174F01">Cursed Finger',
+                    '<b style="color:#4F0007">Elder Frenzy'
                 );
             if (Math.random() < 0.003)
                 choices.push('<b style="color:#5FFFFC">Sugar Lump');
@@ -121,7 +121,7 @@ nextSpellName = function (i) {
 
             if (
                 nextSpell(v) ==
-                '<small><b style="color:#FFD700">Click Frenzy</b></small>'
+                '<small><b style="color:#00C4FF">Click Frenzy</b></small>'
             ) {
                 return "Click Frenzy";
             }
@@ -135,7 +135,7 @@ nextSpellName = function (i) {
 
             if (
                 nextSpell(v) ==
-                '<small><b style="color:#FFDE5F">Cookie Storm</b></small>'
+                '<small><b style="color:#00C4FF">Cookie Storm</b></small>'
             ) {
                 return "Cookie Storm";
             }
@@ -171,14 +171,14 @@ nextSpellName = function (i) {
 
             if (
                 nextSpell(v) ==
-                '<small><b style="color:#DAA520">Cursed Finger</b></small>'
+                '<small><b style="color:#174F01">Cursed Finger</b></small>'
             ) {
                 return "Cursed Finger";
             }
 
             if (
                 nextSpell(v) ==
-                '<small><b style="color:#DAA520">Elder Frenzy</b></small>'
+                '<small><b style="color:#4F0007">Elder Frenzy</b></small>'
             ) {
                 return "Elder Frenzy";
             }
