@@ -3419,7 +3419,7 @@ function isUnavailable(upgrade, upgradeBlacklist) {
     }
 
     // Is it vaulted?
-    if (Game.vault.includes(upgrade.id)) return true;
+    if (Game.Has("Inspired checklist") && Game.vault.includes(upgrade.id)) return true;
 
     // Don't pledge if Easter or Halloween not complete
     if (

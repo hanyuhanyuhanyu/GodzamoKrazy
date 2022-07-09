@@ -57,6 +57,9 @@ If you want to manually install it:
 
 ## What's new?
 
+2022 Jul 09
+- Putting an upgrade in the vault (once **Inspired checklist** is unlocked) will now prevent it from being auto-bought
+
 2022 Jul 07
 - Returned Frozen Cookies ticker messages (now less common)
 - Changed auto-cast behaviour: Frenzy minimum is only checked for FTHOF, more chances are taken to shorten debuffs, and sugar lumps are always taken
