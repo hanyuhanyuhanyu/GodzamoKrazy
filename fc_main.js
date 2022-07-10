@@ -2117,7 +2117,10 @@ function autoDragonAction() {
         if (Game.dragonLevel + 1 >= Game.dragonLevels.length) {
             Game.ToggleSpecialMenu();
         }
-        logEvent("autoDragon", "Upgraded the dragon");
+        logEvent(
+            "autoDragon",
+            "Upgraded the dragon to level " + Game.dragonLevel
+        );
     }
 }
 
@@ -2150,8 +2153,8 @@ function petDragonAction() {
         Game.specialTab = "dragon";
         Game.ToggleSpecialMenu(1);
         Game.ClickSpecialPic();
-        Game.ToggleSpecialMenu(0);
-        //logEvent("petDragon", "Who's a good dragon? You are!");
+        //Game.ToggleSpecialMenu(0);
+        //logEvent("autoDragon", "Who's a good dragon? You are!");
     }
 }
 
@@ -2169,6 +2172,7 @@ function autoDragonAura1Action() {
     if (Game.dragonLevel >= FrozenCookies.autoDragonAura1 + 4) {
         Game.SetDragonAura(FrozenCookies.autoDragonAura1, 0);
         Game.ConfirmPrompt();
+        logEvent("autoDragon", "Set first dragon aura");
         return;
     }
 }
@@ -2186,13 +2190,14 @@ function autoDragonAura2Action() {
 
     if (FrozenCookies.autoDragonAura1 == FrozenCookies.autoDragonAura2) {
         FrozenCookies.autoDragonAura2 = 0;
-        logEvent("autoDragonAura", "Can't set both auras to the same one!");
+        logEvent("autoDragon", "Can't set both auras to the same one!");
         return;
     }
 
     if (Game.dragonLevel == 26) {
         Game.SetDragonAura(FrozenCookies.autoDragonAura2, 1);
         Game.ConfirmPrompt();
+        logEvent("autoDragon", "Set second dragon aura");
         return;
     }
 }
@@ -2246,7 +2251,10 @@ function autoWorship1Action() {
 
     if (T.slot[0] == FrozenCookies.autoWorship1) {
         FrozenCookies.autoworship1 = 0;
-        logEvent("autoWorship1", "Can't worship the same god twice!");
+        logEvent(
+            "autoWorship",
+            "Can't worship the same god in Diamond and Ruby slots!"
+        );
         return;
     }
 
@@ -2264,12 +2272,18 @@ function autoWorship2Action() {
 
     if (T.slot[0] == FrozenCookies.autoWorship2) {
         FrozenCookies.autoworship2 = 0;
-        logEvent("autoWorship2-0", "Can't worship the same god twice!");
+        logEvent(
+            "autoWorship",
+            "Can't worship the same god in Diamond and Jade slots!"
+        );
         return;
     }
     if (T.slot[1] == FrozenCookies.autoWorship2) {
         FrozenCookies.autoworship2 = 0;
-        logEvent("autoWorship2-1", "Can't worship the same god twice!");
+        logEvent(
+            "autoWorship",
+            "Can't worship the same god in Ruby and Jade slots!"
+        );
         return;
     }
 
@@ -3419,7 +3433,8 @@ function isUnavailable(upgrade, upgradeBlacklist) {
     }
 
     // Is it vaulted?
-    if (Game.Has("Inspired checklist") && Game.vault.includes(upgrade.id)) return true;
+    if (Game.Has("Inspired checklist") && Game.vault.includes(upgrade.id))
+        return true;
 
     // Don't pledge if Easter or Halloween not complete
     if (
