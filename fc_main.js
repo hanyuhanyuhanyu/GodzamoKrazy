@@ -820,41 +820,33 @@ function autoRigidel() {
                 swapIn(10, 0); //swap in rigidel
                 rigiSell(); //Meet the %10 condition
                 Game.computeLumpTimes();
-                if (Date.now() - started >= ripeAge) {
-                    Game.clickLump();
-                }
-                // Game.clickLump(); //harvest the ripe lump, AutoSL probably covers this but this should avoid issues with autoBuy going first and disrupting Rigidel
+                Game.clickLump(); //harvest the ripe lump, AutoSL probably covers this but this should avoid issues with autoBuy going first and disrupting Rigidel
                 if (prev != -1) swapIn(prev, 0); //put the old one back
             }
-            break;
+            return;
         case 1: //Rigidel is already in diamond slot
             if (timeToRipe < 60 && Game.BuildingsOwned % 10) {
                 rigiSell();
                 Game.computeLumpTimes();
-                if (Date.now() - started >= ripeAge) {
-                    Game.clickLump();
-                }
+                Game.clickLump();
             }
-            break;
+            return;
         case 2: //Rigidel in Ruby slot,
             if (timeToRipe < 40 && Game.BuildingsOwned % 10) {
                 rigiSell();
                 Game.computeLumpTimes();
-                if (Date.now() - started >= ripeAge) {
-                    Game.clickLump();
-                }
+                Game.clickLump();
             }
-            break;
+            return;
         case 3: //Rigidel in Jade slot
             if (timeToRipe < 20 && Game.BuildingsOwned % 10) {
                 rigiSell();
                 Game.computeLumpTimes();
-                if (Date.now() - started >= ripeAge) {
-                    Game.clickLump();
-                }
+                Game.clickLump();
             }
-            break;
+            return;
     }
+    return;
 }
 
 function autoTicker() {
@@ -1210,10 +1202,6 @@ function autoFTHOFComboAction() {
     )
         return;
 
-    if (typeof autoFTHOFComboAction.count == "undefined") {
-        autoFTHOFComboAction.count = Game.Objects["Wizard tower"].amount;
-    }
-
     if (typeof autoFTHOFComboAction.state == "undefined") {
         autoFTHOFComboAction.state = 0;
     }
@@ -1431,7 +1419,6 @@ function autoFTHOFComboAction() {
             M.castSpell(FTHOF);
             logEvent("autoFTHOFCombo", "Double cast Force the Hand of Fate");
             safeBuy(Game.Objects["Wizard tower"], autoFTHOFComboAction.count);
-            autoFTHOFComboAction.count = Game.Objects["Wizard tower"].amount;
             // Turn autobuy back on if it was on before
             if (autoFTHOFComboAction.autobuyyes == 1) {
                 FrozenCookies.autoBuy = 1;
@@ -1470,47 +1457,6 @@ function auto100ConsistencyComboAction() {
         G.plants["whiskerbloom"].id.unlocked != 1 // Whiskerbloom must be unlocked
     ) {
         return;
-    }
-
-    if (typeof auto100ConsistencyComboAction.countFarm == "undefined") {
-        auto100ConsistencyComboAction.countFarm = Game.Objects["Farm"].amount;
-    }
-    if (typeof auto100ConsistencyComboAction.countMine == "undefined") {
-        auto100ConsistencyComboAction.countMine = Game.Objects["Mine"].amount;
-    }
-    if (typeof auto100ConsistencyComboAction.countFactory == "undefined") {
-        auto100ConsistencyComboAction.countFactory =
-            Game.Objects["Factory"].amount;
-    }
-    if (typeof auto100ConsistencyComboAction.countBank == "undefined") {
-        auto100ConsistencyComboAction.countBank = Game.Objects["Bank"].amount;
-    }
-    if (typeof auto100ConsistencyComboAction.countTemple == "undefined") {
-        auto100ConsistencyComboAction.countTemple =
-            Game.Objects["Temple"].amount;
-    }
-    if (typeof auto100ConsistencyComboAction.countWizard == "undefined") {
-        auto100ConsistencyComboAction.countWizard =
-            Game.Objects["Wizard tower"].amount;
-    }
-    if (typeof auto100ConsistencyComboAction.countShipment == "undefined") {
-        auto100ConsistencyComboAction.countShipment =
-            Game.Objects["Shipment"].amount;
-    }
-    if (typeof auto100ConsistencyComboAction.countAlchemy == "undefined") {
-        auto100ConsistencyComboAction.countAlchemy =
-            Game.Objects["Alchemy lab"].amount;
-    }
-    if (typeof auto100ConsistencyComboAction.countTimeMach == "undefined") {
-        auto100ConsistencyComboAction.countTimeMach =
-            Game.Objects["Time machine"].amount;
-    }
-    if (typeof auto100ConsistencyComboAction.countAntiMatter == "undefined") {
-        auto100ConsistencyComboAction.countAntiMatter =
-            Game.Objects["Antimatter condenser"].amount;
-    }
-    if (typeof auto100ConsistencyComboAction.countPrism == "undefined") {
-        auto100ConsistencyComboAction.countPrism = Game.Objects["Prism"].amount;
     }
 
     if (typeof auto100ConsistencyComboAction.state == "undefined") {
