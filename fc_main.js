@@ -33,23 +33,40 @@ function registerMod(mod_id = "frozen_cookies") {
                 // called when determining news ticker text (about every ten seconds); should return an array of possible choices to add
                 if (
                     Game.cookiesEarned >= 1000 &&
-                    Math.random() < 0.1 &&
+                    Math.random() < 0.3 &&
                     Game.season != "fools"
                 ) {
                     return [
                         "News : debate about whether using Frozen Cookies constitutes cheating continues to rage. Violence escalating.",
                         "News : Supreme Court rules Frozen Cookies not unauthorized cheating after all.",
                         "News : frozen cookies considered 'cool'. Pun-haters heard groaning.",
+                        "Haven't you bought that " +
+                            nextPurchase().purchase.name +
+                            " yet?",
+                        "You wonder if those " +
+                            Beautify(
+                                bestBank(nextChainedPurchase().efficiency).cost
+                            ) +
+                            " banked cookies are still fresh.",
                     ];
-                }if (
+                }
+                if (
                     Game.cookiesEarned >= 1000 &&
-                    Math.random() < 0.1 &&
+                    Math.random() < 0.3 &&
                     Game.season == "fools"
                 ) {
                     return [
-                        "Investigation into your potential cheating is blocked by your lawyers",
-                        "Your Frozen Cookies are now available in markets everywhere",
+                        "Investigation into your potential cheating is blocked by your lawyers.",
+                        "Your Frozen Cookies are now available in markets everywhere3",
                         "Movie studio suit against your use of the term 'frozen' dismissed with prejudice.",
+                        "Your next business venture: " +
+                            nextPurchase().purchase.name +
+                            ".",
+                        "You have " +
+                            Beautify(
+                                bestBank(nextChainedPurchase().efficiency).cost
+                            ) +
+                            " cookies just sitting in your wallet.",
                     ];
                 }
             });
