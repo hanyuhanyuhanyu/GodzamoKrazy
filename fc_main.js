@@ -32,15 +32,24 @@ function registerMod(mod_id = "frozen_cookies") {
             Game.registerHook("ticker", function () {
                 // called when determining news ticker text (about every ten seconds); should return an array of possible choices to add
                 if (
-                    FrozenCookies.autoBuy != 0 &&
                     Game.cookiesEarned >= 1000 &&
-                    Math.random() < 0.1
+                    Math.random() < 0.1 &&
+                    Game.season != "fools"
                 ) {
                     return [
                         "News : debate about whether using Frozen Cookies constitutes cheating continues to rage. Violence escalating.",
                         "News : Supreme Court rules Frozen Cookies not unauthorized cheating after all.",
                         "News : frozen cookies considered 'cool'. Pun-haters heard groaning.",
-                        "News : movie studio suit against popular mod over use of 'frozen' dismissed with prejudice.",
+                    ];
+                }if (
+                    Game.cookiesEarned >= 1000 &&
+                    Math.random() < 0.1 &&
+                    Game.season == "fools"
+                ) {
+                    return [
+                        "Investigation into your potential cheating is blocked by your lawyers",
+                        "Your Frozen Cookies are now available in markets everywhere",
+                        "Movie studio suit against your use of the term 'frozen' dismissed with prejudice.",
                     ];
                 }
             });
