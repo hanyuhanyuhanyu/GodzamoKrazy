@@ -64,9 +64,10 @@ function registerMod(mod_id = "frozen_cookies") {
                             ".",
                         "You have " +
                             Beautify(
-                                bestBank(nextChainedPurchase().efficiency).cost
+                                bestBank(nextChainedPurchase().efficiency)
+                                    .cost * 0.08
                             ) +
-                            " cookies just sitting in your wallet.",
+                            " cookie dollars just sitting in your wallet.",
                     ];
                 }
             });
