@@ -57,7 +57,7 @@ function registerMod(mod_id = "frozen_cookies") {
                 ) {
                     return [
                         "Investigation into your potential cheating is blocked by your lawyers.",
-                        "Your Frozen Cookies are now available in markets everywhere3",
+                        "Your Frozen Cookies are now available in markets everywhere.",
                         "Movie studio suit against your use of the term 'frozen' dismissed with prejudice.",
                         "Your next business venture: " +
                             nextPurchase().purchase.name +
