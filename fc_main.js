@@ -845,35 +845,30 @@ function autoRigidel() {
             if (timeToRipe < 60) {
                 var prev = T.slot[0]; //cache whatever god you have equipped
                 swapIn(10, 0); //swap in rigidel
-                rigiSell(); //Meet the %10 condition
                 Game.computeLumpTimes();
+                rigiSell(); //Meet the %10 condition
                 Game.clickLump(); //harvest the ripe lump, AutoSL probably covers this but this should avoid issues with autoBuy going first and disrupting Rigidel
                 if (prev != -1) swapIn(prev, 0); //put the old one back
             }
-            return;
         case 1: //Rigidel is already in diamond slot
             if (timeToRipe < 60 && Game.BuildingsOwned % 10) {
                 rigiSell();
                 Game.computeLumpTimes();
                 Game.clickLump();
             }
-            return;
         case 2: //Rigidel in Ruby slot,
             if (timeToRipe < 40 && Game.BuildingsOwned % 10) {
                 rigiSell();
                 Game.computeLumpTimes();
                 Game.clickLump();
             }
-            return;
         case 3: //Rigidel in Jade slot
             if (timeToRipe < 20 && Game.BuildingsOwned % 10) {
                 rigiSell();
                 Game.computeLumpTimes();
                 Game.clickLump();
             }
-            return;
     }
-    return;
 }
 
 function autoTicker() {
@@ -2909,31 +2904,37 @@ function harvestBank() {
             FrozenCookies.harvestMinutes = 30;
             FrozenCookies.harvestMaxPercent = 0.03;
             break;
+
         case 2:
             FrozenCookies.harvestPlant = "Chocoroot";
             FrozenCookies.harvestMinutes = 3;
             FrozenCookies.harvestMaxPercent = 0.03;
             break;
+
         case 3:
             FrozenCookies.harvestPlant = "White Chocoroot";
             FrozenCookies.harvestMinutes = 3;
             FrozenCookies.harvestMaxPercent = 0.03;
             break;
+
         case 4:
             FrozenCookies.harvestPlant = "Queenbeet";
             FrozenCookies.harvestMinutes = 60;
             FrozenCookies.harvestMaxPercent = 0.04;
             break;
+
         case 5:
             FrozenCookies.harvestPlant = "Duketater";
             FrozenCookies.harvestMinutes = 120;
             FrozenCookies.harvestMaxPercent = 0.08;
             break;
+
         case 6:
             FrozenCookies.harvestPlant = "Crumbspore";
             FrozenCookies.harvestMinutes = 1;
             FrozenCookies.harvestMaxPercent = 0.01;
             break;
+
         case 7:
             FrozenCookies.harvestPlant = "Doughshroom";
             FrozenCookies.harvestMinutes = 5;
@@ -3450,6 +3451,7 @@ function isUnavailable(upgrade, upgradeBlacklist) {
             (!haveAll(Game.season) ||
                 (upgrade.season != seasons[FrozenCookies.defaultSeason] &&
                     haveAll(upgrade.season))));
+
     return result;
 }
 
@@ -3620,9 +3622,6 @@ function unfinishedUpgradePrereqs(upgrade) {
             }
         });
         if (prereqs.santa) {
-            // season: 'christmas': could use this to auto filter necessary seasons,
-            // currently not doing, bc it would need iteration method or to change needed into an object
-            // that stores the seasons required at the top
             needed.push({
                 type: "santa",
                 id: 0,
