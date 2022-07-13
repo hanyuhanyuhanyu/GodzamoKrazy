@@ -956,6 +956,7 @@ function autoCast() {
                 logEvent("AutoSpell", "Cast Conjure Baked Goods");
                 return;
             }
+            return;
 
         case 2:
             if (Game.hasBuff("Dragonflight") || goldenCookieLife()) return;
@@ -1039,6 +1040,7 @@ function autoCast() {
                 }
                 return;
             }
+            return;
 
         case 3:
             var SE = M.spellsById[3];
@@ -1071,6 +1073,7 @@ function autoCast() {
                 logEvent("AutoSpell", "Cast Spontaneous Edifice");
                 return;
             }
+            return;
 
         case 4:
             var hagC = M.spellsById[4];
@@ -1085,8 +1088,8 @@ function autoCast() {
                 logEvent("AutoSpell", "Cast Haggler's Charm");
                 return;
             }
+            return;
     }
-    return;
 }
 
 // Thank goodness for static variables otherwise this function would not have worked as intended.
