@@ -104,7 +104,7 @@ FrozenCookies.preferenceValues = {
         default: 0,
     },
     shinyPop: {
-        hint: "Protect the endangered Shiny Wrinkler from being auomatically popped. Note: this disables buying the Elder Pledge",
+        hint: "Protect the endangered Shiny Wrinkler from being automatically popped. Note: this disables buying the Elder Pledge",
         display: ["Save Shiny Wrinklers OFF", "Save Shiny Wrinklers ON"],
         default: 0,
     },
