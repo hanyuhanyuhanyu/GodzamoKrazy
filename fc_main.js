@@ -962,8 +962,6 @@ function autoCast() {
                 return;
 
             case 2:
-                if (goldenCookieLife()) return; // Every unclicked GC increases failure chance
-
                 var FTHOF = M.spellsById[1];
                 if (
                     M.magicM <
@@ -1130,8 +1128,7 @@ function autoFTHOFComboAction() {
     if (
         M.magicM < 81 || // Below minimum mana
         FrozenCookies.auto100ConsistencyCombo == 1 || // 100% combo should override
-        FrozenCookies.autoSweet == 1 || // Autosweet overrides
-        (auto100ConsistencyComboAction.state < 3 && goldenCookieLife())
+        FrozenCookies.autoSweet == 1 // Autosweet overrides
     )
         return;
 
@@ -1181,7 +1178,11 @@ function autoFTHOFComboAction() {
 
     switch (autoFTHOFComboAction.state) {
         case 0:
-            if (M.magic == M.magicM && !Game.hasBuff("Dragonflight")) {
+            if (
+                M.magic == M.magicM &&
+                !Game.hasBuff("Dragonflight") &&
+                !goldenCookieLife()
+            ) {
                 //Continue casting Haggler's Charm - unless it's something we need right now
                 if (nextSpellName(0) == "Sugar Lump") {
                     M.castSpell(FTHOF);
@@ -1551,13 +1552,11 @@ function auto100ConsistencyComboAction() {
     if (
         M.magicM < 98 || // Below minimum mana
         FrozenCookies.autoSweet == 1 || // Autosweet overrides
-        (auto100ConsistencyComboAction.state < 2 && goldenCookieLife()) ||
         Game.lumps < 101 ||
         (FrozenCookies.sugarBakingGuard == 0 && Game.lumps < 1) || // Needs at least 1 lump
         Game.dragonLevel < 26 || // Fully upgraded dragon needed for two auras
-        !(Game.hasGod("mother") || T.swaps < 1) ||
-        !(Game.hasGod("ruin") || T.swaps < 1) ||
-        (!Game.hasGod("mother") && !Game.hasGod("ruin") && T.swaps < 2) || // Need to have Moka and Godz or enough swaps
+        (T.swaps < 1 && (!Game.hasGod("mother") || !Game.hasGod("ruin"))) ||
+        (T.swaps < 2 && !Game.hasGod("mother") && !Game.hasGod("ruin")) || // Need to have Moka and Godz or enough swaps
         G.plants["whiskerbloom"].id.unlocked != 1 // Whiskerbloom must be unlocked
     ) {
         return;
@@ -1626,7 +1625,11 @@ function auto100ConsistencyComboAction() {
     switch (auto100ConsistencyComboAction.state) {
         case 0:
             //Continue casting Haggler's Charm - unless it's something we need right now
-            if (M.magic == M.magicM && !Game.hasBuff("Dragonflight")) {
+            if (
+                M.magic == M.magicM &&
+                !Game.hasBuff("Dragonflight") &&
+                !goldenCookieLife()
+            ) {
                 if (nextSpellName(0) == "Sugar Lump") {
                     M.castSpell(FTHOF);
                     logEvent(
