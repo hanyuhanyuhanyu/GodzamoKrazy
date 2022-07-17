@@ -6,7 +6,9 @@ An automated Cookie Clicker tool.
 
 ## Warning
 
-NOT currently compatible with __CCSE__. CCSE changes base game functions that break the switches like the season switch and the elder pledge. This problem exists in version **2.033** of CCSE and older, when used with Cookie Clicker version 2.048.
+NOT currently compatible with **CCSE**: https://github.com/klattmose/klattmose.github.io/issues/47
+
+CCSE changes base game functions that break the switches like the season switch and the elder pledge. This problem exists in version **2.033** of CCSE and older, when used with Cookie Clicker version 2.048.
 
 ## How to use
 
@@ -28,7 +30,7 @@ If you want to manually install it:
 
 ## Bookmarklet install
 
-1. Paste the _contents_ (not the url) of https://github.erbkaiser.com/FrozenCookies/fc_bookmarklet_loader.js into a bookmark.
+1. Paste the **contents** (not the url) of https://github.erbkaiser.com/FrozenCookies/fc_bookmarklet_loader.js into a bookmark.
 2. Load up Cookie Clicker.
 3. Load the recently created bookmark.
 
@@ -162,6 +164,8 @@ If you want to manually install it:
 - Copied the smart FTHOF behaviour from DarkRoman's variant: https://github.com/Darkroman/FrozenCookies
 - Copied the AutoComboFinder and smart Easter from DarkRoman
 - Fixed the broken auto-Godmazok behaviour that sold mines and factories instead of cursors
+
+## Older changelog from upstream
 
 2020 Nov 2
 
