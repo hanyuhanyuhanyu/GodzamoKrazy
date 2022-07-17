@@ -973,20 +973,20 @@ function autoCast() {
 
                 if (cpsBonus() >= FrozenCookies.minCpSMult) {
                     if (
-                        nextSpellName(0) == "Cookie Chain" ||
-                        nextSpellName(0) == "Cookie Storm" ||
-                        nextSpellName(0) == "Frenzy" ||
-                        nextSpellName(0) == "Building Special" ||
-                        nextSpellName(0) == "Blab" ||
-                        nextSpellName(0) == "Cookie Storm (Drop)" ||
-                        nextSpellName(0) == "Lucky"
+                        !Game.hasBuff("Dragonflight") &&
+                        (nextSpellName(0) == "Cookie Chain" ||
+                            nextSpellName(0) == "Cookie Storm" ||
+                            nextSpellName(0) == "Frenzy" ||
+                            nextSpellName(0) == "Building Special" ||
+                            nextSpellName(0) == "Blab" ||
+                            nextSpellName(0) == "Cookie Storm (Drop)" ||
+                            nextSpellName(0) == "Lucky")
                     ) {
                         M.castSpell(FTHOF);
                         logEvent("AutoSpell", "Cast Force the Hand of Fate");
                     }
 
                     if (nextSpellName(0) == "Click Frenzy") {
-                        if (Game.hasBuff("Dragonflight")) return;
                         if (
                             (Game.hasBuff("Frenzy") ||
                                 Game.hasBuff("Dragon Harvest")) &&
@@ -1131,8 +1131,7 @@ function autoFTHOFComboAction() {
         M.magicM < 81 || // Below minimum mana
         FrozenCookies.auto100ConsistencyCombo == 1 || // 100% combo should override
         FrozenCookies.autoSweet == 1 || // Autosweet overrides
-        Game.hasBuff("Dragonflight") ||
-        (auto100ConsistencyComboAction.state < 2 && goldenCookieLife())
+        (auto100ConsistencyComboAction.state < 3 && goldenCookieLife())
     )
         return;
 
@@ -1144,7 +1143,7 @@ function autoFTHOFComboAction() {
     }
 
     if (
-        autoFTHOFComboAction.state == 2 &&
+        autoFTHOFComboAction.state == 3 &&
         M.magic == M.magicM &&
         !Game.hasBuff("Click frenzy") &&
         !(
@@ -1156,19 +1155,25 @@ function autoFTHOFComboAction() {
         logEvent("autoFTHOFCombo", "Soft fail, spell combo is gone");
     }
 
-    if (autoFTHOFComboAction.state == 0) {
-        if (
-            (nextSpellName(0) == "Click Frenzy" &&
-                nextSpellName(1) == "Building Special") ||
+    if (
+        autoFTHOFComboAction.state == 0 &&
+        ((nextSpellName(0) == "Click Frenzy" &&
+            nextSpellName(1) == "Building Special") ||
             (nextSpellName(1) == "Click Frenzy" &&
                 nextSpellName(0) == "Building Special") ||
             (nextSpellName(0) == "Click Frenzy" &&
                 nextSpellName(1) == "Elder Frenzy") ||
             (nextSpellName(1) == "Click Frenzy" &&
-                nextSpellName(0) == "Elder Frenzy")
-        ) {
-            autoFTHOFComboAction.state = 1;
-        }
+                nextSpellName(0) == "Elder Frenzy"))
+    ) {
+        autoFTHOFComboAction.state = 1;
+    }
+    if (
+        autoFTHOFComboAction.state == 0 &&
+        nextSpellName(0) == "Building Special" &&
+        nextSpellName(1) == "Building Special"
+    ) {
+        autoFTHOFComboAction.state = 2;
     }
 
     var SugarLevel = Game.Objects["Wizard tower"].level;
@@ -1176,7 +1181,7 @@ function autoFTHOFComboAction() {
 
     switch (autoFTHOFComboAction.state) {
         case 0:
-            if (M.magic == M.magicM) {
+            if (M.magic == M.magicM && !Game.hasBuff("Dragonflight")) {
                 //Continue casting Haggler's Charm - unless it's something we need right now
                 if (nextSpellName(0) == "Sugar Lump") {
                     M.castSpell(FTHOF);
@@ -1334,13 +1339,155 @@ function autoFTHOFComboAction() {
                                 "autoFTHOFCombo",
                                 "Cast first Force the Hand of Fate"
                             );
-                            autoFTHOFComboAction.state = 2;
+                            autoFTHOFComboAction.state = 3;
                         }
                         return;
                 }
             }
             return;
         case 2:
+            if (
+                M.magic == M.magicM &&
+                (Game.hasBuff("Frenzy") || Game.hasBuff("Dragon Harvest")) &&
+                (Game.hasBuff("Click frenzy") ||
+                    Game.hasBuff("Dragonflight")) &&
+                (Game.hasBuff("Frenzy").time / 30 >=
+                    Math.ceil(13 * BuffTimeFactor()) - 1 ||
+                    Game.hasBuff("Dragon Harvest").time / 30 >=
+                        Math.ceil(13 * BuffTimeFactor()) - 1) &&
+                (Game.hasBuff("Click frenzy").time / 30 >=
+                    Math.ceil(10 * BuffTimeFactor()) - 1 ||
+                    Game.hasBuff("Dragonflight").time / 30 >=
+                        Math.ceil(6 * BuffTimeFactor()) - 1)
+            ) {
+                switch (SugarLevel) {
+                    case 0:
+                        return;
+                    // Calculated with https://lookas123.github.io/CCGrimoireCalculator/
+                    case 1:
+                        if (M.magic >= 81) {
+                            autoFTHOFComboAction.count =
+                                Game.Objects["Wizard tower"].amount - 21;
+                            M.castSpell(FTHOF);
+                            logEvent(
+                                "autoFTHOFCombo",
+                                "Cast first Force the Hand of Fate"
+                            );
+                            autoFTHOFComboAction.state = 2;
+                        }
+                        return;
+                    case 2:
+                        if (M.magic >= 81) {
+                            autoFTHOFComboAction.count =
+                                Game.Objects["Wizard tower"].amount - 14;
+                            M.castSpell(FTHOF);
+                            logEvent(
+                                "autoFTHOFCombo",
+                                "Cast first Force the Hand of Fate"
+                            );
+                            autoFTHOFComboAction.state = 2;
+                        }
+                        return;
+                    case 3:
+                        if (M.magic >= 81) {
+                            autoFTHOFComboAction.count =
+                                Game.Objects["Wizard tower"].amount - 8;
+                            M.castSpell(FTHOF);
+                            logEvent(
+                                "autoFTHOFCombo",
+                                "Cast first Force the Hand of Fate"
+                            );
+                            autoFTHOFComboAction.state = 2;
+                        }
+                        return;
+                    case 4:
+                        if (M.magic >= 81) {
+                            autoFTHOFComboAction.count =
+                                Game.Objects["Wizard tower"].amount - 3;
+                            M.castSpell(FTHOF);
+                            logEvent(
+                                "autoFTHOFCombo",
+                                "Cast first Force the Hand of Fate"
+                            );
+                            autoFTHOFComboAction.state = 2;
+                        }
+                        return;
+                    case 5:
+                        if (M.magic >= 83) {
+                            autoFTHOFComboAction.count =
+                                Game.Objects["Wizard tower"].amount - 1;
+                            M.castSpell(FTHOF);
+                            logEvent(
+                                "autoFTHOFCombo",
+                                "Cast first Force the Hand of Fate"
+                            );
+                            autoFTHOFComboAction.state = 2;
+                        }
+                        return;
+                    case 6:
+                        if (M.magic >= 88) {
+                            autoFTHOFComboAction.count =
+                                Game.Objects["Wizard tower"].amount - 1;
+                            M.castSpell(FTHOF);
+                            logEvent(
+                                "autoFTHOFCombo",
+                                "Cast first Force the Hand of Fate"
+                            );
+                            autoFTHOFComboAction.state = 2;
+                        }
+                        return;
+                    case 7:
+                        if (M.magic >= 91) {
+                            autoFTHOFComboAction.count =
+                                Game.Objects["Wizard tower"].amount - 1;
+                            M.castSpell(FTHOF);
+                            logEvent(
+                                "autoFTHOFCombo",
+                                "Cast first Force the Hand of Fate"
+                            );
+                            autoFTHOFComboAction.state = 2;
+                        }
+                        return;
+                    case 8:
+                        if (M.magic >= 93) {
+                            autoFTHOFComboAction.count =
+                                Game.Objects["Wizard tower"].amount - 1;
+                            M.castSpell(FTHOF);
+                            logEvent(
+                                "autoFTHOFCombo",
+                                "Cast first Force the Hand of Fate"
+                            );
+                            autoFTHOFComboAction.state = 2;
+                        }
+                        return;
+                    case 9:
+                        if (M.magic >= 96) {
+                            autoFTHOFComboAction.count =
+                                Game.Objects["Wizard tower"].amount - 1;
+                            M.castSpell(FTHOF);
+                            logEvent(
+                                "autoFTHOFCombo",
+                                "Cast first Force the Hand of Fate"
+                            );
+                            autoFTHOFComboAction.state = 2;
+                        }
+                        return;
+                    case 10:
+                        if (M.magic >= 98) {
+                            autoFTHOFComboAction.count =
+                                Game.Objects["Wizard tower"].amount - 1;
+                            M.castSpell(FTHOF);
+                            logEvent(
+                                "autoFTHOFCombo",
+                                "Cast first Force the Hand of Fate"
+                            );
+                            autoFTHOFComboAction.state = 3;
+                        }
+                        return;
+                }
+            }
+            return;
+        case 3:
             // Turn off auto buy and make sure we're not in sell mode
             if (FrozenCookies.autoBuy == 1) {
                 autoFTHOFComboAction.autobuyyes = 1;
@@ -1404,7 +1551,6 @@ function auto100ConsistencyComboAction() {
     if (
         M.magicM < 98 || // Below minimum mana
         FrozenCookies.autoSweet == 1 || // Autosweet overrides
-        Game.hasBuff("Dragonflight") ||
         (auto100ConsistencyComboAction.state < 2 && goldenCookieLife()) ||
         Game.lumps < 101 ||
         (FrozenCookies.sugarBakingGuard == 0 && Game.lumps < 1) || // Needs at least 1 lump
@@ -1454,19 +1600,25 @@ function auto100ConsistencyComboAction() {
         auto100ConsistencyComboAction.countPrism = 0;
     }
 
-    if (auto100ConsistencyComboAction.state == 0) {
-        if (
-            (nextSpellName(0) == "Click Frenzy" &&
-                nextSpellName(1) == "Building Special") ||
+    if (
+        auto100ConsistencyComboAction.state == 0 &&
+        ((nextSpellName(0) == "Click Frenzy" &&
+            nextSpellName(1) == "Building Special") ||
             (nextSpellName(1) == "Click Frenzy" &&
                 nextSpellName(0) == "Building Special") ||
             (nextSpellName(0) == "Click Frenzy" &&
                 nextSpellName(1) == "Elder Frenzy") ||
             (nextSpellName(1) == "Click Frenzy" &&
-                nextSpellName(0) == "Elder Frenzy")
-        ) {
-            auto100ConsistencyComboAction.state = 1;
-        }
+                nextSpellName(0) == "Elder Frenzy"))
+    ) {
+        auto100ConsistencyComboAction.state = 1;
+    }
+    if (
+        auto100ConsistencyComboAction.state == 0 &&
+        nextSpellName(0) == "Building Special" &&
+        nextSpellName(1) == "Building Special"
+    ) {
+        auto100ConsistencyComboAction.state = 2;
     }
 
     var FTHOF = M.spellsById[1];
@@ -1474,7 +1626,7 @@ function auto100ConsistencyComboAction() {
     switch (auto100ConsistencyComboAction.state) {
         case 0:
             //Continue casting Haggler's Charm - unless it's something we need right now
-            if (M.magic == M.magicM) {
+            if (M.magic == M.magicM && !Game.hasBuff("Dragonflight")) {
                 if (nextSpellName(0) == "Sugar Lump") {
                     M.castSpell(FTHOF);
                     logEvent(
@@ -1504,6 +1656,7 @@ function auto100ConsistencyComboAction() {
             return;
         case 1:
             if (
+                M.magic == M.magicM &&
                 (Game.hasBuff("Frenzy") || Game.hasBuff("Dragon Harvest")) &&
                 BuildingSpecialBuff() == 1 &&
                 (Game.hasBuff("Frenzy").time / 30 >=
@@ -1526,19 +1679,51 @@ function auto100ConsistencyComboAction() {
                     "auto100ConsistencyCombo",
                     "Starting auto100ConsistencyCombo"
                 );
-                auto100ConsistencyComboAction.state = 2;
+                auto100ConsistencyComboAction.state = 3;
             }
             return;
-        case 2: // Turn off auto click golden cookie
+        case 2:
+            if (
+                M.magic == M.magicM &&
+                (Game.hasBuff("Frenzy") || Game.hasBuff("Dragon Harvest")) &&
+                (Game.hasBuff("Click frenzy") ||
+                    Game.hasBuff("Dragonflight")) &&
+                (Game.hasBuff("Frenzy").time / 30 >=
+                    Math.ceil(13 * BuffTimeFactor()) - 1 ||
+                    Game.hasBuff("Dragon Harvest").time / 30 >=
+                        Math.ceil(13 * BuffTimeFactor()) - 1) &&
+                (Game.hasBuff("Click frenzy").time / 30 >=
+                    Math.ceil(10 * BuffTimeFactor()) - 1 ||
+                    Game.hasBuff("Dragonflight").time / 30 >=
+                        Math.ceil(6 * BuffTimeFactor()) - 1)
+            ) {
+                // Turn off auto buy and make sure we're not in sell mode
+                if (FrozenCookies.autoBuy == 1) {
+                    auto100ConsistencyComboAction.autobuyyes = 1;
+                    FrozenCookies.autoBuy = 0;
+                } else {
+                    auto100ConsistencyComboAction.autobuyyes = 0;
+                }
+                if (Game.buyMode == -1) {
+                    Game.buyMode = 1;
+                }
+                logEvent(
+                    "auto100ConsistencyCombo",
+                    "Starting auto100ConsistencyCombo"
+                );
+                auto100ConsistencyComboAction.state = 3;
+            }
+            return;
+        case 3: // Turn off auto click golden cookie
             if (FrozenCookies.autoGC > 0) {
                 auto100ConsistencyComboAction.autogcyes = 1;
             } else {
                 auto100ConsistencyComboAction.autogcyes = 0;
             }
             FrozenCookies.autoGC = 0;
-            auto100ConsistencyComboAction.state = 3;
+            auto100ConsistencyComboAction.state = 4;
             return;
-        case 3: // Harvest garden then plant whiskerbloom
+        case 4: // Harvest garden then plant whiskerbloom
             G.harvestAll();
             for (var y = 0; y <= 5; y++) {
                 for (var x = 0; x <= 5; x++) {
@@ -1546,9 +1731,9 @@ function auto100ConsistencyComboAction() {
                     G.clickTile(x, y);
                 }
             }
-            auto100ConsistencyComboAction.state = 4;
+            auto100ConsistencyComboAction.state = 5;
             return;
-        case 4: // Set auras to radiant appetite and dragon's fortune
+        case 5: // Set auras to radiant appetite and dragon's fortune
             if (!Game.hasAura("Dragon's Fortune")) {
                 Game.SetDragonAura(16, 1);
                 Game.ConfirmPrompt();
@@ -1557,9 +1742,9 @@ function auto100ConsistencyComboAction() {
                 Game.SetDragonAura(15, 0);
                 Game.ConfirmPrompt();
             }
-            auto100ConsistencyComboAction.state = 5;
+            auto100ConsistencyComboAction.state = 6;
             return;
-        case 5: // Cast FTHOF then sell
+        case 6: // Cast FTHOF then sell
             M.castSpell(FTHOF);
             logEvent(
                 "auto100ConsistencyCombo",
@@ -1570,9 +1755,9 @@ function auto100ConsistencyComboAction() {
             Game.Objects["Wizard tower"].sell(
                 auto100ConsistencyComboAction.countWizard
             );
-            auto100ConsistencyComboAction.state = 6;
+            auto100ConsistencyComboAction.state = 7;
             return;
-        case 6: // Cast FTHOF then buy
+        case 7: // Cast FTHOF then buy
             M.computeMagicM(); //Recalc max after selling
             M.castSpell(FTHOF);
             logEvent(
@@ -1583,13 +1768,14 @@ function auto100ConsistencyComboAction() {
                 Game.Objects["Wizard tower"],
                 auto100ConsistencyComboAction.countWizard
             );
-            auto100ConsistencyComboAction.state = 7;
-            return;
-        case 7: // Use sugar lump to refill magic
-            M.lumpRefill.click();
             auto100ConsistencyComboAction.state = 8;
             return;
-        case 8: // Cast FTHOF then sell
+        case 8: // Use sugar lump to refill magic
+            M.lumpRefill.click();
+            Game.ConfirmPrompt();
+            auto100ConsistencyComboAction.state = 9;
+            return;
+        case 9: // Cast FTHOF then sell
             M.castSpell(FTHOF);
             logEvent(
                 "auto100ConsistencyCombo",
@@ -1598,40 +1784,40 @@ function auto100ConsistencyComboAction() {
             Game.Objects["Wizard tower"].sell(
                 auto100ConsistencyComboAction.countWizard
             );
-            auto100ConsistencyComboAction.state = 9;
+            auto100ConsistencyComboAction.state = 10;
             return;
-        case 9: // Cast FTHOF then buy
+        case 10: // Cast FTHOF then buy
             M.computeMagicM(); //Recalc max after selling
             M.castSpell(FTHOF);
             logEvent(
                 "auto100ConsistencyCombo",
                 "Cast fourth Force the Hand of Fate"
             );
-            auto100ConsistencyComboAction.state = 10;
+            auto100ConsistencyComboAction.state = 11;
             return;
-        case 10: // Take Stock Market loans
+        case 11: // Take Stock Market loans
             if (B) {
                 B.takeLoan(1);
                 B.takeLoan(2);
                 B.takeLoan(3);
             }
-            auto100ConsistencyComboAction.state = 11;
+            auto100ConsistencyComboAction.state = 12;
             return;
-        case 11: // If autoGodzamok is on, disable
+        case 12: // If autoGodzamok is on, disable
             if (FrozenCookies.autoGodzamok > 0) {
                 auto100ConsistencyComboAction.autogodyes = 1;
             } else {
                 auto100ConsistencyComboAction.autogodyes = 0;
             }
             FrozenCookies.autoGodzamok = 0;
-            auto100ConsistencyComboAction.state = 12;
-            return;
-        case 12: // Activate Building Special and Click Frenzy buffs
-            Game.shimmers[0].pop();
-            Game.shimmers[0].pop();
             auto100ConsistencyComboAction.state = 13;
             return;
-        case 13: // sell buildings
+        case 13: // Activate Building Special and Click Frenzy buffs
+            Game.shimmers[0].pop();
+            Game.shimmers[0].pop();
+            auto100ConsistencyComboAction.state = 14;
+            return;
+        case 14: // sell buildings
             auto100ConsistencyComboAction.countFarm =
                 Game.Objects["Farm"].amount - 1;
             auto100ConsistencyComboAction.countMine =
@@ -1682,15 +1868,15 @@ function auto100ConsistencyComboAction() {
             Game.Objects["Prism"].sell(
                 auto100ConsistencyComboAction.countPrism
             );
-            auto100ConsistencyComboAction.state = 14;
+            auto100ConsistencyComboAction.state = 15;
             return;
-        case 14: // Swap Mokalsium to ruby slot
+        case 15: // Swap Mokalsium to ruby slot
             if (!Game.hasGod("mother") && T.swaps >= 1) {
                 swapIn(8, 1);
             }
-            auto100ConsistencyComboAction.state = 15;
+            auto100ConsistencyComboAction.state = 16;
             return;
-        case 15: // buy back buildings
+        case 16: // buy back buildings
             safeBuy(
                 Game.Objects["Farm"],
                 auto100ConsistencyComboAction.countFarm
@@ -1735,9 +1921,9 @@ function auto100ConsistencyComboAction() {
                 Game.Objects["Prism"],
                 auto100ConsistencyComboAction.countPrism
             );
-            auto100ConsistencyComboAction.state = 16;
+            auto100ConsistencyComboAction.state = 17;
             return;
-        case 16: // Put Godz in diamond and perform custom autogodzamok
+        case 17: // Put Godz in diamond and perform custom autogodzamok
             if (!Game.hasGod("ruin") && T.swaps >= 1) {
                 swapIn(2, 0);
             }
@@ -1825,24 +2011,24 @@ function auto100ConsistencyComboAction() {
                 }
             }
             if (!hasClickBuff()) {
-                auto100ConsistencyComboAction.state = 17;
+                auto100ConsistencyComboAction.state = 18;
             }
             return;
-        case 17: // Once click frenzy buff is gone, turn autoGC on if it was on previously
+        case 18: // Once click frenzy buff is gone, turn autoGC on if it was on previously
             if (!Game.hasBuff("Click frenzy")) {
                 if (auto100ConsistencyComboAction.autogcyes == 1) {
                     FrozenCookies.autoGC = 1;
                 }
-                auto100ConsistencyComboAction.state = 18;
+                auto100ConsistencyComboAction.state = 19;
                 return;
             }
-        case 18: // Re-enable autoGodzamok if it was on previously
+        case 19: // Re-enable autoGodzamok if it was on previously
             if (auto100ConsistencyComboAction.autogodyes == 1) {
                 FrozenCookies.autoGodzamok = 1;
             }
-            auto100ConsistencyComboAction.state = 19;
+            auto100ConsistencyComboAction.state = 20;
             return;
-        case 19: // Turn autobuy back on if it was on before - will also reset dragon auras if user automates them
+        case 20: // Turn autobuy back on if it was on before - will also reset dragon auras if user automates them
             if (auto100ConsistencyComboAction.autobuyyes == 1) {
                 FrozenCookies.autoBuy = 1;
                 auto100ConsistencyComboAction.autobuyyes = 0;
