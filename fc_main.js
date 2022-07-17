@@ -779,10 +779,10 @@ function toggleFrozen(setting) {
     FCStart();
 }
 
-var G = Game.Objects["Farm"].minigame;
-var B = Game.Objects["Bank"].minigame;
-var T = Game.Objects["Temple"].minigame;
-var M = Game.Objects["Wizard tower"].minigame;
+var G = Game.Objects["Farm"].minigame; //Garden
+var B = Game.Objects["Bank"].minigame; //Stock Market
+var T = Game.Objects["Temple"].minigame; //Pantheon
+var M = Game.Objects["Wizard tower"].minigame; //Grimoire
 
 function rigiSell() {
     //Sell enough of the cheapest building to enable Rigidels effect
@@ -2186,13 +2186,15 @@ function autoBlacklistOff() {
 }
 
 function autoBrokerAction() {
-    if (!B) return; // Just leave if you don't have the bank
+    if (!B) return; // Just leave if you don't have the stock market
     if (hasClickBuff()) return; // Don't buy during click buff
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
     //Hire brokers
-    var delay = delayAmount();
+    var delay = delayAmount(); //GC or harvest bank
+    var recommendation = nextPurchase();
     if (
+        recommendation.type == "building" &&
         B.brokers < B.getMaxBrokers() &&
         Game.cookies >= delay + B.getBrokerPrice()
     ) {
