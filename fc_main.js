@@ -1139,6 +1139,9 @@ function autoFTHOFComboAction() {
     if (typeof autoFTHOFComboAction.state == "undefined") {
         autoFTHOFComboAction.state = 0;
     }
+    if (typeof autoFTHOFComboAction.count == "undefined") {
+        autoFTHOFComboAction.count = 0;
+    }
 
     if (
         autoFTHOFComboAction.state == 2 &&
@@ -1352,12 +1355,33 @@ function autoFTHOFComboAction() {
             M.computeMagicM(); //Recalc max after selling
             M.castSpell(FTHOF);
             logEvent("autoFTHOFCombo", "Double cast Force the Hand of Fate");
-            safeBuy(Game.Objects["Wizard tower"], autoFTHOFComboAction.count);
+            if (
+                FrozenCookies.towerLimit &&
+                FrozenCookies.manaMax <= 100 &&
+                autoFTHOFComboAction.count <= 497
+            ) {
+                safeBuy(
+                    Game.Objects["Wizard tower"],
+                    autoFTHOFComboAction.count
+                );
+            } else if (
+                FrozenCookies.towerLimit &&
+                FrozenCookies.manaMax <= 100 &&
+                SugarLevel == 10
+            ) {
+                safeBuy(Game.Objects["Wizard tower"], 486);
+            } else {
+                safeBuy(
+                    Game.Objects["Wizard tower"],
+                    autoFTHOFComboAction.count
+                );
+            }
             // Turn autobuy back on if it was on before
             if (autoFTHOFComboAction.autobuyyes == 1) {
                 FrozenCookies.autoBuy = 1;
                 autoFTHOFComboAction.autobuyyes = 0;
             }
+            autoFTHOFComboAction.count = 0;
             autoFTHOFComboAction.state = 0;
             return;
     }
@@ -1395,6 +1419,39 @@ function auto100ConsistencyComboAction() {
 
     if (typeof auto100ConsistencyComboAction.state == "undefined") {
         auto100ConsistencyComboAction.state = 0;
+    }
+    if (typeof auto100ConsistencyComboAction.countFarm == "undefined") {
+        auto100ConsistencyComboAction.countFarm = 0;
+    }
+    if (typeof auto100ConsistencyComboAction.countMine == "undefined") {
+        auto100ConsistencyComboAction.countMine = 0;
+    }
+    if (typeof auto100ConsistencyComboAction.countFactory == "undefined") {
+        auto100ConsistencyComboAction.countFactory = 0;
+    }
+    if (typeof auto100ConsistencyComboAction.countBank == "undefined") {
+        auto100ConsistencyComboAction.countBank = 0;
+    }
+    if (typeof auto100ConsistencyComboAction.countTemple == "undefined") {
+        auto100ConsistencyComboAction.countTemple = 0;
+    }
+    if (typeof auto100ConsistencyComboAction.countWizard == "undefined") {
+        auto100ConsistencyComboAction.countWizard = 0;
+    }
+    if (typeof auto100ConsistencyComboAction.countShipment == "undefined") {
+        auto100ConsistencyComboAction.countShipment = 0;
+    }
+    if (typeof auto100ConsistencyComboAction.countAlchemy == "undefined") {
+        auto100ConsistencyComboAction.countAlchemy = 0;
+    }
+    if (typeof auto100ConsistencyComboAction.countTimeMach == "undefined") {
+        auto100ConsistencyComboAction.countTimeMach = 0;
+    }
+    if (typeof auto100ConsistencyComboAction.countAntiMatter == "undefined") {
+        auto100ConsistencyComboAction.countAntiMatter = 0;
+    }
+    if (typeof auto100ConsistencyComboAction.countPrism == "undefined") {
+        auto100ConsistencyComboAction.countPrism = 0;
     }
 
     if (auto100ConsistencyComboAction.state == 0) {
@@ -1794,6 +1851,17 @@ function auto100ConsistencyComboAction() {
                 "auto100ConsistencyCombo",
                 "Completed auto100ConsistencyCombo"
             );
+            auto100ConsistencyComboAction.countFarm = 0;
+            auto100ConsistencyComboAction.countMine = 0;
+            auto100ConsistencyComboAction.countFactory = 0;
+            auto100ConsistencyComboAction.countBank = 0;
+            auto100ConsistencyComboAction.countTemple = 0;
+            auto100ConsistencyComboAction.countWizard = 0;
+            auto100ConsistencyComboAction.countShipment = 0;
+            auto100ConsistencyComboAction.countAlchemy = 0;
+            auto100ConsistencyComboAction.countTimeMach = 0;
+            auto100ConsistencyComboAction.countAntiMatter = 0;
+            auto100ConsistencyComboAction.countPrism = 0;
             auto100ConsistencyComboAction.state = 0;
             return;
     }
