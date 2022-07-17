@@ -60,6 +60,7 @@ If you want to manually install it:
 ## What's new?
 2022 Jul 17
 - Extended auto FTHOF and auto 100% consistency combos to also work with natural click frenzies, if two building buffs are stored
+- Changed autoBroker so it will only buy brokers if the next recommendation is a building, this should stop it from interfering too much with efficiency
 
 2022 Jul 12
 - Fix some old issues with smart Auto cast and simplify the code; and finally documented how it works
