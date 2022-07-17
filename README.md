@@ -413,21 +413,30 @@ This fork includes some different auto casting combo mechanics. Brief documentat
 
 Auto cast will cast the selected spell when max mana is reached, with some exceptions:
 
-- If the next detected spell is **'Sweet'** (free Sugar lump), it will always cast *FTHOF* next, if it has enough mana
-- If the next detected spell is either **Clot** or **Ruin cookies** AND you are currently under a timed debuff like a clot, it will cast *Stretch Time* to shorten the timer
-- If the next detected spell is either **Clot** or **Ruin cookies** and you are not currently under a timed debuff, it will cast *Haggler's Charm*  instead of the selected spell, to avoid a backfire
+- If the next detected spell is *'Sweet'* (free Sugar lump), it will always cast *Force the Hand of Fate* (FTHOF) next, if it has enough mana
+- If the next detected spell is either *Clot* or *Ruin cookies* AND you are currently under a timed debuff like a clot, it will cast *Stretch Time* to shorten the timer
+- If the next detected spell is either *Clot* or *Ruin cookies* and you are not currently under a timed debuff, it will cast *Haggler's Charm*  instead of the selected spell, to avoid a backfire
+- If there is an unclicked cookie on screen and the next FTHOF spell is a backfire, it will wait until the unclicked cookie has been or has expired
 
-If the selected spell is Force the Hand of Fate (FTHOF), there are some additional checks:
+If the selected spell is FTHOF, there are some additional checks:
 
-- If the next detected spell is *Click Frenzy*, it will not cast the spell unless either a Frenzy or Dragon Harvest is active for long enough to last the entire CF
-- If the next detected spell is either *Elder Frenzy* or *Cursed Finger*, it will not cast this spell unless a Click Frenzy is active for long enough to last the entire spell
+- If the next detected spell is *Click Frenzy*, it will not cast the spell unless either a *Frenzy* or *Dragon Harvest* is active for long enough to last the entire spell
+- If the next detected spell is either *Elder Frenzy* or *Cursed Finger*, it will not cast this spell unless a *Click Frenzy* or *Dragon Frenzy* is active for long enough to last the entire spell
 
 ## Auto FTHOF Combo
 
-Auto FTHOF Combo replaces Auto Cast. If the combo is enabled, it will always cast Haggler's charm until two subsequent spells are Click Frenzy and either Elder Frenzy or a Building Special. If such a combo is detected, it will save the spells until a natural Frenzy + Building Special boost is active, and then quickly cast the first spell, sell wizard towers, and cast the second spell, for a four way boost in total. This can earn decades of cookies in a single combo.
-This does require a set value of minimum mana, depending on your WT levels:
+Auto FTHOF Combo replaces Auto Cast. If the combo is enabled, it will look for a clicking frenzy and two building specials before casting, for a massive boost. Any other spell will be replaced by *Haggler's Charm*, with the same exceptions as the Smart Auto cast system above.
 
-* WT level   1-4: 81 min mana
+The possible combos are:
+- Stored *Click Frenzy* and *Elder Frenzy* and a natural *Frenzy* or *Dragon Harvest*, plus a *Building Special*
+- Stored *Click Frenzy* and a *Building Special* and a natural *Frenzy* or *Dragon Harvest*, plus a *Building Special*
+- Two stored *Building Special*s and a natural *Frenzy* or *Dragon Harvest*, plus any clicking frenzy (*Click Frenzy*, *Dragonflight*, or *Elder Frenzy*)
+
+If such a combo is detected, it will quickly cast the first spell, sell enough wizard towers for dualcasting, then cast the second spell, for a four way boost in total. This can earn decades of cookies in a single combo.
+
+Dualcasting does require a set level of minimum mana, depending on your Wizard Tower levels:
+
+* WT level 1-4: 81 min mana
 * WT level   5: 83 min mana
 * WT level   6: 88 min mana
 * WT level   7: 91 min mana
@@ -439,31 +448,35 @@ This does require a set value of minimum mana, depending on your WT levels:
 
 For convenience sake, you can just set max mana to 100 for all WT levels. The code will work with any value equal to or higher than the minimum, but because of how the mana refueling system works setting having any higher than 100 mana is not recommended.
 
-The combo will not work if you upgrade Wizard Towers to 11 or higher.
+The combo will not work if you upgrade Wizard Towers beyond level 10.
 
 ## Auto 100% Consistency Combo
 
-Based on the 100% Consistency endgame click combo\*, this is basically the Auto FTHOF Combo on steroids and will only work with Wizard Towers on level 10 and a max mana of 100 (or higher).  It will completely automate the building purchases, garden, and grimoire and use a sugar lump to cast up to four spells in succession, selling and rebuying buildings, fully harvesting the garden regardless of what is growing to plant whiskerblooms for a milk combo.  
+Based on the 100% Consistency endgame click combo\*, this is basically the Auto FTHOF Combo on steroids. It will only work with Wizard Towers on level 10 and a max mana of 100 (or higher). The 100% combo will completely automate almost every system and use a sugar lump to cast up to four spells in succession to get a maximum possible combo.
+
+It follows the same rules as the Auto FTHOF Combo until it detects the next combo can be cast.
+
 In order to use this, you must meet the following requirements: 
 
+* Have 98 or higher max mana
 * Have at least 1 sugar lump in reserve (101 recommended to keep the Sugar baking bonus)
-* Have whiskerblooms unlocked in the garden (any current plants will be harvested -- this includes growing Juicy queenbeets!)
 * The dragon must be fully upgraded, so you can have two auras
-* Have Reaper of Fields or Reality Bending as one of your dragon auras, to enable Dragon Harvest
+* Have at least 1 god swap in reserve, OR have both Godzamok in Diamond and Mokalsium in Ruby already
+* Have whiskerblooms unlocked in the garden (any current plants will be harvested -- this includes growing Juicy queenbeets!)
 
-For optimal use, also turn off the mine and factory building caps in Frozen Cookies settings before enabling the combo.
+For optimal use, also turn off any mine and factory building caps in Frozen Cookies settings before enabling the combo.
 
 \*https://pastebin.com/raw/bMHEJ3R9
 
 ## Auto Sweet
 
-If enabled, Auto Sweet will continually rapidly ascend until a grimoire seed with **'Sweet'** (free Sugar Lump) in the first 10 spells is found, then it will cast *Haggler's Charm* until 'Sweet' has been cast. After that, it turns itself off.
+Not technically a spell combo. If enabled, Auto Sweet will continually rapidly ascend until a grimoire seed with *'Sweet'* (free Sugar Lump) in the first 10 spells is found, then it will cast *Haggler's Charm* until 'Sweet' has been cast. After that, it turns itself off.
 
-WARNING: once activated, it can only disabled in the console with *FrozenCookies.autosweet = 0*. There is currently no way to turn it off on Steam.
+WARNING: once activated, it can only disabled in the console with *FrozenCookies.autosweet = 0* or if it has actually cast *'Sweet'*. There is currently no way to turn it off on Steam.
 
 # Information about Frozen Cookies' Data
 
-This is an explanation of each piece of data contained in the Frozen Cookie menu screen.
+This is an explanation of each piece of data contained in the Frozen Cookie menu screen:
 
 ## Autobuy Information
 
