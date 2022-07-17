@@ -56,6 +56,8 @@ If you want to manually install it:
 \*Note: Not guaranteed to actually be the most efficient purchase. Just the most efficient that I currently know of.
 
 ## What's new?
+2022 Jul 17
+- Extended auto FTHOF and auto 100% consistency combos to also work with natural click frenzies, if two building buffs are stored
 
 2022 Jul 12
 - Fix some old issues with smart Auto cast and simplify the code; and finally documented how it works
