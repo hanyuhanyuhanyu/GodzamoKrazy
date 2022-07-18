@@ -52,12 +52,16 @@ If you want to manually install it:
 - Displays a timer for the following items: Next Golden Cookie, Time left in Frenzy, Time until next Heavenly Chip.
 - Displays a second timer for the time to completion of Golden Cookie Bank, Next Purchase, and the end of a Chain of Purchases.
 - Calculates far more building/upgrade efficiency information that any person ever wants to know, and displays it in a not extremely user friendly manner.
+- Automates just about everything that can be automated.
 - Automatically updates to the most recent version upon load. Regardless of if that version is better or not.
 - Might not eat all of your cookies.
 
 \*Note: Not guaranteed to actually be the most efficient purchase. Just the most efficient that I currently know of.
 
 ## What's new?
+<details>
+<summary>Click to expand!</summary>
+
 2022 Jul 18
 - Added an in-game link to this readme page
 - Added dedicated toggles for setting dragon auras and pantheon gods, if turned off auras and gods will not be set.
@@ -169,9 +173,12 @@ If you want to manually install it:
 - Copied the smart FTHOF behaviour from DarkRoman's variant: https://github.com/Darkroman/FrozenCookies
 - Copied the AutoComboFinder and smart Easter from DarkRoman
 - Fixed the broken auto-Godmazok behaviour that sold mines and factories instead of cursors
-
-## Older changelog from upstream
-
+</details>
+  
+## Older changelogs 
+<details>
+  <summary>Click to expand!</summary>
+  
 2020 Nov 2
 
 - Version 1.10.0
@@ -387,6 +394,7 @@ If you want to manually install it:
 2013 Sep 23:
 
 - Added Chained Upgrade purchases
+</details>
 
 ## Planned Features and Known Issues
 
