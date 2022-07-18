@@ -145,11 +145,16 @@ FrozenCookies.preferenceValues = {
     },
 
     // Pantheon options
-    pantheonOptions: {
+    worshipOptions: {
         hint: "Pantheon options:",
     },
-    pantheonNotes: {
-        hint: "(Turn off autobuy while setting. Do not slot the same god in multiple slots)",
+    autoWorshipToggle: {
+        hint: "Automatically slot selected Gods",
+        display: ["Auto Pantheon OFF", "Auto Pantheon ON"],
+        default: 0,
+    },
+    worshipNotes: {
+        hint: "(Cannot slot the same god in multiple slots)",
     },
     autoWorship0: {
         hint: "Automatically slots desired god in DIAMOND slot",
@@ -273,8 +278,13 @@ FrozenCookies.preferenceValues = {
         display: ["Auto-Petting OFF", "Auto-Petting ON"],
         default: 0,
     },
+    autoDragonToggle: {
+        hint: "Automatically set dragon aura(s)",
+        display: ["Dragon Auras OFF", "Dragon Auras ON"],
+        default: 0,
+    },
     dragonNotes: {
-        hint: "(Select your desired aura from the list. Turn off autoBuy option while changing. Cannot set the same aura to both slots)",
+        hint: "(Select your desired aura from the list. Cannot set the same aura to both slots)",
     },
     autoDragonAura1: {
         hint: "Automatically set FIRST dragon aura",

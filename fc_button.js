@@ -435,6 +435,16 @@ function FCMenu() {
         }
         menu.append(subsection);
 
+        //Readme
+        subsection = $("<div>")
+            .addClass("subsection")
+            .append(
+                $(
+                    '<a href="https://github.com/erbkaiser/FrozenCookies#what-can-frozen-cookies-do" target="new">Online documentation</a>'
+                )
+            ),
+        menu.append(subsection);
+        
         // build preference menu items
         if (FrozenCookies.preferenceValues) {
             subsection = $("<div>").addClass("subsection");

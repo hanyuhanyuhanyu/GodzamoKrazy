@@ -58,6 +58,10 @@ If you want to manually install it:
 \*Note: Not guaranteed to actually be the most efficient purchase. Just the most efficient that I currently know of.
 
 ## What's new?
+2022 Jul 18
+- Added an in-game link to this readme page
+- Added dedicated toggles for setting dragon auras and pantheon gods, if turned off auras and gods will not be set.
+
 2022 Jul 17
 - Extended auto FTHOF and auto 100% consistency combos to also work with natural click frenzies, if two building buffs are stored
 - Changed autoBroker so it will only buy brokers if the next recommendation is a building, this should stop it from interfering too much with efficiency
