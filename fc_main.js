@@ -2305,6 +2305,7 @@ function autoDragonAura1Action() {
     )
         return;
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
+    if (FrozenCookies.autoDragonToggle == 0) return;
 
     if (Game.dragonAura == FrozenCookies.autoDragonAura1) return;
 
@@ -2324,6 +2325,7 @@ function autoDragonAura2Action() {
     )
         return;
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
+    if (FrozenCookies.autoDragonToggle == 0) return;
 
     if (Game.dragonAura2 == FrozenCookies.autoDragonAura2) return;
 
@@ -2373,6 +2375,7 @@ function autoSugarFrenzyAction() {
 function autoWorship0Action() {
     if (!T || T.swaps < 1 || FrozenCookies.autoWorship0 == 0) return;
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
+    if (FrozenCookies.autoWorshipToggle == 0) return;
 
     if (T.slot[0] == FrozenCookies.autoWorship0) return;
 
@@ -2385,6 +2388,7 @@ function autoWorship0Action() {
 function autoWorship1Action() {
     if (!T || T.swaps < 1 || FrozenCookies.autoWorship1 == 0) return;
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
+    if (FrozenCookies.autoWorshipToggle == 0) return;
 
     if (T.slot[1] == FrozenCookies.autoWorship1) return;
 
@@ -2406,6 +2410,7 @@ function autoWorship1Action() {
 function autoWorship2Action() {
     if (!T || T.swaps < 1 || FrozenCookies.autoWorship2 == 0) return;
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
+    if (FrozenCookies.autoWorshipToggle == 0) return;
 
     if (T.slot[2] == FrozenCookies.autoWorship2) return;
 

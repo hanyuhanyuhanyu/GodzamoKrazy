@@ -320,6 +320,14 @@ function FCMenu() {
                                 FrozenCookies.version
                         )
                 ),
+            //Readme
+            subsection = $("<div>")
+                .addClass("subsection")
+                .append(
+                    $(
+                        '<a href="https://github.com/erbkaiser/FrozenCookies#what-can-frozen-cookies-do" target="new">Documentation</a>'
+                    )
+                ),
             //Autobuy
             subsection = $("<div>")
                 .addClass("subsection")
