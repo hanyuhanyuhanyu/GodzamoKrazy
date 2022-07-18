@@ -59,6 +59,7 @@ If you want to manually install it:
 
 ## What's new?
 2022 Jul 18
+- Added an in-game link to this readme page
 - Added dedicated toggles for setting dragon auras and pantheon gods, if turned off auras and gods will not be set.
 
 2022 Jul 17
