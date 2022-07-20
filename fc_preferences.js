@@ -278,6 +278,17 @@ FrozenCookies.preferenceValues = {
         display: ["Auto-Petting OFF", "Auto-Petting ON"],
         default: 0,
     },
+    autoDragonOrbs: {
+        hint: "Automatically sacrifice Cortex bakers to summon a Golden Cookie if Dragon Orbs is an aura",
+        display: ["Auto-Dragon Orbs OFF", "Auto-Dragon Orbs ON"],
+        default: 0,
+    },
+    cortexLimit: {
+        hint: "Limit max number of Cortex bakers to keep Dragon Orbs useful",
+        display: ["Cortex bakers Limit OFF", "Cortex bakers Limit ON"],
+        default: 0,
+        extras: '<a class="option" id="cortexMax" onclick="updateCortexMax(\'cortexMax\');">${cortexMax} Cortex bakers</a>',
+    },
     autoDragonToggle: {
         hint: "Automatically set dragon aura(s)",
         display: ["Dragon Auras OFF", "Dragon Auras ON"],
@@ -345,11 +356,8 @@ FrozenCookies.preferenceValues = {
     seasonOptions: {
         hint: "Season options:",
     },
-    seasonNotes: {
-        hint: "(Turn off autoBuy option while changing default season)",
-    },
     defaultSeason: {
-        hint: "Autobuy a selected season when no others have needed upgrades",
+        hint: "Autobuy a selected season when no others have needed upgrades. Turn off autobuy while selecting to prevent buy spam",
         display: [
             "Default Season OFF",
             "Default Season BUSINESS DAY",
@@ -396,15 +404,15 @@ FrozenCookies.preferenceValues = {
         ],
         default: 0,
     },
-
-    //Other options
-    otherOptions: {
-        hint: "Other options:",
-    },
     FCshortcuts: {
         hint: "Use a variety of helpful keyboard shortcuts. See the readme for info",
         display: ["Shortcuts OFF", "Shortcuts ON"],
         default: 1,
+    },
+
+    //Other options
+    otherOptions: {
+        hint: "Other options:",
     },
     otherNotes: {
         hint: "(Setting a bank delays autobuy until the bank is complete)",
