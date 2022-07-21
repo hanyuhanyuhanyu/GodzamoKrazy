@@ -278,17 +278,6 @@ FrozenCookies.preferenceValues = {
         display: ["Auto-Petting OFF", "Auto-Petting ON"],
         default: 0,
     },
-    autoDragonOrbs: {
-        hint: "Automatically sacrifice Cortex bakers to summon a Golden Cookie if Dragon Orbs is an aura",
-        display: ["Auto-Dragon Orbs OFF", "Auto-Dragon Orbs ON"],
-        default: 0,
-    },
-    cortexLimit: {
-        hint: "Limit max number of Cortex bakers to keep Dragon Orbs useful",
-        display: ["Cortex bakers Limit OFF", "Cortex bakers Limit ON"],
-        default: 0,
-        extras: '<a class="option" id="cortexMax" onclick="updateCortexMax(\'cortexMax\');">${cortexMax} Cortex bakers</a>',
-    },
     autoDragonToggle: {
         hint: "Automatically set dragon aura(s)",
         display: ["Dragon Auras OFF", "Dragon Auras ON"],
@@ -350,6 +339,17 @@ FrozenCookies.preferenceValues = {
             "Supreme Intellect",
         ],
         default: 0,
+    },
+    autoDragonOrbs: {
+        hint: "Automatically sell Cortex bakers to summon a Golden Cookie, if Dragon Orbs is an aura and Godzamok is not slotted",
+        display: ["Auto-Dragon Orbs OFF", "Auto-Dragon Orbs ON"],
+        default: 0,
+    },
+    cortexLimit: {
+        hint: "Limit max number of Cortex bakers to keep Dragon Orbs useful",
+        display: ["Cortex bakers Limit OFF", "Cortex bakers Limit ON"],
+        default: 0,
+        extras: '<a class="option" id="cortexMax" onclick="updateCortexMax(\'cortexMax\');">${cortexMax} Cortex bakers</a>',
     },
 
     // Season options
