@@ -2372,7 +2372,8 @@ function autoDragonOrbsAction() {
     if (
         Game.shimmerTypes["golden"].n <= 0 &&
         Game.auraMult("Dragon Orbs") > 0 &&
-        buffsN == 0
+        buffsN == 0 &&
+        Game.shimmerTypes.golden.last != 'cookie chain'
     ) {
         Game.Objects["Cortex baker"].sell(1);
         logEvent(
@@ -5161,7 +5162,7 @@ function FCStart() {
     if (FrozenCookies.autoDragonOrbs) {
         FrozenCookies.autoDragonOrbsBot = setInterval(
             autoDragonOrbsAction,
-            FrozenCookies.frequency
+            FrozenCookies.frequency * 0.1
         );
     }
 
