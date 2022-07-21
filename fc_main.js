@@ -5141,7 +5141,7 @@ function FCStart() {
     if (FrozenCookies.petDragon) {
         FrozenCookies.petDragonBot = setInterval(
             petDragonAction,
-            FrozenCookies.frequency * 10
+            FrozenCookies.frequency * 5
         );
     }
 
@@ -5197,7 +5197,7 @@ function FCStart() {
     if (FrozenCookies.otherUpgrades) {
         FrozenCookies.otherUpgradesBot = setInterval(
             buyOtherUpgrades,
-            FrozenCookies.frequency * 2
+            FrozenCookies.frequency
         );
     }
 
