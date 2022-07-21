@@ -62,6 +62,10 @@ If you want to manually install it:
 <details>
 <summary>Click to expand!</summary>
 
+2022 Jul 20
+- New feature: Auto-Dragon Orbs, with accompanying Cortex bakers Limit.
+- Reduced dragon petting speed for less visual spam
+
 2022 Jul 18
 - Added an in-game link to this readme page
 - Added dedicated toggles for setting dragon auras and pantheon gods, if turned off auras and gods will not be set.

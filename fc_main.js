@@ -252,6 +252,7 @@ function setOverrides(gameSaveData) {
         FrozenCookies.mineMax = preferenceParse("mineMax", 0);
         FrozenCookies.factoryMax = preferenceParse("factoryMax", 0);
         FrozenCookies.manaMax = preferenceParse("manaMax", 0);
+        FrozenCookies.cortexMax = preferenceParse("cortexMax", 0);
 
         // Get historical data
         FrozenCookies.frenzyTimes =
@@ -537,6 +538,7 @@ function saveFCData() {
     saveString.lastHCTime = FrozenCookies.lastHCTime;
     saveString.manaMax = FrozenCookies.manaMax;
     saveString.maxSpecials = FrozenCookies.maxSpecials;
+    saveString.cortexMax = FrozenCookies.cortexMax;
     saveString.prevLastHCTime = FrozenCookies.prevLastHCTime;
     saveString.saveVersion = FrozenCookies.version;
     return JSON.stringify(saveString);
@@ -724,6 +726,15 @@ function updateFactoryMax(base) {
     userInputPrompt(
         "Factory Cap!",
         "How many Factories should Autobuy stop at?",
+        FrozenCookies[base],
+        storeNumberCallback(base, 0)
+    );
+}
+
+function updateCortexMax(base) {
+    userInputPrompt(
+        "Cortex baker Cap!",
+        "How many Cortex bakers should Autobuy stop at?",
         FrozenCookies[base],
         storeNumberCallback(base, 0)
     );
@@ -2343,6 +2354,40 @@ function autoDragonAura2Action() {
     }
 }
 
+function autoDragonOrbsAction() {
+    if (
+        FrozenCookies.autoDragonOrbs == 1 &&
+        (!Game.hasAura("Dragon Orbs") ||
+            Game.hasGod("ruin") ||
+            Game.Objects["Cortex baker"].amount < 1)
+    ) {
+        FrozenCookies.autoDragonOrbs = 0;
+        logEvent("autoDragonOrbs", "Not currently possible to use Dragon Orbs");
+    }
+
+    var buffsN = 0;
+    for (var ii in Game.buffs) {
+        buffsN++;
+    }
+    if (
+        Game.shimmerTypes["golden"].n <= 0 &&
+        Game.auraMult("Dragon Orbs") > 0 &&
+        buffsN == 0 &&
+        Game.shimmerTypes.golden.last != "chain cookie"
+    ) {
+        Game.Objects["Cortex baker"].sell(1);
+        logEvent(
+            "autoDragonOrbs",
+            "Sold 1 Cortex baker for " +
+                (Beautify(
+                    Game.Objects["Cortex baker"].price *
+                        Game.Objects["Cortex baker"].getSellMultiplier()
+                ) +
+                    " cookies and a wish")
+        );
+    }
+}
+
 function autoSugarFrenzyAction() {
     if (
         FrozenCookies.autoSugarFrenzy == 1 &&
@@ -3454,6 +3499,14 @@ function buildingStats(recalculate) {
                 Game.Objects["Factory"].amount >= FrozenCookies.factoryMax
             ) {
                 buildingBlacklist.push(4);
+            }
+            //Stop buying Cortex bakers if at set limit
+            if (
+                FrozenCookies.autoDragonOrbs &&
+                FrozenCookies.cortexLimit &&
+                Game.Objects["Cortex baker"].amount >= FrozenCookies.cortexMax
+            ) {
+                buildingBlacklist.push(16);
             }
             FrozenCookies.caches.buildings = Game.ObjectsById.map(function (
                 current,
@@ -4671,7 +4724,12 @@ function autoCookie() {
                     (FrozenCookies.factoryLimit &&
                         recommendation.purchase.name == "Factory" &&
                         Game.Objects["Factory"].amount >=
-                            FrozenCookies.factoryMax - 100))
+                            FrozenCookies.factoryMax - 100) ||
+                    (FrozenCookies.autoDragonOrbs &&
+                        FrozenCookies.cortexLimit &&
+                        recommendation.purchase.name == "Cortex baker" &&
+                        Game.Objects["Cortex baker"].amount >=
+                            FrozenCookies.cortexMax - 100))
             ) {
                 Game.buyBulkOld = Game.buyBulk;
                 if (Game.buyBulkOld == 100) Game.buyBulk = 10;
@@ -4930,6 +4988,11 @@ function FCStart() {
         FrozenCookies.autoDragonAura2Bot = 0;
     }
 
+    if (FrozenCookies.autoDragonOrbsBot) {
+        clearInterval(FrozenCookies.autoDragonOrbsBot);
+        FrozenCookies.autoDragonOrbsBot = 0;
+    }
+
     if (FrozenCookies.autoSugarFrenzyBot) {
         clearInterval(FrozenCookies.autoSugarFrenzyBot);
         FrozenCookies.autoSugarFrenzyBot = 0;
@@ -5078,7 +5141,7 @@ function FCStart() {
     if (FrozenCookies.petDragon) {
         FrozenCookies.petDragonBot = setInterval(
             petDragonAction,
-            FrozenCookies.frequency * 2
+            FrozenCookies.frequency * 5
         );
     }
 
@@ -5093,6 +5156,13 @@ function FCStart() {
         FrozenCookies.autoDragonAura2Bot = setInterval(
             autoDragonAura2Action,
             FrozenCookies.frequency
+        );
+    }
+
+    if (FrozenCookies.autoDragonOrbs) {
+        FrozenCookies.autoDragonOrbsBot = setInterval(
+            autoDragonOrbsAction,
+            FrozenCookies.frequency * 10
         );
     }
 
@@ -5127,7 +5197,7 @@ function FCStart() {
     if (FrozenCookies.otherUpgrades) {
         FrozenCookies.otherUpgradesBot = setInterval(
             buyOtherUpgrades,
-            FrozenCookies.frequency * 2
+            FrozenCookies.frequency
         );
     }
 
