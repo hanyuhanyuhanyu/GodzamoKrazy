@@ -3467,7 +3467,7 @@ function buildingStats(recalculate) {
                 FrozenCookies.autoSpell == 3 &&
                 Game.Objects["Cortex baker"].amount >= 399
             ) {
-                buildingBlacklist.push(16);
+                buildingBlacklist.push(18);
             }
             //Stop buying wizard towers at max Mana if enabled
             if (
@@ -3497,7 +3497,7 @@ function buildingStats(recalculate) {
                 FrozenCookies.cortexLimit &&
                 Game.Objects["Cortex baker"].amount >= FrozenCookies.cortexMax
             ) {
-                buildingBlacklist.push(16);
+                buildingBlacklist.push(18);
             }
             FrozenCookies.caches.buildings = Game.ObjectsById.map(function (
                 current,
