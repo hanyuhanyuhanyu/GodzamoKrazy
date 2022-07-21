@@ -2360,7 +2360,15 @@ function autoDragonOrbsAction() {
         logEvent("autoDragonOrbs", "Not currently possible to use Dragon Orbs");
     }
 
-    if (!goldenCookieLife() && cpsBonus() != 1) {
+    var buffsN = 0;
+    for (var ii in Game.buffs) {
+        buffsN++;
+    }
+    if (
+        Game.shimmerTypes["golden"].n <= 0 &&
+        Game.auraMult("Dragon Orbs") > 0 &&
+        buffsN == 0
+    ) {
         Game.Objects["Cortex baker"].sell(1);
         logEvent(
             "autoDragonOrbs",
