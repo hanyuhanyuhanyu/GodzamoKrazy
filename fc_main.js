@@ -2363,8 +2363,7 @@ function autoDragonOrbsAction() {
     if (
         Game.shimmerTypes["golden"].n <= 0 &&
         Game.auraMult("Dragon Orbs") > 0 &&
-        buffsN == 0 &&
-        Game.shimmerTypes.golden.last != "chain cookie"
+        buffsN == 0
     ) {
         Game.Objects["Cortex baker"].sell(1);
         logEvent(
