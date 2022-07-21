@@ -149,12 +149,9 @@ FrozenCookies.preferenceValues = {
         hint: "Pantheon options:",
     },
     autoWorshipToggle: {
-        hint: "Automatically slot selected Gods",
+        hint: "Automatically slot selected Gods (Cannot slot the same god in multiple slots)",
         display: ["Auto Pantheon OFF", "Auto Pantheon ON"],
         default: 0,
-    },
-    worshipNotes: {
-        hint: "(Cannot slot the same god in multiple slots)",
     },
     autoWorship0: {
         hint: "Automatically slots desired god in DIAMOND slot",
@@ -215,9 +212,6 @@ FrozenCookies.preferenceValues = {
     spellOptions: {
         hint: "Grimoire options:",
     },
-    spellNotes: {
-        hint: "(Only one combo is active at the same time, with the last one winning. See the readme for more info)",
-    },
     towerLimit: {
         hint: "Stop autobuying Wizard Towers at selected Max Mana. 37 for max single casting FTHOF. Not recommended to set over 100",
         display: ["Wizard Tower Cap OFF", "Wizard Tower Cap ON"],
@@ -244,6 +238,9 @@ FrozenCookies.preferenceValues = {
             "ASF also for Auto FTHOF Combo",
         ],
         default: 0,
+    },
+    spellNotes: {
+        hint: "(Only one combo is active at the same time, with the last one winning. See the readme for more info)",
     },
     autoFTHOFCombo: {
         hint: "Perform FTHOF double cast combos - needs enough mana! Disables Auto Cast",
@@ -379,43 +376,9 @@ FrozenCookies.preferenceValues = {
         default: 0,
     },
 
-    //Display options
-    displayOptions: {
-        hint: "Display options:",
-    },
-    numberDisplay: {
-        hint: "Change how numbers are shortened",
-        display: [
-            "Number Display RAW",
-            "Number Display FULL (million, billion)",
-            "Number Display INITIALS (M, B)",
-            "Number Display SI UNITS (M, G, T)",
-            "Number Display SCIENTIFIC (6.3e12)",
-        ],
-        default: 1,
-    },
-    fancyui: {
-        hint: "Infobox type (can be slow)",
-        display: [
-            "Infobox OFF",
-            "Infobox TEXT ONLY",
-            "Infobox WHEEL ONLY",
-            "Infobox WHEEL & TEXT",
-        ],
-        default: 0,
-    },
-    FCshortcuts: {
-        hint: "Use a variety of helpful keyboard shortcuts. See the readme for info",
-        display: ["Shortcuts OFF", "Shortcuts ON"],
-        default: 1,
-    },
-
-    //Other options
-    otherOptions: {
-        hint: "Other options:",
-    },
-    otherNotes: {
-        hint: "(Setting a bank delays autobuy until the bank is complete)",
+    //Bank options
+    bankOptions: {
+        hint: "Bank options: (Setting a bank delays autobuy until the bank is complete)",
     },
     holdSEBank: {
         hint: "Maintain a bank for Spontaneous Edifice (already enabled if Auto Casting SE)",
@@ -447,31 +410,64 @@ FrozenCookies.preferenceValues = {
         default: 0,
         extras: '<a class="option" id="maxSpecials" onclick="updateMaxSpecials(\'maxSpecials\');">${maxSpecials} Building specials</a>',
     },
-    /*
-      timeTravelMethod:{
-        hint: "Time travel is unstable. This determines how time travel works. If you're unsure, don't touch this",
-        display: [
-            Time Travel DISABLED"],
-            "Purchases by Estimated Effective CpS",
-            "Purchases by Simulated Real Time",
-            "Heavenly Chips by Estimated Effective CpS",
-            "Heavenly Chips by Simulated Real Time"
-        ],
-        default: 0,
-        extras: '<a class="option" id="timeTravelPurchases" onclick="updateTimeTravelAmount();">Set Time Travel Amount</a>',
-      },
-    */
+
+    // Other options
+    otherOptions: {
+        hint: "Other options:",
+    },
+    FCshortcuts: {
+        hint: "Use a variety of helpful keyboard shortcuts. See the readme for info",
+        display: ["Shortcuts OFF", "Shortcuts ON"],
+        default: 1,
+    },
     simulatedGCPercent: {
         hint: 'Assume a percentage of Golden Cookies as "clicked" for GC efficiency calculations (100% recommended)',
         display: ["GC clicked 0%", "GC clicked 100%"],
         default: 1,
+    },
+
+    //Display options
+    displayOptions: {
+        hint: "Display options:",
     },
     showMissedCookies: {
         hint: "Display the number of missed Golden Cookie clicks under Golden Cookie Information",
         display: ["Show Missed GCs OFF", "Show Missed GCs ON"],
         default: 0,
     },
-    otherNotes2: {
+    numberDisplay: {
+        hint: "Change how numbers are shortened",
+        display: [
+            "Number Display RAW",
+            "Number Display FULL (million, billion)",
+            "Number Display INITIALS (M, B)",
+            "Number Display SI UNITS (M, G, T)",
+            "Number Display SCIENTIFIC (6.3e12)",
+        ],
+        default: 1,
+    },
+    fancyui: {
+        hint: "Infobox type (can be slow)",
+        display: [
+            "Infobox OFF",
+            "Infobox TEXT ONLY",
+            "Infobox WHEEL ONLY",
+            "Infobox WHEEL & TEXT",
+        ],
+        default: 0,
+    },
+    logging: {
+        hint: "Display detailed logs in the javascript console",
+        display: ["Logging OFF", "Logging ON"],
+        default: 1,
+    },
+    purchaseLog: {
+        hint: "Log all automatic purchases as well",
+        display: ["Purchase Log OFF", "Purchase Log ON"],
+        default: 0,
+    },
+
+    slowOptions: {
         hint: "(The following options can drastically slow down the game. Do not touch unless you know what you're doing)",
     },
     fpsModifier: {
@@ -495,16 +491,6 @@ FrozenCookies.preferenceValues = {
         ],
         default: 2,
     },
-    logging: {
-        hint: "Display detailed logs in the javascript console",
-        display: ["Logging OFF", "Logging ON"],
-        default: 1,
-    },
-    purchaseLog: {
-        hint: "Log all automatic purchases as well",
-        display: ["Purchase Log OFF", "Purchase Log ON"],
-        default: 0,
-    },
     trackStats: {
         hint: "Track your CpS / HC earned over time during a single session to enable graphing",
         display: [
@@ -519,12 +505,4 @@ FrozenCookies.preferenceValues = {
         default: 0,
         extras: '<a class="option" id="viewStats" onclick="viewStatGraphs();">View Stat Graphs</a>',
     },
-
-    /* Doesnt work
-    showAchievements :{
-        hint: "Show achievement popups (Kind of broken early game)",
-        display: ["Achievement Popups OFF", "Achievement Popups ON"],
-        default: 0
-    },
-    */
 };

@@ -740,15 +740,6 @@ function updateCortexMax(base) {
     );
 }
 
-function updateTimeTravelAmount() {
-    userInputPrompt(
-        "Time Travel!",
-        "Warning: Time travel is highly unstable, and large values are highly likely to either cause long delays or crash the game. Be careful!\nHow much do you want to time travel by? This will happen instantly.",
-        FrozenCookies.timeTravelAmount,
-        storeNumberCallback("timeTravelAmount", 0)
-    );
-}
-
 function updateLoanMultMin(base) {
     userInputPrompt(
         "Loans!",
@@ -4232,37 +4223,6 @@ function updateCaches() {
     } while (FrozenCookies.recalculateCaches && recalcCount < 10);
 }
 
-function doTimeTravel() {
-    //  'Time Travel DISABLED','Purchases by Estimated Effective CPS','Purchases by Simulated Real Time','Heavenly Chips by Estimated Effective CPS','Heavenly Chips by Simulated Real Time'
-    if (FrozenCookies.timeTravelMethod) {
-        // Estimated Effective CPS
-        if (timeTravelMethod % 2 === 1) {
-            var fullCps = effectiveCps();
-            if (fullCps) {
-                var neededCookies = 0;
-                if (timeTravelMethod === 1) {
-                } else if (timeTravelMethod === 3) {
-                }
-            }
-        } else {
-        }
-    } else {
-        FrozenCookies.timeTravelAmount = 0;
-    }
-    /*
-        var fullCps = effectiveCps();
-        if (fullCps > 0) {
-          var neededCookies = Math.max(0, recommendation.cost + delayAmount() - Game.cookies);
-          var time = neededCookies / fullCps;
-          Game.Earn(neededCookies);
-          Game.startDate -= time * 1000;
-          Game.fullDate -= time * 1000;
-          FrozenCookies.timeTravelPurchases -= 1;
-          logEvent('Time travel', 'Travelled ' + timeDisplay(time) + ' into the future.');
-        }
-      */
-}
-
 //Why the hell is fcWin being called so often? It seems to be getting called repeatedly on the CPS achievements,
 //which should only happen when you actually win them?
 function fcWin(what) {
@@ -4273,7 +4233,7 @@ function fcWin(what) {
                     ? Game.Achievements[what].shortName
                     : Game.Achievements[what].name;
                 Game.Achievements[what].won = 1;
-                //This happens a ton of times on CPS achievements; it seems like they would be CHECKED for, but a degbug message placed
+                //This happens a ton of times on CPS achievements; it seems like they would be CHECKED for, but a debug message placed
                 //here gets repeatedly called seeming to indicate that the achievements.won value is 1, even though the achievement isn't
                 //being unlocked. This also means that placing a function to log the achievement spams out messages. Are the Achievement.won
                 //values being turned off before the game checks again? There must be some reason Game.Win is replaced with fcWin
