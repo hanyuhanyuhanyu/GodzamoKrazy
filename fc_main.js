@@ -2355,7 +2355,12 @@ function autoDragonAura2Action() {
 }
 
 function autoDragonOrbsAction() {
-    if (!Game.hasAura("Dragon Orbs") || Game.hasGod("ruin")) {
+    if (
+        FrozenCookies.autoDragonOrbs == 1 &&
+        (!Game.hasAura("Dragon Orbs") ||
+            Game.hasGod("ruin") ||
+            Game.Objects["Cortex baker"].amount < 1)
+    ) {
         FrozenCookies.autoDragonOrbs = 0;
         logEvent("autoDragonOrbs", "Not currently possible to use Dragon Orbs");
     }
@@ -2377,7 +2382,7 @@ function autoDragonOrbsAction() {
                     Game.Objects["Cortex baker"].price *
                         Game.Objects["Cortex baker"].getSellMultiplier()
                 ) +
-                    " cookies")
+                    " cookies and a wish")
         );
     }
 }
