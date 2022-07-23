@@ -1745,11 +1745,13 @@ function auto100ConsistencyComboAction() {
             return;
         case 5: // Set auras to radiant appetite and dragon's fortune
             if (!Game.hasAura("Dragon's Fortune")) {
+                Game.specialTab = "dragon";
                 Game.SetDragonAura(16, 1);
                 Game.ConfirmPrompt();
                 Game.ToggleSpecialMenu();
             }
             if (!Game.hasAura("Radiant Appetite")) {
+                Game.specialTab = "dragon";
                 Game.SetDragonAura(15, 0);
                 Game.ConfirmPrompt();
                 Game.ToggleSpecialMenu();
@@ -2319,6 +2321,7 @@ function autoDragonAura1Action() {
     if (Game.dragonAura == FrozenCookies.autoDragonAura1) return;
 
     if (Game.dragonLevel >= FrozenCookies.autoDragonAura1 + 4) {
+        Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura1, 0);
         Game.ConfirmPrompt();
         Game.ToggleSpecialMenu();
@@ -2346,6 +2349,7 @@ function autoDragonAura2Action() {
     }
 
     if (Game.dragonLevel == 26) {
+        Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura2, 1);
         Game.ConfirmPrompt();
         Game.ToggleSpecialMenu();
