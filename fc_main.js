@@ -479,6 +479,11 @@ function fcDraw(from, text, origin) {
 
 function fcReset() {
     Game.CollectWrinklers();
+    if (B) {
+        for (let i = 0; i < B.goodsById.length; i++) {
+            B.sellGood(i, 10000);
+        } // sell all stock
+    }
     if (
         Game.dragonLevel > 5 &&
         !Game.hasAura("Earth Shatterer") &&
@@ -1742,10 +1747,12 @@ function auto100ConsistencyComboAction() {
             if (!Game.hasAura("Dragon's Fortune")) {
                 Game.SetDragonAura(16, 1);
                 Game.ConfirmPrompt();
+                Game.ToggleSpecialMenu();
             }
             if (!Game.hasAura("Radiant Appetite")) {
                 Game.SetDragonAura(15, 0);
                 Game.ConfirmPrompt();
+                Game.ToggleSpecialMenu();
             }
             auto100ConsistencyComboAction.state = 6;
             return;
@@ -2314,6 +2321,7 @@ function autoDragonAura1Action() {
     if (Game.dragonLevel >= FrozenCookies.autoDragonAura1 + 4) {
         Game.SetDragonAura(FrozenCookies.autoDragonAura1, 0);
         Game.ConfirmPrompt();
+        Game.ToggleSpecialMenu();
         logEvent("autoDragon", "Set first dragon aura");
         return;
     }
@@ -2340,6 +2348,7 @@ function autoDragonAura2Action() {
     if (Game.dragonLevel == 26) {
         Game.SetDragonAura(FrozenCookies.autoDragonAura2, 1);
         Game.ConfirmPrompt();
+        Game.ToggleSpecialMenu();
         logEvent("autoDragon", "Set second dragon aura");
         return;
     }
