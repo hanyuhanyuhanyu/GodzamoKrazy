@@ -4413,28 +4413,12 @@ function autoGodzamokAction() {
             return;
         }
         // if Pantheon is here and autoGodzamok is set
-        if (
-            Game.hasGod("ruin") &&
-            Game.Objects["Mine"].amount >= 500 &&
-            FrozenCookies.mineLimit == 0
-        ) {
-            var countMine = 500;
-        } else if (Game.hasGod("ruin") && Game.Objects["Mine"].amount >= 10) {
+        if (Game.hasGod("ruin") && Game.Objects["Mine"].amount >= 10) {
             var countMine = Game.Objects["Mine"].amount;
-        } else {
-            return;
-        }
+        } 
 
-        if (
-            Game.hasGod("ruin") &&
-            Game.Objects["Factory"].amount >= 500 &&
-            FrozenCookies.factoryLimit == 0
-        ) {
-            var countFactory = 500;
-        } else if (Game.hasGod("ruin") && Game.Objects["Factory"].amount > 10) {
+        if (Game.hasGod("ruin") && Game.Objects["Factory"].amount > 10) {
             var countFactory = Game.Objects["Factory"].amount;
-        } else {
-            return;
         }
 
         //Automatically sell up to limit mines and factories and prevent rapid buy/sell spam
