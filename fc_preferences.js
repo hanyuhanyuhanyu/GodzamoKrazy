@@ -230,15 +230,6 @@ FrozenCookies.preferenceValues = {
         default: 0,
         extras: '<a class="option" id="minCpSMult" onclick="updateCpSMultMin(\'minCpSMult\');">x${minCpSMult} minimum Frenzy</a>',
     },
-    autoSugarFrenzy: {
-        hint: "Buy Sugar Frenzy during the first 100% Consistency and/or Double cast combo",
-        display: [
-            "Auto Sugar Frenzy OFF",
-            "ASF for 100% Consistency Combo",
-            "ASF also for Auto FTHOF Combo",
-        ],
-        default: 0,
-    },
     spellNotes: {
         hint: "(Only one combo is active at the same time, with the last one winning. See the readme for more info)",
     },
@@ -252,6 +243,15 @@ FrozenCookies.preferenceValues = {
         display: [
             "Auto Cast 100% Consistency Combo OFF",
             "Auto Cast 100% Consistency Combo ON",
+        ],
+        default: 0,
+    },
+    autoSugarFrenzy: {
+        hint: "Buy Sugar Frenzy during the first 100% Consistency and/or Double Cast combo",
+        display: [
+            "Auto Sugar Frenzy OFF",
+            "ASF for 100% Consistency Combo",
+            "ASF also for Double Cast Combo",
         ],
         default: 0,
     },
