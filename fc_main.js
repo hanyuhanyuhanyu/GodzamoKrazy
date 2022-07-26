@@ -4404,76 +4404,54 @@ function safeBuy(bldg, count) {
 }
 
 function autoGodzamokAction() {
-    if (T && FrozenCookies.autoGodzamok) {
-        // Break if not at least 10 of each building
+    // if Godz is here and autoGodzamok is set
+    if (Game.hasGod("ruin") && FrozenCookies.autoGodzamok) {
+        // Need at least 10 of each to be useful
         if (
-            Game.Objects["Mine"].amount <= 10 &&
-            Game.Objects["Factory"].amount <= 10
+            Game.Objects["Mine"].amount < 10 ||
+            Game.Objects["Factory"].amount < 10
         ) {
             return;
         }
-        // if Pantheon is here and autoGodzamok is set
-        if (Game.hasGod("ruin") && Game.Objects["Mine"].amount >= 10) {
-            var countMine = Game.Objects["Mine"].amount;
-        } 
+        var countMine = Game.Objects["Mine"].amount;
+        var countFactory = Game.Objects["Factory"].amount;
 
-        if (Game.hasGod("ruin") && Game.Objects["Factory"].amount > 10) {
-            var countFactory = Game.Objects["Factory"].amount;
-        }
-
-        //Automatically sell up to limit mines and factories and prevent rapid buy/sell spam
-        if (
-            FrozenCookies.autoGodzamok >= 1 &&
-            hasClickBuff() &&
-            !Game.hasBuff("Devastation")
-        ) {
+        //Automatically sell all mines and factories
+        if (!Game.hasBuff("Devastation") && hasClickBuff()) {
             Game.Objects["Mine"].sell(countMine);
             Game.Objects["Factory"].sell(countFactory);
-
-            if (countMine != 0) {
-                if (FrozenCookies.mineLimit == 0) {
+            //Rebuy mines
+            if (FrozenCookies.mineLimit && countMine > FrozenCookies.mineMax) {
+                var countMine =
+                    FrozenCookies.mineMax - Game.Objects["Mine"].amount;
+                if (countMine > 0) {
                     safeBuy(Game.Objects["Mine"], countMine);
                     logEvent("AutoGodzamok", "Bought " + countMine + " mines");
                 }
-                if (
-                    FrozenCookies.mineLimit == 1 &&
-                    Game.Objects["Mine"].amount < FrozenCookies.mineMax
-                ) {
-                    var countMine =
-                        FrozenCookies.mineMax - Game.Objects["Mine"].amount;
-                    if (countMine != 0) {
-                        safeBuy(Game.Objects["Mine"], countMine);
-                        logEvent(
-                            "AutoGodzamok",
-                            "Bought " + countMine + " mines"
-                        );
-                    }
-                }
+            } else {
+                safeBuy(Game.Objects["Mine"], countMine);
+                logEvent("AutoGodzamok", "Bought " + countMine + " mines");
             }
-
-            if (countFactory != 0) {
-                if (FrozenCookies.factoryLimit == 0) {
+            //Rebuy factories
+            if (
+                FrozenCookies.factoryLimit &&
+                countFactory > FrozenCookies.factoryMax
+            ) {
+                var countFactory =
+                    FrozenCookies.factoryMax - Game.Objects["Factory"].amount;
+                if (countFactory > 0) {
                     safeBuy(Game.Objects["Factory"], countFactory);
                     logEvent(
                         "AutoGodzamok",
                         "Bought " + countFactory + " factories"
                     );
                 }
-                if (
-                    FrozenCookies.factoryLimit == 1 &&
-                    Game.Objects["Factory"].amount < FrozenCookies.factoryMax
-                ) {
-                    var countFactory =
-                        FrozenCookies.factoryMax -
-                        Game.Objects["Factory"].amount;
-                    if (countFactory != 0) {
-                        safeBuy(Game.Objects["Factory"], countFactory);
-                        logEvent(
-                            "AutoGodzamok",
-                            "Bought " + countFactory + " factories"
-                        );
-                    }
-                }
+            } else {
+                safeBuy(Game.Objects["Factory"], countFactory);
+                logEvent(
+                    "AutoGodzamok",
+                    "Bought " + countFactory + " factories"
+                );
             }
         }
     }
