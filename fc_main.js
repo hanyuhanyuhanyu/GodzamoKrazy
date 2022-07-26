@@ -2043,6 +2043,13 @@ function auto100ConsistencyComboAction() {
 function autoSweetAction() {
     if (FrozenCookies.autoSweet == 0) return;
 
+    if (FrozenCookies.autoBuy == 1) {
+        autoSweetAction.autobuyyes = 1;
+        FrozenCookies.autoBuy = 0;
+    } else {
+        autoSweetAction.autobuyyes = 0;
+    }
+
     if (typeof Game.ready !== "undefined" && Game.ready) {
         if (typeof autoSweetAction.state == "undefined")
             autoSweetAction.state = 0;
@@ -2088,18 +2095,22 @@ function autoSweetAction() {
                         M.castSpell(hagC);
                         logEvent(
                             "autoSweet",
-                            "Cast Haggler's Charm instead of FTHOF"
+                            "Cast Haggler's Charm while waiting for 'Sweet'"
                         );
                     }
                     if (nextSpellName(0) == "Sugar Lump") {
                         var FTHOF = M.spellsById[1];
                         M.castSpell(FTHOF);
                         autoSweetAction.state = 0;
-                        logEvent("autoSweet", "Cast Force the Hand of Fate");
-                        FrozenCookies.autoSweet = 0;
-                        if (autoSweetAction.manaPrev != -1) {
+                        logEvent(
+                            "autoSweet",
+                            "Sugar Lump Get! Disabling Auto Sweet"
+                        );
+                        if (autoSweetAction.manaPrev != -1)
                             FrozenCookies.manaMax = autoSweetAction.manaPrev;
-                        }
+                        if (autoSweetAction.autobuyyes == 1)
+                            FrozenCookies.autoBuy = 1;
+                        FrozenCookies.autoSweet = 0;
                     }
                 }
                 return;
