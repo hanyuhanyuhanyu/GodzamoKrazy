@@ -132,9 +132,14 @@ FrozenCookies.preferenceValues = {
         display: ["Auto-Godzamok OFF", "Auto-Godzamok ON"],
         default: 0,
     },
-    autoBroker: {
-        hint: "Automatically buy stock brokers and upgrade the bank office level",
+    autoBank: {
+        hint: "Automatically upgrade the bank office level",
         display: ["Auto-Banking OFF", "Auto-Banking ON"],
+        default: 0,
+    },
+    autoBroker: {
+        hint: "Automatically buy stock brokers",
+        display: ["Auto-Broker OFF", "Auto-Broker ON"],
         default: 0,
     },
     autoLoan: {

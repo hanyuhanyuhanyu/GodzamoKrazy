@@ -65,6 +65,7 @@ If you want to manually install it:
 2022 Jul 26
 - Auto-Godzamok now limits itself to the mine and factory cap (if set) and no longer is capped at 500. If you have more buildings than the cap, it will rebuy up to that cap.
 - Renamed a few preferences to make what they do more clear
+- Split the auto banking in two separate options, one to upgrade the bank level (to unlock loans and more storage) and one to automatically buy brokers.
 
 2022 Jul 20
 - New feature: Auto-Dragon Orbs, with accompanying Cortex bakers Limit.

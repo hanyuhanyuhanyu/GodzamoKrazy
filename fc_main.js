@@ -2178,6 +2178,30 @@ function autoBlacklistOff() {
     }
 }
 
+function autoBankAction() {
+    if (!B) return; // Just leave if you don't have the stock market
+    if (hasClickBuff()) return; // Don't buy during click buff
+    if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
+
+    //Upgrade bank level
+    let currentOffice = B.offices[B.officeLevel];
+    if (
+        currentOffice.cost &&
+        Game.Objects["Cursor"].amount >= currentOffice.cost[0] &&
+        Game.Objects["Cursor"].level >= currentOffice.cost[1]
+    ) {
+        var countBankCursor = currentOffice.cost[0];
+        l("bankOfficeUpgrade").click();
+        safeBuy(Game.Objects["Cursor"], countBankCursor);
+        logEvent(
+            "AutoBank",
+            "Upgrade bank level for " + countBankCursor + " cursors"
+        );
+        Game.recalculateGains = 1;
+        Game.upgradesToRebuild = 1;
+    }
+}
+
 function autoBrokerAction() {
     if (!B) return; // Just leave if you don't have the stock market
     if (hasClickBuff()) return; // Don't buy during click buff
@@ -2195,23 +2219,6 @@ function autoBrokerAction() {
         logEvent(
             "AutoBroker",
             "Bought a broker for " + Beautify(B.getBrokerPrice()) + " cookies"
-        );
-        Game.recalculateGains = 1;
-        Game.upgradesToRebuild = 1;
-    }
-    //Upgrade bank level
-    let currentOffice = B.offices[B.officeLevel];
-    if (
-        currentOffice.cost &&
-        Game.Objects["Cursor"].amount >= currentOffice.cost[0] &&
-        Game.Objects["Cursor"].level >= currentOffice.cost[1]
-    ) {
-        var countBankCursor = currentOffice.cost[0];
-        l("bankOfficeUpgrade").click();
-        safeBuy(Game.Objects["Cursor"], countBankCursor);
-        logEvent(
-            "AutoBroker",
-            "Upgrade bank level for " + countBankCursor + " cursors"
         );
         Game.recalculateGains = 1;
         Game.upgradesToRebuild = 1;
@@ -4841,6 +4848,11 @@ function FCStart() {
         FrozenCookies.autoHalloweenBot = 0;
     }
 
+    if (FrozenCookies.autoBankBot) {
+        clearInterval(FrozenCookies.autoBankBot);
+        FrozenCookies.autoBankBot = 0;
+    }
+
     if (FrozenCookies.autoBrokerBot) {
         clearInterval(FrozenCookies.autoBrokerBot);
         FrozenCookies.autoBrokerBot = 0;
@@ -4996,6 +5008,13 @@ function FCStart() {
     if (FrozenCookies.autoHalloween) {
         FrozenCookies.autoHalloweenBot = setInterval(
             autoHalloweenAction,
+            FrozenCookies.frequency
+        );
+    }
+
+    if (FrozenCookies.autoBank) {
+        FrozenCookies.autoBankBot = setInterval(
+            autoBankAction,
             FrozenCookies.frequency
         );
     }
