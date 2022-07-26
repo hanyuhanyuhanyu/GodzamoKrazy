@@ -133,12 +133,12 @@ FrozenCookies.preferenceValues = {
         default: 0,
     },
     autoBank: {
-        hint: "Automatically upgrade the bank office level",
+        hint: "Automatically upgrade the bank office level to unlock loans and more storage",
         display: ["Auto-Banking OFF", "Auto-Banking ON"],
         default: 0,
     },
     autoBroker: {
-        hint: "Automatically buy stock brokers",
+        hint: "Automatically hire stock brokers",
         display: ["Auto-Broker OFF", "Auto-Broker ON"],
         default: 0,
     },

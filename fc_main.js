@@ -2204,21 +2204,21 @@ function autoBankAction() {
 
 function autoBrokerAction() {
     if (!B) return; // Just leave if you don't have the stock market
-    if (hasClickBuff()) return; // Don't buy during click buff
+    if (hasClickBuff()) return; // Don't hire during click buff
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
     //Hire brokers
     var delay = delayAmount(); //GC or harvest bank
     var recommendation = nextPurchase();
     if (
-        recommendation.type == "building" &&
+        recommendation.type == "building" && // Don't hire when saving for upgrade
         B.brokers < B.getMaxBrokers() &&
         Game.cookies >= delay + B.getBrokerPrice()
     ) {
         l("bankBrokersBuy").click();
         logEvent(
             "AutoBroker",
-            "Bought a broker for " + Beautify(B.getBrokerPrice()) + " cookies"
+            "Hired a broker for " + Beautify(B.getBrokerPrice()) + " cookies"
         );
         Game.recalculateGains = 1;
         Game.upgradesToRebuild = 1;
@@ -2291,7 +2291,7 @@ function petDragonAction() {
         Game.specialTab = "dragon";
         Game.ToggleSpecialMenu(1);
         Game.ClickSpecialPic();
-        //Game.ToggleSpecialMenu(0);
+        Game.ToggleSpecialMenu(0);
         //logEvent("autoDragon", "Who's a good dragon? You are!");
     }
 }
