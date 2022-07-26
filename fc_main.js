@@ -4418,6 +4418,12 @@ function autoGodzamokAction() {
 
         //Automatically sell all mines and factories
         if (!Game.hasBuff("Devastation") && hasClickBuff()) {
+            if (FrozenCookies.autoBuy == 1) {
+                autoGodzamokAction.autobuyyes = 1;
+                FrozenCookies.autoBuy = 0;
+            } else {
+                autoGodzamokAction.autobuyyes = 0;
+            }
             Game.Objects["Mine"].sell(countMine);
             Game.Objects["Factory"].sell(countFactory);
             //Rebuy mines
@@ -4453,6 +4459,7 @@ function autoGodzamokAction() {
                     "Bought " + countFactory + " factories"
                 );
             }
+            if (autoGodzamokAction.autobuyyes == 1) FrozenCookies.autoBuy = 1;
         }
     }
 }
