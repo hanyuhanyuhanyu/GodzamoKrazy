@@ -64,6 +64,7 @@ If you want to manually install it:
   
 2022 Jul 26
 - Auto-Godzamok now limits itself to the mine and factory cap (if set) and no longer is capped at 500. If you have more buildings than the cap, it will rebuy up to that cap.
+- Renamed a few preferences to make what they do more clear
 
 2022 Jul 20
 - New feature: Auto-Dragon Orbs, with accompanying Cortex bakers Limit.
@@ -447,9 +448,9 @@ If the selected spell is FTHOF, there are some additional checks:
 - If the next detected spell is *Click Frenzy*, it will not cast the spell unless either a *Frenzy* or *Dragon Harvest* is active for long enough to last the entire spell
 - If the next detected spell is either *Elder Frenzy* or *Cursed Finger*, it will not cast this spell unless a *Click Frenzy* or *Dragon Frenzy* is active for long enough to last the entire spell
 
-## Auto FTHOF Combo
+## Double Cast FTHOF
 
-Auto FTHOF Combo replaces Auto Cast. If the combo is enabled, it will look for a clicking frenzy and two building specials before casting, for a massive boost. Any other spell will be replaced by *Haggler's Charm*, with the same exceptions as the Smart Auto cast system above.
+Double Cast FTHOF replaces Auto Cast. If the combo is enabled, it will look for a clicking frenzy and two building specials before casting, for a massive boost. Any other spell will be replaced by *Haggler's Charm*, with the same exceptions as the Smart Auto cast system above.
 
 The possible combos are:
 - Stored *Click Frenzy* and *Elder Frenzy* and a natural *Frenzy* or *Dragon Harvest*, plus a *Building Special*
@@ -474,11 +475,11 @@ For convenience sake, you can just set max mana to 100 for all WT levels. The co
 
 The combo will not work if you upgrade Wizard Towers beyond level 10.
 
-## Auto 100% Consistency Combo
+## 100% Consistency Combo
 
-Based on the 100% Consistency endgame click combo\*, this is basically the Auto FTHOF Combo on steroids. It will only work with Wizard Towers on level 10 and a max mana of 100 (or higher). The 100% combo will completely automate almost every system and use a sugar lump to cast up to four spells in succession to get a maximum possible combo.
+Based on the 100% Consistency endgame click combo\*, this is basically the FTHOF Double Casting Combo on steroids. It will only work with Wizard Towers on level 10 and a max mana of 100 (or higher). The 100% combo will completely automate almost every system and use a sugar lump to cast up to four spells in succession to get a maximum possible combo.
 
-It follows the same rules as the Auto FTHOF Combo until it detects the next combo can be cast.
+It follows the same rules as the FTHOF Double Casting Combo until it detects the next combo can be cast.
 
 In order to use this, you must meet the following requirements: 
 

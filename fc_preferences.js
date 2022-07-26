@@ -124,7 +124,7 @@ FrozenCookies.preferenceValues = {
     },
     autoGS: {
         hint: "Automatically turn on the Golden Switch during Dragonflight and Click Frenzy (and turn back off at the end)",
-        display: ["Auto-GS-Switch OFF", "Auto-GS-Switch ON"],
+        display: ["Auto-Golden Switch OFF", "Auto-Golden Switch ON"],
         default: 0,
     },
     autoGodzamok: {
@@ -133,13 +133,13 @@ FrozenCookies.preferenceValues = {
         default: 0,
     },
     autoBroker: {
-        hint: "Automatically buy stock brokers and upgrade the market",
-        display: ["Auto-Broker OFF", "Auto-Broker ON"],
+        hint: "Automatically buy stock brokers and upgrade the bank office level",
+        display: ["Auto-Banking OFF", "Auto-Banking ON"],
         default: 0,
     },
     autoLoan: {
         hint: "Automatically take loans 1 and 2 during click buffs with frenzies",
-        display: ["Auto-Loan OFF", "Auto-Loan ON"],
+        display: ["Auto-Loans OFF", "Auto-Loans ON"],
         default: 0,
         extras: '<a class="option" id="minLoanMult" onclick="updateLoanMultMin(\'minLoanMult\');">x${minLoanMult} minimum Frenzy</a>',
     },
@@ -231,7 +231,7 @@ FrozenCookies.preferenceValues = {
         extras: '<a class="option" id="minCpSMult" onclick="updateCpSMultMin(\'minCpSMult\');">x${minCpSMult} minimum Frenzy</a>',
     },
     autoSugarFrenzy: {
-        hint: "Buy Sugar Frenzy during the first 100% Consistency and/or FTHOF combo",
+        hint: "Buy Sugar Frenzy during the first 100% Consistency and/or Double cast combo",
         display: [
             "Auto Sugar Frenzy OFF",
             "ASF for 100% Consistency Combo",
@@ -243,15 +243,15 @@ FrozenCookies.preferenceValues = {
         hint: "(Only one combo is active at the same time, with the last one winning. See the readme for more info)",
     },
     autoFTHOFCombo: {
-        hint: "Perform FTHOF double cast combos - needs enough mana! Disables Auto Cast",
-        display: ["Auto FTHOF Combo OFF", "Auto FTHOF Combo ON"],
+        hint: "Perform FTHOF double cast combos - needs enough mana! Replaces Auto Cast",
+        display: ["Double Cast FTHOF OFF", "Double Cast FTHOF ON"],
         default: 0,
     },
     auto100ConsistencyCombo: {
-        hint: "EXPERIMENTAL: Does the 100% Consistency Combo. Disables autocast and auto FTHOF Combo",
+        hint: "EXPERIMENTAL: Does the 100% Consistency Combo. Replaces Auto Cast and FTHOF Double Casting",
         display: [
-            "Auto 100% Consistency Combo OFF",
-            "Auto 100% Consistency Combo ON",
+            "Auto Cast 100% Consistency Combo OFF",
+            "Auto Cast 100% Consistency Combo ON",
         ],
         default: 0,
     },
@@ -267,12 +267,12 @@ FrozenCookies.preferenceValues = {
     },
     autoDragon: {
         hint: "Automatically upgrade the dragon",
-        display: ["Auto-Dragon OFF", "Auto-Dragon ON"],
+        display: ["Dragon Upgrading OFF", "Dragon Upgrading ON"],
         default: 0,
     },
     petDragon: {
         hint: "Automatically pet the dragon",
-        display: ["Auto-Petting OFF", "Auto-Petting ON"],
+        display: ["Dragon Petting OFF", "Dragon Petting ON"],
         default: 0,
     },
     autoDragonToggle: {
@@ -367,12 +367,12 @@ FrozenCookies.preferenceValues = {
     },
     autoEaster: {
         hint: "Switch to Easter season if Cookie Storm is active and you do not have all eggs yet",
-        display: ["Auto Easter OFF", "Auto Easter ON"],
+        display: ["Auto-Easter Switch OFF", "Auto-Easter Switch ON"],
         default: 0,
     },
     autoHalloween: {
         hint: "Switch to Halloween season if you have wrinklers and you do not have all spooky biscuits yet",
-        display: ["Auto Halloween OFF", "Auto Halloween ON"],
+        display: ["Auto-Halloween Switch OFF", "Auto-Halloween Switch ON"],
         default: 0,
     },
 
