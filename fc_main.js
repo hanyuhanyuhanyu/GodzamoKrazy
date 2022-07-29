@@ -1254,7 +1254,6 @@ function autoFTHOFComboAction() {
 
     // Not currently possible to do the combo
     if (
-        M.magicM < 81 || // Below minimum mana
         FrozenCookies.auto100ConsistencyCombo == 1 || // 100% combo should override
         FrozenCookies.autoSweet == 1 // Autosweet overrides
     )
@@ -1678,14 +1677,8 @@ function auto100ConsistencyComboAction() {
 
     // Not currently possible to do the combo
     if (
-        M.magicM < 98 || // Below minimum mana
         FrozenCookies.autoSweet == 1 || // Autosweet overrides
-        Game.lumps < 101 ||
-        (FrozenCookies.sugarBakingGuard == 0 && Game.lumps < 1) || // Needs at least 1 lump
-        Game.dragonLevel < 26 || // Fully upgraded dragon needed for two auras
-        (T.swaps < 1 && (!Game.hasGod("mother") || !Game.hasGod("ruin"))) ||
-        (T.swaps < 2 && !Game.hasGod("mother") && !Game.hasGod("ruin")) // Need to have Moka and Godz or enough swaps
-        //G.plants["whiskerbloom"].id.unlocked != 1 // Whiskerbloom must be unlocked
+        Game.dragonLevel < 26 // Fully upgraded dragon needed for two auras
     ) {
         return;
     }
@@ -1710,13 +1703,41 @@ function auto100ConsistencyComboAction() {
         auto100ConsistencyComboAction.countAlchemy = 0;
     if (typeof auto100ConsistencyComboAction.countTimeMach == "undefined")
         auto100ConsistencyComboAction.countTimeMach = 0;
-    if (typeof auto100ConsistencyComboAction.countAntiMatter == "undefined")
-        auto100ConsistencyComboAction.countAntiMatter = 0;
-    if (typeof auto100ConsistencyComboAction.countPrism == "undefined")
-        auto100ConsistencyComboAction.countPrism = 0;
+
+    if (
+        ((auto100ConsistencyComboAction.state == 0 &&
+            (auto100ConsistencyComboAction.autobuyyes == 1 ||
+                auto100ConsistencyComboAction.autogcyes == 1 ||
+                auto100ConsistencyComboAction.autogsyes == 1 ||
+                auto100ConsistencyComboAction.autogodyes == 1)) ||
+            (auto100ConsistencyComboAction.state > 1 &&
+                BuildingSpecialBuff() == 0 &&
+                !hasClickBuff())) &&
+        M.magic == M.magicM
+    ) {
+        if (auto100ConsistencyComboAction.autobuyyes == 1) {
+            FrozenCookies.autoBuy = 1;
+            auto100ConsistencyComboAction.autobuyyes = 0;
+        }
+        if (auto100ConsistencyComboAction.autogcyes == 1) {
+            FrozenCookies.autoGC = 1;
+            auto100ConsistencyComboAction.autogcyes = 0;
+        }
+        if (auto100ConsistencyComboAction.autogsyes == 1) {
+            FrozenCookies.autoGS = 1;
+            auto100ConsistencyComboAction.autogsyes = 0;
+        }
+        if (auto100ConsistencyComboAction.autogodyes == 1) {
+            FrozenCookies.autoGodzamok = 1;
+            auto100ConsistencyComboAction.autogodyes = 0;
+        }
+        auto100ConsistencyComboAction.state = 0;
+        logEvent("auto100ConsistencyCombo", "Trying to recover from soft fail");
+    }
 
     if (
         auto100ConsistencyComboAction.state == 0 &&
+        M.magicM >= 98 &&
         ((nextSpellName(0) == "Click Frenzy" &&
             nextSpellName(1) == "Building Special") ||
             (nextSpellName(1) == "Click Frenzy" &&
@@ -1728,24 +1749,28 @@ function auto100ConsistencyComboAction() {
     ) {
         auto100ConsistencyComboAction.state = 1;
     }
-    if (
-        auto100ConsistencyComboAction.state == 0 &&
-        nextSpellName(0) == "Building Special" &&
-        nextSpellName(1) == "Building Special"
-    ) {
-        auto100ConsistencyComboAction.state = 2;
-    }
+
+    auto100ConsistencyComboAction.countFarm = Game.Objects["Farm"].amount - 1;
+    auto100ConsistencyComboAction.countMine = Game.Objects["Mine"].amount;
+    auto100ConsistencyComboAction.countFactory = Game.Objects["Factory"].amount;
+    auto100ConsistencyComboAction.countBank = Game.Objects["Bank"].amount - 1;
+    auto100ConsistencyComboAction.countTemple =
+        Game.Objects["Temple"].amount - 1;
+    auto100ConsistencyComboAction.countWizard =
+        Game.Objects["Wizard tower"].amount - 1;
+    auto100ConsistencyComboAction.countShipment =
+        Game.Objects["Shipment"].amount;
+    auto100ConsistencyComboAction.countAlchemy =
+        Game.Objects["Alchemy lab"].amount;
+    auto100ConsistencyComboAction.countTimeMach =
+        Game.Objects["Time machine"].amount;
 
     var FTHOF = M.spellsById[1];
 
     switch (auto100ConsistencyComboAction.state) {
         case 0:
             //Continue casting Haggler's Charm - unless it's something we need right now
-            if (
-                M.magic == M.magicM &&
-                !Game.hasBuff("Dragonflight") &&
-                !goldenCookieLife()
-            ) {
+            if (M.magic == M.magicM) {
                 if (nextSpellName(0) == "Sugar Lump") {
                     M.castSpell(FTHOF);
                     logEvent(
@@ -1773,9 +1798,9 @@ function auto100ConsistencyComboAction() {
                 }
             }
             return;
-        case 1:
+
+        case 1: // Turn off auto buy
             if (
-                M.magic == M.magicM &&
                 (Game.hasBuff("Frenzy") || Game.hasBuff("Dragon Harvest")) &&
                 BuildingSpecialBuff() == 1 &&
                 (Game.hasBuff("Frenzy").time / 30 >=
@@ -1784,61 +1809,34 @@ function auto100ConsistencyComboAction() {
                         Math.ceil(13 * BuffTimeFactor()) - 1) &&
                 BuildingBuffTime() >= Math.ceil(13 * BuffTimeFactor())
             ) {
-                // Turn off auto buy and make sure we're not in sell mode
                 if (FrozenCookies.autoBuy == 1) {
                     auto100ConsistencyComboAction.autobuyyes = 1;
                     FrozenCookies.autoBuy = 0;
                 } else {
                     auto100ConsistencyComboAction.autobuyyes = 0;
                 }
-                if (Game.buyMode == -1) Game.buyMode = 1;
-                logEvent(
-                    "auto100ConsistencyCombo",
-                    "Starting auto100ConsistencyCombo"
-                );
-                auto100ConsistencyComboAction.state = 3;
+                logEvent("auto100ConsistencyCombo", "Starting combo");
+                auto100ConsistencyComboAction.state = 2;
             }
             return;
-        case 2:
-            if (
-                M.magic == M.magicM &&
-                (Game.hasBuff("Frenzy") || Game.hasBuff("Dragon Harvest")) &&
-                (Game.hasBuff("Click frenzy") ||
-                    Game.hasBuff("Dragonflight")) &&
-                (Game.hasBuff("Frenzy").time / 30 >=
-                    Math.ceil(13 * BuffTimeFactor()) - 1 ||
-                    Game.hasBuff("Dragon Harvest").time / 30 >=
-                        Math.ceil(13 * BuffTimeFactor()) - 1) &&
-                (Game.hasBuff("Click frenzy").time / 30 >=
-                    Math.ceil(10 * BuffTimeFactor()) - 1 ||
-                    Game.hasBuff("Dragonflight").time / 30 >=
-                        Math.ceil(6 * BuffTimeFactor()) - 1)
-            ) {
-                // Turn off auto buy and make sure we're not in sell mode
-                if (FrozenCookies.autoBuy == 1) {
-                    auto100ConsistencyComboAction.autobuyyes = 1;
-                    FrozenCookies.autoBuy = 0;
-                } else {
-                    auto100ConsistencyComboAction.autobuyyes = 0;
-                }
-                if (Game.buyMode == -1) Game.buyMode = 1;
-                logEvent(
-                    "auto100ConsistencyCombo",
-                    "Starting auto100ConsistencyCombo"
-                );
-                auto100ConsistencyComboAction.state = 3;
-            }
-            return;
-        case 3: // Turn off auto click golden cookie
+
+        case 2: // Turn off auto click golden cookie
             if (FrozenCookies.autoGC > 0) {
                 auto100ConsistencyComboAction.autogcyes = 1;
+                FrozenCookies.autoGC = 0;
             } else {
                 auto100ConsistencyComboAction.autogcyes = 0;
             }
-            FrozenCookies.autoGC = 0;
-            auto100ConsistencyComboAction.state = 4;
+            if (FrozenCookies.autoGS > 0) {
+                auto100ConsistencyComboAction.autogsyes = 1;
+                FrozenCookies.autoGS = 0;
+            } else {
+                auto100ConsistencyComboAction.autogsyes = 0;
+            }
+            auto100ConsistencyComboAction.state = 3;
             return;
-        case 4: // Harvest garden then plant whiskerbloom
+
+        case 3: // Harvest garden then plant whiskerbloom
             G.harvestAll();
             for (var y = 0; y <= 5; y++) {
                 for (var x = 0; x <= 5; x++) {
@@ -1846,9 +1844,10 @@ function auto100ConsistencyComboAction() {
                     G.clickTile(x, y);
                 }
             }
-            auto100ConsistencyComboAction.state = 5;
+            auto100ConsistencyComboAction.state = 4;
             return;
-        case 5: // Set auras to radiant appetite and dragon's fortune
+
+        case 4: // Change dragon auras to radiant appetite and dragon's fortune
             if (!Game.hasAura("Dragon's Fortune")) {
                 Game.specialTab = "dragon";
                 Game.SetDragonAura(16, 1);
@@ -1861,105 +1860,99 @@ function auto100ConsistencyComboAction() {
                 Game.ConfirmPrompt();
                 Game.ToggleSpecialMenu();
             }
+            auto100ConsistencyComboAction.state = 5;
+            return;
+
+        case 5: // Activate golden switch to prevent backfired natural GCs
+            if (
+                Game.Upgrades["Golden switch [off]"].unlocked &&
+                !Game.Upgrades["Golden switch [off]"].bought
+            ) {
+                Game.Upgrades["Golden switch [off]"].buy();
+            }
             auto100ConsistencyComboAction.state = 6;
             return;
-        case 6: // Cast FTHOF then sell
-            M.castSpell(FTHOF);
-            logEvent(
-                "auto100ConsistencyCombo",
-                "Cast first Force the Hand of Fate"
-            );
-            auto100ConsistencyComboAction.countWizard =
-                Game.Objects["Wizard tower"].amount - 1;
+
+        case 6: // Cast FTHOF 1
+            if (M.magic == M.magicM) {
+                M.castSpell(FTHOF);
+                logEvent("auto100ConsistencyCombo", "Cast FTHOF 1");
+                auto100ConsistencyComboAction.state = 7;
+            }
+            return;
+
+        case 7: // Cast FTHOF 2 then buy
             Game.Objects["Wizard tower"].sell(
                 auto100ConsistencyComboAction.countWizard
             );
-            auto100ConsistencyComboAction.state = 7;
-            return;
-        case 7: // Cast FTHOF then buy
             M.computeMagicM(); //Recalc max after selling
-            M.castSpell(FTHOF);
-            logEvent(
-                "auto100ConsistencyCombo",
-                "Cast second Force the Hand of Fate"
-            );
-            safeBuy(
-                Game.Objects["Wizard tower"],
-                auto100ConsistencyComboAction.countWizard
-            );
-            auto100ConsistencyComboAction.state = 8;
+            if (M.magic >= 30) {
+                M.castSpell(FTHOF);
+                logEvent("auto100ConsistencyCombo", "Cast FTHOF 2");
+                Game.Objects["Wizard tower"].buy(
+                    auto100ConsistencyComboAction.countWizard
+                );
+                auto100ConsistencyComboAction.state = 8;
+            }
             return;
+
         case 8: // Use sugar lump to refill magic
             M.lumpRefill.click();
             Game.ConfirmPrompt();
             auto100ConsistencyComboAction.state = 9;
             return;
-        case 9: // Cast FTHOF then sell
-            M.castSpell(FTHOF);
-            logEvent(
-                "auto100ConsistencyCombo",
-                "Cast third Force the Hand of Fate"
-            );
+
+        case 9: // Cast FTHOF 3
+            if (M.magic == M.magicM) {
+                M.castSpell(FTHOF);
+                logEvent("auto100ConsistencyCombo", "Cast FTHOF 3");
+                auto100ConsistencyComboAction.state = 10;
+            }
+            return;
+
+        case 10: // Cast FTHOF 4 then buy
             Game.Objects["Wizard tower"].sell(
                 auto100ConsistencyComboAction.countWizard
             );
-            auto100ConsistencyComboAction.state = 10;
-            return;
-        case 10: // Cast FTHOF then buy
             M.computeMagicM(); //Recalc max after selling
-            M.castSpell(FTHOF);
-            logEvent(
-                "auto100ConsistencyCombo",
-                "Cast fourth Force the Hand of Fate"
-            );
-            auto100ConsistencyComboAction.state = 11;
-            return;
-        case 11: // Take Stock Market loans
-            if (B) {
-                B.takeLoan(1);
-                B.takeLoan(2);
-                B.takeLoan(3);
+            if (M.magic >= 30) {
+                M.castSpell(FTHOF);
+                logEvent("auto100ConsistencyCombo", "Cast FTHOF 4");
+                Game.Objects["Wizard tower"].buy(
+                    auto100ConsistencyComboAction.countWizard
+                );
+                auto100ConsistencyComboAction.state = 11;
             }
-            auto100ConsistencyComboAction.state = 12;
+
             return;
+
+        case 11: // Take Stock Market loans
+            B.takeLoan(1);
+            B.takeLoan(2);
+            B.takeLoan(3);
+            auto100ConsistencyComboAction.state = 12;
+
+            return;
+
         case 12: // If autoGodzamok is on, disable
             if (FrozenCookies.autoGodzamok > 0) {
                 auto100ConsistencyComboAction.autogodyes = 1;
+                FrozenCookies.autoGodzamok = 0;
             } else {
                 auto100ConsistencyComboAction.autogodyes = 0;
             }
-            FrozenCookies.autoGodzamok = 0;
             auto100ConsistencyComboAction.state = 13;
+
             return;
+
         case 13: // Activate Building Special and Click Frenzy buffs
             Game.shimmers[0].pop();
             Game.shimmers[0].pop();
             auto100ConsistencyComboAction.state = 14;
             return;
-        case 14: // sell buildings
-            auto100ConsistencyComboAction.countFarm =
-                Game.Objects["Farm"].amount - 1;
-            auto100ConsistencyComboAction.countMine =
-                Game.Objects["Mine"].amount;
-            auto100ConsistencyComboAction.countFactory =
-                Game.Objects["Factory"].amount;
-            auto100ConsistencyComboAction.countBank =
-                Game.Objects["Bank"].amount - 1;
-            auto100ConsistencyComboAction.countTemple =
-                Game.Objects["Temple"].amount - 1;
-            auto100ConsistencyComboAction.countWizard =
-                Game.Objects["Wizard tower"].amount - 1;
-            auto100ConsistencyComboAction.countShipment =
-                Game.Objects["Shipment"].amount;
-            auto100ConsistencyComboAction.countAlchemy =
-                Game.Objects["Alchemy lab"].amount;
-            auto100ConsistencyComboAction.countTimeMach =
-                Game.Objects["Time machine"].amount;
-            auto100ConsistencyComboAction.countAntiMatter =
-                Game.Objects["Antimatter condenser"].amount;
-            auto100ConsistencyComboAction.countPrism =
-                Game.Objects["Prism"].amount;
 
+        case 14: // sell buildings for first Devastation boost
+            if (!Game.hasGod("ruin") && T.swaps >= 1) swapIn(2, 0);
             Game.Objects["Farm"].sell(auto100ConsistencyComboAction.countFarm);
             Game.Objects["Mine"].sell(auto100ConsistencyComboAction.countMine);
             Game.Objects["Factory"].sell(
@@ -1981,18 +1974,14 @@ function auto100ConsistencyComboAction() {
             Game.Objects["Time machine"].sell(
                 auto100ConsistencyComboAction.countTimeMach
             );
-            Game.Objects["Antimatter condenser"].sell(
-                auto100ConsistencyComboAction.countAntiMatter
-            );
-            Game.Objects["Prism"].sell(
-                auto100ConsistencyComboAction.countPrism
-            );
             auto100ConsistencyComboAction.state = 15;
             return;
+
         case 15: // Swap Mokalsium to ruby slot
             if (!Game.hasGod("mother") && T.swaps >= 1) swapIn(8, 1);
             auto100ConsistencyComboAction.state = 16;
             return;
+
         case 16: // buy back buildings
             safeBuy(
                 Game.Objects["Farm"],
@@ -2030,18 +2019,10 @@ function auto100ConsistencyComboAction() {
                 Game.Objects["Time machine"],
                 auto100ConsistencyComboAction.countTimeMach
             );
-            safeBuy(
-                Game.Objects["Antimatter condenser"],
-                auto100ConsistencyComboAction.countAntiMatter
-            );
-            safeBuy(
-                Game.Objects["Prism"],
-                auto100ConsistencyComboAction.countPrism
-            );
             auto100ConsistencyComboAction.state = 17;
             return;
-        case 17: // Put Godz in diamond and perform custom autogodzamok
-            if (!Game.hasGod("ruin") && T.swaps >= 1) swapIn(2, 0);
+
+        case 17: // Perform custom autogodzamok
             if (!Game.hasBuff("Devastation") && hasClickBuff()) {
                 if (Game.Objects["Farm"].amount >= 10) {
                     Game.Objects["Farm"].sell(
@@ -2071,98 +2052,288 @@ function auto100ConsistencyComboAction() {
                     Game.Objects["Time machine"].sell(
                         auto100ConsistencyComboAction.countTimeMach
                     );
-                    Game.Objects["Antimatter condenser"].sell(
-                        auto100ConsistencyComboAction.countAntiMatter
-                    );
-                    Game.Objects["Prism"].sell(
-                        auto100ConsistencyComboAction.countPrism
-                    );
                 }
                 if (Game.Objects["Farm"].amount < 10) {
                     safeBuy(
                         Game.Objects["Farm"],
-                        auto100ConsistencyComboAction.countFarm
+                        auto100ConsistencyComboAction.countFarm -
+                            Game.Objects["Farm"].amount
                     );
                     safeBuy(
                         Game.Objects["Mine"],
-                        auto100ConsistencyComboAction.countMine
+                        auto100ConsistencyComboAction.countMine -
+                            Game.Objects["Mine"].amount
                     );
                     safeBuy(
                         Game.Objects["Factory"],
-                        auto100ConsistencyComboAction.countFactory
+                        auto100ConsistencyComboAction.countFactory -
+                            Game.Objects["Factory"].amount
                     );
                     safeBuy(
                         Game.Objects["Bank"],
-                        auto100ConsistencyComboAction.countBank
+                        auto100ConsistencyComboAction.countBank -
+                            Game.Objects["Bank"].amount
                     );
                     safeBuy(
                         Game.Objects["Temple"],
-                        auto100ConsistencyComboAction.countTemple
+                        auto100ConsistencyComboAction.countTemple -
+                            Game.Objects["Temple"].amount
                     );
                     safeBuy(
                         Game.Objects["Wizard tower"],
-                        auto100ConsistencyComboAction.countWizard
+                        auto100ConsistencyComboAction.countWizard -
+                            Game.Objects["Wizard tower"].amount
                     );
                     safeBuy(
                         Game.Objects["Shipment"],
-                        auto100ConsistencyComboAction.countShipment
+                        auto100ConsistencyComboAction.countShipment -
+                            Game.Objects["Shipment"].amount
                     );
                     safeBuy(
                         Game.Objects["Alchemy lab"],
-                        auto100ConsistencyComboAction.countAlchemy
+                        auto100ConsistencyComboAction.countAlchemy -
+                            Game.Objects["Alchemy lab"].amount
                     );
                     safeBuy(
                         Game.Objects["Time machine"],
-                        auto100ConsistencyComboAction.countTimeMach
-                    );
-                    safeBuy(
-                        Game.Objects["Antimatter condenser"],
-                        auto100ConsistencyComboAction.countAntiMatter
-                    );
-                    safeBuy(
-                        Game.Objects["Prism"],
-                        auto100ConsistencyComboAction.countPrism
+                        auto100ConsistencyComboAction.countTimeMach -
+                            Game.Objects["Time machine"].amount
                     );
                 }
             }
-            if (!hasClickBuff()) auto100ConsistencyComboAction.state = 18;
-            return;
-        case 18: // Once click frenzy buff is gone, turn autoGC on if it was on previously
-            if (!Game.hasBuff("Click frenzy")) {
-                if (auto100ConsistencyComboAction.autogcyes == 1)
-                    FrozenCookies.autoGC = 1;
-                auto100ConsistencyComboAction.state = 19;
-                return;
+            if (Game.hasBuff("Devastation") && hasClickBuff()) {
+                if (
+                    Game.Objects["Farm"].amount <
+                    auto100ConsistencyComboAction.countFarm
+                ) {
+                    safeBuy(
+                        Game.Objects["Farm"],
+                        auto100ConsistencyComboAction.countFarm -
+                            Game.Objects["Farm"].amount
+                    );
+                }
+                if (
+                    Game.Objects["Mine"].amount <
+                    auto100ConsistencyComboAction.countMine
+                ) {
+                    safeBuy(
+                        Game.Objects["Mine"],
+                        auto100ConsistencyComboAction.countMine -
+                            Game.Objects["Mine"].amount
+                    );
+                }
+                if (
+                    Game.Objects["Factory"].amount <
+                    auto100ConsistencyComboAction.countFactory
+                ) {
+                    safeBuy(
+                        Game.Objects["Factory"],
+                        auto100ConsistencyComboAction.countFactory -
+                            Game.Objects["Factory"].amount
+                    );
+                }
+                if (
+                    Game.Objects["Bank"].amount <
+                    auto100ConsistencyComboAction.countBank
+                ) {
+                    safeBuy(
+                        Game.Objects["Bank"],
+                        auto100ConsistencyComboAction.countBank -
+                            Game.Objects["Bank"].amount
+                    );
+                }
+                if (
+                    Game.Objects["Temple"].amount <
+                    auto100ConsistencyComboAction.countTemple
+                ) {
+                    safeBuy(
+                        Game.Objects["Temple"],
+                        auto100ConsistencyComboAction.countTemple -
+                            Game.Objects["Temple"].amount
+                    );
+                }
+                if (
+                    Game.Objects["Wizard tower"].amount <
+                    auto100ConsistencyComboAction.countWizard
+                ) {
+                    safeBuy(
+                        Game.Objects["Wizard tower"],
+                        auto100ConsistencyComboAction.countWizard -
+                            Game.Objects["Wizard tower"].amount
+                    );
+                }
+                if (
+                    Game.Objects["Shipment"].amount <
+                    auto100ConsistencyComboAction.countShipment
+                ) {
+                    safeBuy(
+                        Game.Objects["Shipment"],
+                        auto100ConsistencyComboAction.countShipment -
+                            Game.Objects["Shipment"].amount
+                    );
+                }
+                if (
+                    Game.Objects["Alchemy lab"].amount <
+                    auto100ConsistencyComboAction.countAlchemy
+                ) {
+                    safeBuy(
+                        Game.Objects["Alchemy lab"],
+                        auto100ConsistencyComboAction.countAlchemy -
+                            Game.Objects["Alchemy lab"].amount
+                    );
+                }
+                if (
+                    Game.Objects["Time machine"].amount <
+                    auto100ConsistencyComboAction.countTimeMach
+                ) {
+                    safeBuy(
+                        Game.Objects["Time machine"],
+                        auto100ConsistencyComboAction.countTimeMach -
+                            Game.Objects["Time machine"].amount
+                    );
+                }
             }
-        case 19: // Re-enable autoGodzamok if it was on previously
-            if (auto100ConsistencyComboAction.autogodyes == 1)
-                FrozenCookies.autoGodzamok = 1;
-            auto100ConsistencyComboAction.state = 20;
+
+            if (!hasClickBuff()) {
+                auto100ConsistencyComboAction.state = 18;
+            }
             return;
-        case 20: // Turn autobuy back on if it was on before - will also reset dragon auras if user automates them
+
+        case 18: // Once click frenzy buff and GCs are gone, turn autoGC on if it were on previously
+            if (!Game.hasBuff("Click frenzy") && !goldenCookieLife()) {
+                if (
+                    Game.Upgrades["Golden switch [on]"].unlocked &&
+                    !Game.Upgrades["Golden switch [on]"].bought
+                ) {
+                    Game.CalculateGains(); // Ensure price is updated since Frenzy ended
+                    Game.Upgrades["Golden switch [on]"].buy();
+                }
+                if (auto100ConsistencyComboAction.autogcyes == 1) {
+                    FrozenCookies.autoGC = 1;
+                }
+                if (auto100ConsistencyComboAction.autogsyes == 1) {
+                    FrozenCookies.autoGS = 1;
+                }
+                auto100ConsistencyComboAction.state = 19;
+            }
+            return;
+
+        case 19: // Buy back and turn autobuy back on if on before
+            if (
+                Game.Objects["Farm"].amount <
+                auto100ConsistencyComboAction.countFarm
+            ) {
+                safeBuy(
+                    Game.Objects["Farm"],
+                    auto100ConsistencyComboAction.countFarm -
+                        Game.Objects["Farm"].amount
+                );
+            }
+            if (
+                Game.Objects["Mine"].amount <
+                auto100ConsistencyComboAction.countMine
+            ) {
+                safeBuy(
+                    Game.Objects["Mine"],
+                    auto100ConsistencyComboAction.countMine -
+                        Game.Objects["Mine"].amount
+                );
+            }
+            if (
+                Game.Objects["Factory"].amount <
+                auto100ConsistencyComboAction.countFactory
+            ) {
+                safeBuy(
+                    Game.Objects["Factory"],
+                    auto100ConsistencyComboAction.countFactory -
+                        Game.Objects["Factory"].amount
+                );
+            }
+            if (
+                Game.Objects["Bank"].amount <
+                auto100ConsistencyComboAction.countBank
+            ) {
+                safeBuy(
+                    Game.Objects["Bank"],
+                    auto100ConsistencyComboAction.countBank -
+                        Game.Objects["Bank"].amount
+                );
+            }
+            if (
+                Game.Objects["Temple"].amount <
+                auto100ConsistencyComboAction.countTemple
+            ) {
+                safeBuy(
+                    Game.Objects["Temple"],
+                    auto100ConsistencyComboAction.countTemple -
+                        Game.Objects["Temple"].amount
+                );
+            }
+            if (
+                Game.Objects["Wizard tower"].amount <
+                auto100ConsistencyComboAction.countWizard
+            ) {
+                safeBuy(
+                    Game.Objects["Wizard tower"],
+                    auto100ConsistencyComboAction.countWizard -
+                        Game.Objects["Wizard tower"].amount
+                );
+            }
+            if (
+                Game.Objects["Shipment"].amount <
+                auto100ConsistencyComboAction.countShipment
+            ) {
+                safeBuy(
+                    Game.Objects["Shipment"],
+                    auto100ConsistencyComboAction.countShipment -
+                        Game.Objects["Shipment"].amount
+                );
+            }
+            if (
+                Game.Objects["Alchemy lab"].amount <
+                auto100ConsistencyComboAction.countAlchemy
+            ) {
+                safeBuy(
+                    Game.Objects["Alchemy lab"],
+                    auto100ConsistencyComboAction.countAlchemy -
+                        Game.Objects["Alchemy lab"].amount
+                );
+            }
+            if (
+                Game.Objects["Time machine"].amount <
+                auto100ConsistencyComboAction.countTimeMach
+            ) {
+                safeBuy(
+                    Game.Objects["Time machine"],
+                    auto100ConsistencyComboAction.countTimeMach -
+                        Game.Objects["Time machine"].amount
+                );
+            }
+            if (
+                Game.Objects["Antimatter condenser"].amount <
+                auto100ConsistencyComboAction.countAntiMatter
+            ) {
+                safeBuy(
+                    Game.Objects["Antimatter condenser"],
+                    auto100ConsistencyComboAction.countAntiMatter -
+                        Game.Objects["Antimatter condenser"].amount
+                );
+            }
             if (auto100ConsistencyComboAction.autobuyyes == 1) {
                 FrozenCookies.autoBuy = 1;
-                auto100ConsistencyComboAction.autobuyyes = 0;
+                document.getElementById("storeBulk10").click();
             }
-            logEvent(
-                "auto100ConsistencyCombo",
-                "Completed auto100ConsistencyCombo"
-            );
-            auto100ConsistencyComboAction.countFarm = 0;
-            auto100ConsistencyComboAction.countMine = 0;
-            auto100ConsistencyComboAction.countFactory = 0;
-            auto100ConsistencyComboAction.countBank = 0;
-            auto100ConsistencyComboAction.countTemple = 0;
-            auto100ConsistencyComboAction.countWizard = 0;
-            auto100ConsistencyComboAction.countShipment = 0;
-            auto100ConsistencyComboAction.countAlchemy = 0;
-            auto100ConsistencyComboAction.countTimeMach = 0;
-            auto100ConsistencyComboAction.countAntiMatter = 0;
-            auto100ConsistencyComboAction.countPrism = 0;
+            auto100ConsistencyComboAction.state = 20;
+            return;
+
+        case 20: // Re-enable autoGodzamok if it were on previously
+            if (auto100ConsistencyComboAction.autogodyes == 1) {
+                FrozenCookies.autoGodzamok = 1;
+            }
+            logEvent("auto100ConsistencyCombo", "Combo completed");
             auto100ConsistencyComboAction.state = 0;
             return;
     }
-    return;
 }
 
 function autoSweetAction() {
@@ -2485,11 +2656,7 @@ function autoDragonOrbsAction() {
     for (var ii in Game.buffs) {
         buffsN++;
     }
-    if (
-        Game.shimmerTypes["golden"].n <= 0 &&
-        Game.auraMult("Dragon Orbs") > 0 &&
-        buffsN == 0
-    ) {
+    if (!goldenCookieLife() && Game.hasAura("Dragon Orbs") && buffsN == 0) {
         Game.Objects["Cortex baker"].sell(1);
         logEvent(
             "autoDragonOrbs",
