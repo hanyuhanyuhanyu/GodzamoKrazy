@@ -1945,7 +1945,7 @@ function auto100ConsistencyComboAction() {
 
             return;
 
-        case 13: // Activate Building Special and Click Frenzy buffs
+        case 13: // Activate Building Special/Elder Frenzy and Click Frenzy buffs
             Game.shimmers[0].pop();
             Game.shimmers[0].pop();
             auto100ConsistencyComboAction.state = 14;
@@ -1961,9 +1961,6 @@ function auto100ConsistencyComboAction() {
             Game.Objects["Bank"].sell(auto100ConsistencyComboAction.countBank);
             Game.Objects["Temple"].sell(
                 auto100ConsistencyComboAction.countTemple
-            );
-            Game.Objects["Wizard tower"].sell(
-                auto100ConsistencyComboAction.countWizard
             );
             Game.Objects["Shipment"].sell(
                 auto100ConsistencyComboAction.countShipment
@@ -2004,10 +2001,6 @@ function auto100ConsistencyComboAction() {
                 auto100ConsistencyComboAction.countTemple
             );
             safeBuy(
-                Game.Objects["Wizard tower"],
-                auto100ConsistencyComboAction.countWizard
-            );
-            safeBuy(
                 Game.Objects["Shipment"],
                 auto100ConsistencyComboAction.countShipment
             );
@@ -2021,8 +2014,17 @@ function auto100ConsistencyComboAction() {
             );
             auto100ConsistencyComboAction.state = 17;
             return;
+            
+        case 17: // Pop any other golden cookies as long as they're not wrath
+            for (var i in Game.shimmers) {
+                if (Game.shimmers[i].type == "golden" && !Game.shimmer.wrath) {
+                    Game.shimmers[i].pop();
+                }
+            }
+            auto100ConsistencyComboAction.state = 18;
+            return;
 
-        case 17: // Perform custom autogodzamok
+        case 18: // Perform custom autogodzamok
             if (!Game.hasBuff("Devastation") && hasClickBuff()) {
                 if (Game.Objects["Farm"].amount >= 10) {
                     Game.Objects["Farm"].sell(
@@ -2039,9 +2041,6 @@ function auto100ConsistencyComboAction() {
                     );
                     Game.Objects["Temple"].sell(
                         auto100ConsistencyComboAction.countTemple
-                    );
-                    Game.Objects["Wizard tower"].sell(
-                        auto100ConsistencyComboAction.countWizard
                     );
                     Game.Objects["Shipment"].sell(
                         auto100ConsistencyComboAction.countShipment
@@ -2078,11 +2077,6 @@ function auto100ConsistencyComboAction() {
                         Game.Objects["Temple"],
                         auto100ConsistencyComboAction.countTemple -
                             Game.Objects["Temple"].amount
-                    );
-                    safeBuy(
-                        Game.Objects["Wizard tower"],
-                        auto100ConsistencyComboAction.countWizard -
-                            Game.Objects["Wizard tower"].amount
                     );
                     safeBuy(
                         Game.Objects["Shipment"],
@@ -2153,16 +2147,6 @@ function auto100ConsistencyComboAction() {
                     );
                 }
                 if (
-                    Game.Objects["Wizard tower"].amount <
-                    auto100ConsistencyComboAction.countWizard
-                ) {
-                    safeBuy(
-                        Game.Objects["Wizard tower"],
-                        auto100ConsistencyComboAction.countWizard -
-                            Game.Objects["Wizard tower"].amount
-                    );
-                }
-                if (
                     Game.Objects["Shipment"].amount <
                     auto100ConsistencyComboAction.countShipment
                 ) {
@@ -2195,11 +2179,11 @@ function auto100ConsistencyComboAction() {
             }
 
             if (!hasClickBuff()) {
-                auto100ConsistencyComboAction.state = 18;
+                auto100ConsistencyComboAction.state = 19;
             }
             return;
 
-        case 18: // Once click frenzy buff and GCs are gone, turn autoGC on if it were on previously
+        case 19: // Once click frenzy buff and GCs are gone, turn autoGC on if it were on previously
             if (!Game.hasBuff("Click frenzy") && !goldenCookieLife()) {
                 if (
                     Game.Upgrades["Golden switch [on]"].unlocked &&
@@ -2214,11 +2198,11 @@ function auto100ConsistencyComboAction() {
                 if (auto100ConsistencyComboAction.autogsyes == 1) {
                     FrozenCookies.autoGS = 1;
                 }
-                auto100ConsistencyComboAction.state = 19;
+                auto100ConsistencyComboAction.state = 20;
             }
             return;
 
-        case 19: // Buy back and turn autobuy back on if on before
+        case 20: // Buy back and turn autobuy back on if on before
             if (
                 Game.Objects["Farm"].amount <
                 auto100ConsistencyComboAction.countFarm
@@ -2270,16 +2254,6 @@ function auto100ConsistencyComboAction() {
                 );
             }
             if (
-                Game.Objects["Wizard tower"].amount <
-                auto100ConsistencyComboAction.countWizard
-            ) {
-                safeBuy(
-                    Game.Objects["Wizard tower"],
-                    auto100ConsistencyComboAction.countWizard -
-                        Game.Objects["Wizard tower"].amount
-                );
-            }
-            if (
                 Game.Objects["Shipment"].amount <
                 auto100ConsistencyComboAction.countShipment
             ) {
@@ -2323,10 +2297,10 @@ function auto100ConsistencyComboAction() {
                 FrozenCookies.autoBuy = 1;
                 document.getElementById("storeBulk10").click();
             }
-            auto100ConsistencyComboAction.state = 20;
+            auto100ConsistencyComboAction.state = 21;
             return;
 
-        case 20: // Re-enable autoGodzamok if it were on previously
+        case 21: // Re-enable autoGodzamok if it were on previously
             if (auto100ConsistencyComboAction.autogodyes == 1) {
                 FrozenCookies.autoGodzamok = 1;
             }
