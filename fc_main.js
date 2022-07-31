@@ -814,6 +814,7 @@ function autoRigidel() {
     if (!T) return; //Exit if pantheon doesnt even exist
     var timeToRipe =
         (Math.ceil(Game.lumpRipeAge) - (Date.now() - Game.lumpT)) / 60000; //Minutes until sugar lump ripens
+    var ripeAge = Math.ceil(Game.lumpRipeAge);
     var orderLvl = Game.hasGod("order") ? Game.hasGod("order") : 0;
     switch (orderLvl) {
         case 0: //Rigidel isn't in a slot
@@ -827,9 +828,9 @@ function autoRigidel() {
                 } else {
                     autoRigidel.autobuyyes = 0;
                 }
-                Game.computeLumpTimes();
                 rigiSell(); //Meet the %10 condition
-                Game.clickLump(); //harvest the ripe lump, AutoSL probably covers this but this should avoid issues with autoBuy going first and disrupting Rigidel
+                Game.computeLumpTimes();
+                if (Date.now() - started >= ripeAge) Game.clickLump(); //harvest the ripe lump, AutoSL probably covers this but this should avoid issues with autoBuy going first and disrupting Rigidel
                 if (autoRigidel.autobuyyes == 1) FrozenCookies.autoBuy = 1;
                 if (prev != -1) swapIn(prev, 0); //put the old one back
             }
@@ -843,7 +844,7 @@ function autoRigidel() {
                 }
                 rigiSell();
                 Game.computeLumpTimes();
-                Game.clickLump();
+                if (Date.now() - started >= ripeAge) Game.clickLump(); 
                 if (autoRigidel.autobuyyes == 1) FrozenCookies.autoBuy = 1;
             }
         case 2: //Rigidel in Ruby slot,
@@ -856,7 +857,7 @@ function autoRigidel() {
                 }
                 rigiSell();
                 Game.computeLumpTimes();
-                Game.clickLump();
+                if (Date.now() - started >= ripeAge) Game.clickLump(); 
                 if (autoRigidel.autobuyyes == 1) FrozenCookies.autoBuy = 1;
             }
         case 3: //Rigidel in Jade slot
@@ -869,7 +870,7 @@ function autoRigidel() {
                 }
                 rigiSell();
                 Game.computeLumpTimes();
-                Game.clickLump();
+                if (Date.now() - started >= ripeAge) Game.clickLump(); 
                 if (autoRigidel.autobuyyes == 1) FrozenCookies.autoBuy = 1;
             }
     }
