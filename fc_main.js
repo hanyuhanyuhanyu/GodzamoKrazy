@@ -1018,24 +1018,25 @@ function autoCast() {
 
                     if (nextSpellName(0) == "Click Frenzy") {
                         if (
-                            ((Game.hasAura("Reaper of Fields") ||
+                            (((Game.hasAura("Reaper of Fields") ||
                                 Game.hasAura("Reality Bending")) &&
                                 Game.hasBuff("Dragon Harvest") &&
                                 Game.hasBuff("Frenzy") &&
-                                BuildingSpecialBuff() == 1 &&
                                 Game.hasBuff("Dragon Harvest").time / 30 >=
                                     Math.ceil(13 * BuffTimeFactor()) - 1 &&
                                 Game.hasBuff("Frenzy").time / 30 >=
-                                    Math.ceil(13 * BuffTimeFactor()) - 1 &&
-                                BuildingBuffTime() >=
-                                    Math.ceil(13 * BuffTimeFactor())) ||
-                            (!Game.hasAura("Reaper of Fields") &&
-                                Game.hasBuff("Frenzy") &&
-                                BuildingSpecialBuff() == 1 &&
-                                Game.hasBuff("Frenzy").time / 30 >=
-                                    Math.ceil(13 * BuffTimeFactor()) - 1 &&
-                                BuildingBuffTime() >=
-                                    Math.ceil(13 * BuffTimeFactor()))
+                                    Math.ceil(13 * BuffTimeFactor()) - 1) ||
+                                (!Game.hasAura("Reaper of Fields") &&
+                                    (Game.hasBuff("Dragon Harvest") ||
+                                        Game.hasBuff("Frenzy")) &&
+                                    (Game.hasBuff("Dragon Harvest").time / 30 >=
+                                        Math.ceil(13 * BuffTimeFactor()) - 1 ||
+                                        Game.hasBuff("Frenzy").time / 30 >=
+                                            Math.ceil(13 * BuffTimeFactor()) -
+                                                1))) &&
+                            BuildingSpecialBuff() == 1 &&
+                            BuildingBuffTime() >=
+                                Math.ceil(13 * BuffTimeFactor())
                         ) {
                             M.castSpell(FTHOF);
                             logEvent(
@@ -1072,10 +1073,17 @@ function autoCast() {
                                     Game.hasBuff("Frenzy").time / 30 >=
                                         Math.ceil(13 * BuffTimeFactor()) - 1) ||
                                     (!Game.hasAura("Reaper of Fields") &&
-                                        Game.hasBuff("Frenzy") &&
-                                        Game.hasBuff("Frenzy").time / 30 >=
+                                        (Game.hasBuff("Dragon Harvest") ||
+                                            Game.hasBuff("Frenzy")) &&
+                                        (Game.hasBuff("Dragon Harvest").time /
+                                            30 >=
                                             Math.ceil(13 * BuffTimeFactor()) -
-                                                1)) &&
+                                                1 ||
+                                            Game.hasBuff("Frenzy").time / 30 >=
+                                                Math.ceil(
+                                                    13 * BuffTimeFactor()
+                                                ) -
+                                                    1))) &&
                                 (Game.hasBuff("Click frenzy") ||
                                     Game.hasBuff("Dragonflight")) &&
                                 (Game.hasBuff("Click frenzy").time / 30 >=
@@ -1188,24 +1196,25 @@ function autoCast() {
 
                     if (nextSpellName(0) == "Click Frenzy") {
                         if (
-                            ((Game.hasAura("Reaper of Fields") ||
+                            (((Game.hasAura("Reaper of Fields") ||
                                 Game.hasAura("Reality Bending")) &&
                                 Game.hasBuff("Dragon Harvest") &&
                                 Game.hasBuff("Frenzy") &&
-                                BuildingSpecialBuff() == 1 &&
                                 Game.hasBuff("Dragon Harvest").time / 30 >=
                                     Math.ceil(13 * BuffTimeFactor()) - 1 &&
                                 Game.hasBuff("Frenzy").time / 30 >=
-                                    Math.ceil(13 * BuffTimeFactor()) - 1 &&
-                                BuildingBuffTime() >=
-                                    Math.ceil(13 * BuffTimeFactor())) ||
-                            (!Game.hasAura("Reaper of Fields") &&
-                                Game.hasBuff("Frenzy") &&
-                                BuildingSpecialBuff() == 1 &&
-                                Game.hasBuff("Frenzy").time / 30 >=
-                                    Math.ceil(13 * BuffTimeFactor()) - 1 &&
-                                BuildingBuffTime() >=
-                                    Math.ceil(13 * BuffTimeFactor()))
+                                    Math.ceil(13 * BuffTimeFactor()) - 1) ||
+                                (!Game.hasAura("Reaper of Fields") &&
+                                    (Game.hasBuff("Dragon Harvest") ||
+                                        Game.hasBuff("Frenzy")) &&
+                                    (Game.hasBuff("Dragon Harvest").time / 30 >=
+                                        Math.ceil(13 * BuffTimeFactor()) - 1 ||
+                                        Game.hasBuff("Frenzy").time / 30 >=
+                                            Math.ceil(13 * BuffTimeFactor()) -
+                                                1))) &&
+                            BuildingSpecialBuff() == 1 &&
+                            BuildingBuffTime() >=
+                                Math.ceil(13 * BuffTimeFactor())
                         ) {
                             M.castSpell(FTHOF);
                             logEvent(
@@ -1242,10 +1251,17 @@ function autoCast() {
                                     Game.hasBuff("Frenzy").time / 30 >=
                                         Math.ceil(13 * BuffTimeFactor()) - 1) ||
                                     (!Game.hasAura("Reaper of Fields") &&
-                                        Game.hasBuff("Frenzy") &&
-                                        Game.hasBuff("Frenzy").time / 30 >=
+                                        (Game.hasBuff("Dragon Harvest") ||
+                                            Game.hasBuff("Frenzy")) &&
+                                        (Game.hasBuff("Dragon Harvest").time /
+                                            30 >=
                                             Math.ceil(13 * BuffTimeFactor()) -
-                                                1)) &&
+                                                1 ||
+                                            Game.hasBuff("Frenzy").time / 30 >=
+                                                Math.ceil(
+                                                    13 * BuffTimeFactor()
+                                                ) -
+                                                    1))) &&
                                 (Game.hasBuff("Click frenzy") ||
                                     Game.hasBuff("Dragonflight")) &&
                                 (Game.hasBuff("Click frenzy").time / 30 >=
@@ -1388,18 +1404,19 @@ function autoFTHOFComboAction() {
                     Game.hasAura("Reality Bending")) &&
                     Game.hasBuff("Dragon Harvest") &&
                     Game.hasBuff("Frenzy") &&
-                    BuildingSpecialBuff() == 1 &&
                     Game.hasBuff("Dragon Harvest").time / 30 >=
                         Math.ceil(13 * BuffTimeFactor()) - 1 &&
                     Game.hasBuff("Frenzy").time / 30 >=
-                        Math.ceil(13 * BuffTimeFactor()) - 1 &&
-                    BuildingBuffTime() >= Math.ceil(13 * BuffTimeFactor())) ||
+                        Math.ceil(13 * BuffTimeFactor()) - 1) ||
                     (!Game.hasAura("Reaper of Fields") &&
-                        Game.hasBuff("Frenzy") &&
-                        BuildingSpecialBuff() == 1 &&
-                        Game.hasBuff("Frenzy").time / 30 >=
-                            Math.ceil(13 * BuffTimeFactor()) - 1 &&
-                        BuildingBuffTime() >= Math.ceil(13 * BuffTimeFactor())))
+                        (Game.hasBuff("Dragon Harvest") ||
+                            Game.hasBuff("Frenzy")) &&
+                        (Game.hasBuff("Dragon Harvest").time / 30 >=
+                            Math.ceil(13 * BuffTimeFactor()) - 1 ||
+                            Game.hasBuff("Frenzy").time / 30 >=
+                                Math.ceil(13 * BuffTimeFactor()) - 1))) &&
+                BuildingSpecialBuff() == 1 &&
+                BuildingBuffTime() >= Math.ceil(13 * BuffTimeFactor())
             ) {
                 switch (SugarLevel) {
                     case 0:
@@ -1535,26 +1552,23 @@ function autoFTHOFComboAction() {
                     Game.hasAura("Reality Bending")) &&
                     Game.hasBuff("Dragon Harvest") &&
                     Game.hasBuff("Frenzy") &&
-                    (Game.hasBuff("Click frenzy") ||
-                        Game.hasBuff("Dragonflight")) &&
                     Game.hasBuff("Dragon Harvest").time / 30 >=
                         Math.ceil(13 * BuffTimeFactor()) - 1 &&
                     Game.hasBuff("Frenzy").time / 30 >=
-                        Math.ceil(13 * BuffTimeFactor()) - 1 &&
-                    (Game.hasBuff("Click frenzy").time / 30 >=
-                        Math.ceil(10 * BuffTimeFactor()) - 1 ||
-                        Game.hasBuff("Dragonflight").time / 30 >=
-                            Math.ceil(6 * BuffTimeFactor()) - 1)) ||
+                        Math.ceil(13 * BuffTimeFactor()) - 1) ||
                     (!Game.hasAura("Reaper of Fields") &&
-                        Game.hasBuff("Frenzy") &&
-                        (Game.hasBuff("Click frenzy") ||
-                            Game.hasBuff("Dragonflight")) &&
-                        Game.hasBuff("Frenzy").time / 30 >=
-                            Math.ceil(13 * BuffTimeFactor()) - 1 &&
-                        (Game.hasBuff("Click frenzy").time / 30 >=
-                            Math.ceil(10 * BuffTimeFactor()) - 1 ||
-                            Game.hasBuff("Dragonflight").time / 30 >=
-                                Math.ceil(6 * BuffTimeFactor()) - 1)))
+                        (Game.hasBuff("Dragon Harvest") ||
+                            Game.hasBuff("Frenzy")) &&
+                        (Game.hasBuff("Dragon Harvest").time / 30 >=
+                            Math.ceil(13 * BuffTimeFactor()) - 1 ||
+                            Game.hasBuff("Frenzy").time / 30 >=
+                                Math.ceil(13 * BuffTimeFactor()) - 1))) &&
+                (Game.hasBuff("Click frenzy") ||
+                    Game.hasBuff("Dragonflight")) &&
+                (Game.hasBuff("Click frenzy").time / 30 >=
+                    Math.ceil(10 * BuffTimeFactor()) - 1 ||
+                    Game.hasBuff("Dragonflight").time / 30 >=
+                        Math.ceil(6 * BuffTimeFactor()) - 1)
             ) {
                 switch (SugarLevel) {
                     case 0:
@@ -1870,22 +1884,23 @@ function auto100ConsistencyComboAction() {
 
         case 1: // Start combo
             if (
-                ((Game.hasAura("Reaper of Fields") ||
+                (((Game.hasAura("Reaper of Fields") ||
                     Game.hasAura("Reality Bending")) &&
                     Game.hasBuff("Dragon Harvest") &&
                     Game.hasBuff("Frenzy") &&
-                    BuildingSpecialBuff() == 1 &&
                     Game.hasBuff("Dragon Harvest").time / 30 >=
                         Math.ceil(13 * BuffTimeFactor()) - 1 &&
                     Game.hasBuff("Frenzy").time / 30 >=
-                        Math.ceil(13 * BuffTimeFactor()) - 1 &&
-                    BuildingBuffTime() >= Math.ceil(13 * BuffTimeFactor())) ||
-                (!Game.hasAura("Reaper of Fields") &&
-                    Game.hasBuff("Frenzy") &&
-                    BuildingSpecialBuff() == 1 &&
-                    Game.hasBuff("Frenzy").time / 30 >=
-                        Math.ceil(13 * BuffTimeFactor()) - 1 &&
-                    BuildingBuffTime() >= Math.ceil(13 * BuffTimeFactor()))
+                        Math.ceil(13 * BuffTimeFactor()) - 1) ||
+                    (!Game.hasAura("Reaper of Fields") &&
+                        (Game.hasBuff("Dragon Harvest") ||
+                            Game.hasBuff("Frenzy")) &&
+                        (Game.hasBuff("Dragon Harvest").time / 30 >=
+                            Math.ceil(13 * BuffTimeFactor()) - 1 ||
+                            Game.hasBuff("Frenzy").time / 30 >=
+                                Math.ceil(13 * BuffTimeFactor()) - 1))) &&
+                BuildingSpecialBuff() == 1 &&
+                BuildingBuffTime() >= Math.ceil(13 * BuffTimeFactor())
             ) {
                 // Turn off autoBuy - also disables dragon aura and pantheon setting
                 if (FrozenCookies.autoBuy == 1) {
