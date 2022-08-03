@@ -61,11 +61,10 @@ If you want to manually install it:
 ## What's new?
 <details>
 <summary>Click to expand!</summary>
-  
-2022 Aug 3 
+2022 Aug 3
 - Modified the 100% consistency combo so it uses Elder Batallion instead of Radiant Appetite, as EB with full unshackled grandmas beats out RA in virtually all cases
 
-2022 Aug 1 
+2022 Aug 1
 - Any spell casting method that checks for a frenzy will now also check for a Dragon Harvest, *if* Reaper of Fields or Reality Bending is an active aura
 
 2022 Jul 29
