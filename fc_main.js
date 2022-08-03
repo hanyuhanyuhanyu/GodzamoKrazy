@@ -1811,16 +1811,16 @@ function auto100ConsistencyComboAction() {
             auto100ConsistencyComboAction.state = 4;
             return;
 
-        case 4: // Change dragon auras to radiant appetite and dragon's fortune
+        case 4: // Change dragon auras to elder batallion and dragon's fortune
             if (!Game.hasAura("Dragon's Fortune")) {
                 Game.specialTab = "dragon";
                 Game.SetDragonAura(16, 1);
                 Game.ConfirmPrompt();
                 Game.ToggleSpecialMenu();
             }
-            if (!Game.hasAura("Radiant Appetite")) {
+            if (!Game.hasAura("Elder Batallion")) {
                 Game.specialTab = "dragon";
-                Game.SetDragonAura(15, 0);
+                Game.SetDragonAura(3, 0);
                 Game.ConfirmPrompt();
                 Game.ToggleSpecialMenu();
             }
