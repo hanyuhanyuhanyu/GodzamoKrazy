@@ -1294,6 +1294,13 @@ function autoFTHOFComboAction() {
             return;
         case 1:
             if (
+                !nextSpellName(0) == "Click Frenzy" &&
+                !nextSpellName(1) == "Click Frenzy"
+            ) {
+                autoFTHOFComboAction.state = 0;
+                return;
+            }
+            if (
                 M.magic == M.magicM &&
                 (((Game.hasAura("Reaper of Fields") || Game.hasAura("Reality Bending")) &&
                     Game.hasBuff("Dragon Harvest") &&
@@ -1439,6 +1446,13 @@ function autoFTHOFComboAction() {
             }
             return;
         case 2:
+            if (
+                !nextSpellName(0) == "Building Special" &&
+                !nextSpellName(1) == "Building Special"
+            ) {
+                autoFTHOFComboAction.state = 0;
+                return;
+            }
             if (
                 M.magic == M.magicM &&
                 (((Game.hasAura("Reaper of Fields") || Game.hasAura("Reality Bending")) &&
@@ -2332,8 +2346,9 @@ function autoHalloweenAction() {
         return;
     }
 
+    var living = liveWrinklers();
     if (
-        Game.elderWrath > 0 &&
+        living.length > 0 &&
         Game.season != "easter" &&
         Game.season != "halloween" &&
         !haveAll("halloween")
