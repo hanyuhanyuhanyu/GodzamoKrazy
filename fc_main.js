@@ -4601,10 +4601,10 @@ function autoCookie() {
             //      console.log(purchase.name + ': ' + Beautify(recommendation.efficiency) + ',' + Beautify(recommendation.delta_cps));
             if (
                 recommendation.type == "building" &&
-                Game.buyBulk != 1 &&
+                Game.buyBulk == 100 &&
                 ((FrozenCookies.autoSpell == 3 &&
                     recommendation.purchase.name == "Cortex baker" &&
-                    Game.Objects["Cortex baker"].amount >= 289) ||
+                    Game.Objects["Cortex baker"].amount >= 299) ||
                     (FrozenCookies.towerLimit &&
                         recommendation.purchase.name == "Wizard tower" &&
                         M.magicM >= FrozenCookies.manaMax - 10) ||
@@ -4621,11 +4621,34 @@ function autoCookie() {
                         Game.Objects["Cortex baker"].amount >=
                             FrozenCookies.cortexMax - 100))
             ) {
-                Game.buyBulkOld = Game.buyBulk;
-                if (Game.buyBulkOld == 100) Game.buyBulk = 10;
-                if (Game.buyBulkOld == 10) Game.buyBulk = 1;
+                Game.buyBulk = 10;
                 safeBuy(recommendation.purchase);
-                Game.buyBulk = Game.buyBulkOld;
+                Game.buyBulk = 100;
+            } else if (
+                recommendation.type == "building" &&
+                Game.buyBulk == 10 &&
+                ((FrozenCookies.autoSpell == 3 &&
+                    recommendation.purchase.name == "Cortex baker" &&
+                    Game.Objects["Cortex baker"].amount >= 389) ||
+                    (FrozenCookies.towerLimit &&
+                        recommendation.purchase.name == "Wizard tower" &&
+                        M.magicM >= FrozenCookies.manaMax - 2) ||
+                    (FrozenCookies.mineLimit &&
+                        recommendation.purchase.name == "Mine" &&
+                        Game.Objects["Mine"].amount >= FrozenCookies.mineMax - 10) ||
+                    (FrozenCookies.factoryLimit &&
+                        recommendation.purchase.name == "Factory" &&
+                        Game.Objects["Factory"].amount >=
+                            FrozenCookies.factoryMax - 10) ||
+                    (FrozenCookies.autoDragonOrbs &&
+                        FrozenCookies.cortexLimit &&
+                        recommendation.purchase.name == "Cortex baker" &&
+                        Game.Objects["Cortex baker"].amount >=
+                            FrozenCookies.cortexMax - 10))
+            ) {
+                Game.buyBulk = 1;
+                safeBuy(recommendation.purchase);
+                Game.buyBulk = 10;
             } else if (recommendation.type == "building") {
                 safeBuy(recommendation.purchase);
             } else {
