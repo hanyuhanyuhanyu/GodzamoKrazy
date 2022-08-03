@@ -2546,7 +2546,7 @@ function autoSugarFrenzyAction() {
         ((FrozenCookies.sugarBakingGuard == 0 && Game.lumps > 0) || Game.lumps > 100) &&
         Game.UpgradesById["450"].unlocked == 1 && // Check to see if Sugar craving prestige upgrade has been purchased
         Game.UpgradesById["452"].bought == 0 && // Check to see if sugar frenzy has already been bought this ascension
-        auto100ConsistencyComboAction.state == 16
+        auto100ConsistencyComboAction.state == 1
     ) {
         Game.UpgradesById["452"].buy();
         Game.ConfirmPrompt();
@@ -2558,7 +2558,7 @@ function autoSugarFrenzyAction() {
         ((FrozenCookies.sugarBakingGuard == 0 && Game.lumps > 0) || Game.lumps > 100) &&
         Game.UpgradesById["450"].unlocked == 1 && // Check to see if Sugar craving prestige upgrade has been purchased
         Game.UpgradesById["452"].bought == 0 && // Check to see if sugar frenzy has already been bought this ascension
-        (autoFTHOFComboAction.state == 2 || auto100ConsistencyComboAction.state == 16)
+        (autoFTHOFComboAction.state == 3 || auto100ConsistencyComboAction.state == 1)
     ) {
         Game.UpgradesById["452"].buy();
         Game.ConfirmPrompt();
