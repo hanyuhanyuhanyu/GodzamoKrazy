@@ -802,11 +802,11 @@ function autoRigidel() {
                 rigiSell(); //Meet the %10 condition
                 Game.computeLumpTimes();
                 if (Date.now() - started >= ripeAge) Game.clickLump(); //harvest the ripe lump, AutoSL probably covers this but this should avoid issues with autoBuy going first and disrupting Rigidel
-                if (autoRigidel.autobuyyes == 1) {
-                    FrozenCookies.autoBuy = 1;
-                    autoRigidel.autobuyyes = 0;
-                }
                 if (prev != -1) swapIn(prev, 0); //put the old one back
+            }
+            if (autoRigidel.autobuyyes == 1) {
+                FrozenCookies.autoBuy = 1;
+                autoRigidel.autobuyyes = 0;
             }
         case 1: //Rigidel is already in diamond slot
             if (timeToRipe < 60 && Game.BuildingsOwned % 10) {
@@ -819,10 +819,6 @@ function autoRigidel() {
                 rigiSell();
                 Game.computeLumpTimes();
                 if (Date.now() - started >= ripeAge) Game.clickLump();
-                if (autoRigidel.autobuyyes == 1) {
-                    FrozenCookies.autoBuy = 1;
-                    autoRigidel.autobuyyes = 0;
-                }
             }
         case 2: //Rigidel in Ruby slot,
             if (timeToRipe < 40 && Game.BuildingsOwned % 10) {
@@ -835,10 +831,10 @@ function autoRigidel() {
                 rigiSell();
                 Game.computeLumpTimes();
                 if (Date.now() - started >= ripeAge) Game.clickLump();
-                if (autoRigidel.autobuyyes == 1) {
-                    FrozenCookies.autoBuy = 1;
-                    autoRigidel.autobuyyes = 0;
-                }
+            }
+            if (autoRigidel.autobuyyes == 1) {
+                FrozenCookies.autoBuy = 1;
+                autoRigidel.autobuyyes = 0;
             }
         case 3: //Rigidel in Jade slot
             if (timeToRipe < 20 && Game.BuildingsOwned % 10) {
@@ -851,10 +847,10 @@ function autoRigidel() {
                 rigiSell();
                 Game.computeLumpTimes();
                 if (Date.now() - started >= ripeAge) Game.clickLump();
-                if (autoRigidel.autobuyyes == 1) {
-                    FrozenCookies.autoBuy = 1;
-                    autoRigidel.autobuyyes = 0;
-                }
+            }
+            if (autoRigidel.autobuyyes == 1) {
+                FrozenCookies.autoBuy = 1;
+                autoRigidel.autobuyyes = 0;
             }
     }
 }
@@ -1240,7 +1236,8 @@ function autoFTHOFComboAction() {
         autoFTHOFComboAction.state > 2 &&
         M.magic == M.magicM &&
         !Game.hasBuff("Click frenzy") &&
-        !(nextSpellName(0) == "Click Frenzy" || nextSpellName(1) == "Click Frenzy")
+        !nextSpellName(0) == "Click Frenzy" &&
+        !nextSpellName(1) == "Click Frenzy"
     ) {
         if (autoFTHOFComboAction.autobuyyes == 1) {
             FrozenCookies.autoBuy = 1;
@@ -4456,12 +4453,6 @@ function autoGodzamokAction() {
 
         //Automatically sell all mines and factories
         if (!Game.hasBuff("Devastation") && hasClickBuff()) {
-            if (FrozenCookies.autoBuy == 1) {
-                autoGodzamokAction.autobuyyes = 1;
-                FrozenCookies.autoBuy = 0;
-            } else {
-                autoGodzamokAction.autobuyyes = 0;
-            }
             Game.Objects["Mine"].sell(countMine);
             Game.Objects["Factory"].sell(countFactory);
             //Rebuy mines
@@ -4486,10 +4477,6 @@ function autoGodzamokAction() {
             } else {
                 safeBuy(Game.Objects["Factory"], countFactory);
                 logEvent("AutoGodzamok", "Bought " + countFactory + " factories");
-            }
-            if (autoGodzamokAction.autobuyyes == 1) {
-                FrozenCookies.autoBuy = 1;
-                autoGodzamokAction.autobuyyes = 0;
             }
         }
     }
