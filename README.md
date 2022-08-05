@@ -60,7 +60,8 @@ If you want to manually install it:
 
 ## What's new?
 <details>
-<summary>Click to expand!</summary>
+<summary>Click to expand!</summary> 
+
 2022 Aug 1
 - Any spell casting method that checks for a frenzy will now also check for a Dragon Harvest, *if* Reaper of Fields or Reality Bending is an active aura
 
@@ -414,6 +415,39 @@ If you want to manually install it:
 ## Planned Features and Known Issues
 
 - See the Github issues
+
+# What do these options actually mean, in detail?
+
+## Auto clicking Options
+- **Autoclick** This will simulate clicking the big cookie by directly calling the function that register cookie clicks. A value of 250 will work well for most people but if you have a fast computer, you can go up to 1000. Basically, to find the sweet spot for your system, increase it until the countdown in the infobox for the next upgrade begins to go wrong. Or just set it 250 and forget about it. 
+- **Autofrenzy** This is Autoclick but during click frenzies. The same rules as Autoclick apply, but you can use a higher value here if you cannot normally run Autoclick at top speed. 
+- **Autoclick GC** All golden cookes, including wrath cookies, will be collected as soon as they appear if enabled. 
+- **Autoclick Reindeer** This will click Reindeer the moment they appear. 
+- **Auto Fortune** The moment a fortune appears in the newsticker, it will be collected. It may be a good idea to disable this during active play, as you will only collect fortune bonuses once per ascension and *Your Lucky numbers are* gives up to double your bank, so you will likely want this at a later point. 
+
+## Auto buying options
+- **Autobuy** This controls all automated purchases. It also works as a kind of on/off switch for some other options. 
+- **Other Upgrades** Some upgrades don't provide direct CpS bonuses so the normal Autobuy will never guy them. This option will. 
+- **Auto Bulkbuy** This sets the bulk buy mode directly after ascending only. It does not carry over on reloads. If some buildings are capped, it will temporarily bypass bulk buy for those if they are near the cap. 
+- ** Auto Blacklist** Turns off the selected blacklist (next option) if it served its purpose.
+- **Backlist** This contains the Speedrun and Hardcore blacklists required for some of the born again achievements, as well as one to disable ever entering or proceding with the Grandmapocalypse, and a bonus mode that will not buy any buildings.
+- **Mine limit** Auto-Godzamok uses mines and factories so it makes sense to put a maximum cap on these, as otherwise rebuying will cost more than was gained. The actual tipping point depends on your max CpS so this cannot be predetermined. 
+- **Factory limit** See Mine limit
+- **Pastemode** Turning this on is a stupid idea.
+
+## Other automatic options
+- **Autoascend** This is mainly useful if you're grinding out ascensions for Endless Cycle, or want to build up your HC boost. 
+- **Autopop Wrinklers** Pop any wrinklers, either the moment they appear, or when they have eaten enough to provide a decent bonus toward the next purchase. This is ignored during Halloween and Easter season as long as halloween cookies and eggs are still not found. 
+- **Save Shiny Wrinklers** This overrides the Autopop function for the shiny wrinkler, and will also prevent the Grandmapocalypse from ever ending, if enabled. 
+- **Autoharvest Sugar Lump** Will harvest a lump as soon as it is safe to do so (ripe). It can also swap in Rigidel automatically to make the harvest occur up to one hour early. 
+- **Sugar Baking Guard** For all actions that automatically spend a sugar lump, this will block them from working if it would make the number of stored Sugar Lumps go below 100, to keep the max Sugar Baking bonus.  
+- **Auto-Golden Switch** The Golden Switch gives a good CpS boost but prevents cookies from appearing while active. This option toggles the GS the moment a clicking frenzy starts and turns it off when this ends.  
+- **Auto-Godzamok** Godzamok allows for the Devastation boost which can help clicking frenzies earn immense amounts of cookies. If enabled, it will sell mines and factories the moment a CF starts and Godzamok is an active god. If these buildings are not capped, Auto-Godzamok will sell and rebuy up to 500 of each, otherwise it will sell all and rebuy up to the cap. 
+- **Auto-Banking** This will upgrade the bank office level the moment you have enough cursors to do so.  
+- **Auto-Broker** This will hire stock brokers, if the next Autobuy upgrade is a building, and it can afford to do so. 
+- **Auto-Loans** If the bank office level has unlocked one or more loans, setting this option will take the first two loans once a clicking frenzy is active and the total frenzy is higher than the set number.
+
+## More to come
 
 # Efficiency? What's that?
 
