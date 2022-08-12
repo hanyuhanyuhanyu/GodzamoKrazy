@@ -795,26 +795,26 @@ function autoRigidel() {
                 swapIn(10, 0); //swap in rigidel
                 rigiSell(); //Meet the %10 condition
                 Game.computeLumpTimes();
-                if (Date.now() - started >= ripeAge) Game.clickLump(); //harvest the ripe lump, AutoSL probably covers this but this should avoid issues with autoBuy going first and disrupting Rigidel
+                Game.clickLump(); //harvest the ripe lump, AutoSL probably covers this but this should avoid issues with autoBuy going first and disrupting Rigidel
                 if (prev != -1) swapIn(prev, 0); //put the old one back
             }
         case 1: //Rigidel is already in diamond slot
             if (timeToRipe < 60 && Game.BuildingsOwned % 10) {
                 rigiSell();
                 Game.computeLumpTimes();
-                if (Date.now() - started >= ripeAge) Game.clickLump();
+                Game.clickLump();
             }
         case 2: //Rigidel in Ruby slot,
             if (timeToRipe < 40 && Game.BuildingsOwned % 10) {
                 rigiSell();
                 Game.computeLumpTimes();
-                if (Date.now() - started >= ripeAge) Game.clickLump();
+                Game.clickLump();
             }
         case 3: //Rigidel in Jade slot
             if (timeToRipe < 20 && Game.BuildingsOwned % 10) {
                 rigiSell();
                 Game.computeLumpTimes();
-                if (Date.now() - started >= ripeAge) Game.clickLump();
+                Game.clickLump();
             }
     }
 }
