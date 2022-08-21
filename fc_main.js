@@ -2651,6 +2651,96 @@ function buyOtherUpgrades() {
     }
 }
 
+function autoCycliusAction() {
+    if (!T || T.swaps < 1 || FrozenCookies.autoCyclius == 0) return;
+    if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
+
+    if (FrozenCookies.autoWorshipToggle == 1) {
+        FrozenCookies.autoWorshipToggle = 0;
+        logEvent("autoCyclius", "Turning off Auto-Pantheon");
+    }
+
+    //const Diamond1 = 0;
+    const Ruby1 = 1 * 60 + 12;
+    const Jade1 = 4 * 60;
+    const Diamond2 = 9 * 60 + 19;
+    const Jade2 = 10 * 60 + 20;
+    const Diamond3 = 12 * 60;
+    const Ruby2 = 13 * 60 + 12;
+    const Diamond4 = 18 * 60;
+    const CycNone1 = 19 * 60 + 30;
+    const Diamond5 = 21 * 60;
+    const CycNone2 = 22 * 60 + 30;
+    
+    var now = new Date();
+    var currentTime = now.getUTCHours() * 60 + now.getUTCMinutes(); // Time in UTC
+
+    if (T.slot[0] != 3 && currentTime >= 0 && currentTime < Ruby1) {
+        swapIn(3, 0);
+        logEvent("autoCyclius", "Putting Cyclius in DIAMOND");
+    }
+    if (T.slot[1] != 3 && currentTime >= Ruby1 && currentTime < Jade1) {
+        swapIn(3, 1);
+        logEvent("autoCyclius", "Putting Cyclius in RUBY");
+    }
+    if (T.slot[2] != 3 && currentTime >= Jade1 && currentTime < Diamond2) {
+        swapIn(3, 2);
+        logEvent("autoCyclius", "Putting Cyclius in JADE");
+    }
+    if (T.slot[0] != 3 && currentTime >= Diamond2 && currentTime < Jade2) {
+        swapIn(3, 0);
+        logEvent("autoCyclius", "Putting Cyclius in DIAMOND");
+    }
+    if (T.slot[2] != 3 && currentTime >= Jade2 && currentTime < Diamond3) {
+        swapIn(3, 2);
+        logEvent("autoCyclius", "Putting Cyclius in JADE");
+    }
+    if (T.slot[0] != 3 && currentTime >= Diamond3 && currentTime < Ruby2) {
+        swapIn(3, 0);
+        logEvent("autoCyclius", "Putting Cyclius in DIAMOND");
+    }
+    if (T.slot[1] != 3 && currentTime >= Ruby2 && currentTime < Diamond4) {
+        swapIn(3, 1);
+        logEvent("autoCyclius", "Putting Cyclius in RUBY");
+    }
+    if (T.slot[3] != 3 && currentTime >= Diamond4 && currentTime < CycNone1) {
+        swapIn(3, 0);
+        logEvent("autoCyclius", "Putting Cyclius in DIAMOND");
+    }
+    if (Game.hasGod('ages') && currentTime >= CycNone1 && currentTime < Diamond5) {
+        if (
+            FrozenCookies.autoWorship0 != 0 &&
+            T.slot[1] != FrozenCookies.autoWorship0 &&
+            T.slot[2] != FrozenCookies.autoWorship0
+        ) {
+            swapIn(FrozenCookies.autoWorship0, 0);
+        } else if (
+            FrozenCookies.autoWorship1 != 0 &&
+            T.slot[1] != FrozenCookies.autoWorship1 &&
+            T.slot[2] != FrozenCookies.autoWorship1
+        ) {
+            swapIn(FrozenCookies.autoWorship1, 0);
+        } else if (
+            FrozenCookies.autoWorship2 != 0 &&
+            T.slot[1] != FrozenCookies.autoWorship2 &&
+            T.slot[2] != FrozenCookies.autoWorship2
+        ) {
+            swapIn(FrozenCookies.autoWorship2, 0);
+        } else {
+            Game.forceUnslotGod("ages");
+        }
+        logEvent("autoCyclius", "Removing Cyclius");
+    }
+    if (T.slot[0] != 3 && currentTime >= Diamond5 && currentTime < CycNone2) {
+        swapIn(3, 0);
+        logEvent("autoCyclius", "Putting Cyclius in DIAMOND");
+    }
+    if (Game.hasGod('ages') && currentTime >= CycNone2 && currentTime < Diamond5) {
+        Game.forceUnslotGod("ages");
+        logEvent("autoCyclius", "Removing Cyclius");
+    }
+}
+
 function generateProbabilities(upgradeMult, minBase, maxMult) {
     var cumProb = [];
     var remainingProbability = 1;
@@ -5048,6 +5138,13 @@ function FCStart() {
     if (FrozenCookies.otherUpgrades) {
         FrozenCookies.otherUpgradesBot = setInterval(
             buyOtherUpgrades,
+            FrozenCookies.frequency
+        );
+    }
+
+    if (FrozenCookies.autoCyclius) {
+        FrozenCookies.autoCycliusBot = setInterval(
+            autoCycliusAction,
             FrozenCookies.frequency
         );
     }
