@@ -2701,10 +2701,15 @@ function autoCycliusAction() {
                 FrozenCookies.autoWorship1 != 3 &&
                 FrozenCookies.autoWorship2 != 3
             ) {
-                swapIn(FrozenCookies.autoWorship0, 0);
-                swapIn(FrozenCookies.autoWorship1, 1);
-                swapIn(FrozenCookies.autoWorship2, 2);
-                Game.forceUnslotGod("ages");
+                if (T.slot[0] == 3) swapIn(FrozenCookies.autoWorship0, 0);
+                if (T.slot[0] != FrozenCookies.autoWorship0)
+                    swapIn(FrozenCookies.autoWorship0, 0);
+                if (T.slot[1] == 3) swapIn(FrozenCookies.autoWorship1, 1);
+                if (T.slot[1] != FrozenCookies.autoWorship1)
+                    swapIn(FrozenCookies.autoWorship1, 1);
+                if (T.slot[2] == 3) swapIn(FrozenCookies.autoWorship2, 2);
+                if (T.slot[2] != FrozenCookies.autoWorship2)
+                    swapIn(FrozenCookies.autoWorship2, 2);
             } else {
                 Game.forceUnslotGod("ages");
             }
@@ -2763,10 +2768,15 @@ function autoCycliusAction() {
                 FrozenCookies.autoWorship1 != 3 &&
                 FrozenCookies.autoWorship2 != 3
             ) {
-                swapIn(FrozenCookies.autoWorship0, 0);
-                swapIn(FrozenCookies.autoWorship1, 1);
-                swapIn(FrozenCookies.autoWorship2, 2);
-                Game.forceUnslotGod("ages");
+                if (T.slot[0] == 3) swapIn(FrozenCookies.autoWorship0, 0);
+                if (T.slot[0] != FrozenCookies.autoWorship0)
+                    swapIn(FrozenCookies.autoWorship0, 0);
+                if (T.slot[1] == 3) swapIn(FrozenCookies.autoWorship1, 1);
+                if (T.slot[1] != FrozenCookies.autoWorship1)
+                    swapIn(FrozenCookies.autoWorship1, 1);
+                if (T.slot[2] == 3) swapIn(FrozenCookies.autoWorship2, 2);
+                if (T.slot[2] != FrozenCookies.autoWorship2)
+                    swapIn(FrozenCookies.autoWorship2, 2);
             } else {
                 Game.forceUnslotGod("ages");
             }
@@ -2787,10 +2797,15 @@ function autoCycliusAction() {
                 FrozenCookies.autoWorship1 != 3 &&
                 FrozenCookies.autoWorship2 != 3
             ) {
-                swapIn(FrozenCookies.autoWorship0, 0);
-                swapIn(FrozenCookies.autoWorship1, 1);
-                swapIn(FrozenCookies.autoWorship2, 2);
-                Game.forceUnslotGod("ages");
+                if (T.slot[0] == 3) swapIn(FrozenCookies.autoWorship0, 0);
+                if (T.slot[0] != FrozenCookies.autoWorship0)
+                    swapIn(FrozenCookies.autoWorship0, 0);
+                if (T.slot[1] == 3) swapIn(FrozenCookies.autoWorship1, 1);
+                if (T.slot[1] != FrozenCookies.autoWorship1)
+                    swapIn(FrozenCookies.autoWorship1, 1);
+                if (T.slot[2] == 3) swapIn(FrozenCookies.autoWorship2, 2);
+                if (T.slot[2] != FrozenCookies.autoWorship2)
+                    swapIn(FrozenCookies.autoWorship2, 2);
             } else {
                 Game.forceUnslotGod("ages");
             }
