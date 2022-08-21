@@ -2695,25 +2695,16 @@ function autoCycliusAction() {
             // 18:00 - 0:00
             if (
                 FrozenCookies.autoWorship0 != 0 &&
-                FrozenCookies.autoWorship0 != 3 &&
-                T.slot[0] != FrozenCookies.autoWorship0 &&
-                T.slot[2] != FrozenCookies.autoWorship0
-            ) {
-                swapIn(FrozenCookies.autoWorship0, 1);
-            } else if (
                 FrozenCookies.autoWorship1 != 0 &&
-                FrozenCookies.autoWorship1 != 3 &&
-                T.slot[0] != FrozenCookies.autoWorship1 &&
-                T.slot[2] != FrozenCookies.autoWorship1
-            ) {
-                swapIn(FrozenCookies.autoWorship1, 1);
-            } else if (
                 FrozenCookies.autoWorship2 != 0 &&
-                FrozenCookies.autoWorship2 != 3 &&
-                T.slot[0] != FrozenCookies.autoWorship2 &&
-                T.slot[2] != FrozenCookies.autoWorship2
+                FrozenCookies.autoWorship0 != 3 &&
+                FrozenCookies.autoWorship1 != 3 &&
+                FrozenCookies.autoWorship2 != 3
             ) {
-                swapIn(FrozenCookies.autoWorship2, 1);
+                swapIn(FrozenCookies.autoWorship0, 0);
+                swapIn(FrozenCookies.autoWorship1, 1);
+                swapIn(FrozenCookies.autoWorship2, 2);
+                Game.forceUnslotGod("ages");
             } else {
                 Game.forceUnslotGod("ages");
             }
@@ -2766,25 +2757,16 @@ function autoCycliusAction() {
             // 19:30 - 21
             if (
                 FrozenCookies.autoWorship0 != 0 &&
+                FrozenCookies.autoWorship1 != 0 &&
+                FrozenCookies.autoWorship2 != 0 &&
                 FrozenCookies.autoWorship0 != 3 &&
-                T.slot[1] != FrozenCookies.autoWorship0 &&
-                T.slot[2] != FrozenCookies.autoWorship0
+                FrozenCookies.autoWorship1 != 3 &&
+                FrozenCookies.autoWorship2 != 3
             ) {
                 swapIn(FrozenCookies.autoWorship0, 0);
-            } else if (
-                FrozenCookies.autoWorship1 != 0 &&
-                FrozenCookies.autoWorship1 != 3 &&
-                T.slot[1] != FrozenCookies.autoWorship1 &&
-                T.slot[2] != FrozenCookies.autoWorship1
-            ) {
-                swapIn(FrozenCookies.autoWorship1, 0);
-            } else if (
-                FrozenCookies.autoWorship2 != 0 &&
-                FrozenCookies.autoWorship2 != 3 &&
-                T.slot[1] != FrozenCookies.autoWorship2 &&
-                T.slot[2] != FrozenCookies.autoWorship2
-            ) {
-                swapIn(FrozenCookies.autoWorship2, 0);
+                swapIn(FrozenCookies.autoWorship1, 1);
+                swapIn(FrozenCookies.autoWorship2, 2);
+                Game.forceUnslotGod("ages");
             } else {
                 Game.forceUnslotGod("ages");
             }
@@ -2799,25 +2781,16 @@ function autoCycliusAction() {
             // 22:30 - 0
             if (
                 FrozenCookies.autoWorship0 != 0 &&
+                FrozenCookies.autoWorship1 != 0 &&
+                FrozenCookies.autoWorship2 != 0 &&
                 FrozenCookies.autoWorship0 != 3 &&
-                T.slot[1] != FrozenCookies.autoWorship0 &&
-                T.slot[2] != FrozenCookies.autoWorship0
+                FrozenCookies.autoWorship1 != 3 &&
+                FrozenCookies.autoWorship2 != 3
             ) {
                 swapIn(FrozenCookies.autoWorship0, 0);
-            } else if (
-                FrozenCookies.autoWorship1 != 0 &&
-                FrozenCookies.autoWorship1 != 3 &&
-                T.slot[1] != FrozenCookies.autoWorship1 &&
-                T.slot[2] != FrozenCookies.autoWorship1
-            ) {
-                swapIn(FrozenCookies.autoWorship1, 0);
-            } else if (
-                FrozenCookies.autoWorship2 != 0 &&
-                FrozenCookies.autoWorship2 != 3 &&
-                T.slot[1] != FrozenCookies.autoWorship2 &&
-                T.slot[2] != FrozenCookies.autoWorship2
-            ) {
-                swapIn(FrozenCookies.autoWorship2, 0);
+                swapIn(FrozenCookies.autoWorship1, 1);
+                swapIn(FrozenCookies.autoWorship2, 2);
+                Game.forceUnslotGod("ages");
             } else {
                 Game.forceUnslotGod("ages");
             }
