@@ -2710,9 +2710,8 @@ function autoCycliusAction() {
                 if (T.slot[2] == 3) swapIn(FrozenCookies.autoWorship2, 2);
                 if (T.slot[2] != FrozenCookies.autoWorship2)
                     swapIn(FrozenCookies.autoWorship2, 2);
-            } else {
-                Game.forceUnslotGod("ages");
             }
+            Game.forceUnslotGod("ages");
             logEvent("autoCyclius", "Removing Cyclius");
         }
     }
@@ -2777,9 +2776,8 @@ function autoCycliusAction() {
                 if (T.slot[2] == 3) swapIn(FrozenCookies.autoWorship2, 2);
                 if (T.slot[2] != FrozenCookies.autoWorship2)
                     swapIn(FrozenCookies.autoWorship2, 2);
-            } else {
-                Game.forceUnslotGod("ages");
             }
+            Game.forceUnslotGod("ages");
             logEvent("autoCyclius", "Removing Cyclius");
         }
         if (T.slot[0] != 3 && currentTime >= Diamond5 && currentTime < CycNone2) {
@@ -2806,9 +2804,8 @@ function autoCycliusAction() {
                 if (T.slot[2] == 3) swapIn(FrozenCookies.autoWorship2, 2);
                 if (T.slot[2] != FrozenCookies.autoWorship2)
                     swapIn(FrozenCookies.autoWorship2, 2);
-            } else {
-                Game.forceUnslotGod("ages");
             }
+            Game.forceUnslotGod("ages");
             logEvent("autoCyclius", "Removing Cyclius");
         }
     }
