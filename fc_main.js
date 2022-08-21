@@ -2655,7 +2655,7 @@ function autoCycliusAction() {
     if (!T || T.swaps < 1 || FrozenCookies.autoCyclius == 0) return;
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
-    if (FrozenCookies.autoWorshipToggle == 1) {
+    if (Game.hasGod("ages") && FrozenCookies.autoWorshipToggle == 1) {
         FrozenCookies.autoWorshipToggle = 0;
         logEvent("autoCyclius", "Turning off Auto-Pantheon");
     }
@@ -2671,11 +2671,11 @@ function autoCycliusAction() {
     const CycNone1 = 19 * 60 + 30;
     const Diamond5 = 21 * 60;
     const CycNone2 = 22 * 60 + 30;
-    
+
     var now = new Date();
     var currentTime = now.getUTCHours() * 60 + now.getUTCMinutes(); // Time in UTC
 
-    if (T.slot[0] != 3 && currentTime >= 0 && currentTime < Ruby1) {
+    if (T.slot[0] != 3 && currentTime < Ruby1) {
         swapIn(3, 0);
         logEvent("autoCyclius", "Putting Cyclius in DIAMOND");
     }
@@ -2707,21 +2707,24 @@ function autoCycliusAction() {
         swapIn(3, 0);
         logEvent("autoCyclius", "Putting Cyclius in DIAMOND");
     }
-    if (Game.hasGod('ages') && currentTime >= CycNone1 && currentTime < Diamond5) {
+    if (Game.hasGod("ages") && currentTime >= CycNone1 && currentTime < Diamond5) {
         if (
             FrozenCookies.autoWorship0 != 0 &&
+            FrozenCookies.autoWorship0 != 3 &&
             T.slot[1] != FrozenCookies.autoWorship0 &&
             T.slot[2] != FrozenCookies.autoWorship0
         ) {
             swapIn(FrozenCookies.autoWorship0, 0);
         } else if (
             FrozenCookies.autoWorship1 != 0 &&
+            FrozenCookies.autoWorship1 != 3 &&
             T.slot[1] != FrozenCookies.autoWorship1 &&
             T.slot[2] != FrozenCookies.autoWorship1
         ) {
             swapIn(FrozenCookies.autoWorship1, 0);
         } else if (
             FrozenCookies.autoWorship2 != 0 &&
+            FrozenCookies.autoWorship2 != 3 &&
             T.slot[1] != FrozenCookies.autoWorship2 &&
             T.slot[2] != FrozenCookies.autoWorship2
         ) {
@@ -2735,8 +2738,31 @@ function autoCycliusAction() {
         swapIn(3, 0);
         logEvent("autoCyclius", "Putting Cyclius in DIAMOND");
     }
-    if (Game.hasGod('ages') && currentTime >= CycNone2 && currentTime < Diamond5) {
-        Game.forceUnslotGod("ages");
+    if (Game.hasGod("ages") && currentTime >= CycNone2) {
+        if (
+            FrozenCookies.autoWorship0 != 0 &&
+            FrozenCookies.autoWorship0 != 3 &&
+            T.slot[1] != FrozenCookies.autoWorship0 &&
+            T.slot[2] != FrozenCookies.autoWorship0
+        ) {
+            swapIn(FrozenCookies.autoWorship0, 0);
+        } else if (
+            FrozenCookies.autoWorship1 != 0 &&
+            FrozenCookies.autoWorship1 != 3 &&
+            T.slot[1] != FrozenCookies.autoWorship1 &&
+            T.slot[2] != FrozenCookies.autoWorship1
+        ) {
+            swapIn(FrozenCookies.autoWorship1, 0);
+        } else if (
+            FrozenCookies.autoWorship2 != 0 &&
+            FrozenCookies.autoWorship2 != 3 &&
+            T.slot[1] != FrozenCookies.autoWorship2 &&
+            T.slot[2] != FrozenCookies.autoWorship2
+        ) {
+            swapIn(FrozenCookies.autoWorship2, 0);
+        } else {
+            Game.forceUnslotGod("ages");
+        }
         logEvent("autoCyclius", "Removing Cyclius");
     }
 }
