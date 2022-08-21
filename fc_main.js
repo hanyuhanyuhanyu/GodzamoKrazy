@@ -1861,32 +1861,24 @@ function auto100ConsistencyComboAction() {
 
             return;
 
-        case 11: // Take Stock Market loans
-            B.takeLoan(1);
-            B.takeLoan(2);
-            B.takeLoan(3);
-            auto100ConsistencyComboAction.state = 12;
-
-            return;
-
-        case 12: // If autoGodzamok is on, disable
+        case 11: // If autoGodzamok is on, disable
             if (FrozenCookies.autoGodzamok > 0) {
                 auto100ConsistencyComboAction.autogodyes = 1;
                 FrozenCookies.autoGodzamok = 0;
             } else {
                 auto100ConsistencyComboAction.autogodyes = 0;
             }
+            auto100ConsistencyComboAction.state = 12;
+
+            return;
+
+        case 12: // Activate Building Special/Elder Frenzy and Click Frenzy buffs
+            Game.shimmers[0].pop();
+            Game.shimmers[0].pop();
             auto100ConsistencyComboAction.state = 13;
-
             return;
 
-        case 13: // Activate Building Special/Elder Frenzy and Click Frenzy buffs
-            Game.shimmers[0].pop();
-            Game.shimmers[0].pop();
-            auto100ConsistencyComboAction.state = 14;
-            return;
-
-        case 14: // sell buildings for first Devastation boost
+        case 13: // sell buildings for first Devastation boost
             if (!Game.hasGod("ruin") && T.swaps >= 1) swapIn(2, 0);
             Game.Objects["Farm"].sell(auto100ConsistencyComboAction.countFarm);
             Game.Objects["Mine"].sell(auto100ConsistencyComboAction.countMine);
@@ -1898,15 +1890,15 @@ function auto100ConsistencyComboAction() {
             Game.Objects["Time machine"].sell(
                 auto100ConsistencyComboAction.countTimeMach
             );
+            auto100ConsistencyComboAction.state = 14;
+            return;
+
+        case 14: // Swap Mokalsium to ruby slot
+            if (!Game.hasGod("mother") && T.swaps >= 1) swapIn(8, 1);
             auto100ConsistencyComboAction.state = 15;
             return;
 
-        case 15: // Swap Mokalsium to ruby slot
-            if (!Game.hasGod("mother") && T.swaps >= 1) swapIn(8, 1);
-            auto100ConsistencyComboAction.state = 16;
-            return;
-
-        case 16: // buy back buildings
+        case 15: // buy back buildings
             safeBuy(Game.Objects["Farm"], auto100ConsistencyComboAction.countFarm);
             safeBuy(Game.Objects["Mine"], auto100ConsistencyComboAction.countMine);
             safeBuy(Game.Objects["Factory"], auto100ConsistencyComboAction.countFactory);
@@ -1924,19 +1916,19 @@ function auto100ConsistencyComboAction() {
                 Game.Objects["Time machine"],
                 auto100ConsistencyComboAction.countTimeMach
             );
-            auto100ConsistencyComboAction.state = 17;
+            auto100ConsistencyComboAction.state = 16;
             return;
 
-        case 17: // Pop any other golden cookies as long as they're not wrath
+        case 16: // Pop any other golden cookies as long as they're not wrath
             for (var i in Game.shimmers) {
                 if (Game.shimmers[i].type == "golden" && !Game.shimmer.wrath) {
                     Game.shimmers[i].pop();
                 }
             }
-            auto100ConsistencyComboAction.state = 18;
+            auto100ConsistencyComboAction.state = 17;
             return;
 
-        case 18: // Perform custom autogodzamok
+        case 17: // Perform custom autogodzamok
             if (!Game.hasBuff("Devastation") && hasClickBuff()) {
                 if (Game.Objects["Farm"].amount >= 10) {
                     Game.Objects["Farm"].sell(auto100ConsistencyComboAction.countFarm);
@@ -2082,11 +2074,11 @@ function auto100ConsistencyComboAction() {
             }
 
             if (!hasClickBuff()) {
-                auto100ConsistencyComboAction.state = 19;
+                auto100ConsistencyComboAction.state = 18;
             }
             return;
 
-        case 19: // Once click frenzy buff and GCs are gone, turn autoGC on if it were on previously
+        case 18: // Once click frenzy buff and GCs are gone, turn autoGC on if it were on previously
             if (!Game.hasBuff("Click frenzy") && !goldenCookieLife()) {
                 if (
                     Game.Upgrades["Golden switch [on]"].unlocked &&
@@ -2103,11 +2095,11 @@ function auto100ConsistencyComboAction() {
                     FrozenCookies.autoGS = 1;
                     auto100ConsistencyComboAction.autogsyes = 0;
                 }
-                auto100ConsistencyComboAction.state = 20;
+                auto100ConsistencyComboAction.state = 19;
             }
             return;
 
-        case 20: // Buy back
+        case 19: // Buy back
             if (Game.Objects["Farm"].amount < auto100ConsistencyComboAction.countFarm) {
                 safeBuy(
                     Game.Objects["Farm"],
@@ -2190,10 +2182,10 @@ function auto100ConsistencyComboAction() {
                 FrozenCookies.autoBuy = 1;
                 auto100ConsistencyComboAction.autobuyyes = 0;
             }
-            auto100ConsistencyComboAction.state = 21;
+            auto100ConsistencyComboAction.state = 20;
             return;
 
-        case 21: // Re-enable autoGodzamok if it were on previously
+        case 20: // Re-enable autoGodzamok if it were on previously
             if (auto100ConsistencyComboAction.autogodyes == 1) {
                 FrozenCookies.autoGodzamok = 1;
                 auto100ConsistencyComboAction.autogodyes = 0;
@@ -2383,7 +2375,7 @@ function autoLoanBuy() {
     if (hasClickBuff() && cpsBonus() >= FrozenCookies.minLoanMult) {
         B.takeLoan(1);
         B.takeLoan(2);
-        // B.takeLoan(3);
+        if (FrozenCookies.autoLoan == 2) B.takeLoan(3);
     }
 }
 

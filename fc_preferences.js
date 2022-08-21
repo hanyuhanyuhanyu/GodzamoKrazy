@@ -143,8 +143,8 @@ FrozenCookies.preferenceValues = {
         default: 0,
     },
     autoLoan: {
-        hint: "Automatically take loans 1 and 2 during click buffs with frenzies",
-        display: ["Auto-Loans OFF", "Auto-Loans ON"],
+        hint: "Automatically take loans during click buffs with frenzies",
+        display: ["Auto-Loans OFF", "Take loans 1 and 2", "Take all 3 loans"],
         default: 0,
         extras: '<a class="option" id="minLoanMult" onclick="updateLoanMultMin(\'minLoanMult\');">x${minLoanMult} minimum Frenzy</a>',
     },
@@ -154,14 +154,14 @@ FrozenCookies.preferenceValues = {
         hint: "Pantheon options:",
     },
     autoWorshipToggle: {
-        hint: "Automatically slot selected Gods (Cannot slot the same god in multiple slots)",
+        hint: "Automatically slot selected gods (Cannot slot the same god in multiple slots)",
         display: ["Auto Pantheon OFF", "Auto Pantheon ON"],
         default: 0,
     },
     autoWorship0: {
         hint: "Automatically slots desired god in DIAMOND slot",
         display: [
-            "No God",
+            "No god",
             "Vomitrax",
             "Godzamok",
             "Cyclius",
@@ -179,7 +179,7 @@ FrozenCookies.preferenceValues = {
     autoWorship1: {
         hint: "Automatically slots desired god in RUBY slot",
         display: [
-            "No God",
+            "No god",
             "Vomitrax",
             "Godzamok",
             "Cyclius",
@@ -218,7 +218,7 @@ FrozenCookies.preferenceValues = {
         hint: "Grimoire options:",
     },
     towerLimit: {
-        hint: "Stop autobuying Wizard Towers at selected Max Mana. 37 for max single casting FTHOF. Not recommended to set over 100",
+        hint: "Stop autobuying Wizard Towers at selected Max Mana. 37 for optimal single casting FTHOF. Not recommended to set over 100",
         display: ["Wizard Tower Cap OFF", "Wizard Tower Cap ON"],
         default: 0,
         extras: '<a class="option" id="manaMax" onclick="updateManaMax(\'manaMax\');">${manaMax} max Mana</a>',
