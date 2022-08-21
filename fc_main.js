@@ -2696,21 +2696,21 @@ function autoCycliusAction() {
             if (
                 FrozenCookies.autoWorship0 != 0 &&
                 FrozenCookies.autoWorship0 != 3 &&
-                T.slot[1] != FrozenCookies.autoWorship0 &&
+                T.slot[0] != FrozenCookies.autoWorship0 &&
                 T.slot[2] != FrozenCookies.autoWorship0
             ) {
                 swapIn(FrozenCookies.autoWorship0, 1);
             } else if (
                 FrozenCookies.autoWorship1 != 0 &&
                 FrozenCookies.autoWorship1 != 3 &&
-                T.slot[1] != FrozenCookies.autoWorship1 &&
+                T.slot[0] != FrozenCookies.autoWorship1 &&
                 T.slot[2] != FrozenCookies.autoWorship1
             ) {
                 swapIn(FrozenCookies.autoWorship1, 1);
             } else if (
                 FrozenCookies.autoWorship2 != 0 &&
                 FrozenCookies.autoWorship2 != 3 &&
-                T.slot[1] != FrozenCookies.autoWorship2 &&
+                T.slot[0] != FrozenCookies.autoWorship2 &&
                 T.slot[2] != FrozenCookies.autoWorship2
             ) {
                 swapIn(FrozenCookies.autoWorship2, 1);
