@@ -213,7 +213,7 @@ FrozenCookies.preferenceValues = {
         default: 11,
     },
     autoCyclius: {
-        hint: "Continually swap Cyclius throughout the day for max CpS bonus. Works best if auto-Pantheon is set, with Cyclius in JADE slot",
+        hint: "Continually swap Cyclius throughout the day for max CpS bonus. Works best if auto-Pantheon is set, with Cyclius not set to any slot",
         display: ["Auto-Cyclius OFF", "Auto-Cyclius in RUBY and JADE", "Auto-Cyclius in all slots"],
         default: 0,
     },

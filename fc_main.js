@@ -2655,7 +2655,7 @@ function autoCycliusAction() {
     if (!T || T.swaps < 1 || FrozenCookies.autoCyclius == 0) return;
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
-    if (Game.hasGod("ages") && FrozenCookies.autoWorshipToggle == 1) {
+    if (FrozenCookies.autoWorshipToggle == 1) {
         FrozenCookies.autoWorshipToggle = 0;
         logEvent("autoCyclius", "Turning off Auto-Pantheon");
     }
