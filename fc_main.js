@@ -1292,7 +1292,7 @@ function autoFTHOFComboAction() {
                                 "autoFTHOFCombo",
                                 "Cast first Force the Hand of Fate"
                             );
-                            autoFTHOFComboAction.state = 2;
+                            autoFTHOFComboAction.state = 3;
                         }
                         return;
                     case 2:
@@ -1304,7 +1304,7 @@ function autoFTHOFComboAction() {
                                 "autoFTHOFCombo",
                                 "Cast first Force the Hand of Fate"
                             );
-                            autoFTHOFComboAction.state = 2;
+                            autoFTHOFComboAction.state = 3;
                         }
                         return;
                     case 3:
@@ -1316,7 +1316,7 @@ function autoFTHOFComboAction() {
                                 "autoFTHOFCombo",
                                 "Cast first Force the Hand of Fate"
                             );
-                            autoFTHOFComboAction.state = 2;
+                            autoFTHOFComboAction.state = 3;
                         }
                         return;
                     case 4:
@@ -1328,7 +1328,7 @@ function autoFTHOFComboAction() {
                                 "autoFTHOFCombo",
                                 "Cast first Force the Hand of Fate"
                             );
-                            autoFTHOFComboAction.state = 2;
+                            autoFTHOFComboAction.state = 3;
                         }
                         return;
                     case 5:
@@ -1340,7 +1340,7 @@ function autoFTHOFComboAction() {
                                 "autoFTHOFCombo",
                                 "Cast first Force the Hand of Fate"
                             );
-                            autoFTHOFComboAction.state = 2;
+                            autoFTHOFComboAction.state = 3;
                         }
                         return;
                     case 6:
@@ -1352,7 +1352,7 @@ function autoFTHOFComboAction() {
                                 "autoFTHOFCombo",
                                 "Cast first Force the Hand of Fate"
                             );
-                            autoFTHOFComboAction.state = 2;
+                            autoFTHOFComboAction.state = 3;
                         }
                         return;
                     case 7:
@@ -1364,7 +1364,7 @@ function autoFTHOFComboAction() {
                                 "autoFTHOFCombo",
                                 "Cast first Force the Hand of Fate"
                             );
-                            autoFTHOFComboAction.state = 2;
+                            autoFTHOFComboAction.state = 3;
                         }
                         return;
                     case 8:
@@ -1376,7 +1376,7 @@ function autoFTHOFComboAction() {
                                 "autoFTHOFCombo",
                                 "Cast first Force the Hand of Fate"
                             );
-                            autoFTHOFComboAction.state = 2;
+                            autoFTHOFComboAction.state = 3;
                         }
                         return;
                     case 9:
@@ -1388,7 +1388,7 @@ function autoFTHOFComboAction() {
                                 "autoFTHOFCombo",
                                 "Cast first Force the Hand of Fate"
                             );
-                            autoFTHOFComboAction.state = 2;
+                            autoFTHOFComboAction.state = 3;
                         }
                         return;
                     case 10:
@@ -1448,7 +1448,7 @@ function autoFTHOFComboAction() {
                                 "autoFTHOFCombo",
                                 "Cast first Force the Hand of Fate"
                             );
-                            autoFTHOFComboAction.state = 2;
+                            autoFTHOFComboAction.state = 3;
                         }
                         return;
                     case 2:
@@ -1460,7 +1460,7 @@ function autoFTHOFComboAction() {
                                 "autoFTHOFCombo",
                                 "Cast first Force the Hand of Fate"
                             );
-                            autoFTHOFComboAction.state = 2;
+                            autoFTHOFComboAction.state = 3;
                         }
                         return;
                     case 3:
@@ -1472,7 +1472,7 @@ function autoFTHOFComboAction() {
                                 "autoFTHOFCombo",
                                 "Cast first Force the Hand of Fate"
                             );
-                            autoFTHOFComboAction.state = 2;
+                            autoFTHOFComboAction.state = 3;
                         }
                         return;
                     case 4:
@@ -1484,7 +1484,7 @@ function autoFTHOFComboAction() {
                                 "autoFTHOFCombo",
                                 "Cast first Force the Hand of Fate"
                             );
-                            autoFTHOFComboAction.state = 2;
+                            autoFTHOFComboAction.state = 3;
                         }
                         return;
                     case 5:
@@ -1496,7 +1496,7 @@ function autoFTHOFComboAction() {
                                 "autoFTHOFCombo",
                                 "Cast first Force the Hand of Fate"
                             );
-                            autoFTHOFComboAction.state = 2;
+                            autoFTHOFComboAction.state = 3;
                         }
                         return;
                     case 6:
@@ -1508,7 +1508,7 @@ function autoFTHOFComboAction() {
                                 "autoFTHOFCombo",
                                 "Cast first Force the Hand of Fate"
                             );
-                            autoFTHOFComboAction.state = 2;
+                            autoFTHOFComboAction.state = 3;
                         }
                         return;
                     case 7:
@@ -1520,7 +1520,7 @@ function autoFTHOFComboAction() {
                                 "autoFTHOFCombo",
                                 "Cast first Force the Hand of Fate"
                             );
-                            autoFTHOFComboAction.state = 2;
+                            autoFTHOFComboAction.state = 3;
                         }
                         return;
                     case 8:
@@ -1532,7 +1532,7 @@ function autoFTHOFComboAction() {
                                 "autoFTHOFCombo",
                                 "Cast first Force the Hand of Fate"
                             );
-                            autoFTHOFComboAction.state = 2;
+                            autoFTHOFComboAction.state = 3;
                         }
                         return;
                     case 9:
@@ -1544,7 +1544,7 @@ function autoFTHOFComboAction() {
                                 "autoFTHOFCombo",
                                 "Cast first Force the Hand of Fate"
                             );
-                            autoFTHOFComboAction.state = 2;
+                            autoFTHOFComboAction.state = 3;
                         }
                         return;
                     case 10:
