@@ -427,7 +427,7 @@ If you want to manually install it:
 # What do these options actually mean, in detail?
 
 ## Auto clicking Options
-* **Autoclick** This will simulate clicking the big cookie by directly calling the function that register cookie clicks. A value of 250 will work well for most people but if you have a fast computer, you can go up to 1000. Basically, to find the sweet spot for your system, increase it until the countdown in the infobox for the next upgrade begins to go wrong. Or just set it 250 and forget about it. 
+* **Autoclick** This will simulate clicking the big cookie by directly calling the function that register cookie clicks. A value of 250 will best well for most people playing on web, but if you have a fast computer and are playing the Steam version, you can go up to 1000. Basically, to find the sweet spot for your system, start at a value like 100 and increase it until the 'Next' upgrade in the options or infobox begins to go wrong, either by losing the seconds value or by showing a clearly incorrect count. If it does, lower the Autoclick count again until you find the optimal speed. Or, just set it 250 and forget about it.
 * **Autofrenzy** This is Autoclick but during click frenzies. The same rules as Autoclick apply, but you can use a higher value here if you cannot normally run Autoclick at top speed. 
 * **Autoclick GC** All golden cookes, including wrath cookies, will be collected as soon as they appear if enabled. 
 * **Autoclick Reindeer** This will click Reindeer the moment they appear. 
@@ -439,9 +439,9 @@ If you want to manually install it:
 * **Auto Bulkbuy** This sets the bulk buy mode directly after ascending only. It does not carry over on reloads. If some buildings are capped, it will temporarily bypass bulk buy for those if they are near the cap. 
 * ** Auto Blacklist** Turns off the selected blacklist (next option) if it served its purpose.
 * **Blacklist** This contains the Speedrun and Hardcore blacklists required for some of the born again achievements, as well as one to disable ever entering or proceding with the Grandmapocalypse, and a bonus mode that will not buy any buildings.
-* **Mine limit** Auto-Godzamok uses mines and factories so it makes sense to put a maximum cap on these, as otherwise rebuying will cost more than was gained. The actual tipping point depends on your max CpS so this cannot be predetermined. 
+* **Mine limit** Auto-Godzamok uses mines and factories so it makes sense to put a maximum cap on these, as otherwise rebuying will cost more than was gained. The actual tipping point depends on your max CpS so this cannot be predetermined. For mid game (when you can earn enough HCs at a good pace), try a value around 500. For very late game (all upgrades bought), try values around 800.
 * **Factory limit** See Mine limit
-* **Pastemode** Turning this on is a stupid idea.
+* **Pastemode** Turning this on is a very stupid idea.
 
 ## Other automatic options
 * **Autoascend** This is mainly useful if you're grinding out ascensions for Endless Cycle, or want to build up your HC boost. 
@@ -452,38 +452,39 @@ If you want to manually install it:
 * **Auto-Golden Switch** The Golden Switch gives a good CpS boost but prevents cookies from appearing while active. This option toggles the GS the moment a clicking frenzy starts and turns it off when this ends.  
 * **Auto-Godzamok** Godzamok allows for the Devastation boost which can help clicking frenzies earn immense amounts of cookies. If enabled, it will sell mines and factories the moment a CF starts and Godzamok is an active god. If these buildings are not capped, Auto-Godzamok will sell and rebuy up to 500 of each, otherwise it will sell all and rebuy up to the cap. 
 * **Auto-Banking** This will upgrade the bank office level the moment you have enough cursors to do so.  
-* **Auto-Broker** This will hire stock brokers, if the next Autobuy upgrade is a building, and it can afford to do so. 
+* **Auto-Broker** This will hire stock brokers, if the next Autobuy upgrade is a building, and it can afford to do so. If you're not playing the stock market, don't bother with this. 
 * **Auto-Loans** If the bank office level has unlocked one or more loans, setting this option will take the first loans once a clicking frenzy is active and the total frenzy is higher than the set number. The first choice will take the modest (2h/4h) loan and the pawnshop (40s/40m) loan, the second choice will also take the retirement (2d/5d) loan.
 
 ## Pantheon options
-* **Auto Pantheon** The main option to toggle setting the gods or not. The next three options are to select a god per slot. If the same god is set to multiple slots, the highest rank slot stays and the lower one is automatically cleared.
+* **Auto Pantheon** The main option to toggle slotting the gods or not. The next three options are to select a god per slot. If the same god is set to multiple slots, the highest rank slot stays and the lower one is automatically cleared.
 * **Auto-Cyclius** If enabled, turns off the Auto Pantheon. Cyclius' bonus over the course of the day can be maximized by switching him between slots periodically. This option will automate that process. The first option will swap Cyclius between the Ruby and Jade slots, the second option will also use the Diamond slot. For those periods where Cyclius only has negative effects, it will try to replace it with a god from the Auto Pantheon that is currently not slotted, and otherwise it will remove Cyclius. See the schedule on https://cookieclicker.fandom.com/wiki/Pantheon
 
 ## Grimoire options
-* **Wizard Tower Cap** This cap works different than the other building ones, since it will not directly cap at a given WT number, but instead at the amount of mana that is set. 37 is the best value for the auto cast FTHOF or manual casting option, for double casting higher values are needed. Setting this to any value over 100 is wasting mana and can make double casting impossible.
-* **Auto Cast FTHOF**, **Double Cast FTHOF**, **Auto Cast 100% Consistency Combo** Select one of the auto casting methods. More details in this document. Cannot use multiple options at once, the lowest enabled entry in the list will be active.
+* **Wizard Tower Cap** This cap works different than the other building ones, since it will not directly cap at a given WT number, but instead at the amount of mana that is set. 37 is the best value for the auto cast FTHOF or manual casting option, for double casting higher values are needed (between 81 and 100). Setting this to any value over 100 is wasting mana and ruins spell casting speed.
+* **Auto Cast FTHOF**, **Double Cast FTHOF**, **Auto Cast 100% Consistency Combo** Select one of the auto casting methods. More details further on. Cannot use multiple options at once, the lowest enabled entry in the list will be active.
 * **Auto Sugar Frenzy** Will buy Sugar Frenzy with a sugar lump during the first 100% Consistency and/or Double Cast combo (depending on what is set) of that ascension. If Sugar Baking Guard is active, it will only buy ASF if you have 101 lumps or more.
-* **Auto Sweet** Experimental auto casting/ascending option to farm sugar lumps. This is dangerous as it cannot be turned off without access to the console. Do not enable unless you know how.
+* **Auto Sweet** Experimental auto casting/ascending option to farm sugar lumps. This is dangerous as it cannot be turned off without access to the console. Do not enable unless you know how to. This will disable all other automated spell casting methods.
 
 ## Dragon options
 * **Dragon Upgrading** Will buy a dragon upgrade as soon as it is possible to do so. This ignores any building chains and the like.
-* **Dragon Petting** Will spam click the dragon once it can be pet, until all four drops are unlocked.
-* **Dragon Auras** Will set the desired aura. Aura 1 will be set in the first slot and Aura 2 will set in the second slot
-* **Auto Dragon Orbs** If Dragon Orbs is one of thee active auras and Godzamok is not a god, this will repeatedly sell Cortex bakers to try to spawn Golden Cookies. Works together with:
+* **Dragon Petting** Will spam click the dragon once it can be pet, until all four drops are unlocked for this ascension.
+* **Dragon Auras** Will set the desired aura. Aura 1 will be set in the first slot and Aura 2 will set in the second slot, even if Aura 2 could theoretically be set earlier.
+* **Auto Dragon Orbs** If Dragon Orbs is one of the active auras and Godzamok is not a slotted god, this will repeatedly sell Cortex bakers to try to spawn Golden Cookies. Works together with:
 * **Cortex bakers Limit** This will cap the number of Cortex bakers that can be bought to a given number to make sure ADO doesn't wipe out all your cookies.
 
 ## Season options
-* **Default Season** Will constantly buy the given season, if no season is active and all other seasons with drops have had all their upgrades unlocked. This will immediately change seasons if possible so turn off Auto-Buy if you're going through the list to avoid overpaying.
+* **Default Season** Will buy the given season, if no season is active and all other seasons with drops have had all their upgrades unlocked. This will immediately change seasons if possible so turn off Auto-Buy if you're going through the list to avoid overpaying.
 * **Auto-Easter Switch** If you do not have all eggs yet, this will instantly start Easter the moment a Cookie Storm starts. This because eggs can be extremely tedious to unlock by normal means.
 * **Auto-Halloween Switch** If you do not have all spooky biscuits yet, this will change to Halloween if the season is not Easter and there are wrinklers.
 
 ## Bank options
-All bank options will add a number of cookies to the next autoBuy purchase price, so it will never go below this amount from buying. Multiple banks can be enabled at the same time, whatever is highest will be kept in reserve.
+All bank options will add a number of cookies to the next autoBuy purchase price, so it will never go below this amount from buying. This is separate from the 'Lucky' GC bank, which is always active. Multiple banks can be enabled at the same time, whatever is highest will be kept in reserve.
 * **SE Bank** Will keep half the cost of the highest owned building in reserve. This option is always enabled if you're auto-casting SE.
 * **Harvesting bank** Some plants give bonus cookies when they are harvested or let explode. For example, Bakeberries will give up to 30 minutes of CpS when harvested, but are limited to 3% of the stored cookies. Enabling this for Bakeberries will make sure that 3% of your bank is always equal to 30 minutes of current CpS.
 * **Harvestiung during CpS multiplier** This will work with the above option to also take a CpS multiplier into account. If you intend to harvest always during a frenzy and/or 1 or more building specials for optimal returns, this will increase the Harvesting bank value.
 
 ## Other options
+Not all of these work on the Steam version.
 * **Shortcuts** Enable the following keyboard shortcuts:
   * Press 'a' to toggle autobuy.
   * Press 'b' to pop up a copyable window with building spread.
@@ -492,7 +493,6 @@ All bank options will add a number of cookies to the next autoBuy purchase price
   * Press 'r' to pop up the reset window
   * Press 's' to do a manual save
   * Press 'w' to display a wrinkler-info window
-Not all of these work on the Steam version.
 * **GC Clicked percentage** Golden Cookie effiency calculations by default assume all GCs were clicked. If for whatever reason you're not clicking GCs, set this to the approximate value for improved calculations. Don't touch if you don't know what that means.
 
 ## Display options
