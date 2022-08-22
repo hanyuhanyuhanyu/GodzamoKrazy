@@ -62,6 +62,9 @@ If you want to manually install it:
 <details>
 <summary>Click to expand!</summary> 
 
+2022 Aug 22
+* Auto-Pantheon could not set Holobore. Now, it can. An unfortunate side-effect of this fix is that any existing setups which have 'No god' selected for any of the three auto-Pantheon slots will now show Holobore set instead. This will not affect new installs of FC.
+
 2022 Aug 21
 * Extended Auto Loan to also take loan 3, if desired
 * Completed documentation of the options

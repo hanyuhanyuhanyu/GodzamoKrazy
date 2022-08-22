@@ -2535,7 +2535,7 @@ function autoSugarFrenzyAction() {
 }
 
 function autoWorship0Action() {
-    if (!T || T.swaps < 1 || FrozenCookies.autoWorship0 == 0) return;
+    if (!T || T.swaps < 1 || FrozenCookies.autoWorship0 == 11) return;
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
     if (FrozenCookies.autoWorshipToggle == 0) return;
 
@@ -2545,14 +2545,14 @@ function autoWorship0Action() {
 }
 
 function autoWorship1Action() {
-    if (!T || T.swaps < 1 || FrozenCookies.autoWorship1 == 0) return;
+    if (!T || T.swaps < 1 || FrozenCookies.autoWorship1 == 11) return;
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
     if (FrozenCookies.autoWorshipToggle == 0) return;
 
     if (T.slot[1] == FrozenCookies.autoWorship1) return;
 
     if (T.slot[0] == FrozenCookies.autoWorship1) {
-        FrozenCookies.autoworship1 = 0;
+        FrozenCookies.autoworship1 = 11;
         logEvent("autoWorship", "Can't worship the same god in Diamond and Ruby slots!");
         return;
     }
@@ -2561,19 +2561,19 @@ function autoWorship1Action() {
 }
 
 function autoWorship2Action() {
-    if (!T || T.swaps < 1 || FrozenCookies.autoWorship2 == 0) return;
+    if (!T || T.swaps < 1 || FrozenCookies.autoWorship2 == 11) return;
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
     if (FrozenCookies.autoWorshipToggle == 0) return;
 
     if (T.slot[2] == FrozenCookies.autoWorship2) return;
 
     if (T.slot[0] == FrozenCookies.autoWorship2) {
-        FrozenCookies.autoworship2 = 0;
+        FrozenCookies.autoworship2 = 11;
         logEvent("autoWorship", "Can't worship the same god in Diamond and Jade slots!");
         return;
     }
     if (T.slot[1] == FrozenCookies.autoWorship2) {
-        FrozenCookies.autoworship2 = 0;
+        FrozenCookies.autoworship2 = 11;
         logEvent("autoWorship", "Can't worship the same god in Ruby and Jade slots!");
         return;
     }
@@ -2694,9 +2694,9 @@ function autoCycliusAction() {
         if (Game.hasGod("ages") && currentTime >= Diamond4) {
             // 18:00 - 0:00
             if (
-                FrozenCookies.autoWorship0 != 0 &&
-                FrozenCookies.autoWorship1 != 0 &&
-                FrozenCookies.autoWorship2 != 0 &&
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship2 != 11 &&
                 FrozenCookies.autoWorship0 != 3 &&
                 FrozenCookies.autoWorship1 != 3 &&
                 FrozenCookies.autoWorship2 != 3
@@ -2760,9 +2760,9 @@ function autoCycliusAction() {
         if (Game.hasGod("ages") && currentTime >= CycNone1 && currentTime < Diamond5) {
             // 19:30 - 21
             if (
-                FrozenCookies.autoWorship0 != 0 &&
-                FrozenCookies.autoWorship1 != 0 &&
-                FrozenCookies.autoWorship2 != 0 &&
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship2 != 11 &&
                 FrozenCookies.autoWorship0 != 3 &&
                 FrozenCookies.autoWorship1 != 3 &&
                 FrozenCookies.autoWorship2 != 3
@@ -2788,9 +2788,9 @@ function autoCycliusAction() {
         if (Game.hasGod("ages") && currentTime >= CycNone2) {
             // 22:30 - 0
             if (
-                FrozenCookies.autoWorship0 != 0 &&
-                FrozenCookies.autoWorship1 != 0 &&
-                FrozenCookies.autoWorship2 != 0 &&
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship2 != 11 &&
                 FrozenCookies.autoWorship0 != 3 &&
                 FrozenCookies.autoWorship1 != 3 &&
                 FrozenCookies.autoWorship2 != 3

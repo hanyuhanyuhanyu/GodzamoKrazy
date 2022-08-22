@@ -161,7 +161,7 @@ FrozenCookies.preferenceValues = {
     autoWorship0: {
         hint: "Automatically slots desired god in DIAMOND slot",
         display: [
-            "No god",
+            "Holobore",
             "Vomitrax",
             "Godzamok",
             "Cyclius",
@@ -172,14 +172,14 @@ FrozenCookies.preferenceValues = {
             "Mokalsium",
             "Skruuia",
             "Rigidel",
-            "Holobore",
+            "No god",
         ],
-        default: 0,
+        default: 11,
     },
     autoWorship1: {
         hint: "Automatically slots desired god in RUBY slot",
         display: [
-            "No god",
+            "Holobore",
             "Vomitrax",
             "Godzamok",
             "Cyclius",
@@ -190,14 +190,14 @@ FrozenCookies.preferenceValues = {
             "Mokalsium",
             "Skruuia",
             "Rigidel",
-            "Holobore",
+            "No god",
         ],
-        default: 0,
+        default: 11,
     },
     autoWorship2: {
         hint: "Automatically slots desired god in JADE slot",
         display: [
-            "No God",
+            "Holobore",
             "Vomitrax",
             "Godzamok",
             "Cyclius",
@@ -208,9 +208,9 @@ FrozenCookies.preferenceValues = {
             "Mokalsium",
             "Skruuia",
             "Rigidel",
-            "Holobore",
+            "No God",
         ],
-        default: 0,
+        default: 11,
     },
     autoCyclius: {
         hint: "Continually swap Cyclius throughout the day for max CpS bonus. Disables Auto Pantheon",
