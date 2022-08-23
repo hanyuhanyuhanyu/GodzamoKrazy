@@ -62,6 +62,9 @@ If you want to manually install it:
 <details>
 <summary>Click to expand!</summary> 
 
+2022 Aug 23
+* Updated auto-Cyclius to work with Supreme Intellect and to allow it to set all gods properly when activated.
+
 2022 Aug 22
 * Auto-Pantheon could not set Holobore. Now, it can. An unfortunate side-effect of this fix is that any existing setups which have 'No god' selected for any of the three auto-Pantheon slots will now show Holobore set instead. This will not affect new installs of FC.
 
@@ -457,7 +460,8 @@ If you want to manually install it:
 
 ## Pantheon options
 * **Auto Pantheon** The main option to toggle slotting the gods or not. The next three options are to select a god per slot. If the same god is set to multiple slots, the highest rank slot stays and the lower one is automatically cleared.
-* **Auto-Cyclius** If enabled, turns off the Auto Pantheon. Cyclius' bonus over the course of the day can be maximized by switching him between slots periodically. This option will automate that process. The first option will swap Cyclius between the Ruby and Jade slots, the second option will also use the Diamond slot. Works best if the Auto Pantheon is set with three gods other than Cyclius in all slots. For those periods where Cyclius only has negative effects, it will try to replace Cyclius with the gods from the Auto Pantheon options, and otherwise it will fall back to remove it and leave the slot empty. See the schedule on https://cookieclicker.fandom.com/wiki/Pantheon
+* **Auto-Cyclius** If enabled, turns off the Auto Pantheon. Cyclius' bonus over the course of the day can be maximized by switching him between slots periodically. This option will automate that process. The first option will swap Cyclius between the Ruby and Jade slots, the second option will also use the Diamond slot. Auto-Cyclius works best if the Auto Pantheon is set with three gods other than Cyclius in all slots. For those periods where Cyclius only has negative effects, it will try to replace Cyclius with the gods from the Auto Pantheon options, and otherwise it will fall back to remove it and leave the slot empty. If Supreme Intellect is one of the dragon auras and auto-Cyclius is enabled, auto-Cyclius will swap to a modified version of the two slot option.
+See the schedule on https://cookieclicker.fandom.com/wiki/Pantheon
 
 ## Grimoire options
 * **Wizard Tower Cap** This cap works different than the other building ones, since it will not directly cap at a given WT number, but instead at the amount of mana that is set. 37 is the best value for the auto cast FTHOF or manual casting option, for double casting higher values are needed (between 81 and 100). Setting this to any value over 100 is wasting mana and ruins spell casting speed.

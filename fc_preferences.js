@@ -213,8 +213,12 @@ FrozenCookies.preferenceValues = {
         default: 11,
     },
     autoCyclius: {
-        hint: "Continually swap Cyclius throughout the day for max CpS bonus. Works best if auto-Pantheon is set, with Cyclius not set to any slot",
-        display: ["Auto-Cyclius OFF", "Auto-Cyclius in RUBY and JADE", "Auto-Cyclius in all slots"],
+        hint: "Continually swap Cyclius throughout the day for max CpS bonus. Works best if all gods for the auto-Pantheon are set, with Cyclius not set to any slot. If Supreme Intellect is active, only two slots are used",
+        display: [
+            "Auto-Cyclius OFF",
+            "Auto-Cyclius in RUBY and JADE",
+            "Auto-Cyclius in all slots",
+        ],
         default: 0,
     },
 

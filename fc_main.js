@@ -2535,9 +2535,15 @@ function autoSugarFrenzyAction() {
 }
 
 function autoWorship0Action() {
-    if (!T || T.swaps < 1 || FrozenCookies.autoWorship0 == 11) return;
+    if (
+        !T ||
+        T.swaps < 1 ||
+        FrozenCookies.autoWorshipToggle == 0 ||
+        FrozenCookies.autoWorship0 == 11 ||
+        FrozenCookies.autoCyclius != 0
+    )
+        return;
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
-    if (FrozenCookies.autoWorshipToggle == 0) return;
 
     if (T.slot[0] == FrozenCookies.autoWorship0) return;
 
@@ -2545,9 +2551,15 @@ function autoWorship0Action() {
 }
 
 function autoWorship1Action() {
-    if (!T || T.swaps < 1 || FrozenCookies.autoWorship1 == 11) return;
+    if (
+        !T ||
+        T.swaps < 1 ||
+        FrozenCookies.autoWorshipToggle == 0 ||
+        FrozenCookies.autoWorship1 == 11 ||
+        FrozenCookies.autoCyclius != 0
+    )
+        return;
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
-    if (FrozenCookies.autoWorshipToggle == 0) return;
 
     if (T.slot[1] == FrozenCookies.autoWorship1) return;
 
@@ -2561,9 +2573,15 @@ function autoWorship1Action() {
 }
 
 function autoWorship2Action() {
-    if (!T || T.swaps < 1 || FrozenCookies.autoWorship2 == 11) return;
+    if (
+        !T ||
+        T.swaps < 1 ||
+        FrozenCookies.autoWorshipToggle == 0 ||
+        FrozenCookies.autoWorship2 == 11 ||
+        FrozenCookies.autoCyclius != 0
+    )
+        return;
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
-    if (FrozenCookies.autoWorshipToggle == 0) return;
 
     if (T.slot[2] == FrozenCookies.autoWorship2) return;
 
@@ -2660,6 +2678,14 @@ function autoCycliusAction() {
         logEvent("autoCyclius", "Turning off Auto-Pantheon");
     }
 
+    if (FrozenCookies.autoCyclius == 2 && Game.hasAura("Supreme Intellect")) {
+        FrozenCookies.autoCyclius = 1;
+        logevent(
+            "autoCyclius",
+            "Supreme Intellect detected! Swapping Cyclius to two slot mode"
+        );
+    }
+
     //const Diamond1 = 0;
     const Ruby1 = 1 * 60 + 12;
     const Jade1 = 4 * 60;
@@ -2671,139 +2697,700 @@ function autoCycliusAction() {
     const CycNone1 = 19 * 60 + 30;
     const Diamond5 = 21 * 60;
     const CycNone2 = 22 * 60 + 30;
+    const SI6 = 6 * 60;
+    const SI730 = 7 * 60 + 30;
 
     var now = new Date();
     var currentTime = now.getUTCHours() * 60 + now.getUTCMinutes(); // Time in UTC
 
-    if (FrozenCookies.autoCyclius == 1) {
+    if (FrozenCookies.autoCyclius == 1 && !Game.hasAura("Supreme Intellect")) {
         if (T.slot[1] != 3 && currentTime < Jade1) {
             // 0:00 - 4:00
             swapIn(3, 1);
             logEvent("autoCyclius", "Putting Cyclius in RUBY");
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[0] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship2 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship2 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
+            }
         }
         if (T.slot[2] != 3 && currentTime >= Jade1 && currentTime < Diamond3) {
             // 4:00 - 12:00
             swapIn(3, 2);
             logEvent("autoCyclius", "Putting Cyclius in JADE");
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[0] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[1] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 1);
+                logEvent("autoCyclius", "set desired god to RUBY");
+            }
         }
         if (T.slot[1] != 3 && currentTime >= Diamond3 && currentTime < Diamond4) {
             // 12:00 - 18:00
             swapIn(3, 1);
             logEvent("autoCyclius", "Putting Cyclius in RUBY");
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[0] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship2 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship2 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
+            }
         }
         if (Game.hasGod("ages") && currentTime >= Diamond4) {
             // 18:00 - 0:00
             if (
                 FrozenCookies.autoWorship0 != 11 &&
-                FrozenCookies.autoWorship1 != 11 &&
-                FrozenCookies.autoWorship2 != 11 &&
                 FrozenCookies.autoWorship0 != 3 &&
-                FrozenCookies.autoWorship1 != 3 &&
-                FrozenCookies.autoWorship2 != 3
+                T.slot[01] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
             ) {
-                if (T.slot[0] == 3) swapIn(FrozenCookies.autoWorship0, 0);
-                if (T.slot[0] != FrozenCookies.autoWorship0)
-                    swapIn(FrozenCookies.autoWorship0, 0);
-                if (T.slot[1] == 3) swapIn(FrozenCookies.autoWorship1, 1);
-                if (T.slot[1] != FrozenCookies.autoWorship1)
-                    swapIn(FrozenCookies.autoWorship1, 1);
-                if (T.slot[2] == 3) swapIn(FrozenCookies.autoWorship2, 2);
-                if (T.slot[2] != FrozenCookies.autoWorship2)
-                    swapIn(FrozenCookies.autoWorship2, 2);
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[1] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 1);
+                logEvent("autoCyclius", "set desired god to RUBY");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship2 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship2, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
             }
             Game.forceUnslotGod("ages");
             logEvent("autoCyclius", "Removing Cyclius");
         }
     }
 
-    if (FrozenCookies.autoCyclius == 2) {
+    if (FrozenCookies.autoCyclius == 2 && !Game.hasAura("Supreme Intellect")) {
         if (T.slot[0] != 3 && currentTime < Ruby1) {
             // 0:00 - 1:12
             swapIn(3, 0);
             logEvent("autoCyclius", "Putting Cyclius in DIAMOND");
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[1] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 1);
+                logEvent("autoCyclius", "set desired god to RUBY");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
+            }
         }
         if (T.slot[1] != 3 && currentTime >= Ruby1 && currentTime < Jade1) {
             // 1:12 - 4:00
             swapIn(3, 1);
             logEvent("autoCyclius", "Putting Cyclius in RUBY");
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[0] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship2 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship2 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
+            }
         }
         if (T.slot[2] != 3 && currentTime >= Jade1 && currentTime < Diamond2) {
             // 4:00 - 9:19
             swapIn(3, 2);
             logEvent("autoCyclius", "Putting Cyclius in JADE");
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[0] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[1] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 1);
+                logEvent("autoCyclius", "set desired god to RUBY");
+            }
         }
         if (T.slot[0] != 3 && currentTime >= Diamond2 && currentTime < Jade2) {
             // 9:19 - 10:20
             swapIn(3, 0);
             logEvent("autoCyclius", "Putting Cyclius in DIAMOND");
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[1] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 1);
+                logEvent("autoCyclius", "set desired god to RUBY");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
+            }
         }
         if (T.slot[2] != 3 && currentTime >= Jade2 && currentTime < Diamond3) {
             // 10:20 - 12:00
             swapIn(3, 2);
             logEvent("autoCyclius", "Putting Cyclius in JADE");
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[0] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[1] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 1);
+                logEvent("autoCyclius", "set desired god to RUBY");
+            }
         }
         if (T.slot[0] != 3 && currentTime >= Diamond3 && currentTime < Ruby2) {
             // 12 - 13
             swapIn(3, 0);
             logEvent("autoCyclius", "Putting Cyclius in DIAMOND");
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[1] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 1);
+                logEvent("autoCyclius", "set desired god to RUBY");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
+            }
         }
         if (T.slot[1] != 3 && currentTime >= Ruby2 && currentTime < Diamond4) {
             // 13:00 - 18:00
             swapIn(3, 1);
             logEvent("autoCyclius", "Putting Cyclius in RUBY");
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[0] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship2 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship2 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
+            }
         }
         if (T.slot[0] != 3 && currentTime >= Diamond4 && currentTime < CycNone1) {
             // 18:00 - 19:30
             swapIn(3, 0);
             logEvent("autoCyclius", "Putting Cyclius in DIAMOND");
-        }
-        if (Game.hasGod("ages") && currentTime >= CycNone1 && currentTime < Diamond5) {
-            // 19:30 - 21
             if (
                 FrozenCookies.autoWorship0 != 11 &&
-                FrozenCookies.autoWorship1 != 11 &&
-                FrozenCookies.autoWorship2 != 11 &&
                 FrozenCookies.autoWorship0 != 3 &&
-                FrozenCookies.autoWorship1 != 3 &&
-                FrozenCookies.autoWorship2 != 3
+                T.slot[1] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
             ) {
-                if (T.slot[0] == 3) swapIn(FrozenCookies.autoWorship0, 0);
-                if (T.slot[0] != FrozenCookies.autoWorship0)
-                    swapIn(FrozenCookies.autoWorship0, 0);
-                if (T.slot[1] == 3) swapIn(FrozenCookies.autoWorship1, 1);
-                if (T.slot[1] != FrozenCookies.autoWorship1)
-                    swapIn(FrozenCookies.autoWorship1, 1);
-                if (T.slot[2] == 3) swapIn(FrozenCookies.autoWorship2, 2);
-                if (T.slot[2] != FrozenCookies.autoWorship2)
-                    swapIn(FrozenCookies.autoWorship2, 2);
+                swapIn(FrozenCookies.autoWorship0, 1);
+                logEvent("autoCyclius", "set desired god to RUBY");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
+            }
+        }
+        if (Game.hasGod("ages") && currentTime >= CycNone1 && currentTime < Diamond5) {
+            // 19:30 - 21:00
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[01] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[1] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 1);
+                logEvent("autoCyclius", "set desired god to RUBY");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship2 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship2, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
+            }
+            Game.forceUnslotGod("ages");
+            logEvent("autoCyclius", "Removed Cyclius");
+        }
+        if (T.slot[0] != 3 && currentTime >= Diamond5 && currentTime < CycNone2) {
+            // 21:00 - 22:30
+            swapIn(3, 0);
+            logEvent("autoCyclius", "Putting Cyclius in DIAMOND");
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[1] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 1);
+                logEvent("autoCyclius", "set desired god to RUBY");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
+            }
+        }
+        if (Game.hasGod("ages") && currentTime >= CycNone2) {
+            // 22:30 - 0:00
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[01] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[1] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 1);
+                logEvent("autoCyclius", "set desired god to RUBY");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship2 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship2, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
             }
             Game.forceUnslotGod("ages");
             logEvent("autoCyclius", "Removing Cyclius");
         }
-        if (T.slot[0] != 3 && currentTime >= Diamond5 && currentTime < CycNone2) {
-            // 21 - 22:30
-            swapIn(3, 0);
-            logEvent("autoCyclius", "Putting Cyclius in DIAMOND");
-        }
-        if (Game.hasGod("ages") && currentTime >= CycNone2) {
-            // 22:30 - 0
+    }
+
+    // Supreme Intellect turns RUBY to DIAMOND and JADE to RUBY
+    if (FrozenCookies.autoCyclius == 1 && Game.hasAura("Supreme Intellect")) {
+        if (T.slot[1] != 3 && currentTime < Ruby1) {
+            // 0:00 - 1:12
+            swapIn(3, 1);
+            logEvent("autoCyclius", "Putting Cyclius in RUBY");
             if (
                 FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[0] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
                 FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
+            }
+        }
+        if (T.slot[2] != 3 && currentTime >= Ruby1 && currentTime < SI6) {
+            // 1:12 - 6:00
+            swapIn(3, 2);
+            logEvent("autoCyclius", "Putting Cyclius in JADE");
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[0] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
                 FrozenCookies.autoWorship2 != 11 &&
                 FrozenCookies.autoWorship0 != 3 &&
-                FrozenCookies.autoWorship1 != 3 &&
-                FrozenCookies.autoWorship2 != 3
+                T.slot[2] != FrozenCookies.autoWorship2 &&
+                T.swaps > 0
             ) {
-                if (T.slot[0] == 3) swapIn(FrozenCookies.autoWorship0, 0);
-                if (T.slot[0] != FrozenCookies.autoWorship0)
-                    swapIn(FrozenCookies.autoWorship0, 0);
-                if (T.slot[1] == 3) swapIn(FrozenCookies.autoWorship1, 1);
-                if (T.slot[1] != FrozenCookies.autoWorship1)
-                    swapIn(FrozenCookies.autoWorship1, 1);
-                if (T.slot[2] == 3) swapIn(FrozenCookies.autoWorship2, 2);
-                if (T.slot[2] != FrozenCookies.autoWorship2)
-                    swapIn(FrozenCookies.autoWorship2, 2);
+                swapIn(FrozenCookies.autoWorship1, 1);
+                logEvent("autoCyclius", "set desired god to RUBY");
+            }
+        }
+        if (T.slot[1] != 3 && currentTime >= SI6 && currentTime < SI730) {
+            // 6:00 - 7:30
+            swapIn(3, 1);
+            logEvent("autoCyclius", "Putting Cyclius in RUBY");
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[0] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[1] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
+            }
+        }
+        if (Game.hasGod("ages") && currentTime >= SI730 && currentTime < Diamond2) {
+            // 7:30 - 9:19
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[01] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[1] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 1);
+                logEvent("autoCyclius", "set desired god to RUBY");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship2 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship2, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
+            }
+            Game.forceUnslotGod("ages");
+            logEvent("autoCyclius", "Removing Cyclius");
+        }
+        if (T.slot[1] != 3 && currentTime >= Diamond2 && currentTime < Jade2) {
+            // 9:19 - 10:20
+            swapIn(3, 1);
+            logEvent("autoCyclius", "Putting Cyclius in RUBY");
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[1] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
+            }
+        }
+        if (Game.hasGod("ages") && currentTime >= Jade2 && currentTime < Diamond3) {
+            // 10:20 - 12:00
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[01] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[1] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 1);
+                logEvent("autoCyclius", "set desired god to RUBY");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship2 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship2, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
+            }
+            Game.forceUnslotGod("ages");
+            logEvent("autoCyclius", "Removing Cyclius");
+        }
+        if (T.slot[1] != 3 && currentTime >= Diamond3 && currentTime < Ruby2) {
+            // 12 - 13
+            swapIn(3, 1);
+            logEvent("autoCyclius", "Putting Cyclius in RUBY");
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[1] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
+            }
+        }
+        if (T.slot[2] != 3 && currentTime >= Ruby2 && currentTime < Diamond4) {
+            // 13:00 - 18:00
+            swapIn(3, 2);
+            logEvent("autoCyclius", "Putting Cyclius in JADE");
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[0] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship2 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship2 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 1);
+                logEvent("autoCyclius", "set desired god to RUBY");
+            }
+        }
+        if (T.slot[1] != 3 && currentTime >= Diamond4 && currentTime < CycNone1) {
+            // 18:00 - 19:30
+            swapIn(3, 1);
+            logEvent("autoCyclius", "Putting Cyclius in RUBY");
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[1] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
+            }
+        }
+        if (Game.hasGod("ages") && currentTime >= CycNone1 && currentTime < Diamond5) {
+            // 19:30 - 21:00
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[01] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[1] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 1);
+                logEvent("autoCyclius", "set desired god to RUBY");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship2 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship2, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
+            }
+            Game.forceUnslotGod("ages");
+            logEvent("autoCyclius", "Removed Cyclius");
+        }
+        if (T.slot[1] != 3 && currentTime >= Diamond5 && currentTime < CycNone2) {
+            // 21:00 - 22:30
+            swapIn(3, 1);
+            logEvent("autoCyclius", "Putting Cyclius in RUBY");
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[1] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
+            }
+        }
+        if (Game.hasGod("ages") && currentTime >= CycNone2) {
+            // 22:30 - 0:00
+            if (
+                FrozenCookies.autoWorship0 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[01] != FrozenCookies.autoWorship0 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship0, 0);
+                logEvent("autoCyclius", "set desired god to DIAMOND");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[1] != FrozenCookies.autoWorship1 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship1, 1);
+                logEvent("autoCyclius", "set desired god to RUBY");
+            }
+            if (
+                FrozenCookies.autoWorship1 != 11 &&
+                FrozenCookies.autoWorship0 != 3 &&
+                T.slot[2] != FrozenCookies.autoWorship2 &&
+                T.swaps > 0
+            ) {
+                swapIn(FrozenCookies.autoWorship2, 2);
+                logEvent("autoCyclius", "set desired god to JADE");
             }
             Game.forceUnslotGod("ages");
             logEvent("autoCyclius", "Removing Cyclius");
