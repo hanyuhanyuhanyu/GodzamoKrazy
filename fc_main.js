@@ -2370,12 +2370,12 @@ function autoBrokerAction() {
 }
 
 function autoLoanBuy() {
-    if (!B) return; // Just leave if you don't have the bank
+    if (!B || B.officelevel < 2) return;
 
     if (hasClickBuff() && cpsBonus() >= FrozenCookies.minLoanMult) {
-        B.takeLoan(1);
-        B.takeLoan(2);
-        if (FrozenCookies.autoLoan == 2) B.takeLoan(3);
+        if (B.officeLevel >= 2) B.takeLoan(1);
+        if (B.officeLevel >= 4) B.takeLoan(2);
+        if (B.officeLevel >= 5 && FrozenCookies.autoLoan == 2) B.takeLoan(3);
     }
 }
 
