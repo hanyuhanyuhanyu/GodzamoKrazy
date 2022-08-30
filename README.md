@@ -207,7 +207,7 @@ If you want to manually install it:
 * Copied the AutoComboFinder and smart Easter from DarkRoman
 * Fixed the broken auto-Godmazok behaviour that sold mines and factories instead of cursors
 
-\*Note: Recommended for a late stage game only
+\*Note: Recommended for a late stage game only. Don't like these values? Don't use it.
 </details>
   
 ## Older changelogs 
@@ -520,6 +520,7 @@ Not all of these work on the Steam version.
 * **Purchase Log** Will also log every purchase and resulting CpS.
 * **Frame Rate** Speed up or slow down the entire game.
 * **Tracking** Allows you to keep track of earned Heavenly Chips, raw CpS, and actual CpS over intervals and view this with *View Stat Graphs*. This will slow down the game and can even cause it to run out of memory if left enabled long enough, but can be useful to compare building spreads, slotted gods, dragon auras, etc.
+* **Recommended** This will set *all* Frozen Cookies options to predefined values intended for mid to late game. If you are not sure what FC can do for you, you can opt to use this setting to get a start with values that will work *good enough* for everyone. DO NOT USE if you already are familiar with FC as it will reset EVERY OPTION. Don't come complaining to me if you did enable it and lost your setup.
 
 # Efficiency? What's that?
 
