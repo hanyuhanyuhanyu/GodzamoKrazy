@@ -408,7 +408,7 @@ FrozenCookies.preferenceValues = {
             "Harvesting Bank BAKEBERRY",
             "Harvesting Bank CHOCOROOT",
             "Harvesting Bank WHITE CHOCOROOT",
-            "Harvesting Bank QUEEENBEET",
+            "Harvesting Bank QUEENBEET",
             "Harvesting Bank DUKETATER",
             "Harvesting Bank CRUMBSPORE",
             "Harvesting Bank DOUGHSHROOM",
@@ -520,5 +520,10 @@ FrozenCookies.preferenceValues = {
         ],
         default: 0,
         extras: '<a class="option" id="viewStats" onclick="viewStatGraphs();">View Stat Graphs</a>',
+    },
+    recommendedSettings: {
+        hint: "Enable all recommended settings. WARNING: will override anything you have currently set!",
+        display: ["Recommended OFF", "Recommended ON"],
+        default: 0,
     },
 };

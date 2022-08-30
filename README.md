@@ -66,6 +66,7 @@ If you want to manually install it:
 * Added a frenzy modifier check to the Auto Sugar Frenzy so you can make sure it only fires for big combos
 * The Current Frenzy (combination of all effects) is displayed on the Frozen Cookies button
 * Beautified the Frenzy Times so large numbers take the Number Display format
+* Add a one click option to set all recommended\* settings
 
 2022 Aug 23
 * Updated auto-Cyclius to work with Supreme Intellect and to allow it to set all gods properly when activated.
@@ -205,6 +206,8 @@ If you want to manually install it:
 * Copied the smart FTHOF behaviour from DarkRoman's variant: https://github.com/Darkroman/FrozenCookies
 * Copied the AutoComboFinder and smart Easter from DarkRoman
 * Fixed the broken auto-Godmazok behaviour that sold mines and factories instead of cursors
+
+\*Note: Recommended for a late stage game only
 </details>
   
 ## Older changelogs 
