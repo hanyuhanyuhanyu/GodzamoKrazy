@@ -307,6 +307,7 @@ function FCMenu() {
                 recommendation.id == chainRecommendation.id &&
                 recommendation.type == chainRecommendation.type
             ),
+            currentFrenzy = cpsBonus() * clickBuffBonus();
             bankLevel = bestBank(chainRecommendation.efficiency),
             actualCps = Game.cookiesPs + Game.mouseCps() * FrozenCookies.cookieClickSpeed,
             chocolateRecoup =
@@ -370,6 +371,7 @@ function FCMenu() {
             buildListing("Base Δ CPS", Beautify(recommendation.base_delta_cps))
         );
         subsection.append(buildListing("Full Δ CPS", Beautify(recommendation.delta_cps)));
+        subsection.append(buildListing("Current Frenzy", currentFrenzy));
         subsection.append(
             buildListing("Purchase Efficiency", Beautify(recommendation.efficiency))
         );
