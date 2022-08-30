@@ -3459,6 +3459,7 @@ function recommendedSettingsAction() {
         FrozenCookies.autoFTHOFCombo = 0;
         FrozenCookies.auto100ConsistencyCombo = 0;
         FrozenCookies.autoSugarFrenzy = 0;
+        FrozenCookies.minASFMult = 7777;
         FrozenCookies.autoSweet = 0;
         //Dragon options
         FrozenCookies.autoDragon = 1;
@@ -5241,6 +5242,8 @@ function safeBuy(bldg, count) {
 }
 
 function autoGodzamokAction() {
+    if (!T) return;
+    
     // if Godz is here and autoGodzamok is set
     if (Game.hasGod("ruin") && FrozenCookies.autoGodzamok) {
         // Need at least 10 of each to be useful
