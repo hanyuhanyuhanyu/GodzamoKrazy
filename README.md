@@ -64,6 +64,8 @@ If you want to manually install it:
 
 2022 Aug 30
 * Added a frenzy modifier check to the Auto Sugar Frenzy so you can make sure it only fires for big combos
+* The Current Frenzy (combination of all effects) is displayed on the Frozen Cookies button
+* Beautified the Frenzy Times so large numbers take the Number Display format
 
 2022 Aug 23
 * Updated auto-Cyclius to work with Supreme Intellect and to allow it to set all gods properly when activated.
