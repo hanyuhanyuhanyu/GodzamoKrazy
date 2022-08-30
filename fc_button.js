@@ -371,7 +371,7 @@ function FCMenu() {
             buildListing("Base Δ CPS", Beautify(recommendation.base_delta_cps))
         );
         subsection.append(buildListing("Full Δ CPS", Beautify(recommendation.delta_cps)));
-        subsection.append(buildListing("Current Frenzy", currentFrenzy));
+        subsection.append(buildListing("Current Frenzy", Beautify(currentFrenzy)));
         subsection.append(
             buildListing("Purchase Efficiency", Beautify(recommendation.efficiency))
         );
@@ -552,7 +552,7 @@ function FCMenu() {
             (rate, time) => {
                 subsection.append(
                     buildListing(
-                        "Total Recorded Time at x" + rate,
+                        "Total Recorded Time at x" + Beautify(rate),
                         timeDisplay(time / 1000)
                     )
                 );
