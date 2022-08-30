@@ -5623,6 +5623,11 @@ function FCStart() {
         clearInterval(FrozenCookies.otherUpgradesBot);
         FrozenCookies.otherUpgradesBot = 0;
     }
+    
+    if (FrozenCookies.autoCycliusBot) {
+        clearInterval(FrozenCookies.autoCycliusBot);
+        FrozenCookies.autoCycliusBot = 0;
+    }
 
     // Remove until timing issues are fixed
     //  if (FrozenCookies.goldenCookieBot) {
