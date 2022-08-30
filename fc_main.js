@@ -226,6 +226,7 @@ function setOverrides(gameSaveData) {
         FrozenCookies.minCpSMult = preferenceParse("minCpSMult", 1);
         FrozenCookies.maxSpecials = preferenceParse("maxSpecials", 1);
         FrozenCookies.minLoanMult = preferenceParse("minLoanMult", 1);
+        FrozenCookies.minASFMult = preferenceParse("minASFMult", 1);
 
         // building max values
         FrozenCookies.mineMax = preferenceParse("mineMax", 0);
@@ -503,6 +504,7 @@ function saveFCData() {
     saveString.factoryMax = FrozenCookies.factoryMax;
     saveString.minCpSMult = FrozenCookies.minCpSMult;
     saveString.minLoanMult = FrozenCookies.minLoanMult;
+    saveString.minASFMult = FrozenCookies.minASFMult;
     saveString.frenzyTimes = JSON.stringify(FrozenCookies.frenzyTimes);
     //  saveString.nonFrenzyTime = FrozenCookies.non_gc_time;
     //  saveString.frenzyTime = FrozenCookies.gc_time;
@@ -695,6 +697,15 @@ function updateLoanMultMin(base) {
     userInputPrompt(
         "Loans!",
         'What CpS multiplier should trigger taking loans (e.g. "7" will trigger for a normal Frenzy, "500" will require a huge building buff combo, etc.)?',
+        FrozenCookies[base],
+        storeNumberCallback(base, 0)
+    );
+}
+
+function updateASFMultMin(base) {
+    userInputPrompt(
+        "Sugar Frenzy!",
+        'What CpS multiplier should trigger buying the sugar frenzy (e.g. "100" will trigger for a decent early combo, "1000" will require a huge building buff combo, etc.)?',
         FrozenCookies[base],
         storeNumberCallback(base, 0)
     );
@@ -2512,6 +2523,7 @@ function autoSugarFrenzyAction() {
     if (
         FrozenCookies.autoSugarFrenzy == 1 &&
         ((FrozenCookies.sugarBakingGuard == 0 && Game.lumps > 0) || Game.lumps > 100) &&
+        cpsBonus() >= FrozenCookies.minASFMult &&
         Game.UpgradesById["450"].unlocked == 1 && // Check to see if Sugar craving prestige upgrade has been purchased
         Game.UpgradesById["452"].bought == 0 && // Check to see if sugar frenzy has already been bought this ascension
         auto100ConsistencyComboAction.state == 2
@@ -2524,6 +2536,7 @@ function autoSugarFrenzyAction() {
     if (
         FrozenCookies.autoSugarFrenzy == 2 &&
         ((FrozenCookies.sugarBakingGuard == 0 && Game.lumps > 0) || Game.lumps > 100) &&
+        cpsBonus() >= FrozenCookies.minASFMult &&
         Game.UpgradesById["450"].unlocked == 1 && // Check to see if Sugar craving prestige upgrade has been purchased
         Game.UpgradesById["452"].bought == 0 && // Check to see if sugar frenzy has already been bought this ascension
         (autoFTHOFComboAction.state == 3 || auto100ConsistencyComboAction.state == 2)
@@ -5623,7 +5636,7 @@ function FCStart() {
         clearInterval(FrozenCookies.otherUpgradesBot);
         FrozenCookies.otherUpgradesBot = 0;
     }
-    
+
     if (FrozenCookies.autoCycliusBot) {
         clearInterval(FrozenCookies.autoCycliusBot);
         FrozenCookies.autoCycliusBot = 0;

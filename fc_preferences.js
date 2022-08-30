@@ -269,6 +269,7 @@ FrozenCookies.preferenceValues = {
             "ASF also for Double Cast Combo",
         ],
         default: 0,
+        extras: '<a class="option" id="minASFMult" onclick="updateASFMultMin(\'minASFMult\');">x${minASFMult} minimum Frenzy</a>',
     },
     autoSweet: {
         hint: "EXPERIMENTAL: Automatically ascend until 'Sweet' is in the next ten spells. Disables other combos. No manual shutdown!",

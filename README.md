@@ -62,6 +62,9 @@ If you want to manually install it:
 <details>
 <summary>Click to expand!</summary> 
 
+2022 Aug 30
+* Added a frenzy modifier check to the Auto Sugar Frenzy so you can make sure it only fires for big combos
+
 2022 Aug 23
 * Updated auto-Cyclius to work with Supreme Intellect and to allow it to set all gods properly when activated.
 
@@ -466,7 +469,7 @@ See the schedule on https://cookieclicker.fandom.com/wiki/Pantheon
 ## Grimoire options
 * **Wizard Tower Cap** This cap works different than the other building ones, since it will not directly cap at a given WT number, but instead at the amount of mana that is set. 37 is the best value for the auto cast FTHOF or manual casting option, for double casting higher values are needed (between 81 and 100). Setting this to any value over 100 is wasting mana and ruins spell casting speed.
 * **Auto Cast FTHOF**, **Double Cast FTHOF**, **Auto Cast 100% Consistency Combo** Select one of the auto casting methods. More details further on. Cannot use multiple options at once, the lowest enabled entry in the list will be active.
-* **Auto Sugar Frenzy** Will buy Sugar Frenzy with a sugar lump during the first 100% Consistency and/or Double Cast combo (depending on what is set) of that ascension. If Sugar Baking Guard is active, it will only buy ASF if you have 101 lumps or more.
+* **Auto Sugar Frenzy** Will buy Sugar Frenzy with a sugar lump during the first 100% Consistency and/or Double Cast combo (depending on what is set) of that ascension. If Sugar Baking Guard is active, it will only buy ASF if you have 101 lumps or more. You can also set the minimum frenzy level before ASF should be bought, to prevent it from getting used on 'weak' combos.
 * **Auto Sweet** Experimental auto casting/ascending option to farm sugar lumps. This is dangerous as it cannot be turned off without access to the console. Do not enable unless you know how to. This will disable all other automated spell casting methods.
 
 ## Dragon options
