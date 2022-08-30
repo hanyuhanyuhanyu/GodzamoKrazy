@@ -307,7 +307,7 @@ function FCMenu() {
                 recommendation.id == chainRecommendation.id &&
                 recommendation.type == chainRecommendation.type
             ),
-            currentFrenzy = cpsBonus() * clickBuffBonus();
+            currentFrenzy = cpsBonus() * clickBuffBonus(),
             bankLevel = bestBank(chainRecommendation.efficiency),
             actualCps = Game.cookiesPs + Game.mouseCps() * FrozenCookies.cookieClickSpeed,
             chocolateRecoup =
