@@ -39,7 +39,7 @@ function registerMod(mod_id = "frozen_cookies") {
                 }
                 if (
                     bestBank(nextChainedPurchase().efficiency).cost > 0 &&
-                    Math.random() < 0.2 &&
+                    Math.random() < 0.3 &&
                     Game.season != "fools"
                 ) {
                     return [
@@ -50,7 +50,7 @@ function registerMod(mod_id = "frozen_cookies") {
                 }
                 if (
                     nextPurchase().cost > 0 &&
-                    Math.random() < 0.2 &&
+                    Math.random() < 0.3 &&
                     Game.season != "fools"
                 ) {
                     return [
@@ -66,7 +66,7 @@ function registerMod(mod_id = "frozen_cookies") {
                 }
                 if (
                     bestBank(nextChainedPurchase().efficiency).cost > 0 &&
-                    Math.random() < 0.2 &&
+                    Math.random() < 0.3 &&
                     Game.season == "fools"
                 ) {
                     return [
@@ -80,7 +80,7 @@ function registerMod(mod_id = "frozen_cookies") {
                 if (
                     nextPurchase().cost > 0 &&
                     nextPurchase().type != "building" &&
-                    Math.random() < 0.2 &&
+                    Math.random() < 0.3 &&
                     Game.season == "fools"
                 ) {
                     return [
@@ -90,7 +90,7 @@ function registerMod(mod_id = "frozen_cookies") {
                 if (
                     nextPurchase().cost > 0 &&
                     nextPurchase().type == "building" &&
-                    Math.random() < 0.2 &&
+                    Math.random() < 0.3 &&
                     Game.season == "fools"
                 ) {
                     return [
