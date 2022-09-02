@@ -34,28 +34,69 @@ function registerMod(mod_id = "frozen_cookies") {
                     return [
                         "News : debate about whether using Frozen Cookies constitutes cheating continues to rage. Violence escalating.",
                         "News : Supreme Court rules Frozen Cookies not unauthorized cheating after all.",
-                        "News : frozen cookies considered 'cool'. Pun-haters heard groaning.",
-                        "Haven't you bought that " +
-                            nextPurchase().purchase.name +
-                            " yet?",
+                        "News : Frozen Cookies considered 'cool'. Pun-haters heard groaning.",
+                    ];
+                }
+                if (
+                    bestBank(nextChainedPurchase().efficiency).cost > 0 &&
+                    Math.random() < 0.2 &&
+                    Game.season != "fools"
+                ) {
+                    return [
                         "You wonder if those " +
                             Beautify(bestBank(nextChainedPurchase().efficiency).cost) +
                             " banked cookies are still fresh.",
                     ];
                 }
+                if (
+                    nextPurchase().cost > 0 &&
+                    Math.random() < 0.2 &&
+                    Game.season != "fools"
+                ) {
+                    return [
+                        "You should buy that " + nextPurchase().purchase.name + " soon.",
+                    ];
+                }
                 if (Math.random() < 0.3 && Game.season == "fools") {
                     return [
-                        "Investigation into your potential cheating is blocked by your lawyers.",
-                        "Your Frozen Cookies are now available in markets everywhere.",
-                        "Movie studio suit against your use of the term 'frozen' dismissed with prejudice.",
-                        "Your next business venture: " +
-                            nextPurchase().purchase.name +
-                            ".",
+                        "Investigation into potential cheating with Frozen Cookies is blocked by your lawyers.",
+                        "Your Frozen Cookies are now available in stores everywhere.",
+                        "Movie studio suit against your use of 'Frozen' dismissed with prejudice.",
+                    ];
+                }
+                if (
+                    bestBank(nextChainedPurchase().efficiency).cost > 0 &&
+                    Math.random() < 0.2 &&
+                    Game.season == "fools"
+                ) {
+                    return [
                         "You have " +
                             Beautify(
                                 bestBank(nextChainedPurchase().efficiency).cost * 0.08
                             ) +
                             " cookie dollars just sitting in your wallet.",
+                    ];
+                }
+                if (
+                    nextPurchase().cost > 0 &&
+                    nextPurchase().type != "building" &&
+                    Math.random() < 0.2 &&
+                    Game.season == "fools"
+                ) {
+                    return [
+                        "Your next investment: " + nextPurchase().purchase.name + ".",
+                    ];
+                }
+                if (
+                    nextPurchase().cost > 0 &&
+                    nextPurchase().type == "building" &&
+                    Math.random() < 0.2 &&
+                    Game.season == "fools"
+                ) {
+                    return [
+                        "Your next investment: " +
+                            Game.foolObjects[nextPurchase().purchase.name].name +
+                            ".",
                     ];
                 }
             });
@@ -5243,7 +5284,7 @@ function safeBuy(bldg, count) {
 
 function autoGodzamokAction() {
     if (!T) return;
-    
+
     // if Godz is here and autoGodzamok is set
     if (Game.hasGod("ruin") && FrozenCookies.autoGodzamok) {
         // Need at least 10 of each to be useful
