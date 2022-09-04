@@ -504,6 +504,7 @@ function fcReset() {
         Game.HasUnlocked("Chocolate egg") &&
         !Game.Has("Chocolate egg")
     ) {
+        Game.specialTab = "dragon";
         Game.SetDragonAura(5, 0);
         Game.ConfirmPrompt();
         Game.ObjectsById.forEach(function (b) {
@@ -891,6 +892,7 @@ function autoDragonsCurve() {
     if (!Game.hasAura("Dragon's Curve")) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(17, 0);
+        Game.ConfirmPrompt();
     }
 
     if (
@@ -900,6 +902,7 @@ function autoDragonsCurve() {
     ) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(18, 1);
+        Game.ConfirmPrompt();
     }
     return;
 }
@@ -1876,13 +1879,11 @@ function auto100ConsistencyComboAction() {
                 Game.specialTab = "dragon";
                 Game.SetDragonAura(16, 1);
                 Game.ConfirmPrompt();
-                Game.ToggleSpecialMenu();
             }
             if (!Game.hasAura("Radiant Appetite")) {
                 Game.specialTab = "dragon";
                 Game.SetDragonAura(15, 0);
                 Game.ConfirmPrompt();
-                Game.ToggleSpecialMenu();
             }
             auto100ConsistencyComboAction.state = 5;
             return;
@@ -2530,7 +2531,6 @@ function autoDragonAura1Action() {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura1, 0);
         Game.ConfirmPrompt();
-        Game.ToggleSpecialMenu();
         logEvent("autoDragon", "Set first dragon aura");
         return;
     }
@@ -2558,7 +2558,6 @@ function autoDragonAura2Action() {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura2, 1);
         Game.ConfirmPrompt();
-        Game.ToggleSpecialMenu();
         logEvent("autoDragon", "Set second dragon aura");
         return;
     }
@@ -4922,9 +4921,7 @@ function buyFunctionToggle(upgrade) {
 function buySanta() {
     Game.specialTab = "santa";
     Game.UpgradeSanta();
-    if (Game.santaLevel + 1 >= Game.santaLevels.length) {
-        Game.ToggleSpecialMenu();
-    }
+    if (Game.santaLevel + 1 >= Game.santaLevels.length) Game.ToggleSpecialMenu();
 }
 
 function statSpeed() {
