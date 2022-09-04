@@ -890,7 +890,16 @@ function autoDragonsCurve() {
     //Swap dragon auras to try for unusual lumps
     if (Game.dragonLevel < 21 || FrozenCookies.dragonsCurve < 1) return;
 
-    if (!Game.hasAura("Dragon's Curve")) {
+    if (
+        Game.dragonLevel > 25 &&
+        !Game.hasAura("Dragon's Curve") &&
+        Game.hasAura("Reality Bending") &&
+        Game.dragonAura == 18
+    ) {
+        Game.specialTab = "dragon";
+        Game.SetDragonAura(17, 1);
+        Game.ConfirmPrompt();
+    } else if (!Game.hasAura("Dragon's Curve")) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(17, 0);
         Game.ConfirmPrompt();
@@ -1876,14 +1885,27 @@ function auto100ConsistencyComboAction() {
             return;
 
         case 4: // Change dragon auras to radiant appetite and dragon's fortune
-            if (!Game.hasAura("Dragon's Fortune")) {
+            if (
+                !Game.hasAura("Radiant Appetite") &&
+                Game.hasAura("Dragon's Fortune") &&
+                Game.dragonAura == 16
+            ) {
                 Game.specialTab = "dragon";
-                Game.SetDragonAura(16, 1);
+                Game.SetDragonAura(15, 1);
                 Game.ConfirmPrompt();
-            }
-            if (!Game.hasAura("Radiant Appetite")) {
+            } else if (!Game.hasAura("Radiant Appetite")) {
                 Game.specialTab = "dragon";
                 Game.SetDragonAura(15, 0);
+                Game.ConfirmPrompt();
+            }
+
+            if (!Game.hasAura("Dragon's Fortune") && Game.dragonAura1 == 15) {
+                Game.specialTab = "dragon";
+                Game.SetDragonAura(16, 0);
+                Game.ConfirmPrompt();
+            } else if (!Game.hasAura("Dragon's Fortune")) {
+                Game.specialTab = "dragon";
+                Game.SetDragonAura(16, 1);
                 Game.ConfirmPrompt();
             }
             auto100ConsistencyComboAction.state = 5;
@@ -2523,12 +2545,26 @@ function autoDragonAura1Action() {
         FrozenCookies.autoDragonAura1 == 0
     )
         return;
+
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
     if (FrozenCookies.autoDragonToggle == 0) return;
 
-    if (Game.dragonAura == FrozenCookies.autoDragonAura1) return;
+    if (
+        Game.dragonAura == FrozenCookies.autoDragonAura1 ||
+        Game.dragonAura1 == FrozenCookies.autoDragonAura1
+    )
+        return;
 
-    if (Game.dragonLevel >= FrozenCookies.autoDragonAura1 + 4) {
+    if (
+        Game.dragonAura == FrozenCookies.autoDragonAura2 &&
+        Game.dragonLevel >= FrozenCookies.autoDragonAura1 + 4
+    ) {
+        Game.specialTab = "dragon";
+        Game.SetDragonAura(FrozenCookies.autoDragonAura1, 1);
+        Game.ConfirmPrompt();
+        logEvent("autoDragon", "Set first dragon aura");
+        return;
+    } else if (Game.dragonLevel >= FrozenCookies.autoDragonAura1 + 4) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura1, 0);
         Game.ConfirmPrompt();
@@ -2547,7 +2583,11 @@ function autoDragonAura2Action() {
     if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
     if (FrozenCookies.autoDragonToggle == 0) return;
 
-    if (Game.dragonAura2 == FrozenCookies.autoDragonAura2) return;
+    if (
+        Game.dragonAura == FrozenCookies.autoDragonAura2 ||
+        Game.dragonAura1 == FrozenCookies.autoDragonAura2
+    )
+        return;
 
     if (FrozenCookies.autoDragonAura1 == FrozenCookies.autoDragonAura2) {
         FrozenCookies.autoDragonAura2 = 0;
@@ -2555,7 +2595,13 @@ function autoDragonAura2Action() {
         return;
     }
 
-    if (Game.dragonLevel == 26) {
+    if (Game.dragonAura1 == FrozenCookies.autoDragonAura1 && Game.dragonLevel == 26) {
+        Game.specialTab = "dragon";
+        Game.SetDragonAura(FrozenCookies.autoDragonAura2, 0);
+        Game.ConfirmPrompt();
+        logEvent("autoDragon", "Set second dragon aura");
+        return;
+    } else if (Game.dragonLevel == 26) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura2, 1);
         Game.ConfirmPrompt();
