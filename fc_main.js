@@ -2820,7 +2820,7 @@ function autoCycliusAction() {
             if (
                 FrozenCookies.autoWorship2 != 11 &&
                 FrozenCookies.autoWorship0 != 3 &&
-                T.slot[2] != FrozenCookies.autoWorship2 &&
+                T.slot[2] != FrozenCookies.autoWorship1 &&
                 T.swaps > 0
             ) {
                 swapIn(FrozenCookies.autoWorship1, 2);
@@ -2901,7 +2901,7 @@ function autoCycliusAction() {
             if (
                 FrozenCookies.autoWorship2 != 11 &&
                 FrozenCookies.autoWorship0 != 3 &&
-                T.slot[2] != FrozenCookies.autoWorship2 &&
+                T.slot[2] != FrozenCookies.autoWorship1 &&
                 T.swaps > 0
             ) {
                 swapIn(FrozenCookies.autoWorship1, 2);
@@ -3016,7 +3016,7 @@ function autoCycliusAction() {
             if (
                 FrozenCookies.autoWorship2 != 11 &&
                 FrozenCookies.autoWorship0 != 3 &&
-                T.slot[2] != FrozenCookies.autoWorship2 &&
+                T.slot[2] != FrozenCookies.autoWorship1 &&
                 T.swaps > 0
             ) {
                 swapIn(FrozenCookies.autoWorship1, 2);
@@ -3176,7 +3176,7 @@ function autoCycliusAction() {
             if (
                 FrozenCookies.autoWorship2 != 11 &&
                 FrozenCookies.autoWorship0 != 3 &&
-                T.slot[2] != FrozenCookies.autoWorship2 &&
+                T.slot[2] != FrozenCookies.autoWorship1 &&
                 T.swaps > 0
             ) {
                 swapIn(FrozenCookies.autoWorship1, 1);
@@ -3332,7 +3332,7 @@ function autoCycliusAction() {
             if (
                 FrozenCookies.autoWorship2 != 11 &&
                 FrozenCookies.autoWorship0 != 3 &&
-                T.slot[2] != FrozenCookies.autoWorship2 &&
+                T.slot[2] != FrozenCookies.autoWorship1 &&
                 T.swaps > 0
             ) {
                 swapIn(FrozenCookies.autoWorship1, 1);
