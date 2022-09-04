@@ -504,6 +504,7 @@ function fcReset() {
         Game.HasUnlocked("Chocolate egg") &&
         !Game.Has("Chocolate egg")
     ) {
+        Game.specialTab = "dragon";
         Game.SetDragonAura(5, 0);
         Game.ConfirmPrompt();
         Game.ObjectsById.forEach(function (b) {
@@ -847,28 +848,63 @@ function autoRigidel() {
                 swapIn(10, 0); //swap in rigidel
                 rigiSell(); //Meet the %10 condition
                 Game.computeLumpTimes();
-                if (Date.now() - started >= ripeAge) Game.clickLump(); //harvest the ripe lump, AutoSL probably covers this but this should avoid issues with autoBuy going first and disrupting Rigidel
+                if (Date.now() - started >= ripeAge) {
+                    //harvest the ripe lump, AutoSL probably covers this but this should avoid issues with autoBuy going first and disrupting Rigidel
+                    autoDragonsCurve();
+                    Game.clickLump();
+                }
                 if (prev != -1) swapIn(prev, 0); //put the old one back
             }
         case 1: //Rigidel is already in diamond slot
             if (timeToRipe < 60 && Game.BuildingsOwned % 10) {
                 rigiSell();
                 Game.computeLumpTimes();
-                if (Date.now() - started >= ripeAge) Game.clickLump();
+                if (Date.now() - started >= ripeAge) {
+                    autoDragonsCurve();
+                    Game.clickLump();
+                }
             }
         case 2: //Rigidel in Ruby slot,
             if (timeToRipe < 40 && Game.BuildingsOwned % 10) {
                 rigiSell();
                 Game.computeLumpTimes();
-                if (Date.now() - started >= ripeAge) Game.clickLump();
+                if (Date.now() - started >= ripeAge) {
+                    autoDragonsCurve();
+                    Game.clickLump();
+                }
             }
         case 3: //Rigidel in Jade slot
             if (timeToRipe < 20 && Game.BuildingsOwned % 10) {
                 rigiSell();
                 Game.computeLumpTimes();
-                if (Date.now() - started >= ripeAge) Game.clickLump();
+                if (Date.now() - started >= ripeAge) {
+                    autoDragonsCurve();
+                    Game.clickLump();
+                }
             }
     }
+}
+
+function autoDragonsCurve() {
+    //Swap dragon auras to try for unusual lumps
+    if (Game.dragonLevel < 21 || FrozenCookies.dragonsCurve < 1) return;
+
+    if (!Game.hasAura("Dragon's Curve")) {
+        Game.specialTab = "dragon";
+        Game.SetDragonAura(17, 0);
+        Game.ConfirmPrompt();
+    }
+
+    if (
+        FrozenCookies.dragonsCurve == 2 &&
+        Game.dragonLevel > 25 &&
+        !Game.hasAura("Reality Bending")
+    ) {
+        Game.specialTab = "dragon";
+        Game.SetDragonAura(18, 1);
+        Game.ConfirmPrompt();
+    }
+    return;
 }
 
 function autoTicker() {
@@ -1843,13 +1879,11 @@ function auto100ConsistencyComboAction() {
                 Game.specialTab = "dragon";
                 Game.SetDragonAura(16, 1);
                 Game.ConfirmPrompt();
-                Game.ToggleSpecialMenu();
             }
             if (!Game.hasAura("Radiant Appetite")) {
                 Game.specialTab = "dragon";
                 Game.SetDragonAura(15, 0);
                 Game.ConfirmPrompt();
-                Game.ToggleSpecialMenu();
             }
             auto100ConsistencyComboAction.state = 5;
             return;
@@ -2497,7 +2531,6 @@ function autoDragonAura1Action() {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura1, 0);
         Game.ConfirmPrompt();
-        Game.ToggleSpecialMenu();
         logEvent("autoDragon", "Set first dragon aura");
         return;
     }
@@ -2525,7 +2558,6 @@ function autoDragonAura2Action() {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura2, 1);
         Game.ConfirmPrompt();
-        Game.ToggleSpecialMenu();
         logEvent("autoDragon", "Set second dragon aura");
         return;
     }
@@ -3479,6 +3511,7 @@ function recommendedSettingsAction() {
         FrozenCookies.autoWrinkler = 1;
         FrozenCookies.shinyPop = 0;
         FrozenCookies.autoSL = 2;
+        FrozenCookies.dragonsCurve = 2;
         FrozenCookies.sugarBakingGuard = 1;
         FrozenCookies.autoGS = 1;
         FrozenCookies.autoGodzamok = 1;
@@ -4888,9 +4921,7 @@ function buyFunctionToggle(upgrade) {
 function buySanta() {
     Game.specialTab = "santa";
     Game.UpgradeSanta();
-    if (Game.santaLevel + 1 >= Game.santaLevels.length) {
-        Game.ToggleSpecialMenu();
-    }
+    if (Game.santaLevel + 1 >= Game.santaLevels.length) Game.ToggleSpecialMenu();
 }
 
 function statSpeed() {
@@ -5375,7 +5406,10 @@ function autoCookie() {
         if (FrozenCookies.autoSL) {
             var started = Game.lumpT;
             var ripeAge = Math.ceil(Game.lumpRipeAge);
-            if (Date.now() - started >= ripeAge) Game.clickLump();
+            if (Date.now() - started >= ripeAge) {
+                autoDragonsCurve();
+                Game.clickLump();
+            }
         }
         if (FrozenCookies.autoSL == 2) autoRigidel();
         if (FrozenCookies.autoWrinkler == 1) {
