@@ -117,6 +117,15 @@ FrozenCookies.preferenceValues = {
         ],
         default: 0,
     },
+    dragonsCurve: {
+        hint: "Automatically swap in Dragon's Curve aura when sugar lumps are harvested, with option to also apply Reality Bending",
+        display: [
+            "Auto-Dragon's Curve OFF",
+            "Auto-Dragon's Curve ON",
+            "Auto-Dragon's Curve ON + REALITY BENDING",
+        ],
+        default: 0,
+    },
     sugarBakingGuard: {
         hint: "Ignore options that spend a sugar lump until you have 101 stored, to keep max Sugar Baking boost",
         display: ["Sugar Baking Guard OFF", "Sugar Baking Guard ON"],
