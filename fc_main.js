@@ -893,7 +893,6 @@ function autoDragonsCurve() {
     if (
         Game.dragonLevel > 25 &&
         !Game.hasAura("Dragon's Curve") &&
-        Game.hasAura("Reality Bending") &&
         Game.dragonAura == 18
     ) {
         Game.specialTab = "dragon";
@@ -1887,7 +1886,6 @@ function auto100ConsistencyComboAction() {
         case 4: // Change dragon auras to radiant appetite and dragon's fortune
             if (
                 !Game.hasAura("Radiant Appetite") &&
-                Game.hasAura("Dragon's Fortune") &&
                 Game.dragonAura == 16
             ) {
                 Game.specialTab = "dragon";
@@ -2554,17 +2552,17 @@ function autoDragonAura1Action() {
         Game.dragonAura1 == FrozenCookies.autoDragonAura1
     )
         return;
-
+        
     if (
-        Game.dragonAura == FrozenCookies.autoDragonAura2 &&
-        Game.dragonLevel >= FrozenCookies.autoDragonAura1 + 4
-    ) {
-        Game.specialTab = "dragon";
-        Game.SetDragonAura(FrozenCookies.autoDragonAura1, 1);
-        Game.ConfirmPrompt();
-        logEvent("autoDragon", "Set first dragon aura");
+        FrozenCookies.autoDragonAura1 > FrozenCookies.autoDragonAura2
+    )
+        FrozenCookies.autoDragonAuratemp = FrozenCookies.autoDragonAura1;
+        FrozenCookies.autoDragonAura1 = FrozenCookies.autoDragonAura2;
+        FrozenCookies.autoDragonAura2 = FrozenCookies.autoDragonAuratemp;
+        FrozenCookies.autoDragonAuratemp = 0;
         return;
-    } else if (Game.dragonLevel >= FrozenCookies.autoDragonAura1 + 4) {
+
+    if (Game.dragonLevel >= FrozenCookies.autoDragonAura1 + 4) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura1, 0);
         Game.ConfirmPrompt();
@@ -2577,6 +2575,7 @@ function autoDragonAura2Action() {
     if (
         !Game.Has("A crumbly egg") ||
         Game.dragonLevel < 26 ||
+        FrozenCookies.autoDragonAura1 == 0 ||
         FrozenCookies.autoDragonAura2 == 0
     )
         return;
@@ -2595,13 +2594,7 @@ function autoDragonAura2Action() {
         return;
     }
 
-    if (Game.dragonAura1 == FrozenCookies.autoDragonAura1 && Game.dragonLevel == 26) {
-        Game.specialTab = "dragon";
-        Game.SetDragonAura(FrozenCookies.autoDragonAura2, 0);
-        Game.ConfirmPrompt();
-        logEvent("autoDragon", "Set second dragon aura");
-        return;
-    } else if (Game.dragonLevel == 26) {
+    if (Game.dragonLevel == 26) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura2, 1);
         Game.ConfirmPrompt();
