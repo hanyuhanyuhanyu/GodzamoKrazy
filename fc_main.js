@@ -498,6 +498,7 @@ function fcReset() {
             B.sellGood(i, 10000);
         } // sell all stock
     }
+    if (G) G.harvestAll(); // harvest all plants
     if (
         Game.dragonLevel > 5 &&
         !Game.hasAura("Earth Shatterer") &&
