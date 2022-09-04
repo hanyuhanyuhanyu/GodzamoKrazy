@@ -62,6 +62,9 @@ If you want to manually install it:
 <details>
 <summary>Click to expand!</summary> 
 
+2022 Sep 04
+* Add Auto-Dragon's Curve option (#93)
+
 2022 Aug 30
 * Added a frenzy modifier check to the Auto Sugar Frenzy so you can make sure it only fires for big combos
 * The Current Frenzy (combination of all effects) is displayed on the Frozen Cookies button
