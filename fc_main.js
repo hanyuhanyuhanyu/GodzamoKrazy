@@ -275,6 +275,12 @@ function setOverrides(gameSaveData) {
         FrozenCookies.manaMax = preferenceParse("manaMax", 0);
         FrozenCookies.cortexMax = preferenceParse("cortexMax", 0);
 
+        // restore bulk buy if it seems like this was used
+        if (FrozenCookies.autoBulk == 1 && Game.BuildingsOwned % 10)
+            document.getElementById("storeBulk10").click();
+        if (FrozenCookies.autoBulk == 2 && Game.BuildingsOwned % 100)
+            document.getElementById("storeBulk100").click();
+
         // Get historical data
         FrozenCookies.frenzyTimes =
             JSON.parse(
