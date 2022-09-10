@@ -273,8 +273,8 @@ function setOverrides(gameSaveData) {
 
         // Temporary, remove this later
         if (FrozenCookies.autoDragonAura2 != 0) {
-            FrozenCookies.autoDragonAura1 = FrozenCookies.autoDragonAura0;
-            FrozenCookies.autoDragonAura2 = FrozenCookies.autoDragonAura1;
+            FrozenCookies.autoDragonAura0 = FrozenCookies.autoDragonAura1;
+            FrozenCookies.autoDragonAura1 = FrozenCookies.autoDragonAura2;
             FrozenCookies.autoDragonAura2 = 0;
         }
 
