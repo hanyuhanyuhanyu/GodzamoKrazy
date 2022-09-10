@@ -1302,12 +1302,13 @@ function autoFTHOFComboAction() {
     }
 
     if (
+        autoFTHOFComboAction.state > 3 ||
         // Combo started but failed
-        autoFTHOFComboAction.state > 2 &&
-        M.magic == M.magicM &&
-        !Game.hasBuff("Click frenzy") &&
-        !nextSpellName(0) == "Click Frenzy" &&
-        !nextSpellName(1) == "Click Frenzy"
+        (autoFTHOFComboAction.state > 2 &&
+            M.magic == M.magicM &&
+            !Game.hasBuff("Click frenzy") &&
+            !nextSpellName(0) == "Click Frenzy" &&
+            !nextSpellName(1) == "Click Frenzy")
     ) {
         if (autoFTHOFComboAction.autobuyyes == 1) {
             FrozenCookies.autoBuy = 1;
@@ -1751,8 +1752,9 @@ function auto100ConsistencyComboAction() {
         auto100ConsistencyComboAction.countTimeMach = 0;
 
     if (
+        auto100ConsistencyComboAction.state > 20 ||
         // Either at stage 0 or 1 with flags set or in progress, but broken
-        ((auto100ConsistencyComboAction.state < 2 &&
+        (((auto100ConsistencyComboAction.state < 2 &&
             (auto100ConsistencyComboAction.autobuyyes == 1 ||
                 auto100ConsistencyComboAction.autogcyes == 1 ||
                 auto100ConsistencyComboAction.autogsyes == 1 ||
@@ -1762,7 +1764,7 @@ function auto100ConsistencyComboAction() {
             (auto100ConsistencyComboAction.state > 1 &&
                 BuildingSpecialBuff() == 0 &&
                 !hasClickBuff())) &&
-        M.magic == M.magicM
+            M.magic == M.magicM)
     ) {
         if (auto100ConsistencyComboAction.autobuyyes == 1) {
             FrozenCookies.autoBuy = 1;
