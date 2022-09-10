@@ -272,20 +272,10 @@ function setOverrides(gameSaveData) {
         FrozenCookies.minASFMult = preferenceParse("minASFMult", 1);
 
         // Temporary, remove this later
-        if (FrozenCookies.autoDragonAura2 != 0) {
-            FrozenCookies.autoDragonAuratemp = FrozenCookies.autoDragonAura2;
-            if (FrozenCookies.autoDragonAura1 != 0) {
-                FrozenCookies.autoDragonAura0 = FrozenCookies.autoDragonAura1;
-            } else {
-                FrozenCookies.autoDragonAura0 = 0;
-            }
-            if (FrozenCookies.autoDragonAuratemp != 0) {
-                FrozenCookies.autoDragonAura1 = FrozenCookies.autoDragonAuratemp;
-            } else {
-                FrozenCookies.autoDragonAura1 = 0;
-            }
-            FrozenCookies.autoDragonAuratemp = 0;
-            FrozenCookies.autoDragonAura2 = 0;
+        if (FrozenCookies.autoDragonAura2) {
+            FrozenCookies.autoDragonToggle = 0;
+            FrozenCookies.autoDragonAura0 = 0;
+            FrozenCookies.autoDragonAura2 = undefined;
         }
 
         // building max values
@@ -2564,14 +2554,15 @@ function autoDragonAura0Action() {
         logEvent("autoDragon", "Can't set both auras to the same one!");
     }
 
-    if (FrozenCookies.autoDragonAura0 > FrozenCookies.autoDragonAura1) {
-        FrozenCookies.autoDragonAuratemp = FrozenCookies.autoDragonAura0;
-        FrozenCookies.autoDragonAura0 = FrozenCookies.autoDragonAura1;
-        FrozenCookies.autoDragonAura1 = FrozenCookies.autoDragonAuratemp;
-        FrozenCookies.autoDragonAuratemp = 0;
-    }
-
-    if (Game.dragonLevel >= FrozenCookies.autoDragonAura0 + 4) {
+    if (
+        Game.dragonLevel >= Game.dragonLevels.length &&
+        Game.dragonAura0 == FrozenCookies.autoDragonAura1
+    ) {
+        Game.specialTab = "dragon";
+        Game.SetDragonAura(FrozenCookies.autoDragonAura0, 1);
+        Game.ConfirmPrompt();
+        logEvent("autoDragon", "Set first dragon aura");
+    } else if (Game.dragonLevel >= FrozenCookies.autoDragonAura0 + 4) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura0, 0);
         Game.ConfirmPrompt();
@@ -2591,7 +2582,15 @@ function autoDragonAura1Action() {
         return;
     }
 
-    if (Game.dragonLevel >= Game.dragonLevels.length) {
+    if (
+        Game.dragonLevel >= Game.dragonLevels.length &&
+        Game.dragonAura1 == FrozenCookies.autoDragonAura0
+    ) {
+        Game.specialTab = "dragon";
+        Game.SetDragonAura(FrozenCookies.autoDragonAura1, 0);
+        Game.ConfirmPrompt();
+        logEvent("autoDragon", "Set second dragon aura");
+    } else if (Game.dragonLevel >= Game.dragonLevels.length) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura1, 1);
         Game.ConfirmPrompt();
