@@ -1740,8 +1740,8 @@ function auto100ConsistencyComboAction() {
             (auto100ConsistencyComboAction.autobuyyes == 1 ||
                 auto100ConsistencyComboAction.autogcyes == 1 ||
                 auto100ConsistencyComboAction.autogsyes == 1 ||
-                auto100ConsistencyComboAction.autogodyes == 1)) ||
-                auto100ConsistencyComboAction.autodragonyes == 1)) ||
+                auto100ConsistencyComboAction.autogodyes == 1 ||
+                auto100ConsistencyComboAction.autodragonyes == 1 ||
                 auto100ConsistencyComboAction.autoworshipyes == 1)) ||
             (auto100ConsistencyComboAction.state > 1 &&
                 BuildingSpecialBuff() == 0 &&
