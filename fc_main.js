@@ -1696,6 +1696,7 @@ function autoFTHOFComboAction() {
             } else {
                 safeBuy(Game.Objects["Wizard tower"], autoFTHOFComboAction.count);
             }
+            FrozenCookies.autobuyCount += 1;
             // Turn autoBuy back on if it was on before
             if (autoFTHOFComboAction.autobuyyes == 1) {
                 FrozenCookies.autoBuy = 1;
@@ -1965,6 +1966,7 @@ function auto100ConsistencyComboAction() {
                 Game.Objects["Wizard tower"].buy(
                     auto100ConsistencyComboAction.countWizard
                 );
+                FrozenCookies.autobuyCount += 1;
                 auto100ConsistencyComboAction.state = 8;
             }
             return;
@@ -1992,6 +1994,7 @@ function auto100ConsistencyComboAction() {
                 Game.Objects["Wizard tower"].buy(
                     auto100ConsistencyComboAction.countWizard
                 );
+                FrozenCookies.autobuyCount += 1;
                 auto100ConsistencyComboAction.state = 11;
             }
 
@@ -2052,6 +2055,7 @@ function auto100ConsistencyComboAction() {
                 Game.Objects["Time machine"],
                 auto100ConsistencyComboAction.countTimeMach
             );
+            FrozenCookies.autobuyCount += 1;
             auto100ConsistencyComboAction.state = 16;
             return;
 
@@ -2127,6 +2131,7 @@ function auto100ConsistencyComboAction() {
                         auto100ConsistencyComboAction.countTimeMach -
                             Game.Objects["Time machine"].amount
                     );
+                    FrozenCookies.autobuyCount += 1;
                 }
             }
             if (Game.hasBuff("Devastation") && hasClickBuff()) {
@@ -2193,6 +2198,7 @@ function auto100ConsistencyComboAction() {
                         auto100ConsistencyComboAction.countTimeMach -
                             Game.Objects["Time machine"].amount
                     );
+                FrozenCookies.autobuyCount += 1;
             }
 
             if (!hasClickBuff()) auto100ConsistencyComboAction.state = 18;
@@ -2286,6 +2292,7 @@ function auto100ConsistencyComboAction() {
                     auto100ConsistencyComboAction.countAntiMatter -
                         Game.Objects["Antimatter condenser"].amount
                 );
+            FrozenCookies.autobuyCount += 1;
             auto100ConsistencyComboAction.state = 20;
             return;
 
@@ -2448,6 +2455,7 @@ function autoBankAction() {
         var countBankCursor = currentOffice.cost[0];
         l("bankOfficeUpgrade").click();
         safeBuy(Game.Objects["Cursor"], countBankCursor);
+        FrozenCookies.autobuyCount += 1;
         logEvent("AutoBank", "Upgrade bank level for " + countBankCursor + " cursors");
         Game.recalculateGains = 1;
         Game.upgradesToRebuild = 1;
@@ -5347,10 +5355,12 @@ function autoGodzamokAction() {
                 var countMine = FrozenCookies.mineMax - Game.Objects["Mine"].amount;
                 if (countMine > 0) {
                     safeBuy(Game.Objects["Mine"], countMine);
+                    FrozenCookies.autobuyCount += 1;
                     logEvent("AutoGodzamok", "Bought " + countMine + " mines");
                 }
             } else {
                 safeBuy(Game.Objects["Mine"], countMine);
+                FrozenCookies.autobuyCount += 1;
                 logEvent("AutoGodzamok", "Bought " + countMine + " mines");
             }
             //Rebuy factories
@@ -5359,10 +5369,12 @@ function autoGodzamokAction() {
                     FrozenCookies.factoryMax - Game.Objects["Factory"].amount;
                 if (countFactory > 0) {
                     safeBuy(Game.Objects["Factory"], countFactory);
+                    FrozenCookies.autobuyCount += 1;
                     logEvent("AutoGodzamok", "Bought " + countFactory + " factories");
                 }
             } else {
                 safeBuy(Game.Objects["Factory"], countFactory);
+                FrozenCookies.autobuyCount += 1;
                 logEvent("AutoGodzamok", "Bought " + countFactory + " factories");
             }
         }
