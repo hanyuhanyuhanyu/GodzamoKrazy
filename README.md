@@ -65,6 +65,7 @@ If you want to manually install it:
 2022 Sep 10
 * Auto-Halloween will no longer swap out of Valentines early, as all cookies for it can be gotten really quickly.
 * Removed Autobuy's double duty as an on/off switch for other options
+* Changed the Auto Dragon Aura system: if an aura is being set, it will first check if already is set in the other slot before doing so, to prevent needless swapping. **WARNING**: as an unintended consequence of this change, any existing automatic dragon aura may be cleared in the FC options.
 
 2022 Sep 04
 * Add Auto-Dragon's Curve option (#93)

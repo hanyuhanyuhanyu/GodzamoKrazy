@@ -308,7 +308,7 @@ FrozenCookies.preferenceValues = {
     dragonNotes: {
         hint: "(Select your desired aura from the list. Cannot set the same aura to both slots)",
     },
-    autoDragonAura1: {
+    autoDragonAura0: {
         hint: "Automatically set FIRST dragon aura",
         display: [
             "No Aura",
@@ -335,7 +335,7 @@ FrozenCookies.preferenceValues = {
         ],
         default: 0,
     },
-    autoDragonAura2: {
+    autoDragonAura1: {
         hint: "Automatically set SECOND dragon aura",
         display: [
             "No Aura",
