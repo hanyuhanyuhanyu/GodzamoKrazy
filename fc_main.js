@@ -1749,6 +1749,8 @@ function auto100ConsistencyComboAction() {
                 auto100ConsistencyComboAction.autogcyes == 1 ||
                 auto100ConsistencyComboAction.autogsyes == 1 ||
                 auto100ConsistencyComboAction.autogodyes == 1)) ||
+                auto100ConsistencyComboAction.autodragonyes == 1)) ||
+                auto100ConsistencyComboAction.autoworshipyes == 1)) ||
             (auto100ConsistencyComboAction.state > 1 &&
                 BuildingSpecialBuff() == 0 &&
                 !hasClickBuff())) &&
@@ -1769,6 +1771,14 @@ function auto100ConsistencyComboAction() {
         if (auto100ConsistencyComboAction.autogodyes == 1) {
             FrozenCookies.autoGodzamok = 1;
             auto100ConsistencyComboAction.autogodyes = 0;
+        }
+        if (auto100ConsistencyComboAction.autodragonyes == 1) {
+            FrozenCookies.autoDragonToggle = 1;
+            auto100ConsistencyComboAction.autodragonyes = 0;
+        }
+        if (auto100ConsistencyComboAction.autoworshipyes == 1) {
+            FrozenCookies.autoWorshipToggle = 1;
+            auto100ConsistencyComboAction.autoworshipyes = 0;
         }
         auto100ConsistencyComboAction.state = 0;
         logEvent("auto100ConsistencyCombo", "Trying to recover from soft fail");
@@ -1844,12 +1854,26 @@ function auto100ConsistencyComboAction() {
                 BuildingSpecialBuff() == 1 &&
                 BuildingBuffTime() >= Math.ceil(13 * BuffTimeFactor())
             ) {
-                // Turn off autoBuy - also disables dragon aura and pantheon setting
+                // Turn off autoBuy
                 if (FrozenCookies.autoBuy == 1) {
                     auto100ConsistencyComboAction.autobuyyes = 1;
                     FrozenCookies.autoBuy = 0;
                 } else {
                     auto100ConsistencyComboAction.autobuyyes = 0;
+                }
+                // Turn off Auto Dragon Auras
+                if (FrozenCookies.autoDragonToggle == 1 {
+                    auto100ConsistencyComboAction.autodragonyes = 1;
+                    FrozenCookies.autoDragonToggle = 0;
+                } else {
+                    auto100ConsistencyComboAction.autodragonyes = 0;
+                }
+                // Turn off Auto Pantheon
+                if (FrozenCookies.autoWorshipToggle == 1 {
+                    auto100ConsistencyComboAction.autoworshipyes = 1;
+                    FrozenCookies.autoWorshipToggle = 0;
+                } else {
+                    auto100ConsistencyComboAction.autoworshipyes = 0;
                 }
                 logEvent("auto100ConsistencyCombo", "Starting combo");
                 auto100ConsistencyComboAction.state = 2;
@@ -2284,18 +2308,25 @@ function auto100ConsistencyComboAction() {
                         Game.Objects["Antimatter condenser"].amount
                 );
             }
-            // Turning autoBuy back on will also allow dragon auras to be reset, if running RoF
+            auto100ConsistencyComboAction.state = 20;
+            return;
+
+        case 20: // Turning things back on
             if (auto100ConsistencyComboAction.autobuyyes == 1) {
                 FrozenCookies.autoBuy = 1;
                 auto100ConsistencyComboAction.autobuyyes = 0;
             }
-            auto100ConsistencyComboAction.state = 20;
-            return;
-
-        case 20: // Re-enable autoGodzamok if it were on previously
             if (auto100ConsistencyComboAction.autogodyes == 1) {
                 FrozenCookies.autoGodzamok = 1;
                 auto100ConsistencyComboAction.autogodyes = 0;
+            }
+            if (auto100ConsistencyComboAction.autodragonyes == 1) {
+                FrozenCookies.autoDragonToggle = 1;
+                auto100ConsistencyComboAction.autodragonyes = 0;
+            }
+            if (auto100ConsistencyComboAction.autoworshipyes == 1) {
+                FrozenCookies.autoWorshipToggle = 1;
+                auto100ConsistencyComboAction.autoworshipyes = 0;
             }
             logEvent("auto100ConsistencyCombo", "Combo completed");
             auto100ConsistencyComboAction.state = 0;
@@ -2384,8 +2415,7 @@ function autoEasterAction() {
     if (
         FrozenCookies.autoEaster == 0 ||
         Game.season == "easter" ||
-        haveAll("easter") ||
-        FrozenCookies.autoBuy == 0 // Treat like global on/off switch
+        haveAll("easter")
     ) {
         return;
     }
@@ -2398,10 +2428,10 @@ function autoEasterAction() {
 function autoHalloweenAction() {
     if (
         FrozenCookies.autoHalloween == 0 ||
+        Game.season == "valentines" ||
         Game.season == "easter" ||
         Game.season == "halloween" ||
-        haveAll("halloween") ||
-        FrozenCookies.autoBuy == 0 // Treat like global on/off switch
+        haveAll("halloween")
     ) {
         return;
     }
@@ -2435,7 +2465,6 @@ function autoBlacklistOff() {
 function autoBankAction() {
     if (!B) return; // Just leave if you don't have the stock market
     if (hasClickBuff()) return; // Don't buy during click buff
-    if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
     //Upgrade bank level
     let currentOffice = B.offices[B.officeLevel];
@@ -2456,7 +2485,6 @@ function autoBankAction() {
 function autoBrokerAction() {
     if (!B) return; // Just leave if you don't have the stock market
     if (hasClickBuff()) return; // Don't hire during click buff
-    if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
     //Hire brokers
     var delay = delayAmount(); //GC or harvest bank
@@ -2490,7 +2518,6 @@ function autoDragonAction() {
     if (!Game.HasUnlocked("A crumbly egg")) return;
     if (Game.dragonLevel == 26) return;
     if (hasClickBuff()) return; // Don't upgrade during click buff
-    if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
     if (Game.HasUnlocked("A crumbly egg") && !Game.Has("A crumbly egg")) {
         Game.Upgrades["A crumbly egg"].buy();
@@ -2517,7 +2544,6 @@ function petDragonAction() {
         return; //Need to actually be able to pet
     }
     if (hasClickBuff()) return; // Don't pet during click buff
-    if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
     //Calculate current pet drop and if we have it
     Math.seedrandom(Game.seed + "/dragonTime");
@@ -2544,7 +2570,6 @@ function autoDragonAura1Action() {
     )
         return;
 
-    if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
     if (FrozenCookies.autoDragonToggle == 0) return;
 
     if (
@@ -2579,7 +2604,6 @@ function autoDragonAura2Action() {
         FrozenCookies.autoDragonAura2 == 0
     )
         return;
-    if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
     if (FrozenCookies.autoDragonToggle == 0) return;
 
     if (
@@ -2669,7 +2693,6 @@ function autoWorship0Action() {
         FrozenCookies.autoCyclius != 0
     )
         return;
-    if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
     if (T.slot[0] == FrozenCookies.autoWorship0) return;
 
@@ -2685,7 +2708,6 @@ function autoWorship1Action() {
         FrozenCookies.autoCyclius != 0
     )
         return;
-    if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
     if (T.slot[1] == FrozenCookies.autoWorship1) return;
 
@@ -2707,7 +2729,6 @@ function autoWorship2Action() {
         FrozenCookies.autoCyclius != 0
     )
         return;
-    if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
     if (T.slot[2] == FrozenCookies.autoWorship2) return;
 
@@ -2797,7 +2818,6 @@ function buyOtherUpgrades() {
 
 function autoCycliusAction() {
     if (!T || T.swaps < 1 || FrozenCookies.autoCyclius == 0) return;
-    if (FrozenCookies.autoBuy == 0) return; // Treat like global on/off switch
 
     if (FrozenCookies.autoWorshipToggle == 1) {
         FrozenCookies.autoWorshipToggle = 0;
