@@ -65,6 +65,7 @@ If you want to manually install it:
 2022 Sep 10
 * Auto-Halloween will no longer swap out of Valentines early, as all cookies for it can be gotten really quickly.
 * Removed Autobuy's double duty as an on/off switch for other options
+* If Auto Bulkbuy is set and the total number of owned buildings seems to match the 'divide by 10/100' rule, bulkbuy 10/100 will be automatically enabled after reloading
 
 2022 Sep 04
 * Add Auto-Dragon's Curve option (#93)
