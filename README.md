@@ -62,6 +62,10 @@ If you want to manually install it:
 <details>
 <summary>Click to expand!</summary> 
 
+2022 Sep 10
+* Auto-Halloween will no longer swap out of Valentines early, as all cookies for it can be gotten really quickly.
+* Removed Autobuy's double duty as an on/off switch for other options
+
 2022 Sep 04
 * Add Auto-Dragon's Curve option (#93)
 
@@ -448,7 +452,7 @@ If you want to manually install it:
 * **Auto Fortune** The moment a fortune appears in the newsticker, it will be collected. It may be a good idea to disable this during active play, as you will only collect fortune bonuses once per ascension and *Your Lucky numbers are* gives up to double your bank, so you will likely want this at a later point. 
 
 ## Auto buying options
-* **Autobuy** This controls all automated purchases. It also works as a kind of on/off switch for some other options. Upgrades in the vault will not be bought. Buildings with a limit will not be bought beyond the limit. Blacklists will block certain items or reshuffle buying order. Some things to keep in mind: the Research options will be halted at an optimal level, if either the Grandmapocalypse blacklist is active, Shiny Wrinkler protection is active, or the season is Easter or Halloween, as those seasons can use wrinklers.
+* **Autobuy** This controls all automated purchases. Upgrades in the vault will not be bought. Buildings with a limit will not be bought beyond the limit. Blacklists will block certain items or reshuffle buying order. Some things to keep in mind: the Research options will be halted at an optimal level, if either the Grandmapocalypse blacklist is active, Shiny Wrinkler protection is active, or the season is Easter or Halloween, as those seasons can use wrinklers.
 * **Other Upgrades** Some upgrades don't provide direct CpS bonuses so the normal Autobuy will never guy them. This option will. 
 * **Auto Bulkbuy** This sets the bulk buy mode directly after ascending only. It does not carry over on reloads. If some buildings are capped, it will temporarily bypass bulk buy for those if they are near the cap. 
 * ** Auto Blacklist** Turns off the selected blacklist (next option) if it served its purpose.
