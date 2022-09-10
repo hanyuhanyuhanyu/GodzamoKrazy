@@ -1862,14 +1862,14 @@ function auto100ConsistencyComboAction() {
                     auto100ConsistencyComboAction.autobuyyes = 0;
                 }
                 // Turn off Auto Dragon Auras
-                if (FrozenCookies.autoDragonToggle == 1 {
+                if (FrozenCookies.autoDragonToggle == 1) {
                     auto100ConsistencyComboAction.autodragonyes = 1;
                     FrozenCookies.autoDragonToggle = 0;
                 } else {
                     auto100ConsistencyComboAction.autodragonyes = 0;
                 }
                 // Turn off Auto Pantheon
-                if (FrozenCookies.autoWorshipToggle == 1 {
+                if (FrozenCookies.autoWorshipToggle == 1) {
                     auto100ConsistencyComboAction.autoworshipyes = 1;
                     FrozenCookies.autoWorshipToggle = 0;
                 } else {
@@ -2412,11 +2412,7 @@ function autoSweetAction() {
 }
 
 function autoEasterAction() {
-    if (
-        FrozenCookies.autoEaster == 0 ||
-        Game.season == "easter" ||
-        haveAll("easter")
-    ) {
+    if (FrozenCookies.autoEaster == 0 || Game.season == "easter" || haveAll("easter")) {
         return;
     }
 
