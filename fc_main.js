@@ -273,8 +273,18 @@ function setOverrides(gameSaveData) {
 
         // Temporary, remove this later
         if (FrozenCookies.autoDragonAura2 != 0) {
-            FrozenCookies.autoDragonAura0 = FrozenCookies.autoDragonAura1;
-            FrozenCookies.autoDragonAura1 = FrozenCookies.autoDragonAura2;
+            FrozenCookies.autoDragonAuratemp = FrozenCookies.autoDragonAura2;
+            if (FrozenCookies.autoDragonAura1 != 0) {
+                FrozenCookies.autoDragonAura0 = FrozenCookies.autoDragonAura1;
+            } else {
+                FrozenCookies.autoDragonAura0 = 0;
+            }
+            if (FrozenCookies.autoDragonAuratemp != 0) {
+                FrozenCookies.autoDragonAura1 = FrozenCookies.autoDragonAuratemp;
+            } else {
+                FrozenCookies.autoDragonAura1 = 0;
+            }
+            FrozenCookies.autoDragonAuratemp = 0;
             FrozenCookies.autoDragonAura2 = 0;
         }
 
