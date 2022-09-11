@@ -2588,48 +2588,47 @@ function autoDragonAura0Action() {
     if (
         Game.dragonLevel > 25 &&
         Game.dragonAura == FrozenCookies.autoDragonAura1 &&
-        !Game.dragonAura1 == FrozenCookies.autoDragonAura0
+        Game.dragonAura1 != FrozenCookies.autoDragonAura0
     ) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura0, 1);
         Game.ConfirmPrompt();
         logEvent("autoDragon", "Set first dragon aura");
+        return;
     } else if (
         Game.dragonLevel >= FrozenCookies.autoDragonAura0 + 4 &&
-        !Game.dragonAura == FrozenCookies.autoDragonAura0
+        Game.dragonAura != FrozenCookies.autoDragonAura0
     ) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura0, 0);
         Game.ConfirmPrompt();
         logEvent("autoDragon", "Set first dragon aura");
+        return;
     }
 }
 
 function autoDragonAura1Action() {
     if (
         !Game.Has("A crumbly egg") ||
-        Game.dragonLevel < 5 ||
+        Game.dragonLevel < 26 ||
         FrozenCookies.autoDragonAura0 == 0 ||
         FrozenCookies.autoDragonAura1 == 0 ||
         FrozenCookies.autoDragonToggle == 0 ||
+        Game.dragonAura == FrozenCookies.autoDragonAura1 ||
         Game.dragonAura1 == FrozenCookies.autoDragonAura1
     ) {
         return;
     }
 
     if (
-        Game.dragonLevel > 25 &&
         Game.dragonAura1 == FrozenCookies.autoDragonAura0 &&
-        !Game.dragonAura == FrozenCookies.autoDragonAura1
+        Game.dragonAura != FrozenCookies.autoDragonAura1
     ) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura1, 0);
         Game.ConfirmPrompt();
         logEvent("autoDragon", "Set second dragon aura");
-    } else if (
-        Game.dragonLevel > 25 &&
-        !Game.dragonAura1 == FrozenCookies.autoDragonAura1
-    ) {
+    } else if ( Game.dragonAura1 != FrozenCookies.autoDragonAura1 ) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura1, 1);
         Game.ConfirmPrompt();
