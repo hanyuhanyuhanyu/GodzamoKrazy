@@ -905,7 +905,7 @@ function autoDragonsCurve() {
     if (
         Game.dragonLevel > 25 &&
         Game.dragonAura == 18 && //RB
-        !Game.dragonAura1 == 17 // DC
+        !Game.dragonAura2 == 17 // DC
     ) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(17, 1);
@@ -1929,7 +1929,7 @@ function auto100ConsistencyComboAction() {
         case 4: // Change dragon auras to radiant appetite and dragon's fortune
             if (
                 Game.dragonAura == 16 && // DF
-                !Game.dragonAura1 == 15 // RA
+                !Game.dragonAura2 == 15 // RA
             ) {
                 Game.specialTab = "dragon";
                 Game.SetDragonAura(15, 1);
@@ -1941,7 +1941,7 @@ function auto100ConsistencyComboAction() {
             }
 
             if (
-                Game.dragonAura1 == 15 && // RA
+                Game.dragonAura2 == 15 && // RA
                 !Game.dragonAura == 16 // DF
             ) {
                 Game.specialTab = "dragon";
@@ -2606,7 +2606,7 @@ function autoDragonAura1Action() {
         return;
     }
 
-    if (Game.dragonAura1 == FrozenCookies.autoDragonAura1) return;
+    if (Game.dragonAura2 == FrozenCookies.autoDragonAura1) return;
 
     if (Game.dragonLevel == 26) {
         Game.specialTab = "dragon";
