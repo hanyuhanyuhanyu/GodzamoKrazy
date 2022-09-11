@@ -531,7 +531,7 @@ FrozenCookies.preferenceValues = {
         extras: '<a class="option" id="viewStats" onclick="viewStatGraphs();">View Stat Graphs</a>',
     },
     recommendedSettings: {
-        hint: "Enable all recommended settings. WARNING: will override anything you have currently set!",
+        hint: "Enable all recommended settings. WARNING: game will save and reload and this will override anything you have currently set!",
         display: ["Recommended OFF", "Recommended ON"],
         default: 0,
     },

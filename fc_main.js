@@ -3620,6 +3620,8 @@ function recommendedSettingsAction() {
         FrozenCookies.trackStats = 0;
         logEvent("recommendedSettings", "Set all options to recommended values");
         FrozenCookies.recommendedSettings = 0;
+        Game.toSave = true;
+        Game.toReload = true;
     }
 }
 
