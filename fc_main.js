@@ -2519,7 +2519,7 @@ function autoLoanBuy() {
 function autoDragonAction() {
     if (
         !Game.HasUnlocked("A crumbly egg") ||
-        Game.dragonLevel  > 25 ||
+        Game.dragonLevel > 25 ||
         hasClickBuff()
     ) {
         return;
@@ -2587,7 +2587,7 @@ function autoDragonAura0Action() {
 
     if (
         Game.dragonLevel > 25 &&
-        Game.dragonAura0 == FrozenCookies.autoDragonAura1
+        Game.dragonAura == FrozenCookies.autoDragonAura1
     ) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura0, 1);
