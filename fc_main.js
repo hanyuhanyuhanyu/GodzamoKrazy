@@ -952,13 +952,6 @@ function BuffTimeFactor() {
     return DurMod;
 }
 
-// Spell names used by autocast methods
-var CBG = M.spellsById[0];
-var FTHOF = M.spellsById[1];
-var streT = M.spellsById[2];
-var SE = M.spellsById[3];
-var hagC = M.spellsById[4];
-
 function autoCast() {
     if (
         !M ||
@@ -968,6 +961,13 @@ function autoCast() {
     ) {
         return;
     }
+    
+    // Spell names used by autocast methods
+    var CBG = M.spellsById[0];
+    var FTHOF = M.spellsById[1];
+    var streT = M.spellsById[2];
+    var SE = M.spellsById[3];
+    var hagC = M.spellsById[4];
 
     if (M.magic == M.magicM) {
         // Free lump!
@@ -1292,6 +1292,13 @@ function autoFTHOFComboAction() {
         logEvent("autoFTHOFCombo", "Combo disabled, impossible");
         return;
     }
+    
+    // Spell names used by autocast methods
+    var CBG = M.spellsById[0];
+    var FTHOF = M.spellsById[1];
+    var streT = M.spellsById[2];
+    var SE = M.spellsById[3];
+    var hagC = M.spellsById[4];
 
     // Not currently possible to do the combo
     if (
@@ -1721,6 +1728,13 @@ function auto100ConsistencyComboAction() {
         logEvent("auto100ConsistencyCombo", "Combo disabled, impossible");
         return;
     }
+    
+    // Spell names used by autocast methods
+    var CBG = M.spellsById[0];
+    var FTHOF = M.spellsById[1];
+    var streT = M.spellsById[2];
+    var SE = M.spellsById[3];
+    var hagC = M.spellsById[4];
 
     // Not currently possible to do the combo
     if (
@@ -2331,6 +2345,13 @@ function autoSweetAction() {
     } else {
         autoSweetAction.autobuyyes = 0;
     }
+    
+    // Spell names used by autocast methods
+    var CBG = M.spellsById[0];
+    var FTHOF = M.spellsById[1];
+    var streT = M.spellsById[2];
+    var SE = M.spellsById[3];
+    var hagC = M.spellsById[4];
 
     if (typeof Game.ready !== "undefined" && Game.ready) {
         if (typeof autoSweetAction.state == "undefined") autoSweetAction.state = 0;
