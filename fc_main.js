@@ -2587,13 +2587,17 @@ function autoDragonAura0Action() {
 
     if (
         Game.dragonLevel > 25 &&
-        Game.dragonAura == FrozenCookies.autoDragonAura1
+        Game.dragonAura == FrozenCookies.autoDragonAura1 &&
+        !Game.dragonAura1 == FrozenCookies.autoDragonAura0
     ) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura0, 1);
         Game.ConfirmPrompt();
         logEvent("autoDragon", "Set first dragon aura");
-    } else if (Game.dragonLevel >= FrozenCookies.autoDragonAura0 + 4) {
+    } else if (
+        Game.dragonLevel >= FrozenCookies.autoDragonAura0 + 4 &&
+        !Game.dragonAura == FrozenCookies.autoDragonAura0
+    ) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura0, 0);
         Game.ConfirmPrompt();
@@ -2615,13 +2619,17 @@ function autoDragonAura1Action() {
 
     if (
         Game.dragonLevel > 25 &&
-        Game.dragonAura1 == FrozenCookies.autoDragonAura0
+        Game.dragonAura1 == FrozenCookies.autoDragonAura0 &&
+        !Game.dragonAura == FrozenCookies.autoDragonAura1
     ) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura1, 0);
         Game.ConfirmPrompt();
         logEvent("autoDragon", "Set second dragon aura");
-    } else if (Game.dragonLevel > 25) {
+    } else if (
+        Game.dragonLevel > 25 &&
+        !Game.dragonAura1 == FrozenCookies.autoDragonAura1
+    ) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura1, 1);
         Game.ConfirmPrompt();
