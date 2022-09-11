@@ -2628,11 +2628,13 @@ function autoDragonAura1Action() {
         Game.SetDragonAura(FrozenCookies.autoDragonAura1, 0);
         Game.ConfirmPrompt();
         logEvent("autoDragon", "Set second dragon aura");
+        return;
     } else if ( Game.dragonAura1 != FrozenCookies.autoDragonAura1 ) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura1, 1);
         Game.ConfirmPrompt();
         logEvent("autoDragon", "Set second dragon aura");
+        return;
     }
 }
 
