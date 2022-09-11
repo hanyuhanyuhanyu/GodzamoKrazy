@@ -903,7 +903,7 @@ function autoDragonsCurve() {
     if (Game.dragonLevel < 21 || FrozenCookies.dragonsCurve < 1) return;
 
     if (
-        Game.dragonLevel >= Game.dragonLevels.length &&
+        Game.dragonLevel + 1 >= Game.dragonLevels.length &&
         Game.dragonAura == 18 && //RB
         !Game.dragonAura1 == 17 // DC
     ) {
@@ -918,7 +918,7 @@ function autoDragonsCurve() {
 
     if (
         FrozenCookies.dragonsCurve == 2 &&
-        Game.dragonLevel >= Game.dragonLevels.length &&
+        Game.dragonLevel + 1 >= Game.dragonLevels.length &&
         !Game.hasAura("Reality Bending")
     ) {
         Game.specialTab = "dragon";
@@ -961,7 +961,7 @@ function autoCast() {
     ) {
         return;
     }
-    
+
     // Spell names used by autocast methods
     var CBG = M.spellsById[0];
     var FTHOF = M.spellsById[1];
@@ -1292,7 +1292,7 @@ function autoFTHOFComboAction() {
         logEvent("autoFTHOFCombo", "Combo disabled, impossible");
         return;
     }
-    
+
     // Spell names used by autocast methods
     var CBG = M.spellsById[0];
     var FTHOF = M.spellsById[1];
@@ -1728,7 +1728,7 @@ function auto100ConsistencyComboAction() {
         logEvent("auto100ConsistencyCombo", "Combo disabled, impossible");
         return;
     }
-    
+
     // Spell names used by autocast methods
     var CBG = M.spellsById[0];
     var FTHOF = M.spellsById[1];
@@ -1739,7 +1739,7 @@ function auto100ConsistencyComboAction() {
     // Not currently possible to do the combo
     if (
         FrozenCookies.autoSweet == 1 || // Autosweet overrides
-        Game.dragonLevel < Game.dragonLevels.length // Fully upgraded dragon needed for two auras
+        Game.dragonLevel + 1 < Game.dragonLevels.length // Fully upgraded dragon needed for two auras
     ) {
         return;
     }
@@ -2345,7 +2345,7 @@ function autoSweetAction() {
     } else {
         autoSweetAction.autobuyyes = 0;
     }
-    
+
     // Spell names used by autocast methods
     var CBG = M.spellsById[0];
     var FTHOF = M.spellsById[1];
@@ -2519,7 +2519,7 @@ function autoLoanBuy() {
 function autoDragonAction() {
     if (
         !Game.HasUnlocked("A crumbly egg") ||
-        Game.dragonLevel >= Game.dragonLevels.length ||
+        Game.dragonLevel + 1 >= Game.dragonLevels.length ||
         hasClickBuff()
     ) {
         return;
@@ -2586,7 +2586,7 @@ function autoDragonAura0Action() {
     }
 
     if (
-        Game.dragonLevel >= Game.dragonLevels.length &&
+        Game.dragonLevel + 1 >= Game.dragonLevels.length &&
         Game.dragonAura0 == FrozenCookies.autoDragonAura1
     ) {
         Game.specialTab = "dragon";
@@ -2604,7 +2604,7 @@ function autoDragonAura0Action() {
 function autoDragonAura1Action() {
     if (
         !Game.Has("A crumbly egg") ||
-        Game.dragonLevel < Game.dragonLevels.length ||
+        Game.dragonLevel < 5 ||
         FrozenCookies.autoDragonAura0 == 0 ||
         FrozenCookies.autoDragonAura1 == 0 ||
         FrozenCookies.autoDragonToggle == 0 ||
@@ -2614,14 +2614,14 @@ function autoDragonAura1Action() {
     }
 
     if (
-        Game.dragonLevel >= Game.dragonLevels.length &&
+        Game.dragonLevel + 1 >= Game.dragonLevels.length &&
         Game.dragonAura1 == FrozenCookies.autoDragonAura0
     ) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura1, 0);
         Game.ConfirmPrompt();
         logEvent("autoDragon", "Set second dragon aura");
-    } else if (Game.dragonLevel >= Game.dragonLevels.length) {
+    } else if (Game.dragonLevel + 1 >= Game.dragonLevels.length) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(FrozenCookies.autoDragonAura1, 1);
         Game.ConfirmPrompt();
@@ -2778,14 +2778,14 @@ function buyOtherUpgrades() {
 
     //Buy dragon drops
     if (
-        Game.dragonLevel >= Game.dragonLevels.length &&
+        Game.dragonLevel + 1 >= Game.dragonLevels.length &&
         Game.UpgradesById["650"].unlocked == 1 &&
         Game.UpgradesById["650"].bought == 0
     ) {
         Game.UpgradesById["650"].buy(); // Dragon fang
     }
     if (
-        Game.dragonLevel >= Game.dragonLevels.length &&
+        Game.dragonLevel + 1 >= Game.dragonLevels.length &&
         Game.UpgradesById["651"].unlocked == 1 &&
         Game.UpgradesById["651"].bought == 0
     ) {
