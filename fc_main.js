@@ -865,6 +865,7 @@ function autoRigidel() {
                     Game.clickLump();
                 }
                 if (timeToRipe > 60 && prev != -1) swapIn(prev, 0); //put the old one back
+                logEvent("autoRigidel", "Sugar lump harvested early");
             }
         case 1: //Rigidel is already in diamond slot
             if (timeToRipe < 60 && Game.BuildingsOwned % 10) {
@@ -874,6 +875,7 @@ function autoRigidel() {
                 if (Date.now() - started >= ripeAge) {
                     Game.clickLump();
                 }
+                logEvent("autoRigidel", "Sugar lump harvested early");
             }
         case 2: //Rigidel in Ruby slot,
             if (timeToRipe < 40 && Game.BuildingsOwned % 10) {
@@ -883,6 +885,7 @@ function autoRigidel() {
                 if (Date.now() - started >= ripeAge) {
                     Game.clickLump();
                 }
+                logEvent("autoRigidel", "Sugar lump harvested early");
             }
         case 3: //Rigidel in Jade slot
             if (timeToRipe < 20 && Game.BuildingsOwned % 10) {
@@ -892,6 +895,7 @@ function autoRigidel() {
                 if (Date.now() - started >= ripeAge) {
                     Game.clickLump();
                 }
+                logEvent("autoRigidel", "Sugar Lump harvested early");
             }
     }
 }
@@ -915,10 +919,12 @@ function autoDragonsCurve() {
         Game.specialTab = "dragon";
         Game.SetDragonAura(17, 1);
         Game.ConfirmPrompt();
+        logEvent("autoDragonsCurve", "Dragon auras swapped to manipulate new Sugar Lump");
     } else if (!Game.hasAura("Dragon's Curve")) {
         Game.specialTab = "dragon";
         Game.SetDragonAura(17, 0);
         Game.ConfirmPrompt();
+        logEvent("autoDragonsCurve", "Dragon auras swapped to manipulate new Sugar Lump");
     }
 
     if (

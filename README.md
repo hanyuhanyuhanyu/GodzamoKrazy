@@ -62,6 +62,10 @@ If you want to manually install it:
 <details>
 <summary>Click to expand!</summary> 
 
+2022 Sep 14
+* Restored auto dragon settings that were temporarily disabled behind the hood
+* Fixed a long standing bug with auto-Rigidel that could stop the entire mod from working and sugar lump harvesting to fail
+
 2022 Sep 10
 * Auto-Halloween will no longer swap out of Valentines early, as all cookies for it can be gotten really quickly.
 * Removed Autobuy's double duty as an on/off switch for other options
