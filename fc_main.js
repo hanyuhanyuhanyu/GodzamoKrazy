@@ -848,6 +848,7 @@ function swapIn(godId, targetSlot) {
 function autoRigidel() {
     if (!T) return; //Exit if pantheon doesnt even exist
     var timeToRipe = (Math.ceil(Game.lumpRipeAge) - (Date.now() - Game.lumpT)) / 60000; //Minutes until sugar lump ripens
+    var started = Game.lumpT;
     var ripeAge = Math.ceil(Game.lumpRipeAge);
     var orderLvl = Game.hasGod("order") ? Game.hasGod("order") : 0;
     switch (orderLvl) {
