@@ -809,6 +809,7 @@ function rigiSell() {
         });
         cheapest.sell(Game.BuildingsOwned % 10);
     }
+    return;
 }
 
 function lumpIn(mins) {
@@ -855,52 +856,55 @@ function autoRigidel() {
             if (timeToRipe < 60) {
                 var prev = T.slot[0]; //cache whatever god you have equipped
                 swapIn(10, 0); //swap in rigidel
+                Game.computeLumpTimes();
                 rigiSell(); //Meet the %10 condition
+                autoDragonsCurve();
                 Game.computeLumpTimes();
                 if (Date.now() - started >= ripeAge) {
-                    //harvest the ripe lump, AutoSL probably covers this but this should avoid issues with autoBuy going first and disrupting Rigidel
-                    autoDragonsCurve();
                     Game.clickLump();
                 }
-                if (prev != -1) swapIn(prev, 0); //put the old one back
+                if (timeToRipe > 60 && prev != -1) swapIn(prev, 0); //put the old one back
             }
-            return;
         case 1: //Rigidel is already in diamond slot
             if (timeToRipe < 60 && Game.BuildingsOwned % 10) {
                 rigiSell();
+                autoDragonsCurve();
                 Game.computeLumpTimes();
                 if (Date.now() - started >= ripeAge) {
-                    autoDragonsCurve();
                     Game.clickLump();
                 }
             }
-            return;
         case 2: //Rigidel in Ruby slot,
             if (timeToRipe < 40 && Game.BuildingsOwned % 10) {
                 rigiSell();
+                autoDragonsCurve();
                 Game.computeLumpTimes();
                 if (Date.now() - started >= ripeAge) {
-                    autoDragonsCurve();
                     Game.clickLump();
                 }
             }
-            return;
         case 3: //Rigidel in Jade slot
             if (timeToRipe < 20 && Game.BuildingsOwned % 10) {
                 rigiSell();
+                autoDragonsCurve();
                 Game.computeLumpTimes();
                 if (Date.now() - started >= ripeAge) {
-                    autoDragonsCurve();
                     Game.clickLump();
                 }
             }
-            return;
     }
 }
 
 function autoDragonsCurve() {
     //Swap dragon auras to try for unusual lumps
     if (Game.dragonLevel < 21 || FrozenCookies.dragonsCurve < 1) return;
+
+    if (FrozenCookies.autoDragonToggle == 1) {
+        autoDragonsCurve.autodragonyes = 1;
+        FrozenCookies.autoDragonToggle = 0;
+    } else {
+        autoDragonsCurve.autodragonyes = 0;
+    }
 
     if (
         Game.dragonLevel > 25 &&
@@ -925,6 +929,12 @@ function autoDragonsCurve() {
         Game.SetDragonAura(18, 1);
         Game.ConfirmPrompt();
     }
+
+    if (autoDragonsCurve.autodragonyes == 1) {
+        FrozenCookies.autoDragonToggle = 1;
+        autoDragonsCurve.autodragonyes = 0;
+    }
+    return;
 }
 
 function autoTicker() {
@@ -2517,11 +2527,7 @@ function autoLoanBuy() {
 }
 
 function autoDragonAction() {
-    if (
-        !Game.HasUnlocked("A crumbly egg") ||
-        Game.dragonLevel > 25 ||
-        hasClickBuff()
-    ) {
+    if (!Game.HasUnlocked("A crumbly egg") || Game.dragonLevel > 25 || hasClickBuff()) {
         return;
     }
 
@@ -2586,7 +2592,7 @@ function autoDragonAura0Action() {
         return;
     }
 
-     if (
+    if (
         Game.dragonLevel > 25 &&
         Game.dragonAura == FrozenCookies.autoDragonAura1 &&
         Game.dragonAura2 != FrozenCookies.autoDragonAura0
