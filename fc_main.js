@@ -802,13 +802,7 @@ var M = Game.Objects["Wizard tower"].minigame; //Grimoire
 
 function rigiSell() {
     //Sell enough of the cheapest building to enable Rigidels effect
-    if (Game.BuildingsOwned % 10) {
-        var cheapest;
-        Game.ObjectsById.forEach(function (b) {
-            if (!cheapest || b.price < cheapest.price) cheapest = b;
-        });
-        cheapest.sell(Game.BuildingsOwned % 10);
-    }
+    if (Game.BuildingsOwned % 10) Game.Objects["Cursor"].sell(Game.BuildingsOwned % 10);
     return;
 }
 
@@ -861,41 +855,33 @@ function autoRigidel() {
                 rigiSell(); //Meet the %10 condition
                 autoDragonsCurve();
                 Game.computeLumpTimes();
-                if (Date.now() - started >= ripeAge) {
-                    Game.clickLump();
-                    if (prev != -1) swapIn(prev, 0); //put the old one back
-                    logEvent("autoRigidel", "Sugar lump harvested early");
-                }
+                Game.clickLump();
+                if (prev != -1) swapIn(prev, 0); //put the old one back
+                logEvent("autoRigidel", "Sugar lump harvested early");
             }
         case 1: //Rigidel is already in diamond slot
             if (timeToRipe < 60 && Game.BuildingsOwned % 10) {
                 rigiSell();
                 autoDragonsCurve();
                 Game.computeLumpTimes();
-                if (Date.now() - started >= ripeAge) {
-                    Game.clickLump();
-                    logEvent("autoRigidel", "Sugar lump harvested early");
-                }
+                Game.clickLump();
+                logEvent("autoRigidel", "Sugar lump harvested early");
             }
         case 2: //Rigidel in Ruby slot,
             if (timeToRipe < 40 && Game.BuildingsOwned % 10) {
                 rigiSell();
                 autoDragonsCurve();
                 Game.computeLumpTimes();
-                if (Date.now() - started >= ripeAge) {
-                    Game.clickLump();
-                    logEvent("autoRigidel", "Sugar lump harvested early");
-                }
+                Game.clickLump();
+                logEvent("autoRigidel", "Sugar lump harvested early");
             }
         case 3: //Rigidel in Jade slot
             if (timeToRipe < 20 && Game.BuildingsOwned % 10) {
                 rigiSell();
                 autoDragonsCurve();
                 Game.computeLumpTimes();
-                if (Date.now() - started >= ripeAge) {
-                    Game.clickLump();
-                    logEvent("autoRigidel", "Sugar lump harvested early");
-                }
+                Game.clickLump();
+                logEvent("autoRigidel", "Sugar lump harvested early");
             }
     }
 }
