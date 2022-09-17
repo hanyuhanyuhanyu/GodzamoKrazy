@@ -801,8 +801,8 @@ var T = Game.Objects["Temple"].minigame; //Pantheon
 var M = Game.Objects["Wizard tower"].minigame; //Grimoire
 
 function rigiSell() {
-    //Sell enough of the cheapest building to enable Rigidels effect
-    if (Game.BuildingsOwned % 10) Game.Objects["Cursor"].sell(Game.BuildingsOwned % 10);
+    //Sell enough mines to enable Rigidels effect
+    if (Game.BuildingsOwned % 10) Game.Objects["Mine"].sell(Game.BuildingsOwned % 10);
     return;
 }
 
@@ -853,34 +853,46 @@ function autoRigidel() {
                 swapIn(10, 0); //swap in rigidel
                 Game.computeLumpTimes();
                 rigiSell(); //Meet the %10 condition
-                autoDragonsCurve();
                 Game.computeLumpTimes();
-                Game.clickLump();
+                if (Game.dragonLevel >= 21 && FrozenCookies.dragonsCurve) {
+                    autoDragonsCurve();
+                } else {
+                    Game.clickLump();
+                }
                 if (prev != -1) swapIn(prev, 0); //put the old one back
                 logEvent("autoRigidel", "Sugar lump harvested early");
             }
         case 1: //Rigidel is already in diamond slot
             if (timeToRipe < 60 && Game.BuildingsOwned % 10) {
                 rigiSell();
-                autoDragonsCurve();
                 Game.computeLumpTimes();
-                Game.clickLump();
+                if (Game.dragonLevel >= 21 && FrozenCookies.dragonsCurve) {
+                    autoDragonsCurve();
+                } else {
+                    Game.clickLump();
+                }
                 logEvent("autoRigidel", "Sugar lump harvested early");
             }
         case 2: //Rigidel in Ruby slot,
             if (timeToRipe < 40 && Game.BuildingsOwned % 10) {
                 rigiSell();
-                autoDragonsCurve();
                 Game.computeLumpTimes();
-                Game.clickLump();
+                if (Game.dragonLevel >= 21 && FrozenCookies.dragonsCurve) {
+                    autoDragonsCurve();
+                } else {
+                    Game.clickLump();
+                }
                 logEvent("autoRigidel", "Sugar lump harvested early");
             }
         case 3: //Rigidel in Jade slot
             if (timeToRipe < 20 && Game.BuildingsOwned % 10) {
                 rigiSell();
-                autoDragonsCurve();
                 Game.computeLumpTimes();
-                Game.clickLump();
+                if (Game.dragonLevel >= 21 && FrozenCookies.dragonsCurve) {
+                    autoDragonsCurve();
+                } else {
+                    Game.clickLump();
+                }
                 logEvent("autoRigidel", "Sugar lump harvested early");
             }
     }
@@ -922,6 +934,8 @@ function autoDragonsCurve() {
         Game.SetDragonAura(18, 1);
         Game.ConfirmPrompt();
     }
+
+    Game.clickLump();
 
     if (autoDragonsCurve.autodragonyes == 1) {
         FrozenCookies.autoDragonToggle = 1;
@@ -5466,8 +5480,13 @@ function autoCookie() {
         if (FrozenCookies.autoSL) {
             var started = Game.lumpT;
             var ripeAge = Math.ceil(Game.lumpRipeAge);
-            if (Date.now() - started >= ripeAge) {
+            if (
+                Date.now() - started >= ripeAge &&
+                Game.dragonLevel >= 21 &&
+                FrozenCookies.dragonsCurve
+            ) {
                 autoDragonsCurve();
+            } else {
                 Game.clickLump();
             }
         }
