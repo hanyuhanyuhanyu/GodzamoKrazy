@@ -5486,7 +5486,7 @@ function autoCookie() {
                 FrozenCookies.dragonsCurve
             ) {
                 autoDragonsCurve();
-            } else {
+            } else if (Date.now() - started >= ripeAge) {
                 Game.clickLump();
             }
         }
