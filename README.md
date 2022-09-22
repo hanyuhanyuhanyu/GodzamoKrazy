@@ -62,6 +62,10 @@ If you want to manually install it:
 <details>
 <summary>Click to expand!</summary> 
 
+2022 Sep 22
+* AutoSpell's minimum frenzy is now also applied to the double cast and 100% Consistency Combos
+* If a minimum frenzy is set for Auto-Loan and an active loan is being paid back (interest), no loan will be taken even if the total frenzy exceeds the value
+
 2022 Sep 14
 * Restored auto dragon settings that were temporarily disabled behind the hood
 * Fixed a long standing bug with auto-Rigidel that could stop the entire mod from working and sugar lump harvesting to fail

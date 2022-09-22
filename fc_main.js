@@ -1394,6 +1394,7 @@ function autoFTHOFComboAction() {
             }
             if (
                 M.magic == M.magicM &&
+                cpsBonus() >= FrozenCookies.minCpSMult &&
                 (((Game.hasAura("Reaper of Fields") || Game.hasAura("Reality Bending")) &&
                     Game.hasBuff("Dragon Harvest") &&
                     Game.hasBuff("Frenzy") &&
@@ -1547,6 +1548,7 @@ function autoFTHOFComboAction() {
             }
             if (
                 M.magic == M.magicM &&
+                cpsBonus() >= FrozenCookies.minCpSMult &&
                 (((Game.hasAura("Reaper of Fields") || Game.hasAura("Reality Bending")) &&
                     Game.hasBuff("Dragon Harvest") &&
                     Game.hasBuff("Frenzy") &&
@@ -1833,8 +1835,9 @@ function auto100ConsistencyComboAction() {
                 nextSpellName(0) == "Building Special") ||
             (nextSpellName(0) == "Click Frenzy" && nextSpellName(1) == "Elder Frenzy") ||
             (nextSpellName(1) == "Click Frenzy" && nextSpellName(0) == "Elder Frenzy"))
-    )
+    ) {
         auto100ConsistencyComboAction.state = 1;
+    }
 
     auto100ConsistencyComboAction.countFarm = Game.Objects["Farm"].amount - 1;
     auto100ConsistencyComboAction.countMine = Game.Objects["Mine"].amount;
@@ -1874,6 +1877,8 @@ function auto100ConsistencyComboAction() {
 
         case 1: // Start combo
             if (
+                M.magic == M.magicM &&
+                cpsBonus() >= FrozenCookies.minCpSMult &&
                 (((Game.hasAura("Reaper of Fields") || Game.hasAura("Reality Bending")) &&
                     Game.hasBuff("Dragon Harvest") &&
                     Game.hasBuff("Frenzy") &&
@@ -2526,7 +2531,14 @@ function autoBrokerAction() {
 function autoLoanBuy() {
     if (!B || B.officelevel < 2) return;
 
-    if (hasClickBuff() && cpsBonus() >= FrozenCookies.minLoanMult) {
+    if (
+        hasClickBuff() &&
+        cpsBonus() >= FrozenCookies.minLoanMult &&
+        ((!Game.hasBuff("Loan 1 (interest)") &&
+            !Game.hasBuff("Loan 2 (interest)") &&
+            !Game.hasBuff("Loan 3 (interest)")) ||
+            FrozenCookies.minLoanMult == 0)
+    ) {
         if (B.officeLevel >= 2) B.takeLoan(1);
         if (B.officeLevel >= 4) B.takeLoan(2);
         if (B.officeLevel >= 5 && FrozenCookies.autoLoan == 2) B.takeLoan(3);
@@ -2690,7 +2702,11 @@ function autoSugarFrenzyAction() {
         cpsBonus() >= FrozenCookies.minASFMult &&
         Game.UpgradesById["450"].unlocked == 1 && // Check to see if Sugar craving prestige upgrade has been purchased
         Game.UpgradesById["452"].bought == 0 && // Check to see if sugar frenzy has already been bought this ascension
-        auto100ConsistencyComboAction.state == 2
+        auto100ConsistencyComboAction.state == 2 &&
+        ((!Game.hasBuff("Loan 1 (interest)") &&
+            !Game.hasBuff("Loan 2 (interest)") &&
+            !Game.hasBuff("Loan 3 (interest)")) ||
+            FrozenCookies.minLoanMult == 0)
     ) {
         Game.UpgradesById["452"].buy();
         Game.ConfirmPrompt();
@@ -2703,7 +2719,11 @@ function autoSugarFrenzyAction() {
         cpsBonus() >= FrozenCookies.minASFMult &&
         Game.UpgradesById["450"].unlocked == 1 && // Check to see if Sugar craving prestige upgrade has been purchased
         Game.UpgradesById["452"].bought == 0 && // Check to see if sugar frenzy has already been bought this ascension
-        (autoFTHOFComboAction.state == 3 || auto100ConsistencyComboAction.state == 2)
+        (autoFTHOFComboAction.state == 3 || auto100ConsistencyComboAction.state == 2) &&
+        ((!Game.hasBuff("Loan 1 (interest)") &&
+            !Game.hasBuff("Loan 2 (interest)") &&
+            !Game.hasBuff("Loan 3 (interest)")) ||
+            FrozenCookies.minLoanMult == 0)
     ) {
         Game.UpgradesById["452"].buy();
         Game.ConfirmPrompt();
