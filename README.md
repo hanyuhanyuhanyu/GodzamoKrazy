@@ -471,7 +471,7 @@ If you want to manually install it:
 * **Pastemode** Turning this on is a very stupid idea.
 
 ## Other automatic options
-* **Autoascend** This is mainly useful if you're grinding out ascensions for Endless Cycle, or want to build up your HC boost. 
+* **Autoascend** This is mainly useful if you're grinding out ascensions for Endless Cycle, or want to build up your HC boost. Note that it can take a few seconds before the upgrade screen disappears each ascension, the transition isn't instantaneous.
 * **Autopop Wrinklers** Pop any wrinklers, either the moment they appear, or when they have eaten enough to provide a decent bonus toward the next purchase. This is ignored during Halloween and Easter season as long as halloween cookies and eggs are still not found. 
 * **Save Shiny Wrinklers** This overrides the Autopop function for the shiny wrinkler, and will also prevent the Grandmapocalypse from ever ending, if enabled. 
 * **Autoharvest Sugar Lump** Will harvest a lump as soon as it is safe to do so (ripe). It can also swap in Rigidel automatically to make the harvest occur up to one hour early. 
