@@ -83,14 +83,14 @@ FrozenCookies.preferenceValues = {
     autoOtherOptions: {
         hint: "Other automatic actions:",
     },
-    autoBuyAll: {
-        hint: "Automatically buy all possible upgrades a few times after reincarnation",
-        display: ["Auto Buy All Upgrades OFF", "Auto Buy All Upgrades ON"],
-        default: 0,
-    },
     autoBulk: {
         hint: "Automatically set buildings to be bought in bulk after reincarnation",
         display: ["Auto Bulkbuy OFF", "Auto Bulkbuy x10", "Auto Bulkbuy x100"],
+        default: 0,
+    },
+    autoBuyAll: {
+        hint: "Automatically hit the 'buy all upgrades button' until a heavenly chip is earned",
+        display: ["Auto Buy All Upgrades OFF", "Auto Buy All Upgrades ON"],
         default: 0,
     },
     autoAscend: {
