@@ -5581,8 +5581,9 @@ function autoCookie() {
             //      console.log(purchase.name + ': ' + Beautify(recommendation.efficiency) + ',' + Beautify(recommendation.delta_cps));
             if (
                 recommendation.type == "upgrade" &&
+                (FrozenCookies.autobuyCount == 0 || FrozenCookies.autobuyCount == 5) &&
                 FrozenCookies.autoBuyAll &&
-                FrozenCookies.autoBuyAllCount < 5
+                FrozenCookies.autoBuyAllCount < 20
             ) {
                 Game.storeBuyAll();
                 FrozenCookies.autoBuyAllCount += 1;
