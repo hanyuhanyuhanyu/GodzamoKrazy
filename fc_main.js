@@ -5588,10 +5588,18 @@ function autoCookie() {
             );
             if (
                 recommendation.type == "upgrade" &&
-                !(upgradeBlacklist.concat(researchUpgradesList).includes(upgrade.id)) &&
                 FrozenCookies.autoBuyAll &&
-                Game.cookies >= delay + recommendation.cost &&
-                resetPrestige - currPrestige < 1
+                resetPrestige - currPrestige < 1 &&
+                recommendation.purchase.name != "Bingo center/Research facility" &&
+                recommendation.purchase.name != "Specialized chocolate chips" &&
+                recommendation.purchase.name != "Designer cocoa beans" &&
+                recommendation.purchase.name != "Ritual rolling pins" &&
+                recommendation.purchase.name != "Underworld ovens" &&
+                recommendation.purchase.name != "One mind" &&
+                recommendation.purchase.name != "Exotic nuts" &&
+                recommendation.purchase.name != "Communal brainsweep" &&
+                recommendation.purchase.name != "Arcane sugar" &&
+                recommendation.purchase.name != "Elder Pact"
             ) {
                 Game.storeBuyAll();
                 logEvent("Autobuy", "Bought all upgrades!");

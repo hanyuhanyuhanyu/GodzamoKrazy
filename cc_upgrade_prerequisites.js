@@ -1889,23 +1889,6 @@ var recommendationBlacklist = [
     806, // blacklist jukebox from being included in the recommendationList
 ];
 
-var researchUpgradesList = [
-    // Grandmapocalypse research
-    64, // Bingo center/Research facility
-    65, // Specialized chocolate chips
-    66, // Designer cocoa beans
-    67, // Ritual rolling pins
-    68, // Underworld ovens
-    69, // One mind
-    70, // Exotic nuts
-    71, // Communal brainsweep
-    72, // Arcane sugar
-    73, // Elder Pact
-    74, // Elder Pledge
-    84, // Elder Covenant
-    85, // Revoke Elder Covenant
-];
-
 var seasons = ["", "fools", "christmas", "easter", "halloween", "valentines"];
 
 var holidayCookies = {
