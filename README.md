@@ -62,8 +62,9 @@ If you want to manually install it:
 <details>
 <summary>Click to expand!</summary> 
 
-2022 Oct 03
-* Implement #55 'Add a buy all upgrades function'
+2022 Oct 04
+* Implement https://github.com/erbkaiser/FrozenCookies/issues/55 'Add a buy all upgrades function'
+* Fixed a bug that hid the Auto Bulk Buy option
 
 2022 Sep 22
 * AutoSpell's minimum frenzy is now also applied to the double cast and 100% Consistency Combos
@@ -466,8 +467,6 @@ If you want to manually install it:
 ## Auto buying options
 * **Autobuy** This controls all automated purchases. Upgrades in the vault will not be bought. Buildings with a limit will not be bought beyond the limit. Blacklists will block certain items or reshuffle buying order. Some things to keep in mind: the Research options will be halted at an optimal level, if either the Grandmapocalypse blacklist is active, Shiny Wrinkler protection is active, or the season is Easter or Halloween, as those seasons can use wrinklers.
 * **Other Upgrades** Some upgrades don't provide direct CpS bonuses so the normal Autobuy will never guy them. This option will. 
-* **Auto Buy All Upgrades** This will effectively hit the 'buy all upgrades' button as many times as it can until at least one prestige level (heavenly chip) is earned.
-* **Auto Bulkbuy** This sets the bulk buy mode directly after ascending only. It does not carry over on reloads. If some buildings are capped, it will temporarily bypass bulk buy for those if they are near the cap. 
 * ** Auto Blacklist** Turns off the selected blacklist (next option) if it served its purpose.
 * **Blacklist** This contains the Speedrun and Hardcore blacklists required for some of the born again achievements, as well as one to disable ever entering or proceding with the Grandmapocalypse, and a bonus mode that will not buy any buildings.
 * **Mine limit** Auto-Godzamok uses mines and factories so it makes sense to put a maximum cap on these, as otherwise rebuying will cost more than was gained. The actual tipping point depends on your max CpS so this cannot be predetermined. For mid game (when you can earn enough HCs at a good pace), try a value around 500. For very late game (all upgrades bought), try values around 800.
@@ -475,6 +474,8 @@ If you want to manually install it:
 * **Pastemode** Turning this on is a very stupid idea.
 
 ## Other automatic options
+* **Auto Bulkbuy** This sets the bulk buy mode directly after ascending only. It does not carry over on reloads. If some buildings are capped, it will temporarily bypass bulk buy for those if they are near the cap. 
+* **Auto Buy All Upgrades** This will effectively hit the 'buy all upgrades' button as many times as it can until at least one prestige level (heavenly chip) is earned.
 * **Autoascend** This is mainly useful if you're grinding out ascensions for Endless Cycle, or want to build up your HC boost. Note that it can take a few seconds before the upgrade screen disappears each ascension, the transition isn't instantaneous.
 * **Autopop Wrinklers** Pop any wrinklers, either the moment they appear, or when they have eaten enough to provide a decent bonus toward the next purchase. This is ignored during Halloween and Easter season as long as halloween cookies and eggs are still not found. 
 * **Save Shiny Wrinklers** This overrides the Autopop function for the shiny wrinkler, and will also prevent the Grandmapocalypse from ever ending, if enabled. 
