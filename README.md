@@ -576,8 +576,8 @@ Auto cast will cast the selected spell when max mana is reached, with some excep
 
 If the selected spell is FTHOF, there are some additional checks:
 
-* If the next detected spell is *Click Frenzy*, it will not cast the spell unless either a *Frenzy* or *Dragon Harvest* is active for long enough to last the entire spell
-* If the next detected spell is either *Elder Frenzy* or *Cursed Finger*, it will not cast this spell unless a *Click Frenzy* or *Dragon Frenzy* is active for long enough to last the entire spell
+* If the next detected spell is *Click Frenzy*, it will not cast the spell unless either a *Frenzy* or *Dragon Harvest* plus a *Building Special* are active for long enough to last the entire spell
+* If the next detected spell is either *Elder Frenzy* or *Cursed Finger*, it will not cast this spell unless a *Click Frenzy* or *Dragonflight* is active for long enough to last the entire spell
 
 ## Double Cast FTHOF
 
