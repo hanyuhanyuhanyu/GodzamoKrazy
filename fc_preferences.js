@@ -45,11 +45,6 @@ FrozenCookies.preferenceValues = {
         display: ["Other Upgrades OFF", "Other Upgrades ON"],
         default: 1,
     },
-    autoBulk: {
-        hint: "Automatically set buildings to be bought in bulk after reincarnation",
-        display: ["Auto Bulkbuy OFF", "Auto Bulkbuy x10", "Auto Bulkbuy x100"],
-        default: 0,
-    },
     autoBlacklistOff: {
         hint: "Automatically turn off a blacklist once the goal for that blacklist is achieved",
         display: ["Auto Blacklist OFF", "Auto Blacklist ON"],
@@ -87,6 +82,16 @@ FrozenCookies.preferenceValues = {
     // other auto options
     autoOtherOptions: {
         hint: "Other automatic actions:",
+    },
+    autoBulk: {
+        hint: "Automatically set buildings to be bought in bulk after reincarnation",
+        display: ["Auto Bulkbuy OFF", "Auto Bulkbuy x10", "Auto Bulkbuy x100"],
+        default: 0,
+    },
+    autoBuyAll: {
+        hint: "Automatically hit the 'buy all upgrades button' until a heavenly chip is earned",
+        display: ["Auto Buy All Upgrades OFF", "Auto Buy All Upgrades ON"],
+        default: 0,
     },
     autoAscend: {
         hint: "Automatically ascend when your heavenly chip count hits a certain number. Note: this will skip the upgrade screen",

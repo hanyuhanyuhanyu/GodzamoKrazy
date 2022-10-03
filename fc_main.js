@@ -272,10 +272,11 @@ function setOverrides(gameSaveData) {
         FrozenCookies.minASFMult = preferenceParse("minASFMult", 1);
 
         // Temporary, remove this later
-        if (FrozenCookies.autoDragonAura2) {
-            FrozenCookies.autoDragonToggle = 0;
-            FrozenCookies.autoDragonAura0 = 0;
-            FrozenCookies.autoDragonAura2 = undefined;
+        if (FrozenCookies.autoBulk == 10) {
+            FrozenCookies.autoBulk = 1;
+        }
+        if (FrozenCookies.autoBulk == 100) {
+            FrozenCookies.autoBulk = 2;
         }
 
         // building max values
@@ -3596,7 +3597,6 @@ function recommendedSettingsAction() {
         // autobuy options
         FrozenCookies.autoBuy = 1;
         FrozenCookies.otherUpgrades = 1;
-        FrozenCookies.autoBulk = 100;
         FrozenCookies.autoBlacklistOff = 0;
         FrozenCookies.blacklist = 0;
         FrozenCookies.mineLimit = 1;
@@ -3607,6 +3607,8 @@ function recommendedSettingsAction() {
         // other auto options
         FrozenCookies.autoAscend = 0;
         FrozenCookies.HCAscendAmount = 0;
+        FrozenCookies.autoBulk = 2;
+        FrozenCookies.autoBuyAll = 1;
         FrozenCookies.autoWrinkler = 1;
         FrozenCookies.shinyPop = 0;
         FrozenCookies.autoSL = 2;
@@ -5577,7 +5579,31 @@ function autoCookie() {
             recommendation.purchase.clickFunction = null;
             disabledPopups = false;
             //      console.log(purchase.name + ': ' + Beautify(recommendation.efficiency) + ',' + Beautify(recommendation.delta_cps));
+            var currPrestige = Game.prestige;
+            var resetPrestige = Game.HowMuchPrestige(
+                Game.cookiesReset +
+                    Game.cookiesEarned +
+                    wrinklerValue() +
+                    chocolateValue()
+            );
             if (
+                recommendation.type == "upgrade" &&
+                FrozenCookies.autoBuyAll &&
+                resetPrestige - currPrestige < 1 &&
+                recommendation.purchase.name != "Bingo center/Research facility" &&
+                recommendation.purchase.name != "Specialized chocolate chips" &&
+                recommendation.purchase.name != "Designer cocoa beans" &&
+                recommendation.purchase.name != "Ritual rolling pins" &&
+                recommendation.purchase.name != "Underworld ovens" &&
+                recommendation.purchase.name != "One mind" &&
+                recommendation.purchase.name != "Exotic nuts" &&
+                recommendation.purchase.name != "Communal brainsweep" &&
+                recommendation.purchase.name != "Arcane sugar" &&
+                recommendation.purchase.name != "Elder Pact"
+            ) {
+                Game.storeBuyAll();
+                logEvent("Autobuy", "Bought all upgrades!");
+            } else if (
                 recommendation.type == "building" &&
                 Game.buyBulk == 100 &&
                 ((FrozenCookies.autoSpell == 3 &&
