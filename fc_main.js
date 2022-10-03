@@ -5640,6 +5640,7 @@ function autoCookie() {
             } else if (
                 recommendation.type == "upgrade" &&
                 FrozenCookies.autoBuyAll &&
+                Game.cookies >= delay + recommendation.cost &&
                 resetPrestige - currPrestige < 1
             ) {
                 Game.storeBuyAll();
