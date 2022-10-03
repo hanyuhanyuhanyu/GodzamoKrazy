@@ -5586,13 +5586,6 @@ function autoCookie() {
                     chocolateValue()
             );
             if (
-                recommendation.type == "upgrade" &&
-                FrozenCookies.autoBuyAll &&
-                resetPrestige - currPrestige < 1
-            ) {
-                Game.storeBuyAll();
-                logEvent("Autobuy", "Bought all upgrades!");
-            } else if (
                 recommendation.type == "building" &&
                 Game.buyBulk == 100 &&
                 ((FrozenCookies.autoSpell == 3 &&
@@ -5644,6 +5637,13 @@ function autoCookie() {
                 Game.buyBulk = 10;
             } else if (recommendation.type == "building") {
                 safeBuy(recommendation.purchase);
+            } else if (
+                recommendation.type == "upgrade" &&
+                FrozenCookies.autoBuyAll &&
+                resetPrestige - currPrestige < 1
+            ) {
+                Game.storeBuyAll();
+                logEvent("Autobuy", "Bought all upgrades!");
             } else {
                 recommendation.purchase.buy();
             }
