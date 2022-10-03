@@ -5588,7 +5588,7 @@ function autoCookie() {
             );
             if (
                 recommendation.type == "upgrade" &&
-                (!Game.researchT || Game.researchT < 1) &&
+                !(upgradeBlacklist.concat(researchUpgradesList).includes(upgrade.id)) &&
                 FrozenCookies.autoBuyAll &&
                 Game.cookies >= delay + recommendation.cost &&
                 resetPrestige - currPrestige < 1
