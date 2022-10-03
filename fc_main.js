@@ -528,6 +528,7 @@ function fcReset() {
         Game.Upgrades["Chocolate egg"].buy();
     }
     Game.oldReset();
+    FrozenCookies.autoBuyAllCount = 0;
     FrozenCookies.frenzyTimes = {};
     FrozenCookies.last_gc_state =
         (Game.hasBuff("Frenzy") ? Game.buffs["Frenzy"].multCpS : 1) * clickBuffBonus();
@@ -3596,6 +3597,7 @@ function recommendedSettingsAction() {
         // autobuy options
         FrozenCookies.autoBuy = 1;
         FrozenCookies.otherUpgrades = 1;
+        FrozenCookies.autoBuyAll = 1;
         FrozenCookies.autoBulk = 100;
         FrozenCookies.autoBlacklistOff = 0;
         FrozenCookies.blacklist = 0;
@@ -5578,6 +5580,13 @@ function autoCookie() {
             disabledPopups = false;
             //      console.log(purchase.name + ': ' + Beautify(recommendation.efficiency) + ',' + Beautify(recommendation.delta_cps));
             if (
+                recommendation.type == "upgrade" &&
+                FrozenCookies.autoBuyAll &&
+                FrozenCookies.autoBuyAllCount < 5
+            ) {
+                Game.storeBuyAll();
+                FrozenCookies.autoBuyAllCount += 1;
+            } else if (
                 recommendation.type == "building" &&
                 Game.buyBulk == 100 &&
                 ((FrozenCookies.autoSpell == 3 &&
