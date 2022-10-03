@@ -5586,6 +5586,7 @@ function autoCookie() {
             ) {
                 Game.storeBuyAll();
                 FrozenCookies.autoBuyAllCount += 1;
+                logEvent("Autobuy", "Bought all upgrades!");
             } else if (
                 recommendation.type == "building" &&
                 Game.buyBulk == 100 &&
