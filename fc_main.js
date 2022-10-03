@@ -5587,6 +5587,8 @@ function autoCookie() {
                     chocolateValue()
             );
             if (
+                recommendation.type == "upgrade" &&
+                (!Game.researchT || Game.researchT == -1) &&
                 FrozenCookies.autoBuyAll &&
                 Game.cookies >= delay + recommendation.cost &&
                 resetPrestige - currPrestige < 1
