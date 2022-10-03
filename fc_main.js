@@ -5588,6 +5588,7 @@ function autoCookie() {
             );
             if (
                 recommendation.type == "upgrade" &&
+                Game.Has("Inspired checklist") &&
                 FrozenCookies.autoBuyAll &&
                 resetPrestige - currPrestige < 1 &&
                 recommendation.purchase.name != "Bingo center/Research facility" &&
