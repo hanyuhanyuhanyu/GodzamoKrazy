@@ -466,7 +466,7 @@ If you want to manually install it:
 ## Auto buying options
 * **Autobuy** This controls all automated purchases. Upgrades in the vault will not be bought. Buildings with a limit will not be bought beyond the limit. Blacklists will block certain items or reshuffle buying order. Some things to keep in mind: the Research options will be halted at an optimal level, if either the Grandmapocalypse blacklist is active, Shiny Wrinkler protection is active, or the season is Easter or Halloween, as those seasons can use wrinklers.
 * **Other Upgrades** Some upgrades don't provide direct CpS bonuses so the normal Autobuy will never guy them. This option will. 
-* **Auto Buy All Upgrades** This will effectively hit the 'buy all upgrades' button a few times after ascending, to make the process go faster.
+* **Auto Buy All Upgrades** This will effectively hit the 'buy all upgrades' button as many times as it can until at least one prestige level (heavenly chip) is earned.
 * **Auto Bulkbuy** This sets the bulk buy mode directly after ascending only. It does not carry over on reloads. If some buildings are capped, it will temporarily bypass bulk buy for those if they are near the cap. 
 * ** Auto Blacklist** Turns off the selected blacklist (next option) if it served its purpose.
 * **Blacklist** This contains the Speedrun and Hardcore blacklists required for some of the born again achievements, as well as one to disable ever entering or proceding with the Grandmapocalypse, and a bonus mode that will not buy any buildings.
