@@ -272,10 +272,11 @@ function setOverrides(gameSaveData) {
         FrozenCookies.minASFMult = preferenceParse("minASFMult", 1);
 
         // Temporary, remove this later
-        if (FrozenCookies.autoDragonAura2) {
-            FrozenCookies.autoDragonToggle = 0;
-            FrozenCookies.autoDragonAura0 = 0;
-            FrozenCookies.autoDragonAura2 = undefined;
+        if (FrozenCookies.autoBulk == 10) {
+            FrozenCookies.autoBulk = 1;
+        }
+        if (FrozenCookies.autoBulk == 100) {
+            FrozenCookies.autoBulk = 2;
         }
 
         // building max values
@@ -3596,8 +3597,6 @@ function recommendedSettingsAction() {
         // autobuy options
         FrozenCookies.autoBuy = 1;
         FrozenCookies.otherUpgrades = 1;
-        FrozenCookies.autoBuyAll = 1;
-        FrozenCookies.autoBulk = 100;
         FrozenCookies.autoBlacklistOff = 0;
         FrozenCookies.blacklist = 0;
         FrozenCookies.mineLimit = 1;
@@ -3608,6 +3607,8 @@ function recommendedSettingsAction() {
         // other auto options
         FrozenCookies.autoAscend = 0;
         FrozenCookies.HCAscendAmount = 0;
+        FrozenCookies.autoBulk = 2;
+        FrozenCookies.autoBuyAll = 1;
         FrozenCookies.autoWrinkler = 1;
         FrozenCookies.shinyPop = 0;
         FrozenCookies.autoSL = 2;
@@ -5586,6 +5587,13 @@ function autoCookie() {
                     chocolateValue()
             );
             if (
+                FrozenCookies.autoBuyAll &&
+                Game.cookies >= delay + recommendation.cost &&
+                resetPrestige - currPrestige < 1
+            ) {
+                Game.storeBuyAll();
+                logEvent("Autobuy", "Bought all upgrades!");
+            } else if (
                 recommendation.type == "building" &&
                 Game.buyBulk == 100 &&
                 ((FrozenCookies.autoSpell == 3 &&
@@ -5637,14 +5645,6 @@ function autoCookie() {
                 Game.buyBulk = 10;
             } else if (recommendation.type == "building") {
                 safeBuy(recommendation.purchase);
-            } else if (
-                recommendation.type == "upgrade" &&
-                FrozenCookies.autoBuyAll &&
-                Game.cookies >= delay + recommendation.cost &&
-                resetPrestige - currPrestige < 1
-            ) {
-                Game.storeBuyAll();
-                logEvent("Autobuy", "Bought all upgrades!");
             } else {
                 recommendation.purchase.buy();
             }
