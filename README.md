@@ -467,7 +467,7 @@ If you want to manually install it:
 ## Auto buying options
 * **Autobuy** This controls all automated purchases. Upgrades in the vault will not be bought. Buildings with a limit will not be bought beyond the limit. Blacklists will block certain items or reshuffle buying order. Some things to keep in mind: the Research options will be halted at an optimal level, if either the Grandmapocalypse blacklist is active, Shiny Wrinkler protection is active, or the season is Easter or Halloween, as those seasons can use wrinklers.
 * **Other Upgrades** Some upgrades don't provide direct CpS bonuses so the normal Autobuy will never guy them. This option will. 
-* ** Auto Blacklist** Turns off the selected blacklist (next option) if it served its purpose.
+* **Auto Blacklist** Turns off the selected blacklist (next option) if it served its purpose.
 * **Blacklist** This contains the Speedrun and Hardcore blacklists required for some of the born again achievements, as well as one to disable ever entering or proceding with the Grandmapocalypse, and a bonus mode that will not buy any buildings.
 * **Mine limit** Auto-Godzamok uses mines and factories so it makes sense to put a maximum cap on these, as otherwise rebuying will cost more than was gained. The actual tipping point depends on your max CpS so this cannot be predetermined. For mid game (when you can earn enough HCs at a good pace), try a value around 500. For very late game (all upgrades bought), try values around 800.
 * **Factory limit** See Mine limit
@@ -515,7 +515,7 @@ See the schedule on https://cookieclicker.fandom.com/wiki/Pantheon
 All bank options will add a number of cookies to the next autoBuy purchase price, so it will never go below this amount from buying. This is separate from the 'Lucky' GC bank, which is always active. Multiple banks can be enabled at the same time, whatever is highest will be kept in reserve.
 * **SE Bank** Will keep half the cost of the highest owned building in reserve. This option is always enabled if you're auto-casting SE.
 * **Harvesting bank** Some plants give bonus cookies when they are harvested or let explode. For example, Bakeberries will give up to 30 minutes of CpS when harvested, but are limited to 3% of the stored cookies. Enabling this for Bakeberries will make sure that 3% of your bank is always equal to 30 minutes of current CpS.
-* **Harvestiung during CpS multiplier** This will work with the above option to also take a CpS multiplier into account. If you intend to harvest always during a frenzy and/or 1 or more building specials for optimal returns, this will increase the Harvesting bank value.
+* **Harvesting during CpS multiplier** This will work with the above option to also take a CpS multiplier into account. If you intend to harvest always during a frenzy and/or 1 or more building specials for optimal returns, this will increase the Harvesting bank value.
 
 ## Other options
 Not all of these work on the Steam version.
@@ -582,6 +582,7 @@ Auto cast will cast the selected spell when max mana is reached, with some excep
 If the selected spell is FTHOF, there are some additional checks:
 
 * If the next detected spell is *Click Frenzy*, it will not cast the spell unless either a *Frenzy* or *Dragon Harvest* plus a *Building Special* are active for long enough to last the entire spell
+** If *Reaper of Fields* is one of the active dragon auras, it will require both a *Frenzy* and *Dragon Harvest*, plus the *Building Special*.
 * If the next detected spell is either *Elder Frenzy* or *Cursed Finger*, it will not cast this spell unless a *Click Frenzy* or *Dragonflight* is active for long enough to last the entire spell
 
 ## Double Cast FTHOF
@@ -590,8 +591,11 @@ Double Cast FTHOF replaces Auto Cast. If the combo is enabled, it will look for 
 
 The possible combos are:
 * Stored *Click Frenzy* and *Elder Frenzy* and a natural *Frenzy* or *Dragon Harvest*, plus a *Building Special*
+** If *Reaper of Fields* is one of the active dragon auras, it will require both a *Frenzy* and *Dragon Harvest*, plus the *Building Special*.
 * Stored *Click Frenzy* and a *Building Special* and a natural *Frenzy* or *Dragon Harvest*, plus a *Building Special*
+** If *Reaper of Fields* is one of the active dragon auras, it will require both a *Frenzy* and *Dragon Harvest*, plus the *Building Special*.
 * Two stored *Building Special*s and a natural *Frenzy* or *Dragon Harvest*, plus any clicking frenzy (*Click Frenzy*, *Dragonflight*, or *Elder Frenzy*)
+** If *Reaper of Fields* is one of the active dragon auras, it will require both a *Frenzy* and *Dragon Harvest*, plus the *Building Special*s.
 
 If such a combo is detected, it will quickly cast the first spell, sell enough wizard towers for dualcasting, then cast the second spell, for a four way boost in total. This can earn decades of cookies in a single combo.
 
