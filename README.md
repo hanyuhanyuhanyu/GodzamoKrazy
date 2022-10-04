@@ -582,7 +582,7 @@ Auto cast will cast the selected spell when max mana is reached, with some excep
 If the selected spell is FTHOF, there are some additional checks:
 
 * If the next detected spell is *Click Frenzy*, it will not cast the spell unless either a *Frenzy* or *Dragon Harvest* plus a *Building Special* are active for long enough to last the entire spell
-** If *Reaper of Fields* is one of the active dragon auras, it will require both a *Frenzy* and *Dragon Harvest*, plus the *Building Special*.
+* * If *Reaper of Fields* is one of the active dragon auras, it will require both a *Frenzy* and *Dragon Harvest*, plus the *Building Special*.
 * If the next detected spell is either *Elder Frenzy* or *Cursed Finger*, it will not cast this spell unless a *Click Frenzy* or *Dragonflight* is active for long enough to last the entire spell
 
 ## Double Cast FTHOF
@@ -591,11 +591,9 @@ Double Cast FTHOF replaces Auto Cast. If the combo is enabled, it will look for 
 
 The possible combos are:
 * Stored *Click Frenzy* and *Elder Frenzy* and a natural *Frenzy* or *Dragon Harvest*, plus a *Building Special*
-** If *Reaper of Fields* is one of the active dragon auras, it will require both a *Frenzy* and *Dragon Harvest*, plus the *Building Special*.
 * Stored *Click Frenzy* and a *Building Special* and a natural *Frenzy* or *Dragon Harvest*, plus a *Building Special*
-** If *Reaper of Fields* is one of the active dragon auras, it will require both a *Frenzy* and *Dragon Harvest*, plus the *Building Special*.
 * Two stored *Building Special*s and a natural *Frenzy* or *Dragon Harvest*, plus any clicking frenzy (*Click Frenzy*, *Dragonflight*, or *Elder Frenzy*)
-** If *Reaper of Fields* is one of the active dragon auras, it will require both a *Frenzy* and *Dragon Harvest*, plus the *Building Special*s.
+* * If *Reaper of Fields* is one of the active dragon auras, it will require both a natural *Frenzy* and *Dragon Harvest*, plus the other boost(s).
 
 If such a combo is detected, it will quickly cast the first spell, sell enough wizard towers for dualcasting, then cast the second spell, for a four way boost in total. This can earn decades of cookies in a single combo.
 
