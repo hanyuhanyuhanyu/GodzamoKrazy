@@ -2511,6 +2511,28 @@ function autoFTHOFCombo2Action() {
 
     switch (autoFTHOFCombo2Action.state) {
         case 0:
+            // Can we shorten a negative buff with a backfire?
+            if (
+                M.magicM >= Math.floor(streT.costMin + streT.costPercent * M.magicM) &&
+                cpsBonus() < 1 &&
+                (nextSpellName(0) == "Clot" || nextSpellName(0) == "Ruin Cookies")
+            ) {
+                M.castSpell(streT);
+                logEvent("autoFTHOFCombo", "Cast Stretch Time to shorten debuff");
+                return;
+            }
+
+            // Will it backfire?
+            if (
+                M.magicM >= Math.floor(hagC.costMin + hagC.costPercent * M.magicM) &&
+                cpsBonus() >= FrozenCookies.minCpSMult &&
+                (nextSpellName(0) == "Clot" || nextSpellName(0) == "Ruin Cookies")
+            ) {
+                M.castSpell(hagC);
+                logEvent("autoFTHOFCombo", "Cast Haggler's Charm to avoid backfire");
+                return;
+            }
+            
             if (M.magic == M.magicM) {
                 if (
                     !Game.hasBuff("Dragonflight") &&
@@ -2523,7 +2545,7 @@ function autoFTHOFCombo2Action() {
                 ) {
                     M.castSpell(hagC);
                     logEvent(
-                        "AutoSpell",
+                        "autoFTHOFCombo",
                         "Cast Haggler's Charm instead of Force the Hand of Fate"
                     );
                 }
@@ -2556,7 +2578,7 @@ function autoFTHOFCombo2Action() {
                         BuildingBuffTime() >= Math.ceil(13 * BuffTimeFactor())
                     ) {
                         M.castSpell(FTHOF);
-                        logEvent("AutoSpell", "Cast Force the Hand of Fate");
+                        logEvent("autoFTHOFCombo", "Cast Force the Hand of Fate");
                         return;
                     }
 
@@ -2571,7 +2593,7 @@ function autoFTHOFCombo2Action() {
                                         Math.ceil(6 * BuffTimeFactor()) - 1)
                             ) {
                                 M.castSpell(FTHOF);
-                                logEvent("AutoSpell", "Cast Force the Hand of Fate");
+                                logEvent("autoFTHOFCombo", "Cast Force the Hand of Fate");
                             }
                         } else if (Game.Upgrades["Elder Pact"].bought == 0) {
                             if (
@@ -2598,7 +2620,7 @@ function autoFTHOFCombo2Action() {
                                         Math.ceil(6 * BuffTimeFactor()) - 1)
                             ) {
                                 M.castSpell(FTHOF);
-                                logEvent("AutoSpell", "Cast Force the Hand of Fate");
+                                logEvent("autoFTHOFCombo", "Cast Force the Hand of Fate");
                             }
                         }
                         return;
@@ -2613,7 +2635,7 @@ function autoFTHOFCombo2Action() {
                                 Math.ceil(6 * BuffTimeFactor()) - 1)
                     ) {
                         M.castSpell(FTHOF);
-                        logEvent("AutoSpell", "Cast Force the Hand of Fate");
+                        logEvent("autoFTHOFCombo", "Cast Force the Hand of Fate");
                         return;
                     }
                 }
