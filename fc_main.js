@@ -2412,7 +2412,7 @@ function autoSweetAction() {
                 }
                 return;
             case 1:
-                if (FrozenCookies.manaMax != 0) {
+                if (FrozenCookies.towerLimit) {
                     autoSweetAction.manaPrev = FrozenCookies.manaMax;
                     FrozenCookies.manaMax = 37;
                 }
@@ -2461,6 +2461,7 @@ function autoFTHOFCombo2Action() {
 
     // Not currently possible to do the combo
     if (
+        !FrozenCookies.towerLimit ||
         FrozenCookies.auto100ConsistencyCombo == 1 || // 100% combo should override
         FrozenCookies.autoSweet == 1 // Autosweet overrides
     ) {
@@ -2481,6 +2482,7 @@ function autoFTHOFCombo2Action() {
             autoFTHOFCombo2Action.autobuyyes = 0;
         }
         autoFTHOFCombo2Action.state = 0;
+        FrozenCookies.manaMax = 37;
         logEvent("autoFTHOFCombo", "Soft fail, spell combo is gone");
     }
 
@@ -2511,6 +2513,8 @@ function autoFTHOFCombo2Action() {
 
     switch (autoFTHOFCombo2Action.state) {
         case 0:
+            if (FrozenCookies.manaMax != 37) FrozenCookies.manaMax = 37;
+            
             // Can we shorten a negative buff with a backfire?
             if (
                 M.magicM >= Math.floor(streT.costMin + streT.costPercent * M.magicM) &&
@@ -3034,22 +3038,7 @@ function autoFTHOFCombo2Action() {
             M.computeMagicM(); //Recalc max after selling
             M.castSpell(FTHOF);
             logEvent("autoFTHOFCombo", "Double cast Force the Hand of Fate");
-            if (
-                FrozenCookies.towerLimit &&
-                FrozenCookies.manaMax <= 100 &&
-                autoFTHOFCombo2Action.count <= 497
-            ) {
-                safeBuy(Game.Objects["Wizard tower"], autoFTHOFCombo2Action.count);
-            } else if (
-                FrozenCookies.towerLimit &&
-                FrozenCookies.manaMax <= 100 &&
-                SugarLevel == 10
-            ) {
-                safeBuy(Game.Objects["Wizard tower"], 486);
-            } else {
-                safeBuy(Game.Objects["Wizard tower"], autoFTHOFCombo2Action.count);
-            }
-            FrozenCookies.autobuyCount += 1;
+            FrozenCookies.manaMax = 37;
             // Turn autoBuy back on if it was on before
             if (autoFTHOFCombo2Action.autobuyyes == 1) {
                 FrozenCookies.autoBuy = 1;
@@ -3057,7 +3046,6 @@ function autoFTHOFCombo2Action() {
             }
             autoFTHOFCombo2Action.count = 0;
             autoFTHOFCombo2Action.state = 0;
-            FrozenCookies.manaMax = 37;
             return;
     }
     return;
