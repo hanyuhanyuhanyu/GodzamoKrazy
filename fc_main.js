@@ -2506,7 +2506,7 @@ function autoFTHOFCombo2Action() {
     switch (autoFTHOFCombo2Action.state) {
         case 0:
             if (FrozenCookies.manaMax != 37) FrozenCookies.manaMax = 37;
-            
+
             // Can we shorten a negative buff with a backfire?
             if (
                 M.magicM >= Math.floor(streT.costMin + streT.costPercent * M.magicM) &&
@@ -2528,7 +2528,7 @@ function autoFTHOFCombo2Action() {
                 logEvent("autoFTHOFCombo", "Cast Haggler's Charm to avoid backfire");
                 return;
             }
-            
+
             if (M.magic == M.magicM) {
                 if (
                     !Game.hasBuff("Dragonflight") &&
@@ -6434,7 +6434,7 @@ function FCStart() {
         clearInterval(FrozenCookies.autoFTHOFComboBot);
         FrozenCookies.autoFTHOFComboBot = 0;
     }
-    
+
     if (FrozenCookies.autoFTHOFCombo2Bot) {
         clearInterval(FrozenCookies.autoFTHOFCombo2Bot);
         FrozenCookies.autoFTHOFCombo2Bot = 0;
