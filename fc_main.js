@@ -2829,34 +2829,24 @@ function autoFTHOFCombo2Action() {
                     return;
                 case 1:
                     FrozenCookies.manaMax = 81;
-                    return;
                 case 2:
                     FrozenCookies.manaMax = 81;
-                    return;
                 case 3:
                     FrozenCookies.manaMax = 81;
-                    return;
                 case 4:
                     FrozenCookies.manaMax = 81;
-                    return;
                 case 5:
                     FrozenCookies.manaMax = 83;
-                    return;
                 case 6:
                     FrozenCookies.manaMax = 88;
-                    return;
                 case 7:
                     FrozenCookies.manaMax = 91;
-                    return;
                 case 8:
                     FrozenCookies.manaMax = 93;
-                    return;
                 case 9:
                     FrozenCookies.manaMax = 96;
-                    return;
                 case 10:
                     FrozenCookies.manaMax = 98;
-                    return;
             }
             if (
                 M.magic == M.magicM &&
