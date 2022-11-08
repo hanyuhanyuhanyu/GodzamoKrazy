@@ -271,14 +271,6 @@ function setOverrides(gameSaveData) {
         FrozenCookies.minLoanMult = preferenceParse("minLoanMult", 1);
         FrozenCookies.minASFMult = preferenceParse("minASFMult", 1);
 
-        // Temporary, remove this later
-        if (FrozenCookies.autoBulk == 10) {
-            FrozenCookies.autoBulk = 1;
-        }
-        if (FrozenCookies.autoBulk == 100) {
-            FrozenCookies.autoBulk = 2;
-        }
-
         // building max values
         FrozenCookies.mineMax = preferenceParse("mineMax", 0);
         FrozenCookies.factoryMax = preferenceParse("factoryMax", 0);
@@ -4234,6 +4226,7 @@ function recommendedSettingsAction() {
         FrozenCookies.autoSpell = 2;
         FrozenCookies.minCpSMult = 7;
         FrozenCookies.autoFTHOFCombo = 0;
+        FrozenCookies.autoFTHOFCombo2 = 0;
         FrozenCookies.auto100ConsistencyCombo = 0;
         FrozenCookies.autoSugarFrenzy = 0;
         FrozenCookies.minASFMult = 7777;
@@ -6440,6 +6433,11 @@ function FCStart() {
     if (FrozenCookies.autoFTHOFComboBot) {
         clearInterval(FrozenCookies.autoFTHOFComboBot);
         FrozenCookies.autoFTHOFComboBot = 0;
+    }
+    
+    if (FrozenCookies.autoFTHOFCombo2Bot) {
+        clearInterval(FrozenCookies.autoFTHOFCombo2Bot);
+        FrozenCookies.autoFTHOFCombo2Bot = 0;
     }
 
     if (FrozenCookies.auto100ConsistencyComboBot) {
