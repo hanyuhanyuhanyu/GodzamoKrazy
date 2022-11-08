@@ -267,6 +267,11 @@ FrozenCookies.preferenceValues = {
         display: ["Double Cast FTHOF OFF", "Double Cast FTHOF ON"],
         default: 0,
     },
+    autoFTHOFCombo2: {
+        hint: "Perform FTHOF double cast combos - variant",
+        display: ["Double Cast FTHOF OFF", "Double Cast FTHOF ON"],
+        default: 0,
+    },
     auto100ConsistencyCombo: {
         hint: "EXPERIMENTAL: Does the 100% Consistency Combo. Replaces Auto Cast and FTHOF Double Casting",
         display: [
