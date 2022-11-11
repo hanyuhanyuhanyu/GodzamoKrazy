@@ -994,7 +994,10 @@ function autoCast() {
         // Can we shorten a negative buff with a backfire?
         if (
             M.magicM >= Math.floor(streT.costMin + streT.costPercent * M.magicM) &&
-            cpsBonus() < 1 &&
+            ((cpsBonus() < 7 &&
+                (Game.hasBuff("Loan 1 (interest)") ||
+                    Game.hasBuff("Loan 2 (interest)"))) ||
+                cpsBonus() < 1) &&
             (nextSpellName(0) == "Clot" || nextSpellName(0) == "Ruin Cookies")
         ) {
             M.castSpell(streT);
@@ -2407,6 +2410,7 @@ function autoSweetAction() {
                 if (FrozenCookies.towerLimit) {
                     autoSweetAction.manaPrev = FrozenCookies.manaMax;
                     FrozenCookies.manaMax = 37;
+                    if (Game.buyBulk > 1) Game.buyBulk = 1;
                 }
                 if (M.magic == M.magicM) {
                     if (nextSpellName(0) != "Sugar Lump") {
@@ -2475,6 +2479,7 @@ function autoFTHOFCombo2Action() {
         }
         autoFTHOFCombo2Action.state = 0;
         FrozenCookies.manaMax = 37;
+        if (Game.buyBulk > 1) Game.buyBulk = 1;
         logEvent("autoFTHOFCombo", "Soft fail, spell combo is gone");
     }
 
@@ -2505,12 +2510,18 @@ function autoFTHOFCombo2Action() {
 
     switch (autoFTHOFCombo2Action.state) {
         case 0:
-            if (FrozenCookies.manaMax != 37) FrozenCookies.manaMax = 37;
+            if (FrozenCookies.manaMax != 37) {
+                FrozenCookies.manaMax = 37;
+                if (Game.buyBulk > 1) Game.buyBulk = 1;
+            }
 
             // Can we shorten a negative buff with a backfire?
             if (
                 M.magicM >= Math.floor(streT.costMin + streT.costPercent * M.magicM) &&
-                cpsBonus() < 1 &&
+                ((cpsBonus() < 7 &&
+                    (Game.hasBuff("Loan 1 (interest)") ||
+                        Game.hasBuff("Loan 2 (interest)"))) ||
+                    cpsBonus() < 1) &&
                 (nextSpellName(0) == "Clot" || nextSpellName(0) == "Ruin Cookies")
             ) {
                 M.castSpell(streT);
@@ -2518,18 +2529,14 @@ function autoFTHOFCombo2Action() {
                 return;
             }
 
-            // Will it backfire?
-            if (
-                M.magicM >= Math.floor(hagC.costMin + hagC.costPercent * M.magicM) &&
-                cpsBonus() >= FrozenCookies.minCpSMult &&
-                (nextSpellName(0) == "Clot" || nextSpellName(0) == "Ruin Cookies")
-            ) {
-                M.castSpell(hagC);
-                logEvent("autoFTHOFCombo", "Cast Haggler's Charm to avoid backfire");
-                return;
-            }
-
             if (M.magic == M.magicM) {
+                // Will it backfire?
+                if (nextSpellName(0) == "Clot" || nextSpellName(0) == "Ruin Cookies") {
+                    M.castSpell(hagC);
+                    logEvent("autoFTHOFCombo", "Cast Haggler's Charm to avoid backfire");
+                    return;
+                }
+
                 if (
                     !Game.hasBuff("Dragonflight") &&
                     (nextSpellName(0) == "Blab" ||
@@ -2644,6 +2651,7 @@ function autoFTHOFCombo2Action() {
             ) {
                 autoFTHOFCombo2Action.state = 0;
                 FrozenCookies.manaMax = 37;
+                if (Game.buyBulk > 1) Game.buyBulk = 1;
                 return;
             }
             switch (SugarLevel) {
@@ -2651,24 +2659,34 @@ function autoFTHOFCombo2Action() {
                     return;
                 case 1:
                     FrozenCookies.manaMax = 81;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 2:
                     FrozenCookies.manaMax = 81;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 3:
                     FrozenCookies.manaMax = 81;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 4:
                     FrozenCookies.manaMax = 81;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 5:
                     FrozenCookies.manaMax = 83;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 6:
                     FrozenCookies.manaMax = 88;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 7:
                     FrozenCookies.manaMax = 91;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 8:
                     FrozenCookies.manaMax = 93;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 9:
                     FrozenCookies.manaMax = 96;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 10:
                     FrozenCookies.manaMax = 98;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
             }
             if (
                 cpsBonus() >= FrozenCookies.minCpSMult &&
@@ -2822,31 +2840,43 @@ function autoFTHOFCombo2Action() {
             ) {
                 autoFTHOFCombo2Action.state = 0;
                 FrozenCookies.manaMax = 37;
+                if (Game.buyBulk > 1) Game.buyBulk = 1;
                 return;
             }
+
             switch (SugarLevel) {
                 case 0:
                     return;
                 case 1:
                     FrozenCookies.manaMax = 81;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 2:
                     FrozenCookies.manaMax = 81;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 3:
                     FrozenCookies.manaMax = 81;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 4:
                     FrozenCookies.manaMax = 81;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 5:
                     FrozenCookies.manaMax = 83;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 6:
                     FrozenCookies.manaMax = 88;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 7:
                     FrozenCookies.manaMax = 91;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 8:
                     FrozenCookies.manaMax = 93;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 9:
                     FrozenCookies.manaMax = 96;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 10:
                     FrozenCookies.manaMax = 98;
+                    if (Game.buyBulk == 1) Game.buyBulk = 100;
             }
             if (
                 M.magic == M.magicM &&
@@ -3011,6 +3041,7 @@ function autoFTHOFCombo2Action() {
             M.castSpell(FTHOF);
             logEvent("autoFTHOFCombo", "Double cast Force the Hand of Fate");
             FrozenCookies.manaMax = 37;
+            if (Game.buyBulk > 1) Game.buyBulk = 1;
             // Turn autoBuy back on if it was on before
             if (autoFTHOFCombo2Action.autobuyyes == 1) {
                 FrozenCookies.autoBuy = 1;
@@ -6197,7 +6228,7 @@ function autoCookie() {
                     Game.Objects["Cortex baker"].amount >= 299) ||
                     (FrozenCookies.towerLimit &&
                         recommendation.purchase.name == "Wizard tower" &&
-                        M.magicM >= FrozenCookies.manaMax - 10) ||
+                        M.magic >= FrozenCookies.manaMax - 10) ||
                     (FrozenCookies.mineLimit &&
                         recommendation.purchase.name == "Mine" &&
                         Game.Objects["Mine"].amount >= FrozenCookies.mineMax - 100) ||
@@ -6222,7 +6253,7 @@ function autoCookie() {
                     Game.Objects["Cortex baker"].amount >= 389) ||
                     (FrozenCookies.towerLimit &&
                         recommendation.purchase.name == "Wizard tower" &&
-                        M.magicM >= FrozenCookies.manaMax - 2) ||
+                        M.magic >= FrozenCookies.manaMax - 2) ||
                     (FrozenCookies.mineLimit &&
                         recommendation.purchase.name == "Mine" &&
                         Game.Objects["Mine"].amount >= FrozenCookies.mineMax - 10) ||
