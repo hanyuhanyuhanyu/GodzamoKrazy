@@ -2410,7 +2410,6 @@ function autoSweetAction() {
                 if (FrozenCookies.towerLimit) {
                     autoSweetAction.manaPrev = FrozenCookies.manaMax;
                     FrozenCookies.manaMax = 37;
-                    if (Game.buyBulk > 1) Game.buyBulk = 1;
                 }
                 if (M.magic == M.magicM) {
                     if (nextSpellName(0) != "Sugar Lump") {
@@ -2479,7 +2478,6 @@ function autoFTHOFCombo2Action() {
         }
         autoFTHOFCombo2Action.state = 0;
         FrozenCookies.manaMax = 37;
-        if (Game.buyBulk > 1) Game.buyBulk = 1;
         logEvent("autoFTHOFCombo", "Soft fail, spell combo is gone");
     }
 
@@ -2512,7 +2510,6 @@ function autoFTHOFCombo2Action() {
         case 0:
             if (FrozenCookies.manaMax != 37) {
                 FrozenCookies.manaMax = 37;
-                if (Game.buyBulk > 1) Game.buyBulk = 1;
             }
 
             // Can we shorten a negative buff with a backfire?
@@ -2651,7 +2648,6 @@ function autoFTHOFCombo2Action() {
             ) {
                 autoFTHOFCombo2Action.state = 0;
                 FrozenCookies.manaMax = 37;
-                if (Game.buyBulk > 1) Game.buyBulk = 1;
                 return;
             }
             switch (SugarLevel) {
@@ -2659,34 +2655,24 @@ function autoFTHOFCombo2Action() {
                     return;
                 case 1:
                     FrozenCookies.manaMax = 81;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 2:
                     FrozenCookies.manaMax = 81;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 3:
                     FrozenCookies.manaMax = 81;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 4:
                     FrozenCookies.manaMax = 81;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 5:
                     FrozenCookies.manaMax = 83;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 6:
                     FrozenCookies.manaMax = 88;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 7:
                     FrozenCookies.manaMax = 91;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 8:
                     FrozenCookies.manaMax = 93;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 9:
                     FrozenCookies.manaMax = 96;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 10:
                     FrozenCookies.manaMax = 98;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
             }
             if (
                 cpsBonus() >= FrozenCookies.minCpSMult &&
@@ -2840,7 +2826,6 @@ function autoFTHOFCombo2Action() {
             ) {
                 autoFTHOFCombo2Action.state = 0;
                 FrozenCookies.manaMax = 37;
-                if (Game.buyBulk > 1) Game.buyBulk = 1;
                 return;
             }
 
@@ -2849,34 +2834,24 @@ function autoFTHOFCombo2Action() {
                     return;
                 case 1:
                     FrozenCookies.manaMax = 81;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 2:
                     FrozenCookies.manaMax = 81;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 3:
                     FrozenCookies.manaMax = 81;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 4:
                     FrozenCookies.manaMax = 81;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 5:
                     FrozenCookies.manaMax = 83;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 6:
                     FrozenCookies.manaMax = 88;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 7:
                     FrozenCookies.manaMax = 91;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 8:
                     FrozenCookies.manaMax = 93;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 9:
                     FrozenCookies.manaMax = 96;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
                 case 10:
                     FrozenCookies.manaMax = 98;
-                    if (Game.buyBulk == 1) Game.buyBulk = 100;
             }
             if (
                 M.magic == M.magicM &&
@@ -3041,7 +3016,6 @@ function autoFTHOFCombo2Action() {
             M.castSpell(FTHOF);
             logEvent("autoFTHOFCombo", "Double cast Force the Hand of Fate");
             FrozenCookies.manaMax = 37;
-            if (Game.buyBulk > 1) Game.buyBulk = 1;
             // Turn autoBuy back on if it was on before
             if (autoFTHOFCombo2Action.autobuyyes == 1) {
                 FrozenCookies.autoBuy = 1;
