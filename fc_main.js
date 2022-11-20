@@ -1002,7 +1002,8 @@ function autoCast() {
                 ) &&
             ((cpsBonus() < 7 &&
                 (Game.hasBuff("Loan 1 (interest)") ||
-                    Game.hasBuff("Loan 2 (interest)"))) ||
+                    Game.hasBuff("Loan 2 (interest)") ||
+                    Game.hasBuff("Loan 3 (interest)"))) ||
                 cpsBonus() < 1) &&
             (nextSpellName(0) == "Clot" || nextSpellName(0) == "Ruin Cookies")
         ) {
@@ -2725,8 +2726,7 @@ function autoSugarFrenzyAction() {
         cpsBonus() >= FrozenCookies.minASFMult &&
         Game.UpgradesById["450"].unlocked == 1 && // Check to see if Sugar craving prestige upgrade has been purchased
         Game.UpgradesById["452"].bought == 0 && // Check to see if sugar frenzy has already been bought this ascension
-        (autoFTHOFComboAction.state == 3 ||
-        auto100ConsistencyComboAction.state == 2) &&
+        (autoFTHOFComboAction.state == 3 || auto100ConsistencyComboAction.state == 2) &&
         ((!Game.hasBuff("Loan 1 (interest)") &&
             !Game.hasBuff("Loan 2 (interest)") &&
             !Game.hasBuff("Loan 3 (interest)")) ||
