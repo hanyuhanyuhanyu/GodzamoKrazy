@@ -426,7 +426,7 @@ var numberFormatters = [
         " NoT",
     ]),
 
-    formatEveryThirdPower(["", " M", " G", " T", " P", " E", " Z", " Y"]),
+    formatEveryThirdPower(["", " M", " G", " T", " P", " E", " Z", " Y", "R", "Q"]),
     scientificNotation,
 ];
 
