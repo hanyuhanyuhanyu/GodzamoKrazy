@@ -62,6 +62,9 @@ If you want to manually install it:
 <details>
 <summary>Click to expand!</summary> 
 
+2022 Nov 21
+* Implemented Ronna (R) and Quetta (Q) SI prefixes for 10^27 and 10^30.
+
 2022 Nov 20
 * Hopefully finally fixed Rigidel failures
 * Removed 'Combo Cast' since it was too buggy
@@ -542,7 +545,7 @@ Not all of these work on the Steam version.
   * **RAW** just shows the numbers as a string. 
   * **FULL** writes out the full names, eg. '3.753 trillion', '4.589 vigintillion', etc.
   * **INITIALS** does the same as FULL but shortens these: '3.753T', '4.589Vg', etc.
-  * **SI Units** uses canon SI prefixes. This stops being useful at 10^27 (1e27), and will display *Infinity*.
+  * **SI Units** uses canon SI prefixes. This stops being useful at 10^33 (1e33), and will display *Infinity*.
   * **SCIENTIFIC** uses 10^x names in the form of e notation, eg. 6.3e12 for 6.3 x 10^12.
 * **Infobox** The mod can show an info window of its next purchase and any active frenzies in the milk window, either as text, as a graphic, or both. Graphics can slow down the game.
 * **Logging** Will log everything the mod does in the Javascript console, except for what Autobuy just bought (to keep it useful). Disabling this slightly improves performance. It's useless on Steam.
