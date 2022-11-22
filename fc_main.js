@@ -5630,15 +5630,10 @@ function autoCookie() {
             recommendation.purchase.clickFunction = null;
             disabledPopups = false;
             //      console.log(purchase.name + ': ' + Beautify(recommendation.efficiency) + ',' + Beautify(recommendation.delta_cps));
-            var currPrestige = Game.prestige;
-            var resetPrestige = Game.HowMuchPrestige(
-                Game.cookiesReset +
-                    Game.cookiesEarned +
-                    wrinklerValue() +
-                    chocolateValue()
-            );
             if (
-                resetPrestige - currPrestige < 1 &&
+                Math.floor(Game.HowMuchPrestige(Game.cookiesReset + Game.cookiesEarned)) -
+                    Math.floor(Game.HowMuchPrestige(Game.cookiesReset)) <
+                    1 &&
                 Game.Has("Inspired checklist") &&
                 FrozenCookies.autoBuyAll &&
                 nextPurchase().type == "upgrade" &&
