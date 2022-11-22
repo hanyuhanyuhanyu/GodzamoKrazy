@@ -5604,9 +5604,9 @@ function autoCookie() {
                     chocolateValue()
             );
             if (
+                resetPrestige - currPrestige < 1 &&
                 Game.Has("Inspired checklist") &&
                 FrozenCookies.autoBuyAll &&
-                !resetPrestige - currPrestige >= 1 &&
                 ((recommendation.type == "building" &&
                 recommendation.purchase.name.includes != "biscuit") || 
                 (recommendation.type == "upgrade" && 
