@@ -426,18 +426,7 @@ var numberFormatters = [
         " NoT",
     ]),
 
-    formatEveryThirdPower([
-        "",
-        " M",
-        " G",
-        " T",
-        " P",
-        " E",
-        " Z",
-        " Y",
-        " R",
-        " Q",
-    ]),
+    formatEveryThirdPower(["", " M", " G", " T", " P", " E", " Z", " Y", " R", " Q"]),
     scientificNotation,
 ];
 
@@ -2814,63 +2803,108 @@ function autoWorship2Action() {
 function buyOtherUpgrades() {
     // I'm sure there's a better way to do this
     //Buy eggs
-    if (Game.UpgradesById["223"].unlocked == 1 && Game.UpgradesById["223"].bought == 0)
-        Game.UpgradesById["223"].buy(); // Faberge egg
-    if (Game.UpgradesById["224"].unlocked == 1 && Game.UpgradesById["224"].bought == 0)
-        Game.UpgradesById["224"].buy(); // Wrinklerspawn
-    if (Game.UpgradesById["226"].unlocked == 1 && Game.UpgradesById["226"].bought == 0)
-        Game.UpgradesById["226"].buy(); // Omelette
-    if (Game.UpgradesById["229"].unlocked == 1 && Game.UpgradesById["229"].bought == 0)
-        Game.UpgradesById["229"].buy(); // "egg"
+    if (
+        Game.Upgrades["Faberge egg"].unlocked == 1 &&
+        !Game.Upgrades["Faberge egg"].bought &&
+        Game.cookies > Game.Upgrades["Faberge egg"].getPrice()
+    ) {
+        Game.Upgrades["Faberge egg"].buy();
+    }
+    if (
+        Game.Upgrades["Wrinklerspawn"].unlocked == 1 &&
+        !Game.Upgrades["Wrinklerspawn"].bought &&
+        Game.cookies > Game.Upgrades["Wrinklerspawn"].getPrice()
+    ) {
+        Game.Upgrades["Wrinklerspawn"].buy();
+    }
+    if (
+        Game.Upgrades["Omelette"].unlocked == 1 &&
+        !Game.Upgrades["Omelette"].bought &&
+        Game.cookies > Game.Upgrades["Omelette"].getPrice()
+    ) {
+        Game.Upgrades["Omelette"].buy();
+    }
+    if (
+        Game.Upgrades['"egg"'].unlocked == 1 &&
+        !Game.Upgrades['"egg"'].bought &&
+        Game.cookies > Game.Upgrades['"egg"'].getPrice()
+    ) {
+        Game.Upgrades['"egg"'].buy();
+    }
 
     //Buy Santa stuff
     if (
         Game.season == "christmas" &&
-        Game.UpgradesById["158"].unlocked == 1 &&
-        Game.UpgradesById["158"].bought == 0
+        Game.Upgrades["Weighted sleighs"].unlocked == 1 &&
+        !Game.Upgrades["Weighted sleighs"].bought &&
+        Game.cookies > Game.Upgrades["Weighted sleighs"].getPrice()
     ) {
-        Game.UpgradesById["158"].buy(); // Weighted sleighs
+        Game.Upgrades["Weighted sleighs"].buy();
     }
     if (
         Game.season == "christmas" &&
-        Game.UpgradesById["163"].unlocked == 1 &&
-        Game.UpgradesById["163"].bought == 0
+        Game.Upgrades["Santa's bottomless bag"].unlocked == 1 &&
+        !Game.Upgrades["Santa's bottomless bag"].bought &&
+        Game.cookies > Game.Upgrades["Santa's bottomless bag"].getPrice()
     ) {
-        Game.UpgradesById["163"].buy(); // Santa's bottomless bag
+        Game.Upgrades["Santa's bottomless bag"].buy();
     }
 
     //Buy dragon drops
     if (
         Game.dragonLevel > 25 &&
-        Game.UpgradesById["650"].unlocked == 1 &&
-        Game.UpgradesById["650"].bought == 0
+        Game.Upgrades["Dragon fang"].unlocked == 1 &&
+        !Game.Upgrades["Dragon fang"].bought &&
+        Game.cookies > Game.Upgrades["Dragon fang"].getPrice()
     ) {
-        Game.UpgradesById["650"].buy(); // Dragon fang
+        Game.Upgrades["Dragon fang"].buy();
     }
     if (
         Game.dragonLevel > 25 &&
-        Game.UpgradesById["651"].unlocked == 1 &&
-        Game.UpgradesById["651"].bought == 0
+        Game.Upgrades["Dragon teddy bear"].unlocked == 1 &&
+        !Game.Upgrades["Dragon teddy bear"].bought &&
+        Game.cookies > Game.Upgrades["Dragon teddy bear"].getPrice()
     ) {
-        Game.UpgradesById["651"].buy(); // Dragon teddy bear
+        Game.Upgrades["Dragon teddy bear"].buy();
     }
 
     //Buy other essential upgrades
     if (
         Game.Upgrades["Elder Pact"].bought == 1 &&
-        Game.UpgradesById["87"].unlocked == 1 &&
-        Game.UpgradesById["87"].bought == 0
+        Game.Upgrades["Sacrificial rolling pins"].unlocked == 1 &&
+        !Game.Upgrades["Sacrificial rolling pins"].bought &&
+        Game.cookies > Game.Upgrades["Sacrificial rolling pins"].getPrice()
     ) {
-        Game.UpgradesById["87"].buy(); // Sacrificial rolling pins
+        Game.Upgrades["Sacrificial rolling pins"].buy();
     }
-    if (Game.UpgradesById["473"].unlocked == 1 && Game.UpgradesById["473"].bought == 0)
-        Game.UpgradesById["473"].buy(); // Green yeast digestives
-    if (Game.UpgradesById["474"].unlocked == 1 && Game.UpgradesById["474"].bought == 0)
-        Game.UpgradesById["474"].buy(); // Fern tea
-    if (Game.UpgradesById["475"].unlocked == 1 && Game.UpgradesById["475"].bought == 0)
-        Game.UpgradesById["475"].buy(); // Ichor syrup
-    if (Game.UpgradesById["640"].unlocked == 1 && Game.UpgradesById["640"].bought == 0)
-        Game.UpgradesById["640"].buy(); // Fortune #102
+    if (
+        Game.Upgrades["Green yeast digestives"].unlocked == 1 &&
+        !Game.Upgrades["Green yeast digestives"].bought &&
+        Game.cookies > Game.Upgrades["Green yeast digestives"].getPrice()
+    ) {
+        Game.Upgrades["Green yeast digestives"].buy();
+    }
+    if (
+        Game.Upgrades["Fern tea"].unlocked == 1 &&
+        !Game.Upgrades["Fern tea"].bought &&
+        Game.cookies > Game.Upgrades["Fern tea"].getPrice()
+    ) {
+        Game.Upgrades["Fern tea"].buy();
+    }
+    if (
+        Game.Upgrades["Ichor syrup"].unlocked == 1 &&
+        !Game.Upgrades["Ichor syrup"].bought &&
+        Game.cookies > Game.Upgrades["Ichor syrup"].getPrice()
+    ) {
+        Game.Upgrades["Ichor syrup"].buy();
+    }
+    if (
+        Game.Upgrades["Fortune #102"].unlocked == 1 &&
+        !Game.Upgrades["Fortune #102"].bought &&
+        Game.cookies > Game.Upgrades["Fortune #102"].getPrice()
+    ) {
+        Game.Upgrades["Fortune #102"].buy();
+    }
 }
 
 function autoCycliusAction() {
@@ -5604,22 +5638,24 @@ function autoCookie() {
                     chocolateValue()
             );
             if (
+                Game.cookies > recommendation.purchase.price * 2 &&
                 resetPrestige - currPrestige < 1 &&
                 Game.Has("Inspired checklist") &&
                 FrozenCookies.autoBuyAll &&
                 ((recommendation.type == "building" &&
-                recommendation.purchase.name.includes != "biscuit") || 
-                (recommendation.type == "upgrade" && 
-                (recommendation.purchase.name != "Bingo center/Research facility" &&
-                recommendation.purchase.name != "Specialized chocolate chips" &&
-                recommendation.purchase.name != "Designer cocoa beans" &&
-                recommendation.purchase.name != "Ritual rolling pins" &&
-                recommendation.purchase.name != "Underworld ovens" &&
-                recommendation.purchase.name != "One mind" &&
-                recommendation.purchase.name != "Exotic nuts" &&
-                recommendation.purchase.name != "Communal brainsweep" &&
-                recommendation.purchase.name != "Arcane sugar" &&
-                recommendation.purchase.name != "Elder Pact")))
+                    recommendation.purchase.name.includes != "biscuit") ||
+                    (recommendation.type == "upgrade" &&
+                        recommendation.purchase.name !=
+                            "Bingo center/Research facility" &&
+                        recommendation.purchase.name != "Specialized chocolate chips" &&
+                        recommendation.purchase.name != "Designer cocoa beans" &&
+                        recommendation.purchase.name != "Ritual rolling pins" &&
+                        recommendation.purchase.name != "Underworld ovens" &&
+                        recommendation.purchase.name != "One mind" &&
+                        recommendation.purchase.name != "Exotic nuts" &&
+                        recommendation.purchase.name != "Communal brainsweep" &&
+                        recommendation.purchase.name != "Arcane sugar" &&
+                        recommendation.purchase.name != "Elder Pact"))
             ) {
                 document.getElementById("storeBuyAllButton").click();
                 logEvent("Autobuy", "Bought all upgrades!");
