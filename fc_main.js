@@ -5638,24 +5638,24 @@ function autoCookie() {
                     chocolateValue()
             );
             if (
-                Game.cookies >= nextPurchase().cost *2 &&
+                Game.cookies >= nextPurchase().cost * 2 &&
                 resetPrestige - currPrestige < 1 &&
                 Game.Has("Inspired checklist") &&
                 FrozenCookies.autoBuyAll &&
-                ((recommendation.type == "building" &&
-                    recommendation.purchase.name.includes != "biscuit") ||
-                    (recommendation.type == "upgrade" &&
-                        recommendation.purchase.name !=
+                ((nextPurchase().type == "building" &&
+                    nextPurchase().purchase.name.includes != "biscuit") ||
+                    (nextPurchase().type == "upgrade" &&
+                        nextPurchase().purchase.name !=
                             "Bingo center/Research facility" &&
-                        recommendation.purchase.name != "Specialized chocolate chips" &&
-                        recommendation.purchase.name != "Designer cocoa beans" &&
-                        recommendation.purchase.name != "Ritual rolling pins" &&
-                        recommendation.purchase.name != "Underworld ovens" &&
-                        recommendation.purchase.name != "One mind" &&
-                        recommendation.purchase.name != "Exotic nuts" &&
-                        recommendation.purchase.name != "Communal brainsweep" &&
-                        recommendation.purchase.name != "Arcane sugar" &&
-                        recommendation.purchase.name != "Elder Pact"))
+                        nextPurchase().purchase.name != "Specialized chocolate chips" &&
+                        nextPurchase().purchase.name != "Designer cocoa beans" &&
+                        nextPurchase().purchase.name != "Ritual rolling pins" &&
+                        nextPurchase().purchase.name != "Underworld ovens" &&
+                        nextPurchase().purchase.name != "One mind" &&
+                        nextPurchase().purchase.name != "Exotic nuts" &&
+                        nextPurchase().purchase.name != "Communal brainsweep" &&
+                        nextPurchase().purchase.name != "Arcane sugar" &&
+                        nextPurchase().purchase.name != "Elder Pact"))
             ) {
                 document.getElementById("storeBuyAllButton").click();
                 logEvent("Autobuy", "Bought all upgrades!");
