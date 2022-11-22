@@ -842,6 +842,13 @@ function autoRigidel() {
         case 0: //Rigidel isn't in a slot
             if (T.swaps < 2 || (T.swaps == 1 && T.slot[0] == -1)) return; //Don't do anything if we can't swap Rigidel in
             if (timeToRipe < 60) {
+                // Turn off Auto Pantheon
+                if (FrozenCookies.autoWorshipToggle == 1) {
+                    autoRigidel.autoworshipyes = 1;
+                    FrozenCookies.autoWorshipToggle = 0;
+                } else {
+                    autoRigidel.autoworshipyes = 0;
+                }
                 var prev = T.slot[0]; //cache whatever god you have equipped
                 swapIn(10, 0); //swap in rigidel
                 Game.computeLumpTimes();
@@ -855,7 +862,13 @@ function autoRigidel() {
                     }
                     logEvent("autoRigidel", "Sugar lump harvested early");
                 }
-                if (timeToRipe > 60 && prev != -1) swapIn(prev, 0); //put the old one back
+                if (timeToRipe > 60 && (prev != -1 || autoRigidel.autoworshipyes == 1)) {
+                    if (prev != -1) swapIn(prev, 0); //put the old one back
+                    if (autoRigidel.autoworshipyes == 1) {
+                        FrozenCookies.autoWorshipToggle = 1;
+                        autoRigidel.autoworshipyes = 0;
+                    }
+                }
             }
         case 1: //Rigidel is already in diamond slot
             if (timeToRipe < 60 && Game.BuildingsOwned % 10) {
