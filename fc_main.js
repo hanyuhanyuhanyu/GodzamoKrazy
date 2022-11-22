@@ -437,10 +437,6 @@ var numberFormatters = [
         " Y",
         " R",
         " Q",
-        " thousand Q",
-        " million Q",
-        " billion Q",
-        " trillion Q",
     ]),
     scientificNotation,
 ];
@@ -5608,11 +5604,13 @@ function autoCookie() {
                     chocolateValue()
             );
             if (
-                recommendation.type == "upgrade" &&
                 Game.Has("Inspired checklist") &&
                 FrozenCookies.autoBuyAll &&
-                resetPrestige - currPrestige < 1 &&
-                recommendation.purchase.name != "Bingo center/Research facility" &&
+                !resetPrestige - currPrestige >= 1 &&
+                ((recommendation.type == "building" &&
+                recommendation.purchase.name.includes != "biscuit") || 
+                (recommendation.type == "upgrade" && 
+                (recommendation.purchase.name != "Bingo center/Research facility" &&
                 recommendation.purchase.name != "Specialized chocolate chips" &&
                 recommendation.purchase.name != "Designer cocoa beans" &&
                 recommendation.purchase.name != "Ritual rolling pins" &&
@@ -5621,9 +5619,9 @@ function autoCookie() {
                 recommendation.purchase.name != "Exotic nuts" &&
                 recommendation.purchase.name != "Communal brainsweep" &&
                 recommendation.purchase.name != "Arcane sugar" &&
-                recommendation.purchase.name != "Elder Pact"
+                recommendation.purchase.name != "Elder Pact")))
             ) {
-                Game.storeBuyAll();
+                document.getElementById("storeBuyAllButton").click();
                 logEvent("Autobuy", "Bought all upgrades!");
             } else if (
                 recommendation.type == "building" &&
