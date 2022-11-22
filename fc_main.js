@@ -5638,7 +5638,7 @@ function autoCookie() {
                     chocolateValue()
             );
             if (
-                Game.cookies > recommendation.purchase.price * 2 &&
+                Game.cookies >= nextPurchase().cost *2 &&
                 resetPrestige - currPrestige < 1 &&
                 Game.Has("Inspired checklist") &&
                 FrozenCookies.autoBuyAll &&
