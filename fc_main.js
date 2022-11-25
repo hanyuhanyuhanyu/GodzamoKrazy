@@ -862,12 +862,12 @@ function autoRigidel() {
                     }
                     logEvent("autoRigidel", "Sugar lump harvested early");
                 }
-                if (timeToRipe > 60 && (prev != -1 || autoRigidel.autoworshipyes == 1)) {
-                    if (prev != -1) swapIn(prev, 0); //put the old one back
-                    if (autoRigidel.autoworshipyes == 1) {
-                        FrozenCookies.autoWorshipToggle = 1;
-                        autoRigidel.autoworshipyes = 0;
-                    }
+            }
+            if (timeToRipe > 60 && (prev != -1 || autoRigidel.autoworshipyes == 1)) {
+                if (prev != -1) swapIn(prev, 0); //put the old one back
+                if (autoRigidel.autoworshipyes == 1) {
+                    FrozenCookies.autoWorshipToggle = 1;
+                    autoRigidel.autoworshipyes = 0;
                 }
             }
         case 1: //Rigidel is already in diamond slot
