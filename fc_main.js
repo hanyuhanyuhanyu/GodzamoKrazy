@@ -860,11 +860,11 @@ function autoRigidel() {
                     } else {
                         Game.clickLump();
                     }
+                    if (prev != -1) swapIn(prev, 0); //put the old one back
                     logEvent("autoRigidel", "Sugar lump harvested early");
                 }
             }
-            if (timeToRipe > 60 && (prev != -1 || autoRigidel.autoworshipyes == 1)) {
-                if (prev != -1) swapIn(prev, 0); //put the old one back
+            if (timeToRipe > 60 && autoRigidel.autoworshipyes == 1) {
                 if (autoRigidel.autoworshipyes == 1) {
                     FrozenCookies.autoWorshipToggle = 1;
                     autoRigidel.autoworshipyes = 0;
