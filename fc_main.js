@@ -794,8 +794,16 @@ var T = Game.Objects["Temple"].minigame; //Pantheon
 var M = Game.Objects["Wizard tower"].minigame; //Grimoire
 
 function rigiSell() {
-    //Sell enough mines to enable Rigidels effect
-    if (Game.BuildingsOwned % 10) Game.Objects["Mine"].sell(Game.BuildingsOwned % 10);
+    //Sell enough of the cheapest building to enable Rigidels effect
+    if (Game.BuildingsOwned % 10) {
+        var cheapest;
+        Game.ObjectsById.forEach(function (b) {
+            if (!cheapest || b.price < cheapest.price) {
+                cheapest = b;
+            }
+        });
+        cheapest.sell(Game.BuildingsOwned % 10);
+    }
     return;
 }
 
