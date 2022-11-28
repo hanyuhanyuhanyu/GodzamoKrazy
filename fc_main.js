@@ -1001,7 +1001,10 @@ function autoCast() {
         return;
     }
 
-    if (M.magic >= M.magicM - 1) {
+    if (
+        (FrozenCookies.towerLimit && M.magic >= M.magicM) ||
+        (!FrozenCookies.towerLimit && M.magic >= M.magicM - 1)
+    ) {
         // Free lump!
         if (
             M.magicM >=
@@ -1377,7 +1380,8 @@ function autoFTHOFComboAction() {
         autoFTHOFComboAction.state > 3 ||
         // Combo started but failed
         (autoFTHOFComboAction.state > 2 &&
-            M.magic >= M.magicM - 1 &&
+            ((FrozenCookies.towerLimit && M.magic >= M.magicM) ||
+                (!FrozenCookies.towerLimit && M.magic >= M.magicM - 1)) &&
             !Game.hasBuff("Click frenzy") &&
             !nextSpellName(0) == "Click Frenzy" &&
             !nextSpellName(1) == "Click Frenzy")
@@ -1408,7 +1412,11 @@ function autoFTHOFComboAction() {
         autoFTHOFComboAction.state = 2;
     }
 
-    if (!autoFTHOFComboAction.state && M.magic >= M.magicM - 1) {
+    if (
+        !autoFTHOFComboAction.state &&
+        ((FrozenCookies.towerLimit && M.magic >= M.magicM) ||
+            (!FrozenCookies.towerLimit && M.magic >= M.magicM - 1))
+    ) {
         //Continue casting Haggler's Charm - unless it's something we need right now
         if (nextSpellName(0) == "Sugar Lump") {
             M.castSpell(M.spellsById[1]);
@@ -1439,7 +1447,8 @@ function autoFTHOFComboAction() {
                 return;
             }
             if (
-                M.magic >= M.magicM - 1 &&
+                ((FrozenCookies.towerLimit && M.magic >= M.magicM) ||
+                    (!FrozenCookies.towerLimit && M.magic >= M.magicM - 1)) &&
                 cpsBonus() >= FrozenCookies.minCpSMult &&
                 (((Game.hasAura("Reaper of Fields") || Game.hasAura("Reality Bending")) &&
                     Game.hasBuff("Dragon Harvest") &&
@@ -1593,7 +1602,8 @@ function autoFTHOFComboAction() {
                 return;
             }
             if (
-                M.magic >= M.magicM - 1 &&
+                ((FrozenCookies.towerLimit && M.magic >= M.magicM) ||
+                    (!FrozenCookies.towerLimit && M.magic >= M.magicM - 1)) &&
                 cpsBonus() >= FrozenCookies.minCpSMult &&
                 (((Game.hasAura("Reaper of Fields") || Game.hasAura("Reality Bending")) &&
                     Game.hasBuff("Dragon Harvest") &&
@@ -1836,7 +1846,8 @@ function auto100ConsistencyComboAction() {
             (auto100ConsistencyComboAction.state > 1 &&
                 !BuildingSpecialBuff() &&
                 !hasClickBuff())) &&
-            M.magic >= M.magicM - 1)
+            ((FrozenCookies.towerLimit && M.magic >= M.magicM) ||
+                (!FrozenCookies.towerLimit && M.magic >= M.magicM - 1)))
     ) {
         if (auto100ConsistencyComboAction.autobuyyes == 1) {
             FrozenCookies.autoBuy = 1;
@@ -1889,7 +1900,11 @@ function auto100ConsistencyComboAction() {
     auto100ConsistencyComboAction.countTimeMach = Game.Objects["Time machine"].amount;
 
     //Continue casting Haggler's Charm - unless it's something we need right now
-    if (!auto100ConsistencyComboAction.state && M.magic >= M.magicM - 1) {
+    if (
+        !auto100ConsistencyComboAction.state &&
+        ((FrozenCookies.towerLimit && M.magic >= M.magicM) ||
+            (!FrozenCookies.towerLimit && M.magic >= M.magicM - 1))
+    ) {
         if (nextSpellName(0) == "Sugar Lump") {
             M.castSpell(M.spellsById[1]);
             logEvent("auto100ConsistencyCombo", "Cast Force the Hand of Fate");
@@ -1911,7 +1926,8 @@ function auto100ConsistencyComboAction() {
 
         case 1: // Start combo
             if (
-                M.magic >= M.magicM - 1 &&
+                ((FrozenCookies.towerLimit && M.magic >= M.magicM) ||
+                    (!FrozenCookies.towerLimit && M.magic >= M.magicM - 1)) &&
                 cpsBonus() >= FrozenCookies.minCpSMult &&
                 (((Game.hasAura("Reaper of Fields") || Game.hasAura("Reality Bending")) &&
                     Game.hasBuff("Dragon Harvest") &&
@@ -2022,7 +2038,10 @@ function auto100ConsistencyComboAction() {
             return;
 
         case 6: // Cast FTHOF 1
-            if (M.magic >= M.magicM - 1) {
+            if (
+                (FrozenCookies.towerLimit && M.magic >= M.magicM) ||
+                (!FrozenCookies.towerLimit && M.magic >= M.magicM - 1)
+            ) {
                 M.castSpell(M.spellsById[1]);
                 logEvent("auto100ConsistencyCombo", "Cast FTHOF 1");
                 auto100ConsistencyComboAction.state = 7;
@@ -2050,7 +2069,10 @@ function auto100ConsistencyComboAction() {
             return;
 
         case 9: // Cast FTHOF 3
-            if (M.magic >= M.magicM - 1) {
+            if (
+                (FrozenCookies.towerLimit && M.magic >= M.magicM) ||
+                (!FrozenCookies.towerLimit && M.magic >= M.magicM - 1)
+            ) {
                 M.castSpell(M.spellsById[1]);
                 logEvent("auto100ConsistencyCombo", "Cast FTHOF 3");
                 auto100ConsistencyComboAction.state = 10;
@@ -2441,7 +2463,10 @@ function autoSweetAction() {
                     autoSweetAction.manaPrev = FrozenCookies.manaMax;
                     FrozenCookies.manaMax = 37;
                 }
-                if (M.magic >= M.magicM - 1) {
+                if (
+                    (FrozenCookies.towerLimit && M.magic >= M.magicM) ||
+                    (!FrozenCookies.towerLimit && M.magic >= M.magicM - 1)
+                ) {
                     if (nextSpellName(0) != "Sugar Lump") {
                         M.castSpell(M.spellsById[4]);
                         logEvent(
