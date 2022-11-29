@@ -2586,11 +2586,7 @@ function autoLoanBuy() {
 
     if (
         hasClickBuff() &&
-        cpsBonus() >= FrozenCookies.minLoanMult &&
-        ((!Game.hasBuff("Loan 1 (interest)") &&
-            !Game.hasBuff("Loan 2 (interest)") &&
-            !Game.hasBuff("Loan 3 (interest)")) ||
-            !FrozenCookies.minLoanMult)
+        cpsBonus() >= FrozenCookies.minLoanMult
     ) {
         if (B.officeLevel >= 2) B.takeLoan(1);
         if (B.officeLevel >= 4) B.takeLoan(2);
