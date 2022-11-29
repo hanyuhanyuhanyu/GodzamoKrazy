@@ -3851,7 +3851,7 @@ function cpsBonus() {
 
 function hasClickBuff() {
     //return Game.hasBuff("Cursed finger") || clickBuffBonus() > 1;
-    clickBuffBonus() > 1;
+    return clickBuffBonus() > 1;
 }
 
 function baseCps() {
