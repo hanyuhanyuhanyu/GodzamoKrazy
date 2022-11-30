@@ -1807,7 +1807,8 @@ function auto100ConsistencyComboAction() {
     // Not currently possible to do the combo
     if (
         FrozenCookies.autoSweet == 1 || // Autosweet overrides
-        Game.dragonLevel < 26 // Fully upgraded dragon needed for two auras
+        Game.dragonLevel < 26 || // Fully upgraded dragon needed for two auras
+        !G.canPlant(G.plantsById[14]) // Can currently plant whiskerbloom
     ) {
         return;
     }
@@ -1987,15 +1988,27 @@ function auto100ConsistencyComboAction() {
             auto100ConsistencyComboAction.state = 3;
             return;
 
-        case 3: // Harvest garden then plant whiskerbloom
-            G.harvestAll();
-            for (var y = 0; y <= 5; y++) {
-                for (var x = 0; x <= 5; x++) {
-                    G.seedSelected = G.plants["whiskerbloom"].id;
-                    G.clickTile(x, y);
+        case 3: // Check for whiskerbloom (14) and if not found, plant it
+            var whisk = false;
+            for (let i = 0; i < 6; i++) {
+                for (let j = 0; j < 6; j++) {
+                    if (G.plot[i][j][0] - 1 === 14) {
+                        whisk = true;
+                    }
                 }
             }
-            auto100ConsistencyComboAction.state = 4;
+            if (whisk) {
+                auto100ConsistencyComboAction.state = 4;
+            } else {
+                G.harvestAll();
+                for (var y = 0; y <= 5; y++) {
+                    for (var x = 0; x <= 5; x++) {
+                        G.seedSelected = G.plants["whiskerbloom"].id;
+                        G.clickTile(x, y);
+                    }
+                }
+                auto100ConsistencyComboAction.state = 4;
+            }
             return;
 
         case 4: // Change dragon auras to radiant appetite and dragon's fortune
@@ -2584,10 +2597,7 @@ function autoBrokerAction() {
 function autoLoanBuy() {
     if (!B || B.officelevel < 2) return;
 
-    if (
-        hasClickBuff() &&
-        cpsBonus() >= FrozenCookies.minLoanMult
-    ) {
+    if (hasClickBuff() && cpsBonus() >= FrozenCookies.minLoanMult) {
         if (B.officeLevel >= 2) B.takeLoan(1);
         if (B.officeLevel >= 4) B.takeLoan(2);
         if (B.officeLevel >= 5 && FrozenCookies.autoLoan == 2) B.takeLoan(3);

@@ -62,6 +62,9 @@ If you want to manually install it:
 <details>
 <summary>Click to expand!</summary> 
 
+2022 Nov 30
+* Auto 100% Consistency Combo will no longer remove planted whiskerblooms to plant more whiskerblooms
+
 2022 Nov 29
 * Added Game Seed to the Other Information section of the FC Menu
 * Moved current frenzy value to Golden Cookie Info section
