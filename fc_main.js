@@ -1052,7 +1052,7 @@ function autoCast() {
         FrozenCookies.auto100ConsistencyCombo == 1 ||
         FrozenCookies.autoSweet == 1
     ) {
-        FrozenCookies.autoSpell == 0;
+        FrozenCookies.autoSpell = 0;
     }
 
     if (
@@ -1859,7 +1859,7 @@ function auto100ConsistencyComboAction() {
     }
 
     // Autosweet overrides
-    if (FrozenCookies.autoSweet == 1) return;
+    if (FrozenCookies.autoSweet == 1) FrozenCookies.auto100ConsistencyCombo = 0;
 
     // Not currently possible to do the combo
     if (
