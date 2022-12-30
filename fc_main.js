@@ -4785,6 +4785,10 @@ function isUnavailable(upgrade, upgradeBlacklist) {
         Game.baseSeason != 0 &&
         Game.UpgradesById[181].unlocked &&
         FrozenCookies.freeSeason != 0 &&
+        haveAll("christmas") &&
+        haveAll("halloween") &&
+        haveAll("valentines") &&
+        haveAll("easter") &&
         ((FrozenCookies.freeSeason == 1 && (upgrade.id == 182 || upgrade.id == 185)) ||
             (FrozenCookies.freeSeason == 2 && upgrade.season))
     )
