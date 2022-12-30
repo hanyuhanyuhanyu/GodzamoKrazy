@@ -3785,6 +3785,7 @@ function recommendedSettingsAction() {
         FrozenCookies.cortexMax = 200;
         // Season options
         FrozenCookies.defaultSeason = 1;
+        FrozenCookies.freeSeason = 1;
         FrozenCookies.autoEaster = 1;
         FrozenCookies.autoHalloween = 1;
         //Bank options
@@ -4778,6 +4779,16 @@ function isUnavailable(upgrade, upgradeBlacklist) {
 
     // Steamed cookies are only on Steam
     if (!App && upgrade.id == 817) return true;
+
+    // Don't leave base season if it's desired
+    if (
+        Game.baseSeason != 0 &&
+        Game.UpgradesById[181].unlocked &&
+        FrozenCookies.freeSeason != 0 &&
+        ((FrozenCookies.freeSeason == 1 && (upgrade.id == 182 || upgrade.id == 185)) ||
+            (FrozenCookies.freeSeason == 2 && upgrade.season))
+    )
+        return true;
 
     var result = false;
 

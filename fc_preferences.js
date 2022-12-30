@@ -395,6 +395,15 @@ FrozenCookies.preferenceValues = {
         ],
         default: 0,
     },
+    freeSeason: {
+        hint: "Stay in the current base (free) season as long as no others have upgrades. Overrides the Default Season option",
+        display: [
+            "Free Season OFF",
+            "Free Season for CHRISTMAS and BUSINESS DAY",
+            "Free Season for ALL",
+        ],
+        default: 1,
+    },
     autoEaster: {
         hint: "Switch to Easter season if Cookie Storm is active and you do not have all eggs yet",
         display: ["Auto-Easter Switch OFF", "Auto-Easter Switch ON"],
