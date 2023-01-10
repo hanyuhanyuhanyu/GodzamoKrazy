@@ -12,6 +12,12 @@ CCSE changes base game functions that break the switches like the season switch 
 
 ## How to use
 
+If you have the **FrozenCookies** button on the top right of your Cookie Clicker, replacing the **Info** button, you're all set!
+
+Click that button to configure everything or use the Recommended Settings at the bottom of the menu for a quick start. Read on for details on what each option does.
+
+If you do not have the button, confirm FC is installed. Instructions for each platform and method are below.
+
 ## Steam Install
 Get it from the Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=2816199538
 
